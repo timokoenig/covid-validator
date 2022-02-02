@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react'
-import { Container, Heading } from '@chakra-ui/react'
+import { Container, Heading, Button } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import { decodeOnly, DCCData } from 'dcc-decoder'
 import dccConfig from '../utils/dccConfig'
+import useColorMode from '@/utils/color-mode'
 
 const BarcodeScannerComponent = dynamic(() => import('react-qr-barcode-scanner'), {
   ssr: false,
 })
 
 const IndexPage = () => {
+  const { toggleColorMode, newColorMode } = useColorMode()
   const [data, setData] = React.useState<string>('')
 
   useEffect(() => {
@@ -48,6 +50,9 @@ const IndexPage = () => {
         }}
       />
       <p>{data}</p>
+      <Button onClick={toggleColorMode}>
+        Toggle {newColorMode === 'light' ? 'Dark' : 'Light'}
+      </Button>
     </Container>
   )
 }
