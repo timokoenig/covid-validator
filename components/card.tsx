@@ -9,7 +9,14 @@ const Card = () => {
 
       <Box p="6">
         <Center py="10">
-          <Button size="lg" variant="outline" color="white">
+          <Button
+            size="lg"
+            variant="outline"
+            color="white"
+            backgroundColor={'blue.400'}
+            _hover={{ bg: 'blue.300' }}
+            _active={{ bg: 'blue.400' }}
+          >
             Check Certificate
           </Button>
         </Center>
