@@ -1,5 +1,5 @@
 import React from 'react'
-import { Center, Text } from '@chakra-ui/react'
+import { Center, Text, Link } from '@chakra-ui/react'
 
 const Footer = () => (
   <>
@@ -14,13 +14,13 @@ const Footer = () => (
       </Text>
     </Center>
     <Center>
-      <Text as="a" href="https://github.com/timokoenig" target="_blank" px="2">
+      <Link href="https://github.com/timokoenig" target="_blank" px="2">
         Timo Koenig
-      </Text>
+      </Link>
       |
-      <Text as="a" href="https://github.com/timokoenig" target="_blank" px="2">
+      <Link href="https://github.com/timokoenig" target="_blank" px="2">
         Imprint
-      </Text>
+      </Link>
     </Center>
   </>
 )
