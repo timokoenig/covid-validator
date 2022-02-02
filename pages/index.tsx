@@ -1,13 +1,13 @@
-import React from 'react';
-import { Container, Heading } from '@chakra-ui/react';
-import dynamic from 'next/dynamic';
+import React from 'react'
+import { Container, Heading } from '@chakra-ui/react'
+import dynamic from 'next/dynamic'
 
 const BarcodeScannerComponent = dynamic(() => import('react-qr-barcode-scanner'), {
   ssr: false,
-});
+})
 
 const IndexPage = () => {
-  const [data, setData] = React.useState<string>('');
+  const [data, setData] = React.useState<string>('')
 
   return (
     <Container marginTop={10}>
@@ -19,13 +19,13 @@ const IndexPage = () => {
         height={500}
         onUpdate={(_, result) => {
           if (result) {
-            setData(result.getText());
+            setData(result.getText())
           }
         }}
       />
       <p>{data}</p>
     </Container>
-  );
-};
+  )
+}
 
-export default IndexPage;
+export default IndexPage

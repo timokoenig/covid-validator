@@ -1,7 +1,7 @@
-import React from 'react';
-import { ChakraProvider, CSSReset } from '@chakra-ui/react';
+import React from 'react'
+import { ChakraProvider, CSSReset } from '@chakra-ui/react'
 
-import '../styles/globals.css';
+import '../styles/globals.css'
 
 const App = ({ Component, pageProps }) => {
   return (
@@ -9,7 +9,7 @@ const App = ({ Component, pageProps }) => {
       <CSSReset />
       <Component {...pageProps} />
     </ChakraProvider>
-  );
-};
+  )
+}
 
-export default App;
+export default App
