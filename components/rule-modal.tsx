@@ -15,6 +15,7 @@ import countries from '../utils/countries'
 type Props = {
   isOpen: boolean
   onClose: () => void
+  onChange: (selection: { country: string; state: string }) => void
 }
 
 const RuleModal = (props: Props) => {
@@ -22,6 +23,11 @@ const RuleModal = (props: Props) => {
     country: 'de',
     state: '',
   })
+
+  const onSave = () => {
+    props.onChange(selection)
+    props.onClose()
+  }
 
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose} size="lg">
@@ -39,7 +45,7 @@ const RuleModal = (props: Props) => {
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={props.onClose}>
+          <Button colorScheme="blue" mr={3} onClick={onSave}>
             Save Changes
           </Button>
         </ModalFooter>
