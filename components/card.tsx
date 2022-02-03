@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Box, Text, Center, useDisclosure } from '@chakra-ui/react'
+import { Button, Box, Text, Center, useDisclosure, AspectRatio } from '@chakra-ui/react'
 import CardHeader from './card-header'
 import dynamic from 'next/dynamic'
 import validateCertificate from '~/utils/validate-certificate'
 import { VerificationResult } from 'dcc-decoder'
 import ResultModal from './result-modal'
+import LoadingIndicator from './loading-indicator'
 
 const BarcodeScannerComponent = dynamic(() => import('react-qr-barcode-scanner'), {
   ssr: false,
@@ -13,12 +14,14 @@ const BarcodeScannerComponent = dynamic(() => import('react-qr-barcode-scanner')
 const Card = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [scanMode, setScanMode] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false)
   const [data, setData] = useState<string>('')
   const [certificateResult, setCertificateResult] = useState<VerificationResult | undefined>()
 
   const onModalClose = () => {
     setData('')
     setCertificateResult(undefined)
+    setLoading(false)
     onClose()
   }
 
@@ -27,7 +30,12 @@ const Card = () => {
     validateCertificate(data)
       .then(setCertificateResult)
       .then(onOpen)
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)
+        setLoading(false)
+        setData('')
+        setCertificateResult(undefined)
+      })
   }, [data])
 
   return (
@@ -37,13 +45,20 @@ const Card = () => {
 
         {scanMode ? (
           <>
-            <BarcodeScannerComponent
-              onUpdate={(_, result) => {
-                if (!result || result.getText() == data) return
-                setData(result.getText())
-              }}
-            />
-            <p>{data}</p>
+            <Box>
+              <AspectRatio ratio={1}>
+                <>
+                  <BarcodeScannerComponent
+                    onUpdate={(_, result) => {
+                      if (!result || result.getText() == data) return
+                      setData(result.getText())
+                      setLoading(true)
+                    }}
+                  />
+                  {loading && <LoadingIndicator />}
+                </>
+              </AspectRatio>
+            </Box>
             <Center py="5">
               <Text color="white">Hold the QR Code in front of your camera</Text>
             </Center>
