@@ -13,11 +13,13 @@ const StateList = (props: Props) => {
     <RadioGroup onChange={props.onChange} value={props.selectedItem}>
       <Stack>
         {props.items.map(state => (
-          <Radio value={state.code}>
+          <Radio value={state.code} isDisabled={state.code != ''}>
             <Box display="flex" flexDirection="row" alignItems="center">
               <Text fontWeight={state.code == '' ? 'bold' : ''}>{state.name}</Text>
               <Text fontSize="xs" ml="2">
-                (updated {moment(state.updated).format('DD.MM.YYYY')})
+                {state.code == ''
+                  ? `(updated ${moment(state.updated).format('DD.MM.YYYY')})`
+                  : '(Coming soon)'}
               </Text>
             </Box>
           </Radio>
