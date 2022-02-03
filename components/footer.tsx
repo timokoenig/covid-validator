@@ -18,7 +18,7 @@ const Footer = () => (
         Timo Koenig
       </Link>
       |
-      <Link href="https://github.com/timokoenig" target="_blank" px="2">
+      <Link href="/imprint" px="2">
         Imprint
       </Link>
     </Center>
