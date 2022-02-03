@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Modal,
   ModalOverlay,
@@ -8,8 +8,9 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
-  Text,
 } from '@chakra-ui/react'
+import CountryList from './country-list'
+import countries from '../utils/countries'
 
 type Props = {
   isOpen: boolean
@@ -17,21 +18,30 @@ type Props = {
 }
 
 const RuleModal = (props: Props) => {
+  const [selection, setSelection] = useState<{ country: string; state: string }>({
+    country: 'de',
+    state: '',
+  })
+
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose} size="lg">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Select Rules</ModalHeader>
+        <ModalHeader>Select Country and Rules</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Text>Test</Text>
+          <CountryList
+            items={countries}
+            selectedCountry={selection.country}
+            selectedState={selection.state}
+            onChange={(country, state) => setSelection({ country: country, state: state })}
+          />
         </ModalBody>
 
         <ModalFooter>
           <Button colorScheme="blue" mr={3} onClick={props.onClose}>
-            Close
+            Save Changes
           </Button>
-          <Button variant="ghost">Secondary Action</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
