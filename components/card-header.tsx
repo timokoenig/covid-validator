@@ -13,7 +13,7 @@ const CardHeader = () => {
     country: 'de',
     state: '',
   })
-  const [selectionPurpose, setSelectionPurpose] = useState<string>(purpose[0])
+  const [selectionPurpose, setSelectionPurpose] = useState<string>(purpose[0].title)
 
   const country = countries.find(item => item.code == selection.country) ?? countries[0]
   const state = country?.states.find(item => item.code == selection.state) ?? country.states[0]

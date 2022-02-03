@@ -9,3 +9,8 @@ export type Country = {
   name: string
   states: State[]
 }
+
+export type Purpose = {
+  title: string
+  info: string
+}

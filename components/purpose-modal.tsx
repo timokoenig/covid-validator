@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import PurposeList from './purpose-list'
 import purpose from '../utils/purpose'
+import { Purpose } from '../utils/models'
 
 type Props = {
   isOpen: boolean
@@ -19,10 +20,10 @@ type Props = {
 }
 
 const PurposeModal = (props: Props) => {
-  const [selection, setSelection] = useState<string>(purpose[0])
+  const [selection, setSelection] = useState<Purpose>(purpose[0])
 
   const onSave = () => {
-    props.onChange(selection)
+    props.onChange(selection.title)
     props.onClose()
   }
 
