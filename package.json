@@ -1,10 +1,11 @@
 {
   "name": "covid-check",
+  "description": "Check EU Digitial Covid Certificates with ease and validate them against local or country rules.",
   "version": "0.1.0",
   "main": "N/A",
   "repository": "https://github.com/timokoenig/covid-check",
   "author": "Timo Koenig <timo@timokoenig.com>",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "private": false,
   "scripts": {
     "dev": "next",
