@@ -13,7 +13,7 @@ const PurposeList = (props: Props) => {
       <Stack>
         {props.items.map(purpose => (
           <Radio value={purpose}>
-            <Box py="5">
+            <Box py="3">
               <Text fontWeight="bold">{purpose}</Text>
             </Box>
           </Radio>
