@@ -30,6 +30,10 @@ const Information = () => (
         Where do I get help if something is not working?
       </Heading>
       <Text>visit github and create an issue</Text>
+      <Box pt="3">
+        <Text>Known issues that are being worked on</Text>
+        <Text>* Camera quality affects scan time</Text>
+      </Box>
     </Box>
   </Box>
 )
