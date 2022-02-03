@@ -13,7 +13,7 @@ const Footer = () => (
         for the community
       </Text>
     </Center>
-    <Center>
+    <Center mb="20">
       <Link href="https://github.com/timokoenig" target="_blank" px="2">
         Timo Koenig
       </Link>
