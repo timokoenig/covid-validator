@@ -54,6 +54,7 @@ const Card = () => {
                       setData(result.getText())
                       setLoading(true)
                     }}
+                    delay={0}
                   />
                   {loading && <LoadingIndicator />}
                 </>
