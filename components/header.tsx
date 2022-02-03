@@ -8,6 +8,7 @@ import {
   MenuList,
   MenuItem,
   IconButton,
+  Link,
 } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import useColorMode from '@/utils/color-mode'
@@ -17,7 +18,9 @@ const Header = () => {
   return (
     <Box display="flex">
       <Heading as="h1" size="2xl" marginBottom={5} flex="1">
-        Covid Check{' '}
+        <Link href="/" _hover={{ textDecoration: 'none' }}>
+          Covid Check
+        </Link>{' '}
         <Text display="inline" fontSize="lg" color="red">
           BETA
         </Text>
