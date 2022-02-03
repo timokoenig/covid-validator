@@ -93,8 +93,9 @@ const Card = () => {
               </Button>
             </Center>
             <Center pb="10">
-              <Text fontWeight="semibold" color="white">
-                some more information for the user
+              <Text fontWeight="semibold" color="white" textAlign="center" px="10">
+                Make sure to check the selected rules and confirm with your local regulations.
+                Otherwise it might come to invalid certificate validations.
               </Text>
             </Center>
           </Box>
