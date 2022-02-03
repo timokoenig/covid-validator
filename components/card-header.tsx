@@ -47,24 +47,26 @@ const CardHeader = () => {
           <ChevronDownIcon w={8} h={8} color="white" />
           <Spacer />
         </Button>
-        <Button
-          pl="10"
-          pr="5"
-          py="10"
-          backgroundColor={'blue.300'}
-          _hover={{ bg: 'blue.200' }}
-          _active={{ bg: 'blue.300' }}
-          display="flex"
-          flexDirection="row"
-          alignItems="center"
-          onClick={onOpenPurpose}
-          borderRadius="0"
-        >
-          <Text fontSize="h4" fontWeight="bold" color="white">
-            {selectionPurpose}
-          </Text>
-          <ChevronDownIcon w={8} h={8} color="white" />
-        </Button>
+        {selection.country == 'de' && (
+          <Button
+            pl="10"
+            pr="5"
+            py="10"
+            backgroundColor={'blue.300'}
+            _hover={{ bg: 'blue.200' }}
+            _active={{ bg: 'blue.300' }}
+            display="flex"
+            flexDirection="row"
+            alignItems="center"
+            onClick={onOpenPurpose}
+            borderRadius="0"
+          >
+            <Text fontSize="h4" fontWeight="bold" color="white">
+              {selectionPurpose}
+            </Text>
+            <ChevronDownIcon w={8} h={8} color="white" />
+          </Button>
+        )}
       </Box>
       <RuleModal isOpen={isOpenRule} onClose={onCloseRule} onChange={setSelection} />
       <PurposeModal
