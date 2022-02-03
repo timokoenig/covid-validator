@@ -10,10 +10,12 @@ import {
   Button,
   Text,
 } from '@chakra-ui/react'
+import { VerificationResult } from 'dcc-decoder'
 
 type Props = {
   isOpen: boolean
   onClose: () => void
+  result?: VerificationResult | undefined
 }
 
 const ResultModal = (props: Props) => {
@@ -24,7 +26,7 @@ const ResultModal = (props: Props) => {
         <ModalHeader>Result Modal</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Text>Test</Text>
+          <Text>{props.result?.cert?.nam.gn + '' + props.result?.cert?.nam.fn}</Text>
         </ModalBody>
 
         <ModalFooter>

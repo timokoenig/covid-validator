@@ -4,7 +4,7 @@ import dccConfig from './dccConfig'
 export default async function validateCertificate(data: string): Promise<VerificationResult> {
   const dccData = {
     signingKeys: dccConfig.certs,
-    // valueSets: dccConfig.valueSets,
+    valueSets: dccConfig.valueSets,
   } as DCCData
 
   const result = await decodeOnly({
