@@ -1,6 +1,18 @@
-# Covid Check
+<img src="./assets/covidcheck.png" alt="Logo Covid Check" />
 
 Check EU Digitial Covid Certificates with ease and validate them against local or country rules.
+
+## What is the purpose of Covid Check?
+
+todo
+
+## What does BETA mean?
+
+todo
+
+## Where do the rules come from?
+
+todo
 
 ## Getting Started
 
