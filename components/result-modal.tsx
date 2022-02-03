@@ -26,6 +26,8 @@ const ResultModal = (props: Props) => {
         <ModalHeader>Result Modal</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
+          {props.result?.error && <Text>{props.result?.error.name}</Text>}
+          {/* {props.result?.ruleErrors && <Text>{props.result?.ruleErrors}</Text>} */}
           <Text>{props.result?.cert?.nam.gn + '' + props.result?.cert?.nam.fn}</Text>
         </ModalBody>
 

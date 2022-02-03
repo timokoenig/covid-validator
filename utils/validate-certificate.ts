@@ -1,24 +1,12 @@
-import { decodeOnly, DCCData, VerificationResult } from 'dcc-decoder'
-import dccConfig from './dccConfig'
+import { parseDCC, verifyDCC } from './dcc'
 
-export default async function validateCertificate(data: string): Promise<VerificationResult> {
-  const dccData = {
-    signingKeys: dccConfig.certs,
-    valueSets: dccConfig.valueSets,
-  } as DCCData
+export default async function validateCertificate(data: string): Promise<any> {
+  let dcc = parseDCC(data)
+  if (!dcc) {
+    return undefined
+  }
+  console.log(dcc)
+  console.log(await verifyDCC(dcc))
 
-  const result = await decodeOnly({
-    source: [data],
-    dccData: dccData,
-  })
-  // if (result.error) {
-  //   console.log('Decoding error', result.error)
-  //   return
-  // }
-  // if (result.ruleErrors) {
-  //   console.log('Rule errors', result.ruleErrors)
-  //   return
-  // }
-
-  return result
+  return undefined
 }
