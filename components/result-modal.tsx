@@ -20,14 +20,19 @@ type Props = {
 }
 
 const ResultModal = (props: Props) => {
-  const success = true
+  const success = false
 
   const CertValid = () => (
     <ModalContent overflow="hidden" bg="green.400">
       {/* <ModalCloseButton color="white" /> */}
       <ModalBody mb="5">
-        <Center p="10">
+        <Center px="10" pt="10">
           <Heading color="white">VALID</Heading>
+        </Center>
+        <Center px="10" pb="10">
+          <Text color="white" fontWeight="semibold">
+            Germany / Hamburg / 2G
+          </Text>
         </Center>
         <Center display="flex" flexDirection="row">
           <Box px="5">
@@ -69,26 +74,13 @@ const ResultModal = (props: Props) => {
     <ModalContent overflow="hidden" bg="red.400">
       {/* <ModalCloseButton color="white" /> */}
       <ModalBody mb="5">
-        <Center p="10">
+        <Center px="10" pt="10">
           <Heading color="white">NOT VALID</Heading>
         </Center>
-        <Center display="flex" flexDirection="row">
-          <Box px="5">
-            <Text fontWeight="semibold" fontSize="xl" color="white">
-              Name
-            </Text>
-            <Text fontWeight="semibold" fontSize="xl" color="white">
-              Birthdate
-            </Text>
-          </Box>
-          <Box px="5">
-            <Text fontSize="xl" color="white">
-              Timo Koenig
-            </Text>
-            <Text fontSize="xl" color="white">
-              01.01.2000
-            </Text>
-          </Box>
+        <Center px="10">
+          <Text color="white" fontWeight="semibold">
+            Germany / Hamburg / 2G
+          </Text>
         </Center>
       </ModalBody>
 
