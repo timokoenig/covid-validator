@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import { Button, Text, Image, Box, Spacer, useDisclosure } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import RuleModal from './rule-modal'
+import PurposeModal from './purpose-modal'
 import countries from '../utils/countries'
 import purpose from '../utils/purpose'
 
 const CardHeader = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen: isOpenRule, onOpen: onOpenRule, onClose: onCloseRule } = useDisclosure()
+  const { isOpen: isOpenPurpose, onOpen: onOpenPurpose, onClose: onClosePurpose } = useDisclosure()
   const [selection, setSelection] = useState<{ country: string; state: string }>({
     country: 'de',
     state: '',
@@ -29,7 +31,7 @@ const CardHeader = () => {
           display="flex"
           flexDirection="row"
           alignItems="center"
-          onClick={onOpen}
+          onClick={onOpenRule}
           borderRadius="0"
         >
           <Image
@@ -55,7 +57,7 @@ const CardHeader = () => {
           display="flex"
           flexDirection="row"
           alignItems="center"
-          onClick={onOpen}
+          onClick={onOpenPurpose}
           borderRadius="0"
         >
           <Text fontSize="h4" fontWeight="bold" color="white">
@@ -64,7 +66,12 @@ const CardHeader = () => {
           <ChevronDownIcon w={8} h={8} color="white" />
         </Button>
       </Box>
-      <RuleModal isOpen={isOpen} onClose={onClose} onChange={setSelection} />
+      <RuleModal isOpen={isOpenRule} onClose={onCloseRule} onChange={setSelection} />
+      <PurposeModal
+        isOpen={isOpenPurpose}
+        onClose={onClosePurpose}
+        onChange={setSelectionPurpose}
+      />
     </>
   )
 }
