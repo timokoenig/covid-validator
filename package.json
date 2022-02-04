@@ -27,7 +27,6 @@
     "base45": "^2.0.1",
     "cbor": "^8.1.0",
     "cose-js": "^0.8.3",
-    "dcc-decoder": "^0.6.3",
     "emotion-theming": "^11.0.0",
     "framer-motion": "^4",
     "html-react-parser": "^1.4.6",

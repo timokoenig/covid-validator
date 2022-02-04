@@ -27,13 +27,20 @@ export type DCC = {
   data: DCCData
 }
 
-export function parseDCC(data: string): DCC | null {
-  if (!data.startsWith('HC1:')) return null
+export type DCCValidationResult = {
+  certificates: DCC[]
+  valid: boolean
+}
+
+class DCCParseError extends Error {}
+
+export async function parseDCC(data: string): Promise<DCC> {
+  if (!data.startsWith('HC1:')) throw DCCParseError
   const certData = data.replace('HC1:', '')
   const decodedData = base45.decode(certData)
   const decompressedData = zlib.inflate(decodedData)
   const coseResult = cbor.decodeAllSync(decompressedData)
-  if (coseResult.length == 0) return null
+  if (coseResult.length == 0) throw DCCParseError
   const [protected_header, unprotected_header, payload, signature] = coseResult[0].value
   return {
     raw: data,
@@ -48,7 +55,7 @@ export function parseDCC(data: string): DCC | null {
   }
 }
 
-export async function verifyDCC(dcc: DCC): Promise<boolean> {
+export async function verifyDCC(dcc: DCC): Promise<DCCValidationResult> {
   const keyByKid = dscList.certificates.find(cert => cert.kid == dcc.data.header.kid)
   const certList = keyByKid ? [keyByKid] : dscList.certificates
   for (let cert of certList) {
@@ -69,11 +76,17 @@ export async function verifyDCC(dcc: DCC): Promise<boolean> {
       await cose.sign.verify(dcc.decompressedRaw, {
         key: { x: keyX, y: keyY },
       })
-      return true
+      return {
+        certificates: [dcc],
+        valid: true,
+      }
     } catch {}
   }
 
-  return false
+  return {
+    certificates: [dcc],
+    valid: false,
+  }
 }
 
 function parseKid(protectedHeader: any, unprotectedHeader: any): string | null {

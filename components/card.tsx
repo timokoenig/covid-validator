@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Box, Text, Center, useDisclosure, AspectRatio } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
-import validateCertificate from '~/utils/validate-certificate'
-import { VerificationResult } from 'dcc-decoder'
+import { DCCValidationResult, parseDCC, verifyDCC } from '../utils/dcc'
 import ResultModal from './result-modal'
 import LoadingIndicator from './loading-indicator'
 
@@ -19,7 +18,7 @@ const Card = () => {
   const [scanMode, setScanMode] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
   const [data, setData] = useState<string>('')
-  const [certificateResult, setCertificateResult] = useState<VerificationResult | undefined>()
+  const [certificateResult, setCertificateResult] = useState<DCCValidationResult>()
   const isMultiScan = false
 
   const onModalClose = () => {
@@ -30,8 +29,8 @@ const Card = () => {
   }
 
   useEffect(() => {
-    if (!data.startsWith('HC1:')) return
-    validateCertificate(data)
+    parseDCC(data)
+      .then(verifyDCC)
       .then(setCertificateResult)
       .then(onOpen)
       .catch(err => {
@@ -55,6 +54,7 @@ const Card = () => {
                   <BarcodeScannerComponent
                     onUpdate={(_, result) => {
                       if (!result || result.getText() == data) return
+                      if (!result.getText().startsWith('HC1:')) return
                       setData(result.getText())
                       setLoading(true)
                     }}

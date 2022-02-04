@@ -11,14 +11,14 @@ import {
   Box,
   Heading,
 } from '@chakra-ui/react'
-import { VerificationResult } from 'dcc-decoder'
 import countries from '../utils/countries'
 import purpose from '../utils/purpose'
+import { DCCValidationResult } from '~/utils/dcc'
 
 type Props = {
   isOpen: boolean
   onClose: () => void
-  result?: VerificationResult | undefined
+  result?: DCCValidationResult | undefined
 }
 
 const RuleView = () => {
