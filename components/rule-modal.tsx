@@ -32,7 +32,7 @@ const RuleModal = (props: Props) => {
   }
 
   return (
-    <Modal isOpen={props.isOpen} onClose={props.onClose} size="lg">
+    <Modal isOpen={props.isOpen} onClose={props.onClose} size="lg" scrollBehavior="inside">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Select Country and Rules</ModalHeader>
