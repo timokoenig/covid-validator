@@ -20,10 +20,13 @@ type Props = {
 }
 
 const PurposeModal = (props: Props) => {
-  const [selection, setSelection] = useState<Purpose>(purpose[0])
+  const [selection, setSelection] = useState<Purpose>(
+    purpose.find(item => item.title == localStorage.getItem('purpose')) ?? purpose[0]
+  )
 
   const onSave = () => {
     props.onChange(selection.title)
+    localStorage.setItem('purpose', selection.title)
     props.onClose()
   }
 

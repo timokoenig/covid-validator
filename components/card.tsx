@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Box, Text, Center, useDisclosure, AspectRatio } from '@chakra-ui/react'
-import CardHeader from './card-header'
 import dynamic from 'next/dynamic'
 import validateCertificate from '~/utils/validate-certificate'
 import { VerificationResult } from 'dcc-decoder'
 import ResultModal from './result-modal'
 import LoadingIndicator from './loading-indicator'
+
+const CardHeader = dynamic(() => import('./card-header'), {
+  ssr: false,
+})
 
 const BarcodeScannerComponent = dynamic(() => import('react-qr-barcode-scanner'), {
   ssr: false,

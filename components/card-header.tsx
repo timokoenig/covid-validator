@@ -10,10 +10,12 @@ const CardHeader = () => {
   const { isOpen: isOpenRule, onOpen: onOpenRule, onClose: onCloseRule } = useDisclosure()
   const { isOpen: isOpenPurpose, onOpen: onOpenPurpose, onClose: onClosePurpose } = useDisclosure()
   const [selection, setSelection] = useState<{ country: string; state: string }>({
-    country: 'de',
-    state: '',
+    country: localStorage.getItem('country') ?? 'de',
+    state: localStorage.getItem('state') ?? '',
   })
-  const [selectionPurpose, setSelectionPurpose] = useState<string>(purpose[0].title)
+  const [selectionPurpose, setSelectionPurpose] = useState<string>(
+    localStorage.getItem('purpose') ?? purpose[0].title
+  )
 
   const country = countries.find(item => item.code == selection.country) ?? countries[0]
   const state = country?.states.find(item => item.code == selection.state) ?? country.states[0]

@@ -20,12 +20,14 @@ type Props = {
 
 const RuleModal = (props: Props) => {
   const [selection, setSelection] = useState<{ country: string; state: string }>({
-    country: 'de',
-    state: '',
+    country: localStorage.getItem('country') ?? 'de',
+    state: localStorage.getItem('state') ?? '',
   })
 
   const onSave = () => {
     props.onChange(selection)
+    localStorage.setItem('country', selection.country)
+    localStorage.setItem('state', selection.state)
     props.onClose()
   }
 
