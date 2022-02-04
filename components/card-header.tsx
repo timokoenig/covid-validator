@@ -10,7 +10,7 @@ const CardHeader = () => {
   const { isOpen: isOpenRule, onOpen: onOpenRule, onClose: onCloseRule } = useDisclosure()
   const { isOpen: isOpenPurpose, onOpen: onOpenPurpose, onClose: onClosePurpose } = useDisclosure()
   const [selection, setSelection] = useState<{ country: string; state: string }>({
-    country: localStorage.getItem('country') ?? 'de',
+    country: localStorage.getItem('country') ?? 'DE',
     state: localStorage.getItem('state') ?? '',
   })
   const [selectionPurpose, setSelectionPurpose] = useState<string>(
@@ -37,7 +37,7 @@ const CardHeader = () => {
           borderRadius="0"
         >
           <Image
-            src={`https://raw.githubusercontent.com/lipis/flag-icons/main/flags/1x1/${country.code}.svg`}
+            src={`https://raw.githubusercontent.com/lipis/flag-icons/main/flags/1x1/${country.code.toLowerCase()}.svg`}
             width="5"
             height="5"
             borderRadius="10"
@@ -49,7 +49,7 @@ const CardHeader = () => {
           <ChevronDownIcon w={8} h={8} color="white" />
           <Spacer />
         </Button>
-        {selection.country == 'de' && (
+        {selection.country == 'DE' && (
           <Button
             pl="10"
             pr="5"
