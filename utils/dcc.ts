@@ -3,6 +3,7 @@ import zlib from 'pako'
 import cbor from 'cbor'
 import { Certificate, PublicKey } from '@fidm/x509'
 import cose from 'cose-js'
+import { ExtendedResults } from 'cbor/types/lib/decoder'
 
 const dscList = require('./dsc.json') as {
   certificates: {
@@ -11,13 +12,103 @@ const dscList = require('./dsc.json') as {
   }[]
 }
 
+type Vaccination = {
+  // Disease or agent targeted
+  tg: string
+  // Vaccine or prophylaxis
+  vp: string
+  // Vaccine medicinal product
+  mp: string
+  // Marketing Authorization Holder - if no MAH present, then manufacturer
+  ma: string
+  // Dose Number (1-9)
+  dn: number
+  // Total Series of Doses
+  sd: number
+  // Date of Vaccination
+  dt: string
+  // Country of Vaccination
+  co: string
+  // Certificate Issuer
+  is: string
+  // Unique Certificate Identifier: UVCI
+  ci: string
+}
+
+type Test = {
+  // Disease or agent targeted
+  tg: string
+  // Type of Test
+  tt: string
+  // Test name (optional for NAAT test)
+  nm?: string
+  // Test manufacturer (optional for NAAT test)
+  ma?: string
+  // Date/Time of Sample Collection
+  sc: string
+  // Test Result
+  tr: string
+  // Testing Centre
+  tc?: string
+  // Country of Vaccination
+  co: string
+  // Certificate Issuer
+  is: string
+  // Unique Certificate Identifier: UVCI
+  ci: string
+}
+
+type Recovery = {
+  // Disease or agent targeted
+  tg: string
+  // Date of First Positive Test Result
+  fr: string
+  // Date: Certificate Valid From
+  df: string
+  // Date: Certificate Valid Until
+  du: string
+  // Country of Vaccination
+  co: string
+  // Certificate Issuer
+  is: string
+  // Unique Certificate Identifier: UVCI
+  ci: string
+}
+
+type Name = {
+  gn?: string
+  fn?: string
+  gnt?: string
+  fnt: string
+}
+
+type DigitalGreenCertificate = {
+  nam: Name
+  dob?: string
+  v?: Vaccination[]
+  t?: Test[]
+  r?: Recovery[]
+  ver: string
+}
+
+type HealthCertificateClaim = {
+  dgc: DigitalGreenCertificate
+}
+
+export type CBORWebToken = {
+  iss: string
+  iat?: string
+  exp?: string
+  hcert: HealthCertificateClaim
+}
+
 export type DCCHeader = {
   kid: string | null
 }
 
 export type DCCData = {
   header: DCCHeader
-  payload: any
+  payload: CBORWebToken
   signature: string
 }
 
@@ -49,8 +140,19 @@ export async function parseDCC(data: string): Promise<DCC> {
       header: {
         kid: parseKid(cbor.decodeAllSync(protected_header), unprotected_header),
       },
-      payload: cbor.decodeAllSync(payload),
+      payload: parsePayload(cbor.decodeAllSync(payload)),
       signature: signature,
+    },
+  }
+}
+
+function parsePayload(payload: any[] | ExtendedResults[]): CBORWebToken {
+  return {
+    iss: payload[0].get(1) as string,
+    iat: (payload[0].get(6) as number).toFixed(0),
+    exp: (payload[0].get(4) as number).toFixed(0),
+    hcert: {
+      dgc: payload[0].get(-260).get(1),
     },
   }
 }
