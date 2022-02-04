@@ -25,6 +25,7 @@
     "@emotion/styled": "^11",
     "@fidm/x509": "^1.2.1",
     "base45": "^2.0.1",
+    "bignumber.js": "^9.0.2",
     "cbor": "^8.1.0",
     "certlogic-js": "^1.1.1",
     "cose-js": "^0.8.3",
