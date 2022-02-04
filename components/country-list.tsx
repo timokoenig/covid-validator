@@ -25,7 +25,7 @@ const CountryList = (props: Props) => (
     onChange={index => props.onChange(props.items[index.valueOf() as number].code, '')}
   >
     {props.items.map(country => (
-      <AccordionItem>
+      <AccordionItem key={country.code}>
         <h2>
           <AccordionButton>
             <Box flex="1" textAlign="left" display="flex" flexDirection="row">

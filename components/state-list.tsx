@@ -13,7 +13,7 @@ const StateList = (props: Props) => {
     <RadioGroup onChange={props.onChange} value={props.selectedItem}>
       <Stack>
         {props.items.map(state => (
-          <Radio value={state.code} isDisabled={state.code != ''}>
+          <Radio value={state.code} isDisabled={state.code != ''} key={state.code}>
             <Box display="flex" flexDirection="row" alignItems="center">
               <Text fontWeight={state.code == '' ? 'bold' : ''}>{state.name}</Text>
               <Text fontSize="xs" ml="2">
