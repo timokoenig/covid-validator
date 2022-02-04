@@ -20,6 +20,7 @@ const Card = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const [data, setData] = useState<string>('')
   const [certificateResult, setCertificateResult] = useState<VerificationResult | undefined>()
+  const isMultiScan = false
 
   const onModalClose = () => {
     setData('')
@@ -48,7 +49,7 @@ const Card = () => {
 
         {scanMode ? (
           <>
-            <Box>
+            <Box position="relative">
               <AspectRatio ratio={1}>
                 <>
                   <BarcodeScannerComponent
@@ -62,6 +63,41 @@ const Card = () => {
                   {loading && <LoadingIndicator />}
                 </>
               </AspectRatio>
+              {isMultiScan && (
+                <Box
+                  width="100%"
+                  height="100"
+                  backgroundColor="rgba(255, 255, 255, 0.3)"
+                  position="absolute"
+                  bottom="0"
+                >
+                  <Box
+                    display="flex"
+                    flexDirection="row"
+                    p="5"
+                    textAlign="center"
+                    alignItems="center"
+                  >
+                    <Box flex="1">
+                      <Text>Scan test certificate for</Text>
+                      <Text fontWeight="semibold" fontSize="xl">
+                        Timo Koenig
+                      </Text>
+                    </Box>
+                    <Button
+                      size="md"
+                      variant="outline"
+                      color="white"
+                      backgroundColor={'blue.400'}
+                      _hover={{ bg: 'blue.300' }}
+                      _active={{ bg: 'blue.400' }}
+                      // onClick={props.onClose}
+                    >
+                      Abort
+                    </Button>
+                  </Box>
+                </Box>
+              )}
             </Box>
             <Center py="5">
               <Text color="white">Hold the QR Code in front of your camera</Text>
