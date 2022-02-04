@@ -161,7 +161,7 @@ export async function checkCertificate(data: string): Promise<ScanResult> {
         ruleValidation: ruleResult,
       },
     ],
-    isMultiScan: isMultiScan(dcc),
+    isMultiScan: ruleResult.isValid ? isMultiScan(dcc) : false,
   }
 }
 

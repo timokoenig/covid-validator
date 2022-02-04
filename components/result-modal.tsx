@@ -18,7 +18,7 @@ import moment from 'moment'
 
 type Props = {
   isOpen: boolean
-  onClose: () => void
+  onClose: (multiscan: boolean) => void
   result: ScanResult | undefined
 }
 
@@ -80,7 +80,7 @@ const ResultModal = (props: Props) => {
           backgroundColor={'green.400'}
           _hover={{ bg: 'green.300' }}
           _active={{ bg: 'green.400' }}
-          onClick={props.onClose}
+          onClick={() => props.onClose(false)}
         >
           Close
         </Button>
@@ -110,7 +110,7 @@ const ResultModal = (props: Props) => {
           backgroundColor={'red.400'}
           _hover={{ bg: 'red.300' }}
           _active={{ bg: 'red.400' }}
-          onClick={props.onClose}
+          onClick={() => props.onClose(props.result?.isMultiScan ?? false)}
         >
           Close
         </Button>
@@ -140,7 +140,7 @@ const ResultModal = (props: Props) => {
           backgroundColor={'blue.400'}
           _hover={{ bg: 'blue.300' }}
           _active={{ bg: 'blue.400' }}
-          onClick={props.onClose}
+          onClick={() => props.onClose(true)}
         >
           Close
         </Button>
@@ -170,7 +170,7 @@ const ResultModal = (props: Props) => {
           backgroundColor={'gray.400'}
           _hover={{ bg: 'gray.300' }}
           _active={{ bg: 'gray.400' }}
-          onClick={props.onClose}
+          onClick={() => props.onClose(props.result?.isMultiScan ?? false)}
         >
           Close
         </Button>
@@ -201,7 +201,7 @@ const ResultModal = (props: Props) => {
   }
 
   return (
-    <Modal isOpen={props.isOpen} onClose={props.onClose} size="lg">
+    <Modal isOpen={props.isOpen} onClose={() => {}} size="lg">
       <ModalOverlay />
       <Body />
     </Modal>

@@ -19,11 +19,12 @@ const Card = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const [data, setData] = useState<string>('')
   const [scanResult, setScanResult] = useState<ScanResult>()
-  const isMultiScan = false
 
-  const onModalClose = () => {
-    setData('')
-    setScanResult(undefined)
+  const onModalClose = (multiscan: boolean) => {
+    if (!multiscan) {
+      setData('')
+      setScanResult(undefined)
+    }
     setLoading(false)
     onClose()
   }
@@ -71,7 +72,7 @@ const Card = () => {
                   {loading && <LoadingIndicator />}
                 </>
               </AspectRatio>
-              {isMultiScan && (
+              {(scanResult?.isMultiScan ?? false) && (
                 <Box
                   width="100%"
                   height="100"
@@ -99,7 +100,7 @@ const Card = () => {
                       backgroundColor={'blue.400'}
                       _hover={{ bg: 'blue.300' }}
                       _active={{ bg: 'blue.400' }}
-                      // onClick={props.onClose}
+                      onClick={() => onModalClose(false)}
                     >
                       Abort
                     </Button>
