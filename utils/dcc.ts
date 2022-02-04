@@ -4,6 +4,7 @@ import cbor from 'cbor'
 import { Certificate, PublicKey } from '@fidm/x509'
 import cose from 'cose-js'
 import { ExtendedResults } from 'cbor/types/lib/decoder'
+import { DCCRuleValidationResult, validateDCCRules } from './certlogic'
 
 const dscList = require('./dsc.json') as {
   certificates: {
@@ -118,12 +119,64 @@ export type DCC = {
   data: DCCData
 }
 
-export type DCCValidationResult = {
-  certificates: DCC[]
-  valid: boolean
+export type CertificateResult = {
+  dcc: DCC
+  verification: boolean
+  ruleValidation?: DCCRuleValidationResult
+}
+
+export type ScanResult = {
+  certificates: CertificateResult[]
+  isMultiScan: boolean
 }
 
 class DCCParseError extends Error {}
+
+// parse, verify and validate rules
+export async function checkCertificate(data: string): Promise<ScanResult> {
+  // parse dcc
+  const dcc = await parseDCC(data)
+  // verify dcc
+  const verified = await verifyDCC(dcc)
+  if (!verified) {
+    // verification failed
+    return {
+      certificates: [
+        {
+          dcc,
+          verification: false,
+        },
+      ],
+      isMultiScan: false,
+    }
+  }
+  // check dcc is multiscan is required
+  // validate dcc against selected rules
+  const ruleResult = validateDCCRules(dcc, localStorage.getItem('country') ?? 'DE', new Date())
+  return {
+    certificates: [
+      {
+        dcc,
+        verification: true,
+        ruleValidation: ruleResult,
+      },
+    ],
+    isMultiScan: isMultiScan(dcc),
+  }
+}
+
+function isMultiScan(dcc: DCC): boolean {
+  const purpose = localStorage.getItem('purpose') ?? ''
+  if (!purpose.includes('+')) return false
+  // current purpose required additional test, except for valid booster certificates
+  const vac = dcc.data.payload.hcert.dgc.v
+  if (vac == undefined || vac.length == 0) {
+    // TODO throw error
+    return false
+  }
+  const isBooster = vac[0].dn >= 3 || vac[0].dn > vac[0].sd
+  return !isBooster
+}
 
 export async function parseDCC(data: string): Promise<DCC> {
   if (!data.startsWith('HC1:')) throw DCCParseError
@@ -157,7 +210,7 @@ function parsePayload(payload: any[] | ExtendedResults[]): CBORWebToken {
   }
 }
 
-export async function verifyDCC(dcc: DCC): Promise<DCCValidationResult> {
+export async function verifyDCC(dcc: DCC): Promise<boolean> {
   const keyByKid = dscList.certificates.find(cert => cert.kid == dcc.data.header.kid)
   const certList = keyByKid ? [keyByKid] : dscList.certificates
   for (let cert of certList) {
@@ -178,17 +231,11 @@ export async function verifyDCC(dcc: DCC): Promise<DCCValidationResult> {
       await cose.sign.verify(dcc.decompressedRaw, {
         key: { x: keyX, y: keyY },
       })
-      return {
-        certificates: [dcc],
-        valid: true,
-      }
+      return true
     } catch {}
   }
 
-  return {
-    certificates: [dcc],
-    valid: false,
-  }
+  return false
 }
 
 function parseKid(protectedHeader: any, unprotectedHeader: any): string | null {

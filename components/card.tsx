@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Box, Text, Center, useDisclosure, AspectRatio } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
-import { DCCValidationResult, parseDCC, verifyDCC } from '../utils/dcc'
+import { checkCertificate, ScanResult } from '../utils/dcc'
 import ResultModal from './result-modal'
 import LoadingIndicator from './loading-indicator'
-import { validateDCCRules } from '~/utils/certlogic'
 
 const CardHeader = dynamic(() => import('./card-header'), {
   ssr: false,
@@ -19,31 +18,34 @@ const Card = () => {
   const [scanMode, setScanMode] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
   const [data, setData] = useState<string>('')
-  const [certificateResult, setCertificateResult] = useState<DCCValidationResult>()
+  const [scanResult, setScanResult] = useState<ScanResult>()
   const isMultiScan = false
 
   const onModalClose = () => {
     setData('')
-    setCertificateResult(undefined)
+    setScanResult(undefined)
     setLoading(false)
     onClose()
   }
 
   useEffect(() => {
-    parseDCC(data)
-      .then(verifyDCC)
+    if (data.length == 0) return
+    checkCertificate(data)
       .then(res => {
-        let ruleResult = validateDCCRules(res.certificates[0], 'DE', new Date())
-        console.log(ruleResult)
-        return res
+        if (scanResult !== undefined && scanResult.isMultiScan) {
+          let newScanResult = scanResult
+          newScanResult.certificates.push(res.certificates[0])
+          setScanResult(newScanResult)
+        } else {
+          setScanResult(res)
+        }
+        onOpen()
       })
-      .then(setCertificateResult)
-      .then(onOpen)
       .catch(err => {
         console.log(err)
-        setLoading(false)
         setData('')
-        setCertificateResult(undefined)
+        setScanResult(undefined)
+        setLoading(false)
       })
   }, [data])
 
@@ -146,7 +148,7 @@ const Card = () => {
           </Box>
         )}
       </Box>
-      <ResultModal isOpen={isOpen} onClose={onModalClose} result={certificateResult} />
+      <ResultModal isOpen={isOpen} onClose={onModalClose} result={scanResult} />
     </>
   )
 }

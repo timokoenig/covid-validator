@@ -13,12 +13,13 @@ import {
 } from '@chakra-ui/react'
 import countries from '../utils/countries'
 import purpose from '../utils/purpose'
-import { DCCValidationResult } from '~/utils/dcc'
+import { ScanResult } from '~/utils/dcc'
+import moment from 'moment'
 
 type Props = {
   isOpen: boolean
   onClose: () => void
-  result?: DCCValidationResult | undefined
+  result: ScanResult | undefined
 }
 
 const RuleView = () => {
@@ -35,7 +36,15 @@ const RuleView = () => {
 }
 
 const ResultModal = (props: Props) => {
-  const success = false
+  if (props.result === undefined) return <></>
+
+  const notValid = props.result.certificates.find(
+    cert => cert.verification === false || cert.ruleValidation?.isValid === false
+  )
+
+  const dgc = props.result.certificates[0].dcc.data.payload.hcert.dgc
+  const name = dgc.nam.gn + ' ' + dgc.nam.fn
+  const birthdate = dgc.dob ? moment(dgc.dob).format('MM.DD.YYYY') : 'XX.XX.XXXX'
 
   const CertValid = () => (
     <ModalContent overflow="hidden" bg="green.400">
@@ -58,10 +67,10 @@ const ResultModal = (props: Props) => {
           </Box>
           <Box px="5">
             <Text fontSize="xl" color="white">
-              Timo Koenig
+              {name}
             </Text>
             <Text fontSize="xl" color="white">
-              01.01.2000
+              {birthdate}
             </Text>
           </Box>
         </Center>
@@ -116,7 +125,7 @@ const ResultModal = (props: Props) => {
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose} size="lg">
       <ModalOverlay />
-      {success ? <CertValid /> : <CertInvalid />}
+      {notValid ? <CertInvalid /> : <CertValid />}
     </Modal>
   )
 }
