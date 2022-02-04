@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { DCCValidationResult, parseDCC, verifyDCC } from '../utils/dcc'
 import ResultModal from './result-modal'
 import LoadingIndicator from './loading-indicator'
+import { validateDCCRules } from '~/utils/certlogic'
 
 const CardHeader = dynamic(() => import('./card-header'), {
   ssr: false,
@@ -31,6 +32,11 @@ const Card = () => {
   useEffect(() => {
     parseDCC(data)
       .then(verifyDCC)
+      .then(res => {
+        let ruleResult = validateDCCRules(res.certificates[0], 'DE', new Date())
+        console.log(ruleResult)
+        return res
+      })
       .then(setCertificateResult)
       .then(onOpen)
       .catch(err => {
