@@ -1,17 +1,17 @@
 import { DCC } from './dcc'
 import countryBusinessRules from './eu-dcc-rules.json'
 
-type Rules = {
+export type Rules = {
   updatedAt: string
   rules: Rule[]
 }
 
-type Language = {
+export type Language = {
   lang: string
   desc: string
 }
 
-type Rule = {
+export type Rule = {
   Identifier: string
   Hash?: string | null
   Type: string

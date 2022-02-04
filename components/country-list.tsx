@@ -30,7 +30,7 @@ const CountryList = (props: Props) => (
           <AccordionButton>
             <Box flex="1" textAlign="left" display="flex" flexDirection="row">
               <Image
-                src={`https://raw.githubusercontent.com/lipis/flag-icons/main/flags/1x1/${country.code}.svg`}
+                src={`https://raw.githubusercontent.com/lipis/flag-icons/main/flags/1x1/${country.code.toLowerCase()}.svg`}
                 width="5"
                 height="5"
                 borderRadius="10"
