@@ -22,9 +22,9 @@ const Card = () => {
 
   const onModalClose = (multiscan: boolean) => {
     if (!multiscan) {
-      setData('')
       setScanResult(undefined)
     }
+    setData('')
     setLoading(false)
     onClose()
   }
@@ -34,9 +34,14 @@ const Card = () => {
     checkCertificate(data)
       .then(res => {
         if (scanResult !== undefined && scanResult.isMultiScan) {
-          let newScanResult = scanResult
-          newScanResult.certificates.push(res.certificates[0])
-          setScanResult(newScanResult)
+          if (res.certificates[0].dcc.data.payload.hcert.dgc.t?.length ?? 0 > 0) {
+            let newScanResult = scanResult
+            newScanResult.certificates.push(res.certificates[0])
+            setScanResult(newScanResult)
+          } else {
+            // In case the user scanned not a test certificate he will get the TEST REQUIRED modal again
+            // TODO in the future we should show a better error message
+          }
         } else {
           setScanResult(res)
         }
