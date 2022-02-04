@@ -12,11 +12,26 @@ import {
   Heading,
 } from '@chakra-ui/react'
 import { VerificationResult } from 'dcc-decoder'
+import countries from '../utils/countries'
+import purpose from '../utils/purpose'
 
 type Props = {
   isOpen: boolean
   onClose: () => void
   result?: VerificationResult | undefined
+}
+
+const RuleView = () => {
+  const country =
+    countries.find(item => item.code == localStorage.getItem('country')) ?? countries[0]
+  const state =
+    country?.states.find(item => item.code == localStorage.getItem('state')) ?? country.states[0]
+  const currentPurpose = localStorage.getItem('purpose') ?? purpose[0]
+  return (
+    <Text color="white" fontWeight="semibold">
+      {country.name} / {state.name} / {currentPurpose}
+    </Text>
+  )
 }
 
 const ResultModal = (props: Props) => {
@@ -30,9 +45,7 @@ const ResultModal = (props: Props) => {
           <Heading color="white">VALID</Heading>
         </Center>
         <Center px="10" pb="10">
-          <Text color="white" fontWeight="semibold">
-            Germany / Hamburg / 2G
-          </Text>
+          <RuleView />
         </Center>
         <Center display="flex" flexDirection="row">
           <Box px="5">
@@ -79,7 +92,7 @@ const ResultModal = (props: Props) => {
         </Center>
         <Center px="10">
           <Text color="white" fontWeight="semibold">
-            Germany / Hamburg / 2G
+            <RuleView />
           </Text>
         </Center>
       </ModalBody>
