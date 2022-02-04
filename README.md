@@ -17,6 +17,11 @@ todo
 ## Getting Started
 
 ```sh
+CONTACT_DETAILS=Foo Bar<br />Germany
+CONTACT_EMAIL=foo@bar.com
+```
+
+```sh
 npm install
 npm run dev
 ```
