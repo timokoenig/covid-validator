@@ -1,8 +1,8 @@
-<img src="./assets/covidcheck.png" alt="Logo Covid Check" />
+<img src="./assets/covidvalidator.png" alt="Logo Covid Validator" />
 
 Check EU Digitial Covid Certificates with ease and validate them against local or country rules.
 
-## What is the purpose of Covid Check?
+## What is the purpose of Covid Validator?
 
 todo
 

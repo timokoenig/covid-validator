@@ -5,7 +5,7 @@ const Information = () => (
   <Box mb="10">
     <Box mb="5">
       <Heading as="h4" size="md">
-        What is the purpose of Covid Check?
+        What is the purpose of Covid Validator?
       </Heading>
       <Text>to look good</Text>
     </Box>

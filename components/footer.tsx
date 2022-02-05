@@ -14,7 +14,7 @@ const Footer = () => (
       </Text>
     </Center>
     <Center mb="20">
-      <Link href="https://github.com/timokoenig/covid-check" target="_blank" px="2">
+      <Link href="https://github.com/timokoenig/covid-validator" target="_blank" px="2">
         Github
       </Link>
       |
