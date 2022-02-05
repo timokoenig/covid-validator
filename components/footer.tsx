@@ -18,6 +18,10 @@ const Footer = () => (
         Github
       </Link>
       |
+      <Link href="https://ko-fi.com/timokoenig" target="_blank" px="2">
+        Sponsor
+      </Link>
+      |
       <Link href="/privacy" px="2">
         Data Pivacy
       </Link>
