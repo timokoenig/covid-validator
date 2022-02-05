@@ -16,7 +16,7 @@ import {
 import CountryList from './country-list'
 import countries from '../utils/countries'
 import rules from '../utils/eu-dcc-rules.json'
-import { Rules, Rule } from '../utils/certlogic'
+import { Rules, Rule, Language } from '../utils/certlogic'
 
 type Props = {
   isOpen: boolean
@@ -72,18 +72,24 @@ const RuleModal = (props: Props) => {
     const preferredLanguage = localStorage.getItem('lang') ?? 'en'
     // TODO filter rules and show only currently valid rules
     const countryRules: Rule[] = (rules as Rules).rules.filter(rule => rule.Country == country.code)
-    const ruleDescriptions = countryRules
-      .map(rule => {
-        if (rule.Description.length == 0) return null
-        return (
-          rule.Description.find(
-            desc => desc.lang.toLowerCase() == preferredLanguage.toLowerCase()
-          ) ??
-          rule.Description.find(desc => desc.lang.toLowerCase() == 'en') ??
-          rule.Description[0]
-        )
-      })
-      .filter(lang => lang != null)
+    const mapLanguage = (rule: Rule): Language | null => {
+      if (rule.Description.length == 0) return null
+      return (
+        rule.Description.find(desc => desc.lang.toLowerCase() == preferredLanguage.toLowerCase()) ??
+        rule.Description.find(desc => desc.lang.toLowerCase() == 'en') ??
+        rule.Description[0]
+      )
+    }
+    const vRuleDescriptions = countryRules
+      .filter(rule => rule.CertificateType == 'Vaccination')
+      .map(mapLanguage)
+    const rRuleDescriptions = countryRules
+      .filter(rule => rule.CertificateType == 'Recovery')
+      .map(mapLanguage)
+    const tRuleDescriptions = countryRules
+      .filter(rule => rule.CertificateType == 'Test')
+      .map(mapLanguage)
+
     return (
       <ModalContent>
         <ModalHeader>
@@ -94,11 +100,36 @@ const RuleModal = (props: Props) => {
           <Text fontWeight="semibold" mb="5">
             Please confirm that these rules meet your requirements
           </Text>
-          <UnorderedList>
-            {ruleDescriptions.map(desc => (
-              <ListItem mb="2">{desc ? desc.desc : 'n/a'}</ListItem>
-            ))}
-          </UnorderedList>
+          {vRuleDescriptions.length > 0 && (
+            <Box>
+              <Text fontWeight="semibold">Vaccination</Text>
+              <UnorderedList>
+                {vRuleDescriptions.map(desc => (
+                  <ListItem mb="2">{desc ? desc.desc : 'n/a'}</ListItem>
+                ))}
+              </UnorderedList>
+            </Box>
+          )}
+          {rRuleDescriptions.length > 0 && (
+            <Box>
+              <Text fontWeight="semibold">Recovery</Text>
+              <UnorderedList>
+                {rRuleDescriptions.map(desc => (
+                  <ListItem mb="2">{desc ? desc.desc : 'n/a'}</ListItem>
+                ))}
+              </UnorderedList>
+            </Box>
+          )}
+          {tRuleDescriptions.length > 0 && (
+            <Box>
+              <Text fontWeight="semibold">Test</Text>
+              <UnorderedList>
+                {tRuleDescriptions.map(desc => (
+                  <ListItem mb="2">{desc ? desc.desc : 'n/a'}</ListItem>
+                ))}
+              </UnorderedList>
+            </Box>
+          )}
         </ModalBody>
 
         <ModalFooter>
