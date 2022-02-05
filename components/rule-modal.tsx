@@ -17,6 +17,7 @@ import CountryList from './country-list'
 import countries from '../utils/countries'
 import rules from '../utils/eu-dcc-rules.json'
 import { Rules, Rule, Language } from '../utils/certlogic'
+import moment from 'moment'
 
 type Props = {
   isOpen: boolean
@@ -70,8 +71,9 @@ const RuleModal = (props: Props) => {
     const state = country?.states.find(item => item.code == selection.state) ?? country.states[0]
 
     const preferredLanguage = localStorage.getItem('lang') ?? 'en'
-    // TODO filter rules and show only currently valid rules
-    const countryRules: Rule[] = (rules as Rules).rules.filter(rule => rule.Country == country.code)
+    const countryRules: Rule[] = (rules as Rules).rules
+      .filter(rule => moment() >= moment(rule.ValidFrom) && moment() < moment(rule.ValidTo))
+      .filter(rule => rule.Country == country.code)
     const mapLanguage = (rule: Rule): Language | null => {
       if (rule.Description.length == 0) return null
       return (
