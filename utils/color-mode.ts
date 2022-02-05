@@ -9,7 +9,6 @@ export default function useColorMode() {
 
   const toggle = () => {
     toggleColorMode()
-    document.cookie = `colorMode=${newColorMode}`
   }
 
   return {
