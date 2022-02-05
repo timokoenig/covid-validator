@@ -7,7 +7,11 @@ import Information from '../components/information'
 import Footer from '../components/footer'
 import OnboardingModal from '~/components/onboarding-modal'
 
-const IndexPage = () => {
+type Props = {
+  version: string
+}
+
+const IndexPage = (props: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { i18n } = useTranslation()
 
@@ -26,7 +30,7 @@ const IndexPage = () => {
   return (
     <>
       <Container marginTop={10}>
-        <Header />
+        <Header version={props.version} />
         <Card />
         <Information />
         <Footer />
@@ -34,6 +38,14 @@ const IndexPage = () => {
       <OnboardingModal isOpen={isOpen} onClose={onClose} />
     </>
   )
+}
+
+export async function getStaticProps(): Promise<{ props: Props }> {
+  return {
+    props: {
+      version: process.env.VERSION as string,
+    },
+  }
 }
 
 export default IndexPage

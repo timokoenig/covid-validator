@@ -19,6 +19,7 @@ const SettingsModal = dynamic(() => import('./settings-modal'), {
 
 type Props = {
   showMenu?: boolean
+  version?: string
 }
 
 const Header = (props: Props) => {
@@ -50,7 +51,7 @@ const Header = (props: Props) => {
         </Box>
         <Text fontWeight="semibold">{t('subtitle')}</Text>
       </Box>
-      <SettingsModal isOpen={isOpen} onClose={onClose} />
+      <SettingsModal isOpen={isOpen} onClose={onClose} version={props.version ?? 'n/a'} />
     </>
   )
 }

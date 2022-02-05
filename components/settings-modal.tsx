@@ -19,6 +19,7 @@ import { useTranslation } from 'react-i18next'
 type Props = {
   isOpen: boolean
   onClose: () => void
+  version: string
 }
 
 const SettingsModal = (props: Props) => {
@@ -53,7 +54,7 @@ const SettingsModal = (props: Props) => {
 
         <ModalFooter>
           <Text textAlign="center" flex="1">
-            Version 0.1.0
+            Version {props.version}
           </Text>
         </ModalFooter>
       </ModalContent>

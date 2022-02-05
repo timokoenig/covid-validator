@@ -19,6 +19,7 @@ todo
 ```sh
 CONTACT_DETAILS=Foo Bar<br />Germany
 CONTACT_EMAIL=foo@bar.com
+VERSION=0.1.0
 ```
 
 ```sh
