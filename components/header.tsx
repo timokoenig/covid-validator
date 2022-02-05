@@ -30,7 +30,7 @@ const Header = (props: Props) => {
         <Box display="flex">
           <Heading as="h1" size="2xl" flex="1">
             <Link href="/" _hover={{ textDecoration: 'none' }}>
-              Covid Check
+              Covid Validator
             </Link>{' '}
             <Text display="inline" fontSize="lg" color="red">
               BETA
