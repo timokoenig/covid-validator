@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import useColorMode from '@/utils/color-mode'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   showMenu?: boolean
@@ -19,6 +20,7 @@ type Props = {
 
 const Header = (props: Props) => {
   const { toggleColorMode, newColorMode } = useColorMode()
+  const { t } = useTranslation('common')
   return (
     <Box mb="5">
       <Box display="flex">
@@ -39,14 +41,14 @@ const Header = (props: Props) => {
               variant="outline"
             />
             <MenuList>
-              <MenuItem onClick={toggleColorMode}>
+              <MenuItem onClick={() => toggleColorMode}>
                 Toggle {newColorMode === 'light' ? 'Dark' : 'Light'}
               </MenuItem>
             </MenuList>
           </Menu>
         )}
       </Box>
-      <Text fontWeight="semibold">Validator for the EU Digital Covid Certificate</Text>
+      <Text fontWeight="semibold">{t('subtitle')}</Text>
     </Box>
   )
 }
