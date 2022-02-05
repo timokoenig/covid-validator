@@ -33,9 +33,10 @@ const Card = () => {
     if (data.length == 0) return
     checkCertificate(data)
       .then(res => {
+        // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
         if (scanResult !== undefined && scanResult.isMultiScan) {
-          if (res.certificates[0].dcc.data.payload.hcert.dgc.t?.length ?? 0 > 0) {
-            let newScanResult = scanResult
+          if ((res.certificates[0].dcc.data.payload.hcert.dgc.t?.length ?? 0) > 0) {
+            const newScanResult = scanResult
             newScanResult.certificates.push(res.certificates[0])
             setScanResult(newScanResult)
           } else {
@@ -53,6 +54,7 @@ const Card = () => {
         setScanResult(undefined)
         setLoading(false)
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 
   return (
@@ -102,7 +104,7 @@ const Card = () => {
                       size="md"
                       variant="outline"
                       color="white"
-                      backgroundColor={'blue.400'}
+                      backgroundColor="blue.400"
                       _hover={{ bg: 'blue.300' }}
                       _active={{ bg: 'blue.400' }}
                       onClick={() => onModalClose(false)}
@@ -121,7 +123,7 @@ const Card = () => {
                 size="lg"
                 variant="outline"
                 color="white"
-                backgroundColor={'blue.400'}
+                backgroundColor="blue.400"
                 _hover={{ bg: 'blue.300' }}
                 _active={{ bg: 'blue.400' }}
                 onClick={() => setScanMode(false)}
@@ -137,7 +139,7 @@ const Card = () => {
                 size="lg"
                 variant="outline"
                 color="white"
-                backgroundColor={'blue.400'}
+                backgroundColor="blue.400"
                 _hover={{ bg: 'blue.300' }}
                 _active={{ bg: 'blue.400' }}
                 onClick={() => setScanMode(true)}
@@ -154,7 +156,9 @@ const Card = () => {
           </Box>
         )}
       </Box>
-      <ResultModal isOpen={isOpen} onClose={onModalClose} result={scanResult} />
+      {scanResult !== undefined && (
+        <ResultModal isOpen={isOpen} onClose={onModalClose} result={scanResult} />
+      )}
     </>
   )
 }

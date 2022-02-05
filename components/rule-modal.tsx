@@ -13,11 +13,148 @@ import {
   UnorderedList,
   ListItem,
 } from '@chakra-ui/react'
-import CountryList from './country-list'
+import moment from 'moment'
 import countries from '../utils/countries'
 import rules from '../utils/eu-dcc-rules.json'
 import { Rules, Rule, Language } from '../utils/certlogic'
-import moment from 'moment'
+import CountryList from './country-list'
+
+type RuleSelectionProps = {
+  selection: { country: string; state: string }
+  setSelection: (selection: { country: string; state: string }) => void
+  setConfirm: (confirm: boolean) => void
+}
+
+const RuleSelection = (props: RuleSelectionProps) => (
+  <ModalContent>
+    <ModalHeader>Select Country and Rules</ModalHeader>
+    <ModalCloseButton />
+    <ModalBody>
+      <CountryList
+        items={countries}
+        selectedCountry={props.selection.country}
+        selectedState={props.selection.state}
+        onChange={(country, state) => props.setSelection({ country, state })}
+      />
+    </ModalBody>
+
+    <ModalFooter>
+      <Button colorScheme="blue" mr={3} onClick={() => props.setConfirm(true)}>
+        Continue
+      </Button>
+    </ModalFooter>
+  </ModalContent>
+)
+
+type RuleConfirmationProps = {
+  selection: { country: string; state: string }
+  setConfirm: (confirm: boolean) => void
+  onSave: () => void
+}
+
+const RuleConfirmation = (props: RuleConfirmationProps) => {
+  const country = countries.find(item => item.code == props.selection.country) ?? countries[0]
+  const state = country.states.find(item => item.code == props.selection.state) ?? country.states[0]
+
+  const preferredLanguage = localStorage.getItem('lang') ?? 'en'
+  const countryRules: Rule[] = (rules as Rules).rules
+    .filter(rule => moment() >= moment(rule.ValidFrom) && moment() < moment(rule.ValidTo))
+    .filter(rule => rule.Country == country.code)
+  const mapLanguage = (rule: Rule): Language | null => {
+    if (rule.Description.length == 0) return null
+    return (
+      rule.Description.find(desc => desc.lang.toLowerCase() == preferredLanguage.toLowerCase()) ??
+      rule.Description.find(desc => desc.lang.toLowerCase() == 'en') ??
+      rule.Description[0]
+    )
+  }
+  const vRuleDescriptions = countryRules
+    .filter(rule => rule.CertificateType == 'Vaccination')
+    .map(mapLanguage)
+  const rRuleDescriptions = countryRules
+    .filter(rule => rule.CertificateType == 'Recovery')
+    .map(mapLanguage)
+  const tRuleDescriptions = countryRules
+    .filter(rule => rule.CertificateType == 'Test')
+    .map(mapLanguage)
+
+  return (
+    <ModalContent>
+      <ModalHeader>
+        {country.name} / {state.name}
+      </ModalHeader>
+      <ModalCloseButton />
+      <ModalBody>
+        <Text fontWeight="semibold" mb="5">
+          Please confirm that these rules meet your requirements
+        </Text>
+        {vRuleDescriptions.length > 0 && (
+          <Box>
+            <Text fontWeight="semibold">Vaccination</Text>
+            <UnorderedList>
+              {vRuleDescriptions.map(desc => (
+                <ListItem mb="2" key={desc?.desc ?? ''}>
+                  {desc ? desc.desc : 'n/a'}
+                </ListItem>
+              ))}
+            </UnorderedList>
+          </Box>
+        )}
+        {rRuleDescriptions.length > 0 && (
+          <Box>
+            <Text fontWeight="semibold">Recovery</Text>
+            <UnorderedList>
+              {rRuleDescriptions.map(desc => (
+                <ListItem mb="2" key={desc?.desc ?? ''}>
+                  {desc ? desc.desc : 'n/a'}
+                </ListItem>
+              ))}
+            </UnorderedList>
+          </Box>
+        )}
+        {tRuleDescriptions.length > 0 && (
+          <Box>
+            <Text fontWeight="semibold">Test</Text>
+            <UnorderedList>
+              {tRuleDescriptions.map(desc => (
+                <ListItem mb="2" key={desc?.desc ?? ''}>
+                  {desc ? desc.desc : 'n/a'}
+                </ListItem>
+              ))}
+            </UnorderedList>
+          </Box>
+        )}
+      </ModalBody>
+
+      <ModalFooter>
+        <Button
+          size="lg"
+          variant="outline"
+          backgroundColor="transparent"
+          _hover={{ bg: 'gray.600' }}
+          _active={{ bg: 'gray.800' }}
+          mr={3}
+          onClick={() => props.setConfirm(false)}
+        >
+          Back
+        </Button>
+        <Box flex="1" />
+        <Button
+          size="lg"
+          variant="ghost"
+          color="white"
+          backgroundColor="blue.400"
+          _hover={{ bg: 'blue.300' }}
+          _active={{ bg: 'blue.400' }}
+          mr={3}
+          onClick={props.onSave}
+        >
+          Confirm Selection
+        </Button>
+      </ModalFooter>
+    </ModalContent>
+  )
+}
 
 type Props = {
   isOpen: boolean
@@ -45,129 +182,14 @@ const RuleModal = (props: Props) => {
     props.onClose()
   }
 
-  const RuleSelection = () => (
-    <ModalContent>
-      <ModalHeader>Select Country and Rules</ModalHeader>
-      <ModalCloseButton />
-      <ModalBody>
-        <CountryList
-          items={countries}
-          selectedCountry={selection.country}
-          selectedState={selection.state}
-          onChange={(country, state) => setSelection({ country: country, state: state })}
-        />
-      </ModalBody>
-
-      <ModalFooter>
-        <Button colorScheme="blue" mr={3} onClick={() => setConfirm(true)}>
-          Continue
-        </Button>
-      </ModalFooter>
-    </ModalContent>
-  )
-
-  const RuleConfirmation = () => {
-    const country = countries.find(item => item.code == selection.country) ?? countries[0]
-    const state = country?.states.find(item => item.code == selection.state) ?? country.states[0]
-
-    const preferredLanguage = localStorage.getItem('lang') ?? 'en'
-    const countryRules: Rule[] = (rules as Rules).rules
-      .filter(rule => moment() >= moment(rule.ValidFrom) && moment() < moment(rule.ValidTo))
-      .filter(rule => rule.Country == country.code)
-    const mapLanguage = (rule: Rule): Language | null => {
-      if (rule.Description.length == 0) return null
-      return (
-        rule.Description.find(desc => desc.lang.toLowerCase() == preferredLanguage.toLowerCase()) ??
-        rule.Description.find(desc => desc.lang.toLowerCase() == 'en') ??
-        rule.Description[0]
-      )
-    }
-    const vRuleDescriptions = countryRules
-      .filter(rule => rule.CertificateType == 'Vaccination')
-      .map(mapLanguage)
-    const rRuleDescriptions = countryRules
-      .filter(rule => rule.CertificateType == 'Recovery')
-      .map(mapLanguage)
-    const tRuleDescriptions = countryRules
-      .filter(rule => rule.CertificateType == 'Test')
-      .map(mapLanguage)
-
-    return (
-      <ModalContent>
-        <ModalHeader>
-          {country.name} / {state.name}
-        </ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <Text fontWeight="semibold" mb="5">
-            Please confirm that these rules meet your requirements
-          </Text>
-          {vRuleDescriptions.length > 0 && (
-            <Box>
-              <Text fontWeight="semibold">Vaccination</Text>
-              <UnorderedList>
-                {vRuleDescriptions.map(desc => (
-                  <ListItem mb="2">{desc ? desc.desc : 'n/a'}</ListItem>
-                ))}
-              </UnorderedList>
-            </Box>
-          )}
-          {rRuleDescriptions.length > 0 && (
-            <Box>
-              <Text fontWeight="semibold">Recovery</Text>
-              <UnorderedList>
-                {rRuleDescriptions.map(desc => (
-                  <ListItem mb="2">{desc ? desc.desc : 'n/a'}</ListItem>
-                ))}
-              </UnorderedList>
-            </Box>
-          )}
-          {tRuleDescriptions.length > 0 && (
-            <Box>
-              <Text fontWeight="semibold">Test</Text>
-              <UnorderedList>
-                {tRuleDescriptions.map(desc => (
-                  <ListItem mb="2">{desc ? desc.desc : 'n/a'}</ListItem>
-                ))}
-              </UnorderedList>
-            </Box>
-          )}
-        </ModalBody>
-
-        <ModalFooter>
-          <Button
-            size="lg"
-            variant="outline"
-            backgroundColor={'transparent'}
-            _hover={{ bg: 'gray.600' }}
-            _active={{ bg: 'gray.800' }}
-            mr={3}
-            onClick={() => setConfirm(false)}
-          >
-            Back
-          </Button>
-          <Box flex="1" />
-          <Button
-            size="lg"
-            variant="ghost"
-            color="white"
-            backgroundColor={'blue.400'}
-            _hover={{ bg: 'blue.300' }}
-            _active={{ bg: 'blue.400' }}
-            mr={3}
-            onClick={onSave}
-          >
-            Confirm Selection
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    )
-  }
-
   return (
     <Modal isOpen={props.isOpen} onClose={onClose} size="lg" scrollBehavior="inside">
       <ModalOverlay />
-      {confirm ? <RuleConfirmation /> : <RuleSelection />}
+      {confirm ? (
+        <RuleConfirmation selection={selection} setConfirm={setConfirm} onSave={onSave} />
+      ) : (
+        <RuleSelection selection={selection} setSelection={setSelection} setConfirm={setConfirm} />
+      )}
     </Modal>
   )
 }

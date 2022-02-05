@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { evaluate } from 'certlogic-js'
 import { DCC } from './dcc'
 import countryBusinessRules from './eu-dcc-rules.json'
-import { evaluate } from 'certlogic-js'
 
 export type Rules = {
   updatedAt: string
@@ -52,7 +55,7 @@ export type Parameters = {
 export function validateDCCRule(rule: Rule, parameters: Parameters): ValidationResult {
   const res = evaluate(rule.Logic, parameters)
   return {
-    rule: rule,
+    rule,
     valid: res === true,
   }
 }

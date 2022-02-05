@@ -1,8 +1,8 @@
 import React from 'react'
 import { Container, Heading, Text } from '@chakra-ui/react'
+import parse from 'html-react-parser'
 import Header from '../components/header'
 import Footer from '../components/footer'
-import parse from 'html-react-parser'
 
 type Props = {
   contactDetails: string

@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import base45 from 'base45'
 import zlib from 'pako'
 import cbor from 'cbor'
@@ -5,8 +10,9 @@ import { Certificate, PublicKey } from '@fidm/x509'
 import cose from 'cose-js'
 import { ExtendedResults } from 'cbor/types/lib/decoder'
 import { DCCRuleValidationResult, validateDCCRules } from './certlogic'
+import dscListJson from './dsc.json'
 
-const dscList = require('./dsc.json') as {
+const dscList = dscListJson as {
   certificates: {
     kid: string
     rawData: string
@@ -194,7 +200,7 @@ export async function parseDCC(data: string): Promise<DCC> {
         kid: parseKid(cbor.decodeAllSync(protected_header), unprotected_header),
       },
       payload: parsePayload(cbor.decodeAllSync(payload)),
-      signature: signature,
+      signature,
     },
   }
 }
@@ -213,25 +219,28 @@ function parsePayload(payload: any[] | ExtendedResults[]): CBORWebToken {
 export async function verifyDCC(dcc: DCC): Promise<boolean> {
   const keyByKid = dscList.certificates.find(cert => cert.kid == dcc.data.header.kid)
   const certList = keyByKid ? [keyByKid] : dscList.certificates
-  for (let cert of certList) {
+  for (const cert of certList) {
+    const chunkedData = chunkSubstr(cert.rawData, 64).join('\n')
     const certBuff = Buffer.from(
-      '-----BEGIN CERTIFICATE-----\n' +
-        chunkSubstr(cert.rawData, 64).join('\n') +
-        '\n-----END CERTIFICATE-----'
+      `-----BEGIN CERTIFICATE-----\n${chunkedData}\n-----END CERTIFICATE-----`
     )
+    const chunkedPubkey = chunkSubstr(
+      Certificate.fromPEM(certBuff).publicKeyRaw.toString('base64'),
+      64
+    ).join('\n')
     const pubkeyBuff = Buffer.from(
-      '-----BEGIN PUBLIC KEY-----\n' +
-        chunkSubstr(Certificate.fromPEM(certBuff).publicKeyRaw.toString('base64'), 64).join('\n') +
-        '\n-----END PUBLIC KEY-----'
+      `-----BEGIN PUBLIC KEY-----\n${chunkedPubkey}\n-----END PUBLIC KEY-----`
     )
     const publicKey = PublicKey.fromPEM(pubkeyBuff).keyRaw
     const keyX = publicKey.slice(1, 1 + 32)
     const keyY = publicKey.slice(33, 33 + 32)
     try {
+      // eslint-disable-next-line no-await-in-loop
       await cose.sign.verify(dcc.decompressedRaw, {
         key: { x: keyX, y: keyY },
       })
       return true
+      // eslint-disable-next-line no-empty
     } catch {}
   }
 
@@ -244,7 +253,7 @@ function parseKid(protectedHeader: any, unprotectedHeader: any): string | null {
     kid = unprotectedHeader.get(4)
   }
   if (!kid) return null
-  return btoa(kid.reduce((str: any, v: any) => str + String.fromCharCode(v), ''))
+  return btoa(kid.reduce((str: any, v: any) => `${str}${String.fromCharCode(v)}`, ''))
 }
 
 function chunkSubstr(str: string, size: number): string[] {

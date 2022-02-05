@@ -9,8 +9,8 @@ import {
   Box,
   Image,
 } from '@chakra-ui/react'
-import StateList from './state-list'
 import { Country } from '../utils/models'
+import StateList from './state-list'
 
 type Props = {
   items: Country[]

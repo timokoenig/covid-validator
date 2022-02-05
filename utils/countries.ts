@@ -1,6 +1,6 @@
+import moment from 'moment'
 import countryBusinessRules from './eu-dcc-rules.json'
 import { Rules } from './certlogic'
-import moment from 'moment'
 
 const countryNames = [
   { code: 'IT', name: 'Italy' },
@@ -69,9 +69,9 @@ const countriesWithRules = [
   ...new Set((countryBusinessRules as Rules).rules.map(rule => rule.Country)),
 ].sort()
 
-let countries = countriesWithRules.map(country => {
+const countries = countriesWithRules.map(country => {
   const countryName = countryNames.find(c => c.code == country)
-  let obj = {
+  const obj = {
     code: country,
     name: countryName ? countryName.name : country,
     states: [

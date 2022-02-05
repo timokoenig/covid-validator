@@ -9,9 +9,9 @@ import {
   ModalCloseButton,
   Button,
 } from '@chakra-ui/react'
-import PurposeList from './purpose-list'
 import purpose from '../utils/purpose'
 import { Purpose } from '../utils/models'
+import PurposeList from './purpose-list'
 
 type Props = {
   isOpen: boolean
@@ -45,7 +45,7 @@ const PurposeModal = (props: Props) => {
             size="lg"
             variant="ghost"
             color="white"
-            backgroundColor={'blue.400'}
+            backgroundColor="blue.400"
             _hover={{ bg: 'blue.300' }}
             _active={{ bg: 'blue.400' }}
             mr={3}

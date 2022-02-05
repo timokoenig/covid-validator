@@ -28,8 +28,8 @@ const SettingsModal = (props: Props) => {
 
   useEffect(() => {
     localStorage.setItem('lang', lang)
-    i18n.changeLanguage(lang)
-  }, [lang])
+    i18n.changeLanguage(lang).catch(console.log)
+  }, [lang, i18n])
 
   return (
     <Modal isOpen={props.isOpen} onClose={() => {}} size="lg" scrollBehavior="inside">

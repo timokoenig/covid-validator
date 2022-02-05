@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Button, Text, Image, Box, Spacer, useDisclosure } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
+import purpose from '../utils/purpose'
+import countries from '../utils/countries'
 import RuleModal from './rule-modal'
 import PurposeModal from './purpose-modal'
-import countries from '../utils/countries'
-import purpose from '../utils/purpose'
 
 const CardHeader = () => {
   const { isOpen: isOpenRule, onOpen: onOpenRule, onClose: onCloseRule } = useDisclosure()
@@ -18,7 +18,7 @@ const CardHeader = () => {
   )
 
   const country = countries.find(item => item.code == selection.country) ?? countries[0]
-  const state = country?.states.find(item => item.code == selection.state) ?? country.states[0]
+  const state = country.states.find(item => item.code == selection.state) ?? country.states[0]
 
   return (
     <>
@@ -27,7 +27,7 @@ const CardHeader = () => {
           px="5"
           py="10"
           isFullWidth
-          backgroundColor={'blue.300'}
+          backgroundColor="blue.300"
           _hover={{ bg: 'blue.200' }}
           _active={{ bg: 'blue.300' }}
           display="flex"
@@ -54,7 +54,7 @@ const CardHeader = () => {
             pl="10"
             pr="5"
             py="10"
-            backgroundColor={'blue.300'}
+            backgroundColor="blue.300"
             _hover={{ bg: 'blue.200' }}
             _active={{ bg: 'blue.300' }}
             display="flex"
