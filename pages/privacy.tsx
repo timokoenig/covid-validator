@@ -5,7 +5,7 @@ import Footer from '../components/footer'
 
 const PrivacyPage = () => (
   <Container marginTop={10}>
-    <Header />
+    <Header showMenu={false} />
     <Heading>Data Privacy</Heading>
     <Text mb="10">todo</Text>
     <Footer />

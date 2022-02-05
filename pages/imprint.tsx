@@ -11,7 +11,7 @@ type Props = {
 
 const ImprintPage = (props: Props) => (
   <Container marginTop={10}>
-    <Header />
+    <Header showMenu={false} />
     <Heading>Imprint</Heading>
     <Text mb="10">Information in accordance with Section 5 TMG</Text>
 

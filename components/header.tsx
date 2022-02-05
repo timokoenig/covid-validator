@@ -13,7 +13,11 @@ import {
 import { HamburgerIcon } from '@chakra-ui/icons'
 import useColorMode from '@/utils/color-mode'
 
-const Header = () => {
+type Props = {
+  showMenu?: boolean
+}
+
+const Header = (props: Props) => {
   const { toggleColorMode, newColorMode } = useColorMode()
   return (
     <Box display="flex">
@@ -25,19 +29,21 @@ const Header = () => {
           BETA
         </Text>
       </Heading>
-      <Menu>
-        <MenuButton
-          as={IconButton}
-          aria-label="Options"
-          icon={<HamburgerIcon />}
-          variant="outline"
-        />
-        <MenuList>
-          <MenuItem onClick={toggleColorMode}>
-            Toggle {newColorMode === 'light' ? 'Dark' : 'Light'}
-          </MenuItem>
-        </MenuList>
-      </Menu>
+      {(props.showMenu ?? true) && (
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            aria-label="Options"
+            icon={<HamburgerIcon />}
+            variant="outline"
+          />
+          <MenuList>
+            <MenuItem onClick={toggleColorMode}>
+              Toggle {newColorMode === 'light' ? 'Dark' : 'Light'}
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      )}
     </Box>
   )
 }
