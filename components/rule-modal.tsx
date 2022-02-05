@@ -31,10 +31,16 @@ const RuleModal = (props: Props) => {
   })
   const [confirm, setConfirm] = useState<boolean>(false)
 
+  const onClose = () => {
+    setConfirm(false)
+    props.onClose()
+  }
+
   const onSave = () => {
     props.onChange(selection)
     localStorage.setItem('country', selection.country)
     localStorage.setItem('state', selection.state)
+    setConfirm(false)
     props.onClose()
   }
 
@@ -99,7 +105,6 @@ const RuleModal = (props: Props) => {
           <Button
             size="lg"
             variant="outline"
-            color="white"
             backgroundColor={'transparent'}
             _hover={{ bg: 'gray.600' }}
             _active={{ bg: 'gray.800' }}
@@ -127,7 +132,7 @@ const RuleModal = (props: Props) => {
   }
 
   return (
-    <Modal isOpen={props.isOpen} onClose={props.onClose} size="lg" scrollBehavior="inside">
+    <Modal isOpen={props.isOpen} onClose={onClose} size="lg" scrollBehavior="inside">
       <ModalOverlay />
       {confirm ? <RuleConfirmation /> : <RuleSelection />}
     </Modal>
