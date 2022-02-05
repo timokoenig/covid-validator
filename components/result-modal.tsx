@@ -27,10 +27,10 @@ const RuleView = () => {
     countries.find(item => item.code == localStorage.getItem('country')) ?? countries[0]
   const state =
     country?.states.find(item => item.code == localStorage.getItem('state')) ?? country.states[0]
-  const currentPurpose = (localStorage.getItem('purpose') ?? purpose[0]) as Purpose
+  const currentPurpose = localStorage.getItem('purpose') ?? purpose[0].title
   return (
     <Text color="white" fontWeight="semibold">
-      {country.name} / {state.name} / {currentPurpose.title}
+      {country.name} / {state.name} / {currentPurpose}
     </Text>
   )
 }
