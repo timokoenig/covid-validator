@@ -28,9 +28,13 @@ const RuleView = () => {
   const state =
     country.states.find(item => item.code == localStorage.getItem('state')) ?? country.states[0]
   const currentPurpose = localStorage.getItem('purpose') ?? purpose[0].title
+  let ruleText = `${country.name} / ${state.name}`
+  if (country.code === 'DE') {
+    ruleText = `${ruleText} / ${currentPurpose}`
+  }
   return (
     <Text color="white" fontWeight="semibold">
-      {country.name} / {state.name} / {currentPurpose}
+      {ruleText}
     </Text>
   )
 }
