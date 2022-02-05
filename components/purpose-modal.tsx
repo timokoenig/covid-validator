@@ -41,7 +41,16 @@ const PurposeModal = (props: Props) => {
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onSave}>
+          <Button
+            size="lg"
+            variant="ghost"
+            color="white"
+            backgroundColor={'blue.400'}
+            _hover={{ bg: 'blue.300' }}
+            _active={{ bg: 'blue.400' }}
+            mr={3}
+            onClick={onSave}
+          >
             Save Changes
           </Button>
         </ModalFooter>
