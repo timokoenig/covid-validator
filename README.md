@@ -2,17 +2,17 @@
 
 Check EU Digitial Covid Certificates with ease and validate them against local or country rules.
 
-## What is the purpose of Covid Validator?
+### What is the purpose of Covid Validator?
 
-todo
+Covid Validator allows you to scan and validate EU Digital Covid Certificates based on country or local rules. It gives the person that checks the certificate only as little personal information as possible to protect the users' privacy. This web app is an alternative to other existing products because it does not rely on certain app stores or country restrictions.
 
-## What does BETA mean?
+### What does BETA mean?
 
-todo
+The web app is still in active development and might contain minor bugs. The production use of this app is not recommended yet, so please use it with caution. Updates will come regularly.
 
-## Where do the rules come from?
+### What rules are being used?
 
-todo
+At the moment the app uses the official EU entry rules to validate the certificate. These rules are being provided by the member countries of the Digital Covid Certificate. It is a known problem that those rules might be out of date and does not reflect state or local regulations. This project is working on a custom rule builder that allows more precise rules for local regulations. You can follow the development [here](https://github.com/timokoenig/covid-validator/issues/4).
 
 ## Getting Started
 
