@@ -4,7 +4,7 @@ import jsQR from 'jsqr'
 import jpeg from 'jpeg-js'
 
 const DELAY = 500
-const SIZE = 1000
+const SIZE = 400
 
 type Props = {
   onData: (data: string) => void
