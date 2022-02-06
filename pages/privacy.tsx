@@ -107,9 +107,9 @@ const PrivacyEN = (props: Props) => (
         <Text mb="5">
           Profiling means any form of automated processing of personal data consisting of the use of
           personal data to evaluate certain personal aspects relating to a natural person, in
-          particular to analyse or predict aspects concerning that natural person's performance at
-          work, economic situation, health, personal preferences, interests, reliability, behaviour,
-          location or movements.
+          particular to analyse or predict aspects concerning that natural person&apos;s performance
+          at work, economic situation, health, personal preferences, interests, reliability,
+          behaviour, location or movements.
         </Text>
       </ListItem>
       <ListItem mb="5">
@@ -174,9 +174,9 @@ const PrivacyEN = (props: Props) => (
         </Heading>
         <Text mb="5">
           Consent of the data subject is any freely given, specific, informed and unambiguous
-          indication of the data subject's wishes by which he or she, by a statement or by a clear
-          affirmative action, signifies agreement to the processing of personal data relating to him
-          or her.
+          indication of the data subject&apos;s wishes by which he or she, by a statement or by a
+          clear affirmative action, signifies agreement to the processing of personal data relating
+          to him or her.
         </Text>
       </ListItem>
     </List>
@@ -502,17 +502,17 @@ const PrivacyEN = (props: Props) => (
           her, as long as the decision (1) is not is necessary for entering into, or the performance
           of, a contract between the data subject and a data controller, or (2) is not authorised by
           Union or Member State law to which the controller is subject and which also lays down
-          suitable measures to safeguard the data subject's rights and freedoms and legitimate
-          interests, or (3) is not based on the data subject's explicit consent.
+          suitable measures to safeguard the data subject&apos;s rights and freedoms and legitimate
+          interests, or (3) is not based on the data subject&apos;s explicit consent.
         </Text>
 
         <Text mb="5">
           If the decision (1) is necessary for entering into, or the performance of, a contract
-          between the data subject and a data controller, or (2) it is based on the data subject's
-          explicit consent, {props.contactName} shall implement suitable measures to safeguard the
-          data subject's rights and freedoms and legitimate interests, at least the right to obtain
-          human intervention on the part of the controller, to express his or her point of view and
-          contest the decision.
+          between the data subject and a data controller, or (2) it is based on the data
+          subject&apos;s explicit consent, {props.contactName} shall implement suitable measures to
+          safeguard the data subject&apos;s rights and freedoms and legitimate interests, at least
+          the right to obtain human intervention on the part of the controller, to express his or
+          her point of view and contest the decision.
         </Text>
 
         <Text mb="5">
@@ -1312,13 +1312,21 @@ const PrivacyDE = (props: Props) => (
   </>
 )
 
-const PrivacyPage = (props: Props) => {
+const PrivacyPage = () => {
   const [lang, setLang] = useState<string>('')
 
   useEffect(() => {
     const preferredLanguage = localStorage.getItem('lang') ?? 'en'
     setLang(preferredLanguage)
   }, [])
+
+  const props = {
+    contactName: process.env.NEXT_PUBLIC_CONTACT_NAME as string,
+    contactAddress: process.env.NEXT_PUBLIC_CONTACT_ADDRESS as string,
+    contactAddressCountry: process.env.NEXT_PUBLIC_CONTACT_ADDRESS_COUNTRY as string,
+    contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL as string,
+    contactWebsite: process.env.NEXT_PUBLIC_CONTACT_WEBSITE as string,
+  }
 
   return (
     <Container marginTop={10}>
@@ -1331,18 +1339,6 @@ const PrivacyPage = (props: Props) => {
       <Footer />
     </Container>
   )
-}
-
-export async function getStaticProps(): Promise<{ props: Props }> {
-  return {
-    props: {
-      contactName: process.env.CONTACT_NAME as string,
-      contactAddress: process.env.CONTACT_ADDRESS as string,
-      contactAddressCountry: process.env.CONTACT_ADDRESS_COUNTRY as string,
-      contactEmail: process.env.CONTACT_EMAIL as string,
-      contactWebsite: process.env.CONTACT_WEBSITE as string,
-    },
-  }
 }
 
 export default PrivacyPage

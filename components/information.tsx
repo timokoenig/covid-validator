@@ -10,7 +10,7 @@ const Information = () => (
       <Text>
         Covid Validator allows you to scan and validate EU Digital Covid Certificates based on
         country or local rules. It gives the person that checks the certificate only as little
-        personal information as possible to protect the users' privacy. This web app is an
+        personal information as possible to protect the users&apos; privacy. This web app is an
         alternative to other existing products because it does not rely on certain app stores or
         country restrictions.
       </Text>

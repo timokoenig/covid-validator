@@ -40,10 +40,10 @@ const IndexPage = (props: Props) => {
   )
 }
 
-export async function getStaticProps(): Promise<{ props: Props }> {
+export async function getInitialProps(): Promise<{ props: Props }> {
   return {
     props: {
-      version: process.env.VERSION as string,
+      version: process.env.NEXT_PUBLIC_VERSION as string,
     },
   }
 }

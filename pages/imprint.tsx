@@ -3,14 +3,7 @@ import { Container, Heading, Text } from '@chakra-ui/react'
 import Header from '../components/header'
 import Footer from '../components/footer'
 
-type Props = {
-  contactName: string
-  contactAddress: string
-  contactAddressCountry: string
-  contactEmail: string
-}
-
-const ImprintPage = (props: Props) => (
+const ImprintPage = () => (
   <Container marginTop={10}>
     <Header showMenu={false} />
     <Heading>Imprint</Heading>
@@ -18,29 +11,18 @@ const ImprintPage = (props: Props) => (
 
     <Heading size="md">LEGAL DISCLOSURE</Heading>
     <Text mb="10">
-      {props.contactName}
+      {process.env.NEXT_PUBLIC_CONTACT_NAME}
       <br />
-      {props.contactAddress}
+      {process.env.NEXT_PUBLIC_CONTACT_ADDRESS}
       <br />
-      {props.contactAddressCountry}
+      {process.env.NEXT_PUBLIC_CONTACT_ADDRESS_COUNTRY}
     </Text>
 
     <Heading size="md">CONTACT INFORMATION</Heading>
-    <Text mb="10">E-Mail: {props.contactEmail}</Text>
+    <Text mb="10">E-Mail: {process.env.NEXT_PUBLIC_CONTACT_EMAIL}</Text>
 
     <Footer />
   </Container>
 )
-
-export async function getStaticProps(): Promise<{ props: Props }> {
-  return {
-    props: {
-      contactName: process.env.CONTACT_NAME as string,
-      contactAddress: process.env.CONTACT_ADDRESS as string,
-      contactAddressCountry: process.env.CONTACT_ADDRESS_COUNTRY as string,
-      contactEmail: process.env.CONTACT_EMAIL as string,
-    },
-  }
-}
 
 export default ImprintPage
