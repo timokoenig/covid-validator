@@ -9,6 +9,7 @@ const SIZE = 1000
 type Props = {
   onData: (data: string) => void
   enableScan: boolean
+  facingMode?: string
 }
 
 const QRCodeScanner = (props: Props) => {
@@ -43,7 +44,7 @@ const QRCodeScanner = (props: Props) => {
       videoConstraints={{
         width: SIZE,
         height: SIZE,
-        facingMode: 'environment',
+        facingMode: props.facingMode ?? 'environment',
       }}
     />
   )

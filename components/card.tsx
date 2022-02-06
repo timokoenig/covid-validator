@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Box, Text, Center, useDisclosure, AspectRatio } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
+import { RepeatIcon } from '@chakra-ui/icons'
 import { checkCertificate, ScanResult } from '../utils/dcc'
 import ResultModal from './result-modal'
 import LoadingIndicator from './loading-indicator'
@@ -16,6 +17,7 @@ const QRCodeScanner = dynamic(() => import('./qr-code-scanner'), {
 const Card = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [scanMode, setScanMode] = useState<boolean>(false)
+  const [scannerFacingMode, setScannerFacingMode] = useState<string>('environment')
   const [loading, setLoading] = useState<boolean>(false)
   const [data, setData] = useState<string>('')
   const [scanResult, setScanResult] = useState<ScanResult>()
@@ -69,6 +71,7 @@ const Card = () => {
                 <>
                   <QRCodeScanner
                     enableScan={!loading}
+                    facingMode={scannerFacingMode}
                     onData={qrcode => {
                       if (!qrcode.startsWith('HC1:')) return
                       // TODO show error for wrongly scanned qr code
@@ -122,19 +125,39 @@ const Card = () => {
             <Center py="5">
               <Text color="white">Hold the QR Code in front of your camera</Text>
             </Center>
-            <Center pb="5">
-              <Button
-                size="lg"
-                variant="outline"
-                color="white"
-                backgroundColor="blue.400"
-                _hover={{ bg: 'blue.300' }}
-                _active={{ bg: 'blue.400' }}
-                onClick={() => setScanMode(false)}
-              >
-                Close Camera
-              </Button>
-            </Center>
+            <Box pb="5" px="5" display="flex">
+              <Box flex="1">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  color="white"
+                  backgroundColor="blue.400"
+                  _hover={{ bg: 'blue.300' }}
+                  _active={{ bg: 'blue.400' }}
+                  onClick={() =>
+                    scannerFacingMode == 'environment'
+                      ? setScannerFacingMode('user')
+                      : setScannerFacingMode('environment')
+                  }
+                >
+                  <RepeatIcon width="8" height="8" />
+                </Button>
+              </Box>
+              <Box flex="1">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  color="white"
+                  backgroundColor="blue.400"
+                  _hover={{ bg: 'blue.300' }}
+                  _active={{ bg: 'blue.400' }}
+                  onClick={() => setScanMode(false)}
+                >
+                  Close Camera
+                </Button>
+              </Box>
+              <Box flex="1" />
+            </Box>
           </>
         ) : (
           <Box p="6">
