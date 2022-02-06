@@ -8,6 +8,7 @@ const SIZE = 1000
 
 type Props = {
   onData: (data: string) => void
+  enableScan: boolean
 }
 
 const QRCodeScanner = (props: Props) => {
@@ -16,6 +17,7 @@ const QRCodeScanner = (props: Props) => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (ref.current === null) return
+      if (!props.enableScan) return
       const image = ref.current.getScreenshot({ width: SIZE, height: SIZE })
       if (image === null) return
       const jpegData = Buffer.from(image.replace('data:image/jpeg;base64,', ''), 'base64')

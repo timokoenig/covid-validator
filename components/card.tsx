@@ -68,11 +68,12 @@ const Card = () => {
               <AspectRatio ratio={1}>
                 <>
                   <QRCodeScanner
+                    enableScan={!loading}
                     onData={qrcode => {
                       if (!qrcode.startsWith('HC1:')) return
                       // TODO show error for wrongly scanned qr code
-                      setData(qrcode)
                       setLoading(true)
+                      setData(qrcode)
                     }}
                   />
                   {loading && <LoadingIndicator />}
