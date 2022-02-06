@@ -9,7 +9,7 @@ const CardHeader = dynamic(() => import('./card-header'), {
   ssr: false,
 })
 
-const BarcodeScannerComponent = dynamic(() => import('react-qr-barcode-scanner'), {
+const QRCodeScanner = dynamic(() => import('./qr-code-scanner'), {
   ssr: false,
 })
 
@@ -67,14 +67,13 @@ const Card = () => {
             <Box position="relative">
               <AspectRatio ratio={1}>
                 <>
-                  <BarcodeScannerComponent
-                    onUpdate={(_, result) => {
-                      if (!result || result.getText() == data) return
-                      if (!result.getText().startsWith('HC1:')) return
-                      setData(result.getText())
+                  <QRCodeScanner
+                    onData={qrcode => {
+                      if (!qrcode.startsWith('HC1:')) return
+                      // TODO show error for wrongly scanned qr code
+                      setData(qrcode)
                       setLoading(true)
                     }}
-                    delay={0}
                   />
                   {loading && <LoadingIndicator />}
                 </>
