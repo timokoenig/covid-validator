@@ -153,8 +153,13 @@ const Card = () => {
             </Center>
             <Center pb="10">
               <Text fontWeight="semibold" color="white" textAlign="center" px="10">
-                Make sure to check the selected rules and confirm with your local regulations.
-                Otherwise it might come to invalid certificate validations.
+                Always make sure you have the permission to scan the other persons certificate!
+              </Text>
+            </Center>
+            <Center pb="10">
+              <Text color="white" textAlign="center" px="10">
+                Check the selected rules and confirm with your local regulations. Otherwise it might
+                come to invalid certificate validations.
               </Text>
             </Center>
           </Box>
