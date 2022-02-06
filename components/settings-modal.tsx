@@ -47,7 +47,7 @@ const SettingsModal = (props: Props) => {
             <FormLabel flex="1">Preferred Language</FormLabel>
             <Select value={lang} onChange={e => setLang(e.target.value)} width="100">
               <option value="en">English</option>
-              <option value="de">Deutsch</option>
+              {/* <option value="de">Deutsch</option> */}
             </Select>
           </FormControl>
         </ModalBody>
