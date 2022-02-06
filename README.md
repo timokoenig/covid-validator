@@ -14,6 +14,12 @@ The web app is still in active development and might contain minor bugs. The pro
 
 At the moment the app uses the official EU entry rules to validate the certificate. These rules are being provided by the member countries of the Digital Covid Certificate. It is a known problem that those rules might be out of date and does not reflect state or local regulations. This project is working on a custom rule builder that allows more precise rules for local regulations. You can follow the development [here](https://github.com/timokoenig/covid-validator/issues/4).
 
+### Additional Information
+
+- [EU Digital Covid Certificate Documentation](https://ec.europa.eu/info/live-work-travel-eu/coronavirus-response/safe-covid-19-vaccines-europeans/eu-digital-covid-certificate_en)
+- [PDF EU DCC Validation Rules](https://ec.europa.eu/health/system/files/2021-06/eu-dcc_validation-rules_en_0.pdf)
+- [DGC Business Rules Implementation Details](https://github.com/ehn-dcc-development/dgc-business-rules)
+
 ## Getting Started
 
 ```sh
