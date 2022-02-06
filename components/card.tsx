@@ -96,7 +96,11 @@ const Card = () => {
                     <Box flex="1">
                       <Text>Scan test certificate for</Text>
                       <Text fontWeight="semibold" fontSize="xl">
-                        Timo Koenig
+                        {scanResult
+                          ? scanResult.certificates.length > 0
+                            ? `${scanResult.certificates[0].dcc.data.payload.hcert.dgc.nam.gn} ${scanResult.certificates[0].dcc.data.payload.hcert.dgc.nam.fn}`
+                            : 'n/a'
+                          : 'n/a'}
                       </Text>
                     </Box>
                     <Button
