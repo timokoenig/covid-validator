@@ -17,9 +17,12 @@ todo
 ## Getting Started
 
 ```sh
-CONTACT_DETAILS=Foo Bar<br />Germany
-CONTACT_EMAIL=foo@bar.com
-VERSION=0.1.0
+CONTACT_NAME=xxx
+CONTACT_ADDRESS=xxx
+CONTACT_ADDRESS_COUNTRY=xxx
+CONTACT_EMAIL=xxx
+CONTACT_WEBSITE=covidvalidator.app
+VERSION=0.0.1
 ```
 
 ```sh
