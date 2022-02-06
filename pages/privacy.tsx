@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Container, Heading, Text, List, ListItem, Link } from '@chakra-ui/react'
 import Header from '../components/header'
 import Footer from '../components/footer'
+import PageMeta from '~/components/page-meta'
 
 type Props = {
   contactName: string
@@ -1329,15 +1330,18 @@ const PrivacyPage = () => {
   }
 
   return (
-    <Container marginTop={10}>
-      <Header showMenu={false} />
+    <>
+      <PageMeta />
+      <Container marginTop={10}>
+        <Header showMenu={false} />
 
-      <Heading mb="5">Privacy Policy</Heading>
+        <Heading mb="5">Privacy Policy</Heading>
 
-      {lang == 'de' ? <PrivacyDE {...props} /> : <PrivacyEN {...props} />}
+        {lang == 'de' ? <PrivacyDE {...props} /> : <PrivacyEN {...props} />}
 
-      <Footer />
-    </Container>
+        <Footer />
+      </Container>
+    </>
   )
 }
 
