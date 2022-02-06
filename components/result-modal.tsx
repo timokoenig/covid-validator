@@ -24,7 +24,7 @@ type Props = {
 
 const RuleView = () => {
   const country =
-    countries.find(item => item.code == localStorage.getItem('country')) ?? countries[0]
+    countries.find(item => item.code == (localStorage.getItem('country') ?? 'DE')) ?? countries[0]
   const state =
     country.states.find(item => item.code == localStorage.getItem('state')) ?? country.states[0]
   const currentPurpose = localStorage.getItem('purpose') ?? purpose[0].title
