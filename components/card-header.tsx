@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { Button, Text, Image, Box, Spacer, useDisclosure } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
+import { useTranslation } from 'react-i18next'
 import purpose from '../utils/purpose'
 import countries from '../utils/countries'
 import RuleModal from './rule-modal'
 import PurposeModal from './purpose-modal'
 
 const CardHeader = () => {
+  const { t } = useTranslation('country')
   const { isOpen: isOpenRule, onOpen: onOpenRule, onClose: onCloseRule } = useDisclosure()
   const { isOpen: isOpenPurpose, onOpen: onOpenPurpose, onClose: onClosePurpose } = useDisclosure()
   const [selection, setSelection] = useState<{ country: string; state: string }>({
@@ -17,7 +19,8 @@ const CardHeader = () => {
     localStorage.getItem('purpose') ?? purpose[0].title
   )
 
-  const country = countries.find(item => item.code == selection.country) ?? countries[0]
+  const allCountries = countries(t)
+  const country = allCountries.find(item => item.code == selection.country) ?? allCountries[0]
   const state = country.states.find(item => item.code == selection.state) ?? country.states[0]
 
   return (

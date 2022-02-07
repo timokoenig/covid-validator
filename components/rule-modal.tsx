@@ -34,7 +34,6 @@ const RuleSelection = (props: RuleSelectionProps) => {
       <ModalCloseButton />
       <ModalBody>
         <CountryList
-          items={countries}
           selectedCountry={props.selection.country}
           selectedState={props.selection.state}
           onChange={(country, state) => props.setSelection({ country, state })}
@@ -58,7 +57,8 @@ type RuleConfirmationProps = {
 
 const RuleConfirmation = (props: RuleConfirmationProps) => {
   const { t } = useTranslation('common')
-  const country = countries.find(item => item.code == props.selection.country) ?? countries[0]
+  const allCountries = countries(useTranslation('country').t)
+  const country = allCountries.find(item => item.code == props.selection.country) ?? allCountries[0]
   const state = country.states.find(item => item.code == props.selection.state) ?? country.states[0]
 
   const preferredLanguage = localStorage.getItem('lang') ?? 'en'

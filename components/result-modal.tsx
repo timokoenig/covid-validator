@@ -24,8 +24,11 @@ type Props = {
 }
 
 const RuleView = () => {
+  const { t } = useTranslation('country')
+  const allCountries = countries(t)
   const country =
-    countries.find(item => item.code == (localStorage.getItem('country') ?? 'DE')) ?? countries[0]
+    allCountries.find(item => item.code == (localStorage.getItem('country') ?? 'DE')) ??
+    allCountries[0]
   const state =
     country.states.find(item => item.code == localStorage.getItem('state')) ?? country.states[0]
   const currentPurpose = localStorage.getItem('purpose') ?? purpose[0].title

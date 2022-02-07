@@ -12,9 +12,11 @@ i18next.init({
   resources: {
     en: {
       common: require('../translations/en/common.json'),
+      country: require('../translations/en/country.json'),
     },
     de: {
       common: require('../translations/de/common.json'),
+      country: require('../translations/de/country.json'),
     },
   },
 })
