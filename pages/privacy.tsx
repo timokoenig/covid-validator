@@ -1320,7 +1320,7 @@ const PrivacyPage = () => {
   const [lang, setLang] = useState<string>('')
 
   useEffect(() => {
-    const preferredLanguage = localStorage.getItem('lang') ?? 'en'
+    const preferredLanguage = localStorage.getItem('i18nextLng')?.substring(0, 2) ?? 'en'
     setLang(preferredLanguage)
   }, [])
 

@@ -68,7 +68,7 @@ const RuleConfirmation = (props: RuleConfirmationProps) => {
   const country = allCountries.find(item => item.code == props.selection.country) ?? allCountries[0]
   const state = country.states.find(item => item.code == props.selection.state) ?? country.states[0]
 
-  const preferredLanguage = localStorage.getItem('lang') ?? 'en'
+  const preferredLanguage = localStorage.getItem('i18nextLng')?.substring(0, 2) ?? 'en'
   const countryRules: Rule[] = (rules as Rules).rules
     .filter(rule => moment() >= moment(rule.ValidFrom) && moment() < moment(rule.ValidTo))
     .filter(rule => rule.Country == country.code)

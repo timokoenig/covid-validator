@@ -2,12 +2,12 @@ import React from 'react'
 import { ChakraProvider, CSSReset } from '@chakra-ui/react'
 import { I18nextProvider } from 'react-i18next'
 import i18next from 'i18next'
+import LanguageDetector from 'i18next-browser-languagedetector'
 
 import '../styles/globals.css'
 
-i18next.init({
+i18next.use(LanguageDetector).init({
   interpolation: { escapeValue: false },
-  lng: 'en',
   fallbackLng: 'en',
   resources: {
     en: {

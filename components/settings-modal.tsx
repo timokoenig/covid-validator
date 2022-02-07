@@ -25,12 +25,13 @@ type Props = {
 }
 
 const SettingsModal = (props: Props) => {
-  const [lang, setLang] = useState<string>(localStorage.getItem('lang') ?? 'en')
+  const [lang, setLang] = useState<string>(
+    localStorage.getItem('i18nextLng')?.substring(0, 2) ?? 'en'
+  )
   const { toggleColorMode, newColorMode } = useColorMode()
   const { t, i18n } = useTranslation('common')
 
   useEffect(() => {
-    localStorage.setItem('lang', lang)
     i18n.changeLanguage(lang).catch(console.log)
   }, [lang, i18n])
 
