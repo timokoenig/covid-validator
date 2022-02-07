@@ -8,6 +8,7 @@ const SIZE = 400
 
 type Props = {
   onData: (data: string) => void
+  onError: (error: string) => void
   enableScan: boolean
   facingMode?: string
 }
@@ -46,6 +47,9 @@ const QRCodeScanner = (props: Props) => {
         height: SIZE,
         facingMode: props.facingMode ?? 'environment',
       }}
+      onUserMediaError={err =>
+        typeof err == 'string' ? props.onError(err) : props.onError(err.message)
+      }
     />
   )
 }

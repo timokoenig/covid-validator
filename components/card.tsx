@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Box, Text, Center, useDisclosure, AspectRatio } from '@chakra-ui/react'
+import { Button, Box, Text, Center, useDisclosure, AspectRatio, Heading } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import { RepeatIcon } from '@chakra-ui/icons'
 import { checkCertificate, ScanResult } from '../utils/dcc'
@@ -17,6 +17,7 @@ const QRCodeScanner = dynamic(() => import('./qr-code-scanner'), {
 const Card = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [scanMode, setScanMode] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null)
   const [scannerFacingMode, setScannerFacingMode] = useState<string>('environment')
   const [loading, setLoading] = useState<boolean>(false)
   const [data, setData] = useState<string>('')
@@ -69,6 +70,14 @@ const Card = () => {
             <Box position="relative">
               <AspectRatio ratio={1}>
                 <>
+                  {error !== null && (
+                    <Box flexDirection="column">
+                      <Heading size="md" color="white">
+                        Camera error
+                      </Heading>
+                      <Text color="white">Did you accept the camera permission?</Text>
+                    </Box>
+                  )}
                   <QRCodeScanner
                     enableScan={!loading}
                     facingMode={scannerFacingMode}
@@ -78,6 +87,7 @@ const Card = () => {
                       setLoading(true)
                       setData(qrcode)
                     }}
+                    onError={setError}
                   />
                   {loading && <LoadingIndicator />}
                 </>
@@ -169,7 +179,10 @@ const Card = () => {
                 backgroundColor="blue.400"
                 _hover={{ bg: 'blue.300' }}
                 _active={{ bg: 'blue.400' }}
-                onClick={() => setScanMode(true)}
+                onClick={() => {
+                  setError(null)
+                  setScanMode(true)
+                }}
               >
                 Check Certificate
               </Button>
