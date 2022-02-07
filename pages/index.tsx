@@ -8,11 +8,7 @@ import Footer from '../components/footer'
 import OnboardingModal from '~/components/onboarding-modal'
 import PageMeta from '~/components/page-meta'
 
-type Props = {
-  version: string
-}
-
-const IndexPage = (props: Props) => {
+const IndexPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { i18n } = useTranslation()
 
@@ -32,7 +28,7 @@ const IndexPage = (props: Props) => {
     <>
       <PageMeta />
       <Container marginTop={10}>
-        <Header version={props.version} />
+        <Header version={process.env.NEXT_PUBLIC_VERSION as string} />
         <Card />
         <Information />
         <Footer />
@@ -40,14 +36,6 @@ const IndexPage = (props: Props) => {
       <OnboardingModal isOpen={isOpen} onClose={onClose} />
     </>
   )
-}
-
-export async function getInitialProps(): Promise<{ props: Props }> {
-  return {
-    props: {
-      version: process.env.NEXT_PUBLIC_VERSION as string,
-    },
-  }
 }
 
 export default IndexPage
