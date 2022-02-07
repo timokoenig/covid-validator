@@ -40,3 +40,13 @@ npm run dev
 ## Developer Notes
 
 The qr code reader needs to run over localhost or ssl to work. For the local development follow the script on https://github.com/vercel/next.js/discussions/10935#discussioncomment-1540436 and run `ipconfig getifaddr en0` to get your address. Now you can access your dev build via https on your network.
+
+## i18n
+
+The app uses [i18next](https://www.i18next.com/) for internationalization. We would like to offer this app to as many people as possible, therefore native translations are an important part. We welcome anyone to help us translate this app. To do so follow these steps:
+
+- If the language does not exist yet, create a folder in _/translations_ and copy the files _/translations/en/common.json_ and _/translations/en/country.json_ in that folder
+- Translate the existing values in those files and make sure you do not change the key
+- Save and commit your changes
+
+Note: If you do not add a translation in any given language, the app will default to English.
