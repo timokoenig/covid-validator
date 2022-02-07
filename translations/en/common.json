@@ -71,5 +71,10 @@
   "onboarding.list.3": "is Open Source and can be found on <1>Github</1>",
   "onboarding.list.4": "is hosted in Germany by <1>Hetzner Online GmbH</1>",
   "onboarding.privacy": "Read more about the Privacy Policy",
-  "onboarding.privacy.accept": "I agree to the Privacy Policy"
+  "onboarding.privacy.accept": "I agree to the Privacy Policy",
+
+  "lang": {
+    "en": "English",
+    "de": "German"
+  }
 }

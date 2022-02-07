@@ -16,6 +16,8 @@ import {
 import useColorMode from '@/utils/color-mode'
 import { useTranslation } from 'react-i18next'
 
+const availableLanguages = ['en', 'de']
+
 type Props = {
   isOpen: boolean
   onClose: () => void
@@ -46,8 +48,11 @@ const SettingsModal = (props: Props) => {
           <FormControl display="flex" alignItems="center">
             <FormLabel flex="1">{t('modal.settings.language')}</FormLabel>
             <Select value={lang} onChange={e => setLang(e.target.value)} width="100">
-              <option value="en">English</option>
-              {/* <option value="de">Deutsch</option> */}
+              {availableLanguages.map(key => (
+                <option key={key} value={key}>
+                  {t(`lang.${key}`)}
+                </option>
+              ))}
             </Select>
           </FormControl>
         </ModalBody>
