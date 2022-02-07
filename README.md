@@ -23,12 +23,12 @@ At the moment the app uses the official EU entry rules to validate the certifica
 ## Getting Started
 
 ```sh
-CONTACT_NAME=xxx
-CONTACT_ADDRESS=xxx
-CONTACT_ADDRESS_COUNTRY=xxx
-CONTACT_EMAIL=xxx
-CONTACT_WEBSITE=covidvalidator.app
-VERSION=0.0.1
+NEXT_PUBLIC_CONTACT_NAME=xxx
+NEXT_PUBLIC_CONTACT_ADDRESS=xxx
+NEXT_PUBLIC_CONTACT_ADDRESS_COUNTRY=xxx
+NEXT_PUBLIC_CONTACT_EMAIL=xxx
+NEXT_PUBLIC_CONTACT_WEBSITE=covidvalidator.app
+NEXT_PUBLIC_VERSION=0.0.1
 ```
 
 ```sh
