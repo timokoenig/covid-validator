@@ -1331,7 +1331,7 @@ const PrivacyPage = () => {
 
   return (
     <>
-      <PageMeta />
+      <PageMeta allowIndex={false} />
       <Container marginTop={10}>
         <Header showMenu={false} />
 

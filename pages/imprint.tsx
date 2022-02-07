@@ -6,7 +6,7 @@ import PageMeta from '../components/page-meta'
 
 const ImprintPage = () => (
   <>
-    <PageMeta />
+    <PageMeta allowIndex={false} />
     <Container marginTop={10}>
       <Header showMenu={false} />
       <Heading>Imprint</Heading>

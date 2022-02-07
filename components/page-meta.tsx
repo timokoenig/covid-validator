@@ -1,13 +1,18 @@
 import React from 'react'
 import Head from 'next/head'
 
-const PageMeta = () => (
+type Props = {
+  allowIndex?: boolean
+}
+
+const PageMeta = (props: Props) => (
   <Head>
     <title>Covid Validator</title>
     <meta
       name="description"
       content="Check EU Digitial Covid Certificates with ease and validate them against country and local rules"
     />
+    {props.allowIndex === false && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#ffffff" />
     <meta property="og:title" content="covidvalidator.de" />
     <meta property="og:url" content="https://covidvalidator.de" />
