@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { evaluate } from 'certlogic-js'
+import moment from 'moment'
 import { DCC } from './dcc'
 import countryBusinessRules from './eu-dcc-rules.json'
 
@@ -66,7 +67,12 @@ export function validateDCCRules(
   validationClock: Date
 ): DCCRuleValidationResult {
   const rules = countryBusinessRules as Rules
-  const countryRules = rules.rules.filter(rule => rule.Country == country.toUpperCase())
+  const countryRules = rules.rules
+    .filter(rule => rule.Country == country.toUpperCase())
+    // Currently we only use Acceptance rules due to the fact that there are not Invalidation rules yet
+    .filter(rule => rule.Type == 'Acceptance')
+    // Only use rules that are active
+    .filter(rule => moment() >= moment(rule.ValidFrom) && moment() < moment(rule.ValidTo))
   const results = countryRules.map(rule => {
     return validateDCCRule(rule, {
       payload: dcc.data.payload.hcert.dgc,
