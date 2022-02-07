@@ -22,7 +22,7 @@
   "meta.description": "Überprüfen Sie digitale COVID-Zertifikate der EU mit Leichtigkeit und validieren Sie sie anhand der länderspezifischen und lokalen Vorschriften",
 
   "information.purpose": "Was ist der Zweck von Covid Validator?",
-  "information.purpose.message": "Mit Covid Validator können Sie digitale COVID-Zertifikate der EU auf der Grundlage nationaler oder lokaler Regeln scannen und überprüfen. CovidValidator zeigt der prüfenden Person nur so wenige persönliche Informationen wie möglich an, um die Privatsphäre der Nutzenden zu schützen. Diese Web-App ist eine Alternative zu anderen bestehenden Produkten, da sie nicht nur in bestimmte App-Stores oder Ländern verfügbar ist.",
+  "information.purpose.message": "Mit Covid Validator können Sie digitale COVID-Zertifikate der EU auf der Grundlage nationaler oder lokaler Regeln scannen und überprüfen. Covid Validator zeigt der prüfenden Person nur so wenige persönliche Informationen wie möglich an, um die Privatsphäre der Nutzenden zu schützen. Diese Web-App ist eine Alternative zu anderen bestehenden Produkten, da sie nicht nur in bestimmte App-Stores oder Ländern verfügbar ist.",
   "information.beta": "Was bedeutet <1>BETA</1>?",
   "information.beta.message": "Die Web-App befindet sich noch in aktiver Entwicklung und kann kleinere Fehler enthalten. Der produktive Einsatz dieser Anwendung wird noch nicht empfohlen, bitte verwenden Sie die Web-App daher mit Vorsicht. Updates werden regelmäßig erscheinen. Sie können die Entwicklung auf<1>GitHub</1>verfolgen.",
   "information.rules": "Welche Regeln werden verwendet?",
@@ -35,7 +35,7 @@
   "scan.button": "Zertifikat prüfen",
   "scan.message": "Halten Sie den QR-Code vor Ihre Kamera",
   "scan.error": "Kamera Fehler",
-  "scan.error.message": "Haben Sie Zugriff auf die Kamera erlaubt?",
+  "scan.error.message": "Haben Sie den Zugriff auf die Kamera erlaubt?",
   "scan.multiscan": "Scannen Sie das Testzertifikat für",
   "scan.note.permission": "Stellen Sie immer sicher, dass Sie berechtigt sind, das Zertifikat der anderen Person zu scannen!",
   "scan.note.rules": "Überprüfen Sie die ausgewählten Regeln und stellen Sie sicher, dass Sie Ihren lokalen Vorschriften entsprechen. Andernfalls kann es zu ungültigen Prüfergebnissen kommen.",
@@ -64,7 +64,7 @@
   "modal.result.rulecount": "Überprüfte Regeln",
   "modal.result.scannext": "Zertifikat scannen",
 
-  "onboarding.message": "Covid Validator ermöglicht es Ihnen, <b>digitale COVID-Zertifikate der EU</b> zu scannen und zu validieren, basierend auf länderspezifischen oder lokalen Regeln. Der Scan- und Überprüfungsprozess findet lokal in Ihrem Browser statt.",
+  "onboarding.message": "Covid Validator ermöglicht es Ihnen, <b>digitale COVID-Zertifikate der EU</b> zu scannen und basierend auf länderspezifischen oder lokalen Regeln zu validieren. Der Scan- und Überprüfungsprozess findet lokal in Ihrem Browser statt.",
   "onboarding.list": "Diese Webseite",
   "onboarding.list.0": "speichert keinerlei persönliche Informationen",
   "onboarding.list.1": "teilt keinerlei Informationen mit Dritten",
