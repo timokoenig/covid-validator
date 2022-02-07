@@ -16,6 +16,7 @@ import {
   Box,
 } from '@chakra-ui/react'
 import { useTranslation, Trans } from 'react-i18next'
+import parse from 'html-react-parser'
 
 type Props = {
   isOpen: boolean
@@ -36,7 +37,7 @@ const OnboardingModal = (props: Props) => {
       <ModalContent>
         <ModalHeader>Covid Validator</ModalHeader>
         <ModalBody>
-          <Text>{t('onboarding.message')}</Text>
+          <Text>{parse(t('onboarding.message'))}</Text>
           <Heading size="sm" mt="5">
             {t('onboarding.list')}
           </Heading>
