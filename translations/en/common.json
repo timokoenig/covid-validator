@@ -22,7 +22,7 @@
   "meta.description": "Check EU Digitial Covid Certificates with ease and validate them against country and local rules",
 
   "information.purpose": "What is the purpose of Covid Validator?",
-  "information.purpose.message": "Covid Validator allows you to scan and validate EU Digital Covid Certificates based on country or local rules. It gives the person that checks the certificate only as little personal information as possible to protect the users&apos; privacy. This web app is an alternative to other existing products because it does not rely on certain app stores or country restrictions.",
+  "information.purpose.message": "Covid Validator allows you to scan and validate EU Digital Covid Certificates based on country or local rules. It gives the person that checks the certificate only as little personal information as possible to protect the users' privacy. This web app is an alternative to other existing products because it does not rely on certain app stores or country restrictions.",
   "information.beta": "What does <1>BETA</1> mean?",
   "information.beta.message": "The web app is still in active development and might contain minor bugs. The production use of this app is not recommended yet, so please use it with caution. Updates will come regularly. You can follow the development on <1>Github</1>.",
   "information.rules": "What rules are being used?",
