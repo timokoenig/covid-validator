@@ -1,6 +1,7 @@
 import React from 'react'
 import { Text, Box, Stack, Radio, RadioGroup } from '@chakra-ui/react'
 import moment from 'moment'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   items: { code: string; name: string; updated: Date }[]
@@ -9,6 +10,7 @@ type Props = {
 }
 
 const StateList = (props: Props) => {
+  const { t } = useTranslation('common')
   return (
     <RadioGroup onChange={props.onChange} value={props.selectedItem}>
       <Stack>
@@ -18,8 +20,8 @@ const StateList = (props: Props) => {
               <Text fontWeight={state.code == '' ? 'bold' : ''}>{state.name}</Text>
               <Text fontSize="xs" ml="2">
                 {state.code == ''
-                  ? `(updated ${moment(state.updated).format('DD.MM.YYYY')})`
-                  : '(Coming soon)'}
+                  ? `(${t('modal.rules.updated')} ${moment(state.updated).format('DD.MM.YYYY')})`
+                  : `(${t('modal.rules.comingsoon')})`}
               </Text>
             </Box>
           </Radio>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Box, Text, Center, useDisclosure, AspectRatio, Heading } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import { RepeatIcon } from '@chakra-ui/icons'
+import { useTranslation } from 'react-i18next'
 import { checkCertificate, ScanResult } from '../utils/dcc'
 import ResultModal from './result-modal'
 import LoadingIndicator from './loading-indicator'
@@ -15,6 +16,7 @@ const QRCodeScanner = dynamic(() => import('./qr-code-scanner'), {
 })
 
 const Card = () => {
+  const { t } = useTranslation('common')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [scanMode, setScanMode] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
@@ -73,9 +75,9 @@ const Card = () => {
                   {error !== null && (
                     <Box flexDirection="column">
                       <Heading size="md" color="white">
-                        Camera error
+                        {t('scan.error')}
                       </Heading>
-                      <Text color="white">Did you accept the camera permission?</Text>
+                      <Text color="white">{t('scan.error.message')}</Text>
                     </Box>
                   )}
                   <QRCodeScanner
@@ -108,7 +110,7 @@ const Card = () => {
                     alignItems="center"
                   >
                     <Box flex="1">
-                      <Text>Scan test certificate for</Text>
+                      <Text>{t('scan.multiscan')}</Text>
                       <Text fontWeight="semibold" fontSize="xl">
                         {scanResult
                           ? scanResult.certificates.length > 0
@@ -126,14 +128,14 @@ const Card = () => {
                       _active={{ bg: 'blue.400' }}
                       onClick={() => onModalClose(false)}
                     >
-                      Abort
+                      {t('abort')}
                     </Button>
                   </Box>
                 </Box>
               )}
             </Box>
             <Center py="5">
-              <Text color="white">Hold the QR Code in front of your camera</Text>
+              <Text color="white">{t('scan.message')}</Text>
             </Center>
             <Box pb="5" px="5" display="flex">
               <Box flex="1">
@@ -163,7 +165,7 @@ const Card = () => {
                   _active={{ bg: 'blue.400' }}
                   onClick={() => setScanMode(false)}
                 >
-                  Close Camera
+                  {t('camera.close')}
                 </Button>
               </Box>
               <Box flex="1" />
@@ -184,18 +186,17 @@ const Card = () => {
                   setScanMode(true)
                 }}
               >
-                Check Certificate
+                {t('scan.button')}
               </Button>
             </Center>
             <Center pb="10">
               <Text fontWeight="semibold" color="white" textAlign="center" px="10">
-                Always make sure you have the permission to scan the other persons certificate!
+                {t('scan.note.permission')}
               </Text>
             </Center>
             <Center pb="10">
               <Text color="white" textAlign="center" px="10">
-                Check the selected rules and confirm with your local regulations. Otherwise it might
-                come to invalid certificate validations.
+                {t('scan.note.rules')}
               </Text>
             </Center>
           </Box>

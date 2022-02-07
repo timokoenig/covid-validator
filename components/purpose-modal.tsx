@@ -9,6 +9,7 @@ import {
   ModalCloseButton,
   Button,
 } from '@chakra-ui/react'
+import { useTranslation } from 'react-i18next'
 import purpose from '../utils/purpose'
 import { Purpose } from '../utils/models'
 import PurposeList from './purpose-list'
@@ -20,6 +21,7 @@ type Props = {
 }
 
 const PurposeModal = (props: Props) => {
+  const { t } = useTranslation('common')
   const [selection, setSelection] = useState<Purpose>(
     purpose.find(item => item.title == localStorage.getItem('purpose')) ?? purpose[0]
   )
@@ -34,7 +36,7 @@ const PurposeModal = (props: Props) => {
     <Modal isOpen={props.isOpen} onClose={props.onClose} size="lg">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Select purpose of use</ModalHeader>
+        <ModalHeader>{t('modal.purpose')}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <PurposeList items={purpose} selectedItem={selection} onChange={setSelection} />
@@ -51,7 +53,7 @@ const PurposeModal = (props: Props) => {
             mr={3}
             onClick={onSave}
           >
-            Save Changes
+            {t('save')}
           </Button>
         </ModalFooter>
       </ModalContent>

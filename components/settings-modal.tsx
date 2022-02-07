@@ -25,7 +25,7 @@ type Props = {
 const SettingsModal = (props: Props) => {
   const [lang, setLang] = useState<string>(localStorage.getItem('lang') ?? 'en')
   const { toggleColorMode, newColorMode } = useColorMode()
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation('common')
 
   useEffect(() => {
     localStorage.setItem('lang', lang)
@@ -36,15 +36,15 @@ const SettingsModal = (props: Props) => {
     <Modal isOpen={props.isOpen} onClose={() => {}} size="lg" scrollBehavior="inside">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Settings</ModalHeader>
+        <ModalHeader>{t('modal.settings')}</ModalHeader>
         <ModalCloseButton onClick={props.onClose} />
         <ModalBody>
           <FormControl display="flex" alignItems="center" mb="5">
-            <FormLabel flex="1">Dark Mode</FormLabel>
+            <FormLabel flex="1">{t('modal.settings.darkmode')}</FormLabel>
             <Switch size="lg" onChange={toggleColorMode} isChecked={newColorMode == 'light'} />
           </FormControl>
           <FormControl display="flex" alignItems="center">
-            <FormLabel flex="1">Preferred Language</FormLabel>
+            <FormLabel flex="1">{t('modal.settings.language')}</FormLabel>
             <Select value={lang} onChange={e => setLang(e.target.value)} width="100">
               <option value="en">English</option>
               {/* <option value="de">Deutsch</option> */}
@@ -54,7 +54,7 @@ const SettingsModal = (props: Props) => {
 
         <ModalFooter>
           <Text textAlign="center" flex="1">
-            Version {props.version}
+            {t('version')} {props.version}
           </Text>
         </ModalFooter>
       </ModalContent>

@@ -14,6 +14,7 @@ import {
   ListItem,
 } from '@chakra-ui/react'
 import moment from 'moment'
+import { useTranslation } from 'react-i18next'
 import countries from '../utils/countries'
 import rules from '../utils/eu-dcc-rules.json'
 import { Rules, Rule, Language } from '../utils/certlogic'
@@ -25,26 +26,29 @@ type RuleSelectionProps = {
   setConfirm: (confirm: boolean) => void
 }
 
-const RuleSelection = (props: RuleSelectionProps) => (
-  <ModalContent>
-    <ModalHeader>Select Country and Rules</ModalHeader>
-    <ModalCloseButton />
-    <ModalBody>
-      <CountryList
-        items={countries}
-        selectedCountry={props.selection.country}
-        selectedState={props.selection.state}
-        onChange={(country, state) => props.setSelection({ country, state })}
-      />
-    </ModalBody>
+const RuleSelection = (props: RuleSelectionProps) => {
+  const { t } = useTranslation('common')
+  return (
+    <ModalContent>
+      <ModalHeader>{t('modal.rules')}</ModalHeader>
+      <ModalCloseButton />
+      <ModalBody>
+        <CountryList
+          items={countries}
+          selectedCountry={props.selection.country}
+          selectedState={props.selection.state}
+          onChange={(country, state) => props.setSelection({ country, state })}
+        />
+      </ModalBody>
 
-    <ModalFooter>
-      <Button colorScheme="blue" mr={3} onClick={() => props.setConfirm(true)}>
-        Continue
-      </Button>
-    </ModalFooter>
-  </ModalContent>
-)
+      <ModalFooter>
+        <Button colorScheme="blue" mr={3} onClick={() => props.setConfirm(true)}>
+          {t('continue')}
+        </Button>
+      </ModalFooter>
+    </ModalContent>
+  )
+}
 
 type RuleConfirmationProps = {
   selection: { country: string; state: string }
@@ -53,6 +57,7 @@ type RuleConfirmationProps = {
 }
 
 const RuleConfirmation = (props: RuleConfirmationProps) => {
+  const { t } = useTranslation('common')
   const country = countries.find(item => item.code == props.selection.country) ?? countries[0]
   const state = country.states.find(item => item.code == props.selection.state) ?? country.states[0]
 
@@ -86,11 +91,11 @@ const RuleConfirmation = (props: RuleConfirmationProps) => {
       <ModalCloseButton />
       <ModalBody>
         <Text fontWeight="semibold" mb="5">
-          Please confirm that these rules meet your requirements
+          {t('modal.rules.confirmation')}
         </Text>
         {vRuleDescriptions.length > 0 && (
           <Box>
-            <Text fontWeight="semibold">Vaccination</Text>
+            <Text fontWeight="semibold">{t('vaccination')}</Text>
             <UnorderedList>
               {vRuleDescriptions.map(desc => (
                 <ListItem mb="2" key={desc?.desc ?? ''}>
@@ -102,7 +107,7 @@ const RuleConfirmation = (props: RuleConfirmationProps) => {
         )}
         {rRuleDescriptions.length > 0 && (
           <Box>
-            <Text fontWeight="semibold">Recovery</Text>
+            <Text fontWeight="semibold">{t('recovery')}</Text>
             <UnorderedList>
               {rRuleDescriptions.map(desc => (
                 <ListItem mb="2" key={desc?.desc ?? ''}>
@@ -114,7 +119,7 @@ const RuleConfirmation = (props: RuleConfirmationProps) => {
         )}
         {tRuleDescriptions.length > 0 && (
           <Box>
-            <Text fontWeight="semibold">Test</Text>
+            <Text fontWeight="semibold">{t('test')}</Text>
             <UnorderedList>
               {tRuleDescriptions.map(desc => (
                 <ListItem mb="2" key={desc?.desc ?? ''}>
@@ -136,7 +141,7 @@ const RuleConfirmation = (props: RuleConfirmationProps) => {
           mr={3}
           onClick={() => props.setConfirm(false)}
         >
-          Back
+          {t('back')}
         </Button>
         <Box flex="1" />
         <Button
@@ -149,7 +154,7 @@ const RuleConfirmation = (props: RuleConfirmationProps) => {
           mr={3}
           onClick={props.onSave}
         >
-          Confirm Selection
+          {t('modal.rules.confirmation.confirm')}
         </Button>
       </ModalFooter>
     </ModalContent>

@@ -15,6 +15,7 @@ import {
   UnorderedList,
   Box,
 } from '@chakra-ui/react'
+import { useTranslation, Trans } from 'react-i18next'
 
 type Props = {
   isOpen: boolean
@@ -22,6 +23,7 @@ type Props = {
 }
 
 const OnboardingModal = (props: Props) => {
+  const { t } = useTranslation('common')
   const [accepted, setAccepted] = useState<boolean>(false)
   const onSave = () => {
     localStorage.setItem('onboarding', 'true')
@@ -34,59 +36,59 @@ const OnboardingModal = (props: Props) => {
       <ModalContent>
         <ModalHeader>Covid Validator</ModalHeader>
         <ModalBody>
-          <Text>
-            Covid Validator allows you to scan and validate <b>EU Digital Covid Certificates </b>
-            based on country or local rules. The scan and validation process happens locally in your
-            browser.
-          </Text>
+          <Text>{t('onboarding.message')}</Text>
           <Heading size="sm" mt="5">
-            The website
+            {t('onboarding.list')}
           </Heading>
           <UnorderedList>
-            <ListItem>does not save any personal information</ListItem>
-            <ListItem>does not share any information with others</ListItem>
+            <ListItem>{t('onboarding.list.0')}</ListItem>
+            <ListItem>{t('onboarding.list.1')}</ListItem>
+            <ListItem>{t('onboarding.list.2')}</ListItem>
             <ListItem>
-              does not use any cookies (required data is saved in your browsers local storage)
+              <Trans i18nKey="onboarding.list.3" t={t}>
+                x
+                <Link
+                  href="http://github.com/timokoenig/covid-validator"
+                  target="_blank"
+                  style={{ textDecoration: 'underline' }}
+                  mx="1"
+                >
+                  Github
+                </Link>
+                y
+              </Trans>
             </ListItem>
             <ListItem>
-              is Open Source and can be found on
-              <Link
-                href="http://github.com/timokoenig/covid-validator"
-                target="_blank"
-                style={{ textDecoration: 'underline' }}
-                mx="1"
-              >
-                Github
-              </Link>
-            </ListItem>
-            <ListItem>
-              is hosted in Germany by
-              <Link
-                href="https://www.hetzner.com/"
-                target="_blank"
-                style={{ textDecoration: 'underline' }}
-                mx="1"
-              >
-                Hetzner Online GmbH
-              </Link>
+              <Trans i18nKey="onboarding.list.4" t={t}>
+                x
+                <Link
+                  href="https://www.hetzner.com/"
+                  target="_blank"
+                  style={{ textDecoration: 'underline' }}
+                  mx="1"
+                >
+                  Hetzner Online GmbH
+                </Link>
+                y
+              </Trans>
             </ListItem>
           </UnorderedList>
 
           <Box my="5">
             <Link href="/privacy" target="_blank" style={{ textDecoration: 'underline' }}>
-              Read more about the Privacy Policy
+              {t('onboarding.privacy')}
             </Link>
           </Box>
 
           <Button isFullWidth onClick={() => setAccepted(!accepted)}>
             <Checkbox isChecked={accepted} mr="5" />
-            <Text>I agree to the Privacy Policy</Text>
+            <Text>{t('onboarding.privacy.accept')}</Text>
           </Button>
         </ModalBody>
 
         <ModalFooter>
           <Button colorScheme="blue" mr={3} onClick={onSave} isDisabled={!accepted}>
-            Continue
+            {t('continue')}
           </Button>
         </ModalFooter>
       </ModalContent>
