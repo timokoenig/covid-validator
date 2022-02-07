@@ -74,6 +74,14 @@ const CertValid = (props: Props) => {
       </ModalBody>
 
       <ModalFooter>
+        <Text>
+          <Text as="span" fontWeight="semibold">
+            {props.result.certificates[props.result.certificates.length - 1].ruleValidation?.results
+              .length ?? 0}{' '}
+          </Text>
+          Rules checked
+        </Text>
+        <Box flex="1" />
         <Button
           size="lg"
           variant="outline"
@@ -104,6 +112,14 @@ const CertInvalid = (props: Props) => (
     </ModalBody>
 
     <ModalFooter>
+      <Text>
+        <Text as="span" fontWeight="semibold">
+          {props.result.certificates[props.result.certificates.length - 1].ruleValidation?.results
+            .length ?? 0}{' '}
+        </Text>
+        Rules checked
+      </Text>
+      <Box flex="1" />
       <Button
         size="lg"
         variant="outline"
@@ -123,7 +139,9 @@ const CertMultiscan = (props: Props) => (
   <ModalContent overflow="hidden" bg="blue.400">
     <ModalBody mb="5">
       <Center px="10" pt="10">
-        <Heading color="white">TEST CERTIFICATE REQUIRED</Heading>
+        <Heading color="white" textAlign="center">
+          TEST CERTIFICATE REQUIRED
+        </Heading>
       </Center>
       <Center px="10">
         <Text color="white" fontWeight="semibold">
@@ -142,7 +160,7 @@ const CertMultiscan = (props: Props) => (
         _active={{ bg: 'blue.400' }}
         onClick={() => props.onClose(true)}
       >
-        Close
+        Scan Certificate
       </Button>
     </ModalFooter>
   </ModalContent>
