@@ -18,6 +18,8 @@ const ImprintPage = () => (
         <br />
         {process.env.NEXT_PUBLIC_CONTACT_ADDRESS}
         <br />
+        {process.env.NEXT_PUBLIC_CONTACT_ADDRESS_CITY}
+        <br />
         {process.env.NEXT_PUBLIC_CONTACT_ADDRESS_COUNTRY}
       </Text>
 

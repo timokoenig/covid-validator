@@ -7,6 +7,7 @@ import PageMeta from '~/components/page-meta'
 type Props = {
   contactName: string
   contactAddress: string
+  contactAddressCity: string
   contactAddressCountry: string
   contactEmail: string
   contactWebsite: string
@@ -195,6 +196,8 @@ const PrivacyEN = (props: Props) => (
       {props.contactName}
       <br />
       {props.contactAddress}
+      <br />
+      {props.contactAddressCity}
       <br />
       {props.contactAddressCountry}
       <br />
@@ -828,9 +831,9 @@ const PrivacyDE = (props: Props) => (
       <br />
       {props.contactAddress}
       <br />
-      20359 Hamburg
+      {props.contactAddressCity}
       <br />
-      DEUTSCHLAND
+      {props.contactAddressCountry}
       <br />
       E-Mail: {props.contactEmail}
       <br />
@@ -1324,6 +1327,7 @@ const PrivacyPage = () => {
   const props = {
     contactName: process.env.NEXT_PUBLIC_CONTACT_NAME as string,
     contactAddress: process.env.NEXT_PUBLIC_CONTACT_ADDRESS as string,
+    contactAddressCity: process.env.NEXT_PUBLIC_CONTACT_ADDRESS_CITY as string,
     contactAddressCountry: process.env.NEXT_PUBLIC_CONTACT_ADDRESS_COUNTRY as string,
     contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL as string,
     contactWebsite: process.env.NEXT_PUBLIC_CONTACT_WEBSITE as string,

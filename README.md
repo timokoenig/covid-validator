@@ -25,6 +25,7 @@ At the moment the app uses the official EU entry rules to validate the certifica
 ```sh
 NEXT_PUBLIC_CONTACT_NAME=xxx
 NEXT_PUBLIC_CONTACT_ADDRESS=xxx
+NEXT_PUBLIC_CONTACT_ADDRESS_CITY=xxx
 NEXT_PUBLIC_CONTACT_ADDRESS_COUNTRY=xxx
 NEXT_PUBLIC_CONTACT_EMAIL=xxx
 NEXT_PUBLIC_CONTACT_WEBSITE=covidvalidator.app
