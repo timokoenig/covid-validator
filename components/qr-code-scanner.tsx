@@ -43,8 +43,6 @@ const QRCodeScanner = (props: Props) => {
       screenshotFormat="image/jpeg"
       width={SIZE}
       videoConstraints={{
-        width: SIZE,
-        height: SIZE,
         facingMode: props.facingMode ?? 'environment',
       }}
       onUserMediaError={err =>
