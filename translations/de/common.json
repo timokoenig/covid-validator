@@ -1,1 +1,81 @@
-{}
+{
+  "subtitle": "Scannen und Überprüfen von digitalen COVID-Zertifikaten der EU",
+  "abort": "Abbrechen",
+  "save": "Sichern",
+  "close": "Schließen",
+  "continue": "Weiter",
+  "back": "Zurück",
+  "version": "Version",
+  "sponsor": "Unterstützen",
+  "privacy": "Datenschutzerklärung",
+
+  "imprint": "Impressum",
+  "imprint.information": "Informationen nach Sektion 5 TMG",
+  "imprint.legal": "RECHTLICHE HINWEISE",
+  "imprint.contact": "Kontaktinformationen",
+  "imprint.email": "E-Mail",
+
+  "vaccination": "Impfung",
+  "recovery": "Genesung",
+  "test": "Test",
+
+  "meta.description": "Überprüfen Sie digitale COVID-Zertifikate der EU mit Leichtigkeit und validieren Sie sie anhand der länderspezifischen und lokalen Vorschriften",
+
+  "information.purpose": "Was ist der Zweck von Covid Validator?",
+  "information.purpose.message": "Mit Covid Validator können Sie digitale COVID-Zertifikate der EU auf der Grundlage nationaler oder lokaler Regeln scannen und überprüfen. CovidValidator zeigt der prüfenden Person nur so wenige persönliche Informationen wie möglich an, um die Privatsphäre der Nutzenden zu schützen. Diese Web-App ist eine Alternative zu anderen bestehenden Produkten, da sie nicht nur in bestimmte App-Stores oder Ländern verfügbar ist.",
+  "information.beta": "Was bedeutet <1>BETA</1>?",
+  "information.beta.message": "Die Web-App befindet sich noch in aktiver Entwicklung und kann kleinere Fehler enthalten. Der produktive Einsatz dieser Anwendung wird noch nicht empfohlen, bitte verwenden Sie die Web-App daher mit Vorsicht. Updates werden regelmäßig erscheinen. Sie können die Entwicklung auf<1>GitHub</1>verfolgen.",
+  "information.rules": "Welche Regeln werden verwendet?",
+  "information.rules.message": "Im Moment verwendet die App die offiziellen EU-Eintrittsregeln, um das Zertifikat zu validieren. Diese Regeln werden von den Mitgliedsländern des digitalen COVID Zertifikats zur Verfügung gestellt. Es ist ein bekanntes Problem, dass diese Regeln veraltet sein können und nicht den staatlichen oder lokalen Vorschriften entsprechen. Dieses Projekt arbeitet an einem benutzerdefinierten Regelersteller, der präzisere Regeln für lokale Vorschriften ermöglicht. Sie können die Entwicklung<1>hier</1>verfolgen.",
+  "information.issue": "Was ist zu tun, wenn etwas nicht funktioniert?",
+  "information.issue.message": "Überprüfen Sie zunächst, ob Sie das richtige Land und die richtigen Regeln ausgewählt haben. Versuchen Sie dann, Ihr Gerät mit dem Internet zu verbinden, um die neusten Daten herunterzuladen. Wenn das Problem weiterhin auftritt, erstellen Sie auf<1>GitHub</1>ein Issue.",
+  "information.certificate": "Was ist das digitale COVID-Zertifikat der EU?",
+  "information.certificate.message": "Weitere Informationen dazu finden Sie auf<1>der offiziellen Website der EU</1>.",
+
+  "scan.button": "Zertifikat prüfen",
+  "scan.message": "Halten Sie den QR-Code vor Ihre Kamera",
+  "scan.error": "Kamera Fehler",
+  "scan.error.message": "Haben Sie Zugriff auf die Kamera erlaubt?",
+  "scan.multiscan": "Scannen Sie das Testzertifikat für",
+  "scan.note.permission": "Stellen Sie immer sicher, dass Sie berechtigt sind, das Zertifikat der anderen Person zu scannen!",
+  "scan.note.rules": "Überprüfen Sie die ausgewählten Regeln und stellen Sie sicher, dass Sie Ihren lokalen Vorschriften entsprechen. Andernfalls kann es zu ungültigen Prüfergebnissen kommen.",
+
+
+  "camera.close": "Kamera schließen",
+
+  "modal.purpose": "Prüfmodus auswählen",
+
+  "modal.rules": "Land und Regeln auswählen",
+  "modal.rules.updated": "aktualisiert",
+  "modal.rules.comingsoon": "Bald Verfügbar",
+  "modal.rules.confirmation": "Bitte stellen Sie sicher, dass diese Regeln Ihre Vorschriften entsprechen",
+  "modal.rules.confirmation.confirm": "Auswahl bestätigen",
+
+  "modal.settings": "Einstellungen",
+  "modal.settings.darkmode": "Dunkler Modus",
+  "modal.settings.language": "Bevorzugte Sprache",
+
+  "modal.result.valid": "GÜLTIG",
+  "modal.result.notvalid": "UNGÜLTIG",
+  "modal.result.testrequired": "TEST ZERTIFIKAT BENÖTIGT",
+  "modal.result.technicallyinvalid": "TECHNISCH UNGÜLTIG",
+  "modal.result.name": "Name",
+  "modal.result.birthdate": "Geburtsdatum",
+  "modal.result.rulecount": "Überprüfte Regeln",
+  "modal.result.scannext": "Zertifikat scannen",
+
+  "onboarding.message": "Covid Validator ermöglicht es Ihnen, <b>digitale COVID-Zertifikate der EU</b> zu scannen und zu validieren, basierend auf länderspezifischen oder lokalen Regeln. Der Scan- und Überprüfungsprozess findet lokal in Ihrem Browser statt.",
+  "onboarding.list": "Diese Webseite",
+  "onboarding.list.0": "speichert keinerlei persönliche Informationen",
+  "onboarding.list.1": "teilt keinerlei Informationen mit Dritten",
+  "onboarding.list.2": "nutzt keinerlei Cookies (benötigte Daten werden lokal in Ihrem Browser gespeichert)",
+  "onboarding.list.3": "ist Open Source und kann auf <1>GitHub</1> gefunden werden",
+  "onboarding.list.4": "wird in Deutschland von <1>Hetzner Online GmbH</1> gehostet",
+  "onboarding.privacy": "Lesen Sie mehr in der Datenschutzerklärung",
+  "onboarding.privacy.accept": "Ich stimme der Datenschutzerklärung zu",
+
+  "lang": {
+    "en": "Englisch",
+    "de": "Deutsch"
+  }
+}
