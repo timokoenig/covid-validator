@@ -32,14 +32,21 @@ const RuleSelection = (props: RuleSelectionProps) => {
     <ModalContent>
       <ModalHeader>{t('modal.rules')}</ModalHeader>
       <ModalCloseButton />
-      <ModalBody>
+      <ModalBody position="relative">
         <CountryList
           selectedCountry={props.selection.country}
           selectedState={props.selection.state}
           onChange={(country, state) => props.setSelection({ country, state })}
         />
+        <Box
+          w="100%"
+          h="70px"
+          position="sticky"
+          left="0"
+          bottom="-2"
+          bgGradient="linear(to-b, transparent, gray.700)"
+        />
       </ModalBody>
-
       <ModalFooter>
         <Button colorScheme="blue" mr={3} onClick={() => props.setConfirm(true)}>
           {t('continue')}
@@ -129,6 +136,14 @@ const RuleConfirmation = (props: RuleConfirmationProps) => {
             </UnorderedList>
           </Box>
         )}
+        <Box
+          w="100%"
+          h="70px"
+          position="sticky"
+          left="0"
+          bottom="-2"
+          bgGradient="linear(to-b, transparent, gray.700)"
+        />
       </ModalBody>
 
       <ModalFooter>
