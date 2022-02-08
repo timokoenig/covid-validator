@@ -1,5 +1,5 @@
 import React from 'react'
-import { Center, Text, Link } from '@chakra-ui/react'
+import { Center, Text, Link, Box } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
 
 const Footer = () => {
@@ -16,7 +16,7 @@ const Footer = () => {
           for the community
         </Text>
       </Center>
-      <Center mb="20">
+      <Box mb="20" textAlign="center">
         <Link href="https://github.com/timokoenig/covid-validator" target="_blank" px="2">
           Github
         </Link>
@@ -32,7 +32,7 @@ const Footer = () => {
         <Link href="/imprint" px="2">
           {t('imprint')}
         </Link>
-      </Center>
+      </Box>
     </>
   )
 }
