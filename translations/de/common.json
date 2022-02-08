@@ -15,6 +15,9 @@
   "imprint.contact": "Kontaktinformationen",
   "imprint.email": "E-Mail",
 
+  "offline": "Offline",
+  "offline.message": "Bitte überprüfen Sie Ihre Internetverbindung",
+
   "vaccination": "Impfung",
   "recovery": "Genesung",
   "test": "Test",
@@ -39,7 +42,6 @@
   "scan.multiscan": "Scannen Sie das Testzertifikat für",
   "scan.note.permission": "Stellen Sie immer sicher, dass Sie berechtigt sind, das Zertifikat der anderen Person zu scannen!",
   "scan.note.rules": "Überprüfen Sie die ausgewählten Regeln und stellen Sie sicher, dass Sie Ihren lokalen Vorschriften entsprechen. Andernfalls kann es zu ungültigen Prüfergebnissen kommen.",
-
 
   "camera.close": "Kamera schließen",
 

@@ -15,6 +15,9 @@
   "imprint.contact": "CONTACT INFORMATION",
   "imprint.email": "Email",
 
+  "offline": "Offline",
+  "offline.message": "Please check your internet connection",
+
   "vaccination": "Vaccination",
   "recovery": "Recovery",
   "test": "Test",
