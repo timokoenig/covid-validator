@@ -157,8 +157,6 @@ const RuleConfirmation = (props: RuleConfirmationProps) => {
           size="lg"
           variant="outline"
           backgroundColor="transparent"
-          _hover={{ bg: 'gray.600' }}
-          _active={{ bg: 'gray.800' }}
           mr={3}
           onClick={() => props.setConfirm(false)}
         >
