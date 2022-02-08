@@ -53,7 +53,9 @@ const CertValid = (props: Props) => {
     <ModalContent overflow="hidden" bg="green.400">
       <ModalBody mb="5">
         <Center px="10" pt="10">
-          <Heading color="white">{t('modal.result.valid')}</Heading>
+          <Heading color="white" textAlign="center">
+            {t('modal.result.valid')}
+          </Heading>
         </Center>
         <Center px="10" pb="10">
           <RuleView />
@@ -109,7 +111,9 @@ const CertInvalid = (props: Props) => {
     <ModalContent overflow="hidden" bg="red.400">
       <ModalBody mb="5">
         <Center px="10" pt="10">
-          <Heading color="white">{t('modal.result.notvalid')}</Heading>
+          <Heading color="white" textAlign="center">
+            {t('modal.result.notvalid')}
+          </Heading>
         </Center>
         <Center px="10">
           <Text color="white" fontWeight="semibold">
@@ -182,7 +186,7 @@ const CertTechnicallyInvalid = (props: Props) => {
   return (
     <ModalContent overflow="hidden" bg="gray.400">
       <ModalBody mb="5">
-        <Center px="10" pt="10">
+        <Center px="10" pt="10" textAlign="center">
           <Heading color="white">{t('modal.result.technicallyinvalid')}</Heading>
         </Center>
         <Center px="10">
