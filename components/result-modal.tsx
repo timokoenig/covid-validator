@@ -81,7 +81,7 @@ const CertValid = (props: Props) => {
       </ModalBody>
 
       <ModalFooter>
-        <Text>
+        <Text color="white">
           <Text as="span" fontWeight="semibold">
             {props.result.certificates[props.result.certificates.length - 1].ruleValidation?.results
               .length ?? 0}{' '}
