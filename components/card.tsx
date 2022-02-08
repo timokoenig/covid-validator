@@ -137,10 +137,10 @@ const Card = () => {
             <Center py="5">
               <Text color="white">{t('scan.message')}</Text>
             </Center>
-            <Box pb="5" px="5" display="flex">
+            <Box pb="5" px="5" display="flex" alignItems="center">
               <Box flex="1">
                 <Button
-                  size="lg"
+                  size="md"
                   variant="outline"
                   color="white"
                   backgroundColor="blue.400"
@@ -152,7 +152,7 @@ const Card = () => {
                       : setScannerFacingMode('environment')
                   }
                 >
-                  <RepeatIcon width="8" height="8" />
+                  <RepeatIcon width="6" height="6" />
                 </Button>
               </Box>
               <Box flex="1">
