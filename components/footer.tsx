@@ -17,19 +17,24 @@ const Footer = () => {
         </Text>
       </Center>
       <Box mb="20" textAlign="center">
-        <Link href="https://github.com/timokoenig/covid-validator" target="_blank" px="2">
+        <Link
+          href="https://github.com/timokoenig/covid-validator"
+          target="_blank"
+          px="2"
+          display="inline-block"
+        >
           Github
         </Link>
         |
-        <Link href="https://ko-fi.com/timokoenig" target="_blank" px="2">
+        <Link href="https://ko-fi.com/timokoenig" target="_blank" px="2" display="inline-block">
           {t('sponsor')}
         </Link>
         |
-        <Link href="/privacy" px="2">
+        <Link href="/privacy" px="2" display="inline-block">
           {t('privacy')}
         </Link>
         |
-        <Link href="/imprint" px="2">
+        <Link href="/imprint" px="2" display="inline-block">
           {t('imprint')}
         </Link>
       </Box>
