@@ -15,10 +15,30 @@ import {
 } from '@chakra-ui/react'
 import moment from 'moment'
 import { useTranslation } from 'react-i18next'
+import useColorMode from '@/utils/color-mode'
 import countries from '../utils/countries'
 import rules from '../utils/eu-dcc-rules.json'
 import { Rules, Rule, Language } from '../utils/certlogic'
 import CountryList from './country-list'
+
+const BoxShadow = () => {
+  const { isDarkMode } = useColorMode()
+
+  return (
+    <Box
+      w="100%"
+      h="70px"
+      position="sticky"
+      left="0"
+      bottom="-5"
+      bgGradient={
+        isDarkMode
+          ? 'linear-gradient(0deg, rgba(45,55,72,1) 50%, rgba(45,55,72,0) 100%)'
+          : 'linear-gradient(0deg, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%)'
+      }
+    />
+  )
+}
 
 type RuleSelectionProps = {
   selection: { country: string; state: string }
@@ -38,14 +58,7 @@ const RuleSelection = (props: RuleSelectionProps) => {
           selectedState={props.selection.state}
           onChange={(country, state) => props.setSelection({ country, state })}
         />
-        <Box
-          w="100%"
-          h="70px"
-          position="sticky"
-          left="0"
-          bottom="-2"
-          bgGradient="linear(to-b, transparent, gray.700)"
-        />
+        <BoxShadow />
       </ModalBody>
       <ModalFooter>
         <Button colorScheme="blue" mr={3} onClick={() => props.setConfirm(true)}>
@@ -136,14 +149,7 @@ const RuleConfirmation = (props: RuleConfirmationProps) => {
             </UnorderedList>
           </Box>
         )}
-        <Box
-          w="100%"
-          h="70px"
-          position="sticky"
-          left="0"
-          bottom="-2"
-          bgGradient="linear(to-b, transparent, gray.700)"
-        />
+        <BoxShadow />
       </ModalBody>
 
       <ModalFooter>
