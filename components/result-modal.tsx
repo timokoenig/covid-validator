@@ -150,7 +150,7 @@ const CertInvalid = (props: Props) => {
 const CertMultiscan = (props: Props) => {
   const { t } = useTranslation('common')
   return (
-    <ModalContent overflow="hidden" bg="blue.400">
+    <ModalContent overflow="hidden" bg="orange.400">
       <ModalBody mb="5">
         <Center px="10" pt="10">
           <Heading color="white" textAlign="center">
@@ -169,9 +169,9 @@ const CertMultiscan = (props: Props) => {
           size="lg"
           variant="outline"
           color="white"
-          backgroundColor="blue.400"
-          _hover={{ bg: 'blue.300' }}
-          _active={{ bg: 'blue.400' }}
+          backgroundColor="orange.400"
+          _hover={{ bg: 'orange.300' }}
+          _active={{ bg: 'orange.400' }}
           onClick={() => props.onClose(true)}
         >
           {t('modal.result.scannext')}
