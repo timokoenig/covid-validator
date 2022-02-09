@@ -13,7 +13,7 @@ import { HamburgerIcon } from '@chakra-ui/icons'
 import { useTranslation } from 'react-i18next'
 import dynamic from 'next/dynamic'
 
-const SettingsModal = dynamic(() => import('./settings-modal'), {
+const SettingsModal = dynamic(() => import('./modal/settings'), {
   ssr: false,
 })
 

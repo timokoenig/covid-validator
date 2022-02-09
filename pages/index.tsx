@@ -4,8 +4,8 @@ import Header from '../components/header'
 import Card from '../components/card'
 import Information from '../components/information'
 import Footer from '../components/footer'
-import OnboardingModal from '~/components/onboarding-modal'
-import PageMeta from '~/components/page-meta'
+import OnboardingModal from '../components/modal/onboarding'
+import PageMeta from '../components/page-meta'
 
 const IndexPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()

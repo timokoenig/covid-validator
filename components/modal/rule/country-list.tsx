@@ -10,7 +10,7 @@ import {
   Image,
 } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
-import countries from '../utils/countries'
+import countries from '../../../utils/countries'
 import StateList from './state-list'
 
 type Props = {

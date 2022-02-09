@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, Stack, Radio, RadioGroup, Box } from '@chakra-ui/react'
-import { Purpose } from '~/utils/models'
+import { Purpose } from '../../../utils/models'
 
 type Props = {
   items: Purpose[]

@@ -8,12 +8,15 @@
   "version": "Version",
   "sponsor": "Unterstützen",
   "privacy": "Datenschutzerklärung",
+  "github": "Github",
 
   "imprint": "Impressum",
   "imprint.information": "Informationen nach Sektion 5 TMG",
   "imprint.legal": "RECHTLICHE HINWEISE",
   "imprint.contact": "Kontaktinformationen",
   "imprint.email": "E-Mail",
+
+  "footer.madewithheart": "Made with <1>♥</1> for the community",
 
   "offline": "Offline",
   "offline.message": "Bitte überprüfen Sie Ihre Internetverbindung",

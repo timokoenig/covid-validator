@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { Button, Text, Image, Box, Spacer, useDisclosure } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { useTranslation } from 'react-i18next'
-import purpose from '../utils/purpose'
-import countries from '../utils/countries'
-import RuleModal from './rule-modal'
-import PurposeModal from './purpose-modal'
+import purpose from '../../utils/purpose'
+import countries from '../../utils/countries'
+import RuleModal from '../modal/rule'
+import PurposeModal from '../modal/purpose'
 
 const CardHeader = () => {
   const { t } = useTranslation('country')

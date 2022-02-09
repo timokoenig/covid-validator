@@ -10,8 +10,8 @@ import {
   Button,
 } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
-import purpose from '../utils/purpose'
-import { Purpose } from '../utils/models'
+import purpose from '../../../utils/purpose'
+import { Purpose } from '../../../utils/models'
 import PurposeList from './purpose-list'
 
 type Props = {

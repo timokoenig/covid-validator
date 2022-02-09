@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Container, Heading, Text, List, ListItem, Link } from '@chakra-ui/react'
 import Header from '../components/header'
 import Footer from '../components/footer'
-import PageMeta from '~/components/page-meta'
+import PageMeta from '../components/page-meta'
 
 type Props = {
   contactName: string

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Center, Text, Link, Box } from '@chakra-ui/react'
-import { useTranslation } from 'react-i18next'
+import { useTranslation, Trans } from 'react-i18next'
 
 const Footer = () => {
   const { t } = useTranslation('common')
@@ -9,11 +9,13 @@ const Footer = () => {
       <hr />
       <Center mt="5">
         <Text>
-          Made with{' '}
-          <Text as="span" color="red">
-            ♥
-          </Text>{' '}
-          for the community
+          <Trans i18nKey="footer.madewithheart" t={t}>
+            x
+            <Text as="span" color="red">
+              ♥
+            </Text>
+            y
+          </Trans>
         </Text>
       </Center>
       <Box mb="20" textAlign="center">
@@ -23,7 +25,7 @@ const Footer = () => {
           px="2"
           display="inline-block"
         >
-          Github
+          {t('github')}
         </Link>
         |
         <Link href="https://ko-fi.com/timokoenig" target="_blank" px="2" display="inline-block">
