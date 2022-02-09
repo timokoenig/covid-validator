@@ -9,6 +9,7 @@ import cbor from 'cbor'
 import { Certificate, PublicKey } from '@fidm/x509'
 import cose from 'cose-js'
 import { ExtendedResults } from 'cbor/types/lib/decoder'
+import moment from 'moment'
 import { DCCRuleValidationResult, validateDCCRules } from './certlogic'
 import dscListJson from './dsc.json'
 
@@ -144,7 +145,8 @@ export async function checkCertificate(data: string): Promise<ScanResult> {
   const dcc = await parseDCC(data)
   // verify dcc
   const verified = await verifyDCC(dcc)
-  if (!verified) {
+  const isExpired = dcc.data.payload.exp ? moment() > moment(dcc.data.payload.exp) : false
+  if (!verified || isExpired) {
     // verification failed
     return {
       certificates: [
