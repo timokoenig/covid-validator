@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { Button, Text, Image, Box, Spacer, useDisclosure } from '@chakra-ui/react'
+import { Button, Text, Box, Spacer, useDisclosure } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { useTranslation } from 'react-i18next'
 import purpose from '../../utils/purpose'
 import countries from '../../utils/countries'
 import RuleModal from '../modal/rule'
 import PurposeModal from '../modal/purpose'
+import Flag from '../flag'
 
 const CardHeader = () => {
   const { t } = useTranslation('country')
@@ -39,14 +40,8 @@ const CardHeader = () => {
           onClick={onOpenRule}
           borderRadius="0"
         >
-          <Image
-            src={`https://raw.githubusercontent.com/lipis/flag-icons/main/flags/1x1/${country.code.toLowerCase()}.svg`}
-            width="5"
-            height="5"
-            borderRadius="10"
-            marginRight="2"
-          />
-          <Text fontSize="h4" fontWeight="bold" color="white">
+          <Flag country={country.code.toLowerCase()} size={25} />
+          <Text fontSize="h4" fontWeight="bold" color="white" ml="2">
             {country.name} / {state.name}
           </Text>
           <ChevronDownIcon w={8} h={8} color="white" />

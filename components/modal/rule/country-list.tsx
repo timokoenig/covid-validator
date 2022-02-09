@@ -7,10 +7,10 @@ import {
   AccordionPanel,
   AccordionIcon,
   Box,
-  Image,
 } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
 import countries from '../../../utils/countries'
+import Flag from '../../flag'
 import StateList from './state-list'
 
 type Props = {
@@ -32,14 +32,8 @@ const CountryList = (props: Props) => {
           <h2>
             <AccordionButton>
               <Box flex="1" textAlign="left" display="flex" flexDirection="row">
-                <Image
-                  src={`https://raw.githubusercontent.com/lipis/flag-icons/main/flags/1x1/${country.code.toLowerCase()}.svg`}
-                  width="5"
-                  height="5"
-                  borderRadius="10"
-                  marginRight="2"
-                />
-                <Text fontSize="h4" fontWeight="bold">
+                <Flag country={country.code.toLowerCase()} size={20} />
+                <Text fontSize="h4" fontWeight="bold" ml="2">
                   {country.name}
                 </Text>
               </Box>

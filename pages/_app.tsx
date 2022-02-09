@@ -6,6 +6,7 @@ import i18next from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { AppProps } from 'next/app'
 
+import '@/node_modules/flag-icons/css/flag-icons.min.css'
 import '../styles/globals.css'
 
 i18next

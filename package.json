@@ -30,6 +30,7 @@
     "certlogic-js": "^1.1.1",
     "cose-js": "^0.8.3",
     "emotion-theming": "^11.0.0",
+    "flag-icons": "^6.0.3",
     "framer-motion": "^4",
     "html-react-parser": "^1.4.8",
     "i18next": "^21.6.10",
