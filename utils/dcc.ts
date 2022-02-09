@@ -172,6 +172,10 @@ export async function checkCertificate(data: string): Promise<ScanResult> {
 }
 
 function isMultiScan(dcc: DCC): boolean {
+  // At the moment the multiscan is only available in Germany. Need to check if this is a thing in other countries as well
+  const country = localStorage.getItem('country') ?? 'DE'
+  if (country !== 'DE') return false
+
   const purpose = localStorage.getItem('purpose') ?? ''
   if (!purpose.includes('+')) return false
   // current purpose required additional test, except for valid booster certificates
