@@ -1,13 +1,13 @@
-import React from 'react'
 import {
-  Text,
   Accordion,
-  AccordionItem,
   AccordionButton,
-  AccordionPanel,
   AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
   Box,
+  Text,
 } from '@chakra-ui/react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import countries from '../../../utils/countries'
 import Flag from '../../flag'
@@ -31,7 +31,7 @@ const CountryList = (props: Props) => {
         <AccordionItem key={country.code}>
           <h2>
             <AccordionButton>
-              <Box flex="1" textAlign="left" display="flex" flexDirection="row">
+              <Box flex="1" textAlign="left" alignItems="center" display="flex" flexDirection="row">
                 <Flag country={country.code.toLowerCase()} size={20} />
                 <Text fontSize="h4" fontWeight="bold" ml="2">
                   {country.name}
