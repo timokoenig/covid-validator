@@ -65,6 +65,7 @@
   "modal.settings": "Settings",
   "modal.settings.darkmode": "Dark Mode",
   "modal.settings.language": "Preferred Language",
+  "modal.settings.counter": "Scan Counter",
 
   "modal.result.valid": "VALID",
   "modal.result.notvalid": "NOT VALID",
@@ -84,6 +85,8 @@
   "onboarding.list.4": "is hosted in Germany by <1>Hetzner Online GmbH</1>",
   "onboarding.privacy": "Read more about the Privacy Policy",
   "onboarding.privacy.accept": "I agree to the Privacy Policy",
+
+  "counter": "Number of people scanned",
 
   "lang": {
     "en": "English",

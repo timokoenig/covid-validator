@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   ModalContent,
   ModalFooter,
@@ -12,6 +12,7 @@ import {
 import moment from 'moment'
 import { useTranslation } from 'react-i18next'
 import { ScanResult } from '../../../utils/dcc'
+import { increase } from '../../../state/counter'
 import RuleView from './rule-view'
 
 type Props = {
@@ -25,6 +26,11 @@ const ResultValid = (props: Props) => {
   const dgc = props.result.certificates[0].dcc.data.payload.hcert.dgc
   const name = `${dgc.nam.gn} ${dgc.nam.fn}` // TODO show gnt and fnt as a fallback
   const birthdate = dgc.dob ? moment(dgc.dob).format('MM.DD.YYYY') : 'XX.XX.XXXX'
+
+  useEffect(() => {
+    // increase counter for valid certificate
+    increase()
+  }, [])
 
   return (
     <ModalContent overflow="hidden" bg="green.400">

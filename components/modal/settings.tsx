@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react'
 import useColorMode from '@/utils/color-mode'
 import { useTranslation } from 'react-i18next'
+import { showCounter, toggle } from '../../state/show-counter'
 
 const availableLanguages = ['en', 'de']
 
@@ -29,6 +30,7 @@ const SettingsModal = (props: Props) => {
     localStorage.getItem('i18nextLng')?.substring(0, 2) ?? 'en'
   )
   const { toggleColorMode, newColorMode } = useColorMode()
+  const showCounterComponent = showCounter.use()
   const { t, i18n } = useTranslation('common')
 
   useEffect(() => {
@@ -46,7 +48,8 @@ const SettingsModal = (props: Props) => {
             <FormLabel flex="1">{t('modal.settings.darkmode')}</FormLabel>
             <Switch size="lg" onChange={toggleColorMode} isChecked={newColorMode == 'light'} />
           </FormControl>
-          <FormControl display="flex" alignItems="center">
+
+          <FormControl display="flex" alignItems="center" mb="5">
             <FormLabel flex="1">{t('modal.settings.language')}</FormLabel>
             <Select value={lang} onChange={e => setLang(e.target.value)} width="100">
               {availableLanguages.map(key => (
@@ -55,6 +58,11 @@ const SettingsModal = (props: Props) => {
                 </option>
               ))}
             </Select>
+          </FormControl>
+
+          <FormControl display="flex" alignItems="center" mb="5">
+            <FormLabel flex="1">{t('modal.settings.counter')}</FormLabel>
+            <Switch size="lg" onChange={toggle} isChecked={showCounterComponent} />
           </FormControl>
         </ModalBody>
 

@@ -65,6 +65,7 @@
   "modal.settings": "Einstellungen",
   "modal.settings.darkmode": "Dunkler Modus",
   "modal.settings.language": "Bevorzugte Sprache",
+  "modal.settings.counter": "Scan-Zähler",
 
   "modal.result.valid": "GÜLTIG",
   "modal.result.notvalid": "UNGÜLTIG",
@@ -84,6 +85,8 @@
   "onboarding.list.4": "wird in Deutschland von <1>Hetzner Online GmbH</1> gehostet",
   "onboarding.privacy": "Lesen Sie mehr in der Datenschutzerklärung",
   "onboarding.privacy.accept": "Ich stimme der Datenschutzerklärung zu",
+
+  "counter": "Anzahl der gescannten Personen",
 
   "lang": {
     "en": "Englisch",
