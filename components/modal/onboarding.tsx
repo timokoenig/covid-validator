@@ -1,22 +1,22 @@
-import React, { useState } from 'react'
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
+  Box,
   Button,
-  Text,
   Checkbox,
+  Heading,
   Link,
   ListItem,
-  Heading,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
   UnorderedList,
-  Box,
 } from '@chakra-ui/react'
-import { useTranslation, Trans } from 'react-i18next'
 import parse from 'html-react-parser'
+import React, { useState } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
 
 type Props = {
   isOpen: boolean
@@ -82,7 +82,7 @@ const OnboardingModal = (props: Props) => {
           </Box>
 
           <Button isFullWidth onClick={() => setAccepted(!accepted)}>
-            <Checkbox isChecked={accepted} mr="5" />
+            <Checkbox isChecked={accepted} mr="5" onChange={e => setAccepted(!e.target.checked)} />
             <Text>{t('onboarding.privacy.accept')}</Text>
           </Button>
         </ModalBody>
