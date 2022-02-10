@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next'
 import Flag from '../flag'
 import CountryModal from './country'
 import PurposeModal from './purpose'
+import RulesModal from './rules'
 
 type Props = {
   isOpen: boolean
@@ -26,6 +27,7 @@ const OverviewModal = (props: Props) => {
   const { t } = useTranslation('common')
   const { isOpen: isOpenCountry, onOpen: onOpenCountry, onClose: onCloseCountry } = useDisclosure()
   const { isOpen: isOpenPurpose, onOpen: onOpenPurpose, onClose: onClosePurpose } = useDisclosure()
+  const { isOpen: isOpenRules, onOpen: onOpenRules, onClose: onCloseRules } = useDisclosure()
 
   return (
     <>
@@ -63,7 +65,9 @@ const OverviewModal = (props: Props) => {
               <Box flex="1" display="flex" alignItems="center">
                 <Text fontWeight="semibold">11 rules active</Text>
               </Box>
-              <Button variant="outline">{t('show')}</Button>
+              <Button variant="outline" onClick={onOpenRules}>
+                {t('show')}
+              </Button>
             </Box>
           </ModalBody>
 
@@ -72,6 +76,7 @@ const OverviewModal = (props: Props) => {
       </Modal>
       <CountryModal isOpen={isOpenCountry} onClose={onCloseCountry} onChange={() => {}} />
       <PurposeModal isOpen={isOpenPurpose} onClose={onClosePurpose} onChange={() => {}} />
+      <RulesModal isOpen={isOpenRules} onClose={onCloseRules} />
     </>
   )
 }
