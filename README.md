@@ -4,10 +4,10 @@ Check EU Digitial Covid Certificates with ease and validate them against local o
 
 **Features**
 
-📱 Scan and verify EU Digital Covid Certificates
-🌍 Validate against country or local rules
-🎟 Scan Counter to keep track of admission criteria at local venues
-📴 Works offline
+- 📱 Scan and verify EU Digital Covid Certificates
+- 🌍 Validate against country or local rules
+- 🎟 Scan Counter to keep track of admission criteria at local venues
+- 📴 Works offline
 
 ### What is the purpose of CovidValidator?
 
