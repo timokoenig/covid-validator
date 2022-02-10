@@ -1,17 +1,17 @@
-import React from 'react'
+import { SettingsIcon } from '@chakra-ui/icons'
 import {
-  Heading,
   Box,
-  Text,
-  Menu,
-  MenuButton,
+  Heading,
   IconButton,
   Link,
+  Menu,
+  MenuButton,
+  Text,
   useDisclosure,
 } from '@chakra-ui/react'
-import { HamburgerIcon } from '@chakra-ui/icons'
-import { useTranslation } from 'react-i18next'
 import dynamic from 'next/dynamic'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 const SettingsModal = dynamic(() => import('./modal/settings'), {
   ssr: false,
@@ -42,7 +42,7 @@ const Header = (props: Props) => {
               <MenuButton
                 as={IconButton}
                 aria-label="Options"
-                icon={<HamburgerIcon />}
+                icon={<SettingsIcon />}
                 variant="outline"
                 onClick={onOpen}
               />
