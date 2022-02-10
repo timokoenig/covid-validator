@@ -11,8 +11,13 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
+import moment from 'moment'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { app } from '../../state/app'
+import { Rules } from '../../utils/certlogic'
+import countries from '../../utils/countries'
+import rules from '../../utils/eu-dcc-rules.json'
 import Flag from '../flag'
 import CountryModal from './country'
 import PurposeModal from './purpose'
@@ -25,9 +30,16 @@ type Props = {
 
 const OverviewModal = (props: Props) => {
   const { t } = useTranslation('common')
+  const { t: tCountry } = useTranslation('country')
   const { isOpen: isOpenCountry, onOpen: onOpenCountry, onClose: onCloseCountry } = useDisclosure()
   const { isOpen: isOpenPurpose, onOpen: onOpenPurpose, onClose: onClosePurpose } = useDisclosure()
   const { isOpen: isOpenRules, onOpen: onOpenRules, onClose: onCloseRules } = useDisclosure()
+  const appState = app.use()
+
+  const allCountries = countries(tCountry)
+  const country = allCountries.find(item => item.code == appState.country) ?? allCountries[0]
+  const state = country.states.find(item => item.code == appState.state) ?? country.states[0]
+  const ruleCount = (rules as Rules).rules.filter(item => item.Country == country.code).length
 
   return (
     <>
@@ -42,8 +54,8 @@ const OverviewModal = (props: Props) => {
                 <Flag country="de" size={25} />
               </Box>
               <Box flex="1">
-                <Text fontWeight="semibold">Deutschland</Text>
-                <Text>Nationwide</Text>
+                <Text fontWeight="semibold">{country.name}</Text>
+                <Text>{state.name}</Text>
               </Box>
               <Button variant="outline" onClick={onOpenCountry}>
                 {t('change')}
@@ -51,19 +63,26 @@ const OverviewModal = (props: Props) => {
             </Box>
             <hr />
 
-            <Box my="5" display="flex" flexDirection="row">
-              <Box flex="1" display="flex" alignItems="center">
-                <Text fontWeight="semibold">2G+</Text>
-              </Box>
-              <Button variant="outline" onClick={onOpenPurpose}>
-                {t('change')}
-              </Button>
-            </Box>
-            <hr />
+            {country.code === 'DE' && (
+              <>
+                <Box my="5" display="flex" flexDirection="row">
+                  <Box flex="1" display="flex" alignItems="center">
+                    <Text fontWeight="semibold">{appState.purpose}</Text>
+                  </Box>
+                  <Button variant="outline" onClick={onOpenPurpose}>
+                    {t('change')}
+                  </Button>
+                </Box>
+                <hr />
+              </>
+            )}
 
             <Box my="5" display="flex" flexDirection="row">
-              <Box flex="1" display="flex" alignItems="center">
-                <Text fontWeight="semibold">11 rules active</Text>
+              <Box flex="1" display="flex" flexDirection="column">
+                <Text fontWeight="semibold">{ruleCount} rules active</Text>
+                <Text>
+                  ({t('modal.rules.updated')} {moment(rules.updatedAt).format('DD.MM.YYYY')})
+                </Text>
               </Box>
               <Button variant="outline" onClick={onOpenRules}>
                 {t('show')}
@@ -74,8 +93,8 @@ const OverviewModal = (props: Props) => {
           <ModalFooter />
         </ModalContent>
       </Modal>
-      <CountryModal isOpen={isOpenCountry} onClose={onCloseCountry} onChange={() => {}} />
-      <PurposeModal isOpen={isOpenPurpose} onClose={onClosePurpose} onChange={() => {}} />
+      <CountryModal isOpen={isOpenCountry} onClose={onCloseCountry} />
+      <PurposeModal isOpen={isOpenPurpose} onClose={onClosePurpose} />
       <RulesModal isOpen={isOpenRules} onClose={onCloseRules} />
     </>
   )

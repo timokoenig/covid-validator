@@ -1,18 +1,19 @@
 import { Modal, ModalOverlay } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { app, setCountry, setState } from '../../../state/app'
 import CountryConfirmation from './country-confirmation'
 import CountrySelection from './country-selection'
 
 type Props = {
   isOpen: boolean
   onClose: () => void
-  onChange: (selection: { country: string; state: string }) => void
 }
 
 const CountryModal = (props: Props) => {
+  const appState = app.use()
   const [selection, setSelection] = useState<{ country: string; state: string }>({
-    country: localStorage.getItem('country') ?? 'DE',
-    state: localStorage.getItem('state') ?? '',
+    country: appState.country,
+    state: appState.state,
   })
   const [confirm, setConfirm] = useState<boolean>(false)
 
@@ -22,9 +23,8 @@ const CountryModal = (props: Props) => {
   }
 
   const onSave = () => {
-    props.onChange(selection)
-    localStorage.setItem('country', selection.country)
-    localStorage.setItem('state', selection.state)
+    setCountry(selection.country)
+    setState(selection.state)
     setConfirm(false)
     props.onClose()
   }

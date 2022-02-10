@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Box, Text, Center, useDisclosure, AspectRatio, Heading } from '@chakra-ui/react'
+import { AspectRatio, Box, Button, Center, Heading, Text, useDisclosure } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { checkCertificate, ScanResult } from '../../utils/dcc'
 import ResultModal from '../modal/result'
-import LoadingIndicator from './loading-indicator'
 import CameraActionBar from './camera-action-bar'
+import LoadingIndicator from './loading-indicator'
 
 const QRCodeScanner = dynamic(() => import('./qr-code-scanner'), {
   ssr: false,

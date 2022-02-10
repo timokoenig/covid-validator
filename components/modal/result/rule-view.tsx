@@ -1,19 +1,16 @@
-import React from 'react'
 import { Text } from '@chakra-ui/react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { app } from '../../../state/app'
 import countries from '../../../utils/countries'
-import purpose from '../../../utils/purpose'
 
 const RuleView = () => {
   const { t } = useTranslation('country')
-  const { t: tCommon } = useTranslation('common')
+  const appState = app.use()
   const allCountries = countries(t)
-  const country =
-    allCountries.find(item => item.code == (localStorage.getItem('country') ?? 'DE')) ??
-    allCountries[0]
-  const state =
-    country.states.find(item => item.code == localStorage.getItem('state')) ?? country.states[0]
-  const currentPurpose = localStorage.getItem('purpose') ?? purpose(tCommon)[0].title
+  const country = allCountries.find(item => item.code == appState.country) ?? allCountries[0]
+  const state = country.states.find(item => item.code == appState.state) ?? country.states[0]
+  const currentPurpose = appState.purpose
   let ruleText = `${country.name} / ${state.name}`
   if (country.code === 'DE') {
     ruleText = `${ruleText} / ${currentPurpose}`

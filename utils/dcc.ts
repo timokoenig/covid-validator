@@ -3,13 +3,14 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import base45 from 'base45'
-import zlib from 'pako'
-import cbor from 'cbor'
 import { Certificate, PublicKey } from '@fidm/x509'
-import cose from 'cose-js'
+import base45 from 'base45'
+import cbor from 'cbor'
 import { ExtendedResults } from 'cbor/types/lib/decoder'
+import cose from 'cose-js'
 import moment from 'moment'
+import zlib from 'pako'
+import { app } from '../state/app'
 import { DCCRuleValidationResult, validateDCCRules } from './certlogic'
 import dscListJson from './dsc.json'
 
@@ -160,7 +161,7 @@ export async function checkCertificate(data: string): Promise<ScanResult> {
   }
   // check dcc is multiscan is required
   // validate dcc against selected rules
-  const ruleResult = validateDCCRules(dcc, localStorage.getItem('country') ?? 'DE', new Date())
+  const ruleResult = validateDCCRules(dcc, app.get().country, new Date())
   return {
     certificates: [
       {
@@ -169,16 +170,16 @@ export async function checkCertificate(data: string): Promise<ScanResult> {
         ruleValidation: ruleResult,
       },
     ],
-    isMultiScan: ruleResult.isValid ? isMultiScan(dcc) : false,
+    isMultiScan: ruleResult.isValid
+      ? isMultiScan(dcc, app.get().country, app.get().purpose)
+      : false,
   }
 }
 
-function isMultiScan(dcc: DCC): boolean {
+function isMultiScan(dcc: DCC, country: string, purpose: string): boolean {
   // At the moment the multiscan is only available in Germany. Need to check if this is a thing in other countries as well
-  const country = localStorage.getItem('country') ?? 'DE'
   if (country !== 'DE') return false
 
-  const purpose = localStorage.getItem('purpose') ?? ''
   if (!purpose.includes('+')) return false
   // current purpose required additional test, except for valid booster certificates
   const vac = dcc.data.payload.hcert.dgc.v
