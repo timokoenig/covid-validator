@@ -25,6 +25,12 @@
   "recovery": "Recovery",
   "test": "Test",
 
+  "3G": "Vaccinated or Recovered or Test",
+  "2G+": "Vaccinated or Recoverd + Test or Booster",
+  "2G": "Vaccinated or Recoverd",
+  "1G+": "Vaccinated + Test or Booster",
+  "1G": "Vaccinated",
+
   "meta.description": "Check EU Digitial Covid Certificates with ease and validate them against country and local rules",
 
   "information.purpose": "What is the purpose of Covid Validator?",

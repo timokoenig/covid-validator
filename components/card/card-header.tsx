@@ -10,6 +10,7 @@ import Flag from '../flag'
 
 const CardHeader = () => {
   const { t } = useTranslation('country')
+  const { t: tCommon } = useTranslation('common')
   const { isOpen: isOpenRule, onOpen: onOpenRule, onClose: onCloseRule } = useDisclosure()
   const { isOpen: isOpenPurpose, onOpen: onOpenPurpose, onClose: onClosePurpose } = useDisclosure()
   const [selection, setSelection] = useState<{ country: string; state: string }>({
@@ -17,7 +18,7 @@ const CardHeader = () => {
     state: localStorage.getItem('state') ?? '',
   })
   const [selectionPurpose, setSelectionPurpose] = useState<string>(
-    localStorage.getItem('purpose') ?? purpose[0].title
+    localStorage.getItem('purpose') ?? purpose(tCommon)[0].title
   )
 
   const allCountries = countries(t)

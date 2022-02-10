@@ -1,11 +1,14 @@
+import { TFunction } from 'react-i18next'
 import { Purpose } from './models'
 
-const purpose: Purpose[] = [
-  { title: '3G', info: '(Vaccinated or Recovered or Test)' },
-  { title: '2G+', info: '(Vaccinated or Recoverd + Test or Booster)' },
-  { title: '2G', info: '(Vaccinated or Recoverd)' },
-  { title: '1G+', info: '(Fully Vaccinated + Test or Booster)' },
-  { title: '1G', info: '(Fully Vaccinated)' },
-]
+const purpose = (t: TFunction): Purpose[] => {
+  return [
+    { title: '3G', info: t('3G') },
+    { title: '2G+', info: t('2G+') },
+    { title: '2G', info: t('2G') },
+    { title: '1G+', info: t('1G+') },
+    { title: '1G', info: t('1G') },
+  ]
+}
 
 export default purpose

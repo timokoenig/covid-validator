@@ -25,6 +25,12 @@
   "recovery": "Genesung",
   "test": "Test",
 
+  "3G": "Geimpft oder Genesen oder Getestet",
+  "2G+": "Geimpft oder Genesen + Test oder Booster",
+  "2G": "Geimpft oder Genesen",
+  "1G+": "Geimpft + Test oder Booster",
+  "1G": "Geimpft",
+
   "meta.description": "Überprüfen Sie digitale COVID-Zertifikate der EU mit Leichtigkeit und validieren Sie sie anhand der länderspezifischen und lokalen Vorschriften",
 
   "information.purpose": "Was ist der Zweck von Covid Validator?",

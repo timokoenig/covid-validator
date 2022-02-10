@@ -23,7 +23,7 @@ type Props = {
 const PurposeModal = (props: Props) => {
   const { t } = useTranslation('common')
   const [selection, setSelection] = useState<Purpose>(
-    purpose.find(item => item.title == localStorage.getItem('purpose')) ?? purpose[0]
+    purpose(t).find(item => item.title == localStorage.getItem('purpose')) ?? purpose(t)[0]
   )
 
   const onSave = () => {
@@ -39,7 +39,7 @@ const PurposeModal = (props: Props) => {
         <ModalHeader>{t('modal.purpose')}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <PurposeList items={purpose} selectedItem={selection} onChange={setSelection} />
+          <PurposeList items={purpose(t)} selectedItem={selection} onChange={setSelection} />
         </ModalBody>
 
         <ModalFooter>
