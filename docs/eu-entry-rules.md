@@ -48,8 +48,8 @@ The new rules will apply as of 1 February 2022.
 | Novavax         | EU/1/21/1618/001 | 2/1  | Booster              | -         | -        | Booster after full immunization after recovery (dn > sn) |
 |                 |                  |      |                      |           |          |                                                          |
 | Johnson&Johnson | EU/1/20/1525     | 1/1  | Full Immunization    | 14 days   | 270 days |                                                          |
-| Johnson&Johnson | EU/1/20/1525     | 2/2  | Booster              | 0 days    | -        | Booster after full immunization ((dn == sn) && sn > 1)   |
-| Johnson&Johnson | EU/1/20/1525     | 2/1  | Booster              | 0 days    | -        | Booster after full immunization (dn > sn)                |
+| Johnson&Johnson | EU/1/20/1525     | 2/2  | Booster              | -         | -        | Booster after full immunization ((dn == sn) && sn > 1)   |
+| Johnson&Johnson | EU/1/20/1525     | 2/1  | Booster              | -         | -        | Booster after full immunization (dn > sn)                |
 
 ## Recovery
 
