@@ -33,8 +33,8 @@ The QR code on every certificate has a digital signature to protect it against f
 
 **CovidValidation** uses a Github Action to fetch the newest DSC list once a day from the following API.
 
-API: [de.dscg.ubirch.com](https://de.dscg.ubirch.com/trustList/DSC/)
-Data Schema: [github.com/Digitaler-Impfnachweis/certification-apis](https://github.com/Digitaler-Impfnachweis/certification-apis/blob/master/dsc-update/README.md#data-schema)
+- API: [de.dscg.ubirch.com](https://de.dscg.ubirch.com/trustList/DSC/)
+- Data Schema: [github.com/Digitaler-Impfnachweis/certification-apis](https://github.com/Digitaler-Impfnachweis/certification-apis/blob/master/dsc-update/README.md#data-schema)
 
 The verification takes place in `async function verifyDCC(dcc: DCC): Promise<boolean>` ([link](https://github.com/timokoenig/covid-validator/blob/bbf92a6df5ad56463d8e6fd47190ed4a1f023b3a/utils/dcc.ts#L219)). Every time a certificate is scanned, the app checks for the _kid_ in the CBOR Web Token and searches for the matching DSC. If no _kid_ is available, then all DSCs will be used to verify the certificate. The app uses [cose-js](https://github.com/erdtman/COSE-JS) to verify the signature of the DCC. If the check fails, the user will get an error message that the certificate is technically invalid.
 
@@ -56,9 +56,9 @@ The [EU DCC Validation Rules](https://ec.europa.eu/health/system/files/2021-06/e
 
 **CovidValidation** uses a Github Action to fetch the newest rules and value sets once a day from the EU Digital COVID Certificate Business Rule Service.
 
-API: [distribution.dcc-rules.de](https://distribution.dcc-rules.de)
-OpenAPI Specs: [eu-digital-green-certificates.github.io/dgca-businessrule-service](https://eu-digital-green-certificates.github.io/dgca-businessrule-service/)
-Overview of current rules: [EU DCC Rules](https://timokoenig.github.io/eu-dcc-rules/)
+- API: [distribution.dcc-rules.de](https://distribution.dcc-rules.de)
+- OpenAPI Specs: [eu-digital-green-certificates.github.io/dgca-businessrule-service](https://eu-digital-green-certificates.github.io/dgca-businessrule-service/)
+- Overview of current rules: [EU DCC Rules](https://timokoenig.github.io/eu-dcc-rules/)
 
 For reference implementations, please refer to [github.com/ehn-dcc-development/dgc-business-rules](https://github.com/ehn-dcc-development/dgc-business-rules).
 
