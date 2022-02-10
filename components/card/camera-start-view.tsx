@@ -25,12 +25,12 @@ const CameraStartView = (props: Props) => {
         </Button>
       </Center>
       <Center pb="10">
-        <Text fontWeight="semibold" color="white" textAlign="center" px="10">
+        <Text fontWeight="semibold" color="white" textAlign="center">
           {t('scan.note.permission')}
         </Text>
       </Center>
       <Center pb="10">
-        <Text color="white" textAlign="center" px="10">
+        <Text color="white" textAlign="center">
           {t('scan.note.rules')}
         </Text>
       </Center>
