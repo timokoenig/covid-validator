@@ -19,8 +19,7 @@ import {
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { app } from '../../state/app'
-import { showCounter, toggle } from '../../state/show-counter'
+import { app, resetCounter, toggleCounter } from '../../state/app'
 import { Rules } from '../../utils/certlogic'
 import countries from '../../utils/countries'
 import rules from '../../utils/eu-dcc-rules.json'
@@ -42,7 +41,6 @@ const SettingsModal = (props: Props) => {
     localStorage.getItem('i18nextLng')?.substring(0, 2) ?? 'en'
   )
   const { toggleColorMode, newColorMode } = useColorMode()
-  const showCounterComponent = showCounter.use()
   const { t, i18n } = useTranslation('common')
   const { t: tCountry } = useTranslation('country')
   const { isOpen: isOpenCountry, onOpen: onOpenCountry, onClose: onCloseCountry } = useDisclosure()
@@ -129,7 +127,14 @@ const SettingsModal = (props: Props) => {
 
             <FormControl display="flex" alignItems="center" mb="5">
               <FormLabel flex="1">{t('modal.settings.counter')}</FormLabel>
-              <Switch size="lg" onChange={toggle} isChecked={showCounterComponent} />
+              <Switch
+                size="lg"
+                onChange={() => {
+                  resetCounter()
+                  toggleCounter()
+                }}
+                isChecked={appState.showCounter}
+              />
             </FormControl>
           </ModalBody>
 

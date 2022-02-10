@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react'
 import {
+  Box,
+  Button,
+  Center,
+  Heading,
+  ModalBody,
   ModalContent,
   ModalFooter,
-  ModalBody,
-  Button,
   Text,
-  Center,
-  Box,
-  Heading,
 } from '@chakra-ui/react'
 import moment from 'moment'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { increaseCounter } from '../../../state/app'
 import { ScanResult } from '../../../utils/dcc'
-import { increase } from '../../../state/counter'
 import RuleView from './rule-view'
 
 type Props = {
@@ -29,7 +29,7 @@ const ResultValid = (props: Props) => {
 
   useEffect(() => {
     // increase counter for valid certificate
-    increase()
+    increaseCounter()
   }, [])
 
   return (

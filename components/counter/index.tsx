@@ -1,16 +1,14 @@
-import React from 'react'
-import { Box, Button, Text } from '@chakra-ui/react'
 import { MinusIcon } from '@chakra-ui/icons'
+import { Box, Button, Text } from '@chakra-ui/react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { counter, decrease } from '../../state/counter'
-import { showCounter } from '../../state/show-counter'
+import { app, decreaseCounter } from '../../state/app'
 
 const Counter = () => {
   const { t } = useTranslation('common')
-  const count = counter.use()
-  const showComponent = showCounter.use()
+  const appState = app.use()
 
-  if (!showComponent) return <Box />
+  if (!appState.showCounter) return <Box />
 
   return (
     <Box
@@ -29,12 +27,12 @@ const Counter = () => {
           {t('counter')}
         </Text>
         <Text fontSize="2xl" color="white">
-          {count}
+          {appState.counter}
         </Text>
       </Box>
       <Box mt="1">
         <Button
-          onClick={decrease}
+          onClick={decreaseCounter}
           size="lg"
           variant="outline"
           color="white"
