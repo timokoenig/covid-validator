@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
 import { Modal, ModalOverlay } from '@chakra-ui/react'
-import RuleConfirmation from './rule-confirmation'
-import RuleSelection from './rule-selection'
+import React, { useState } from 'react'
+import CountryConfirmation from './country-confirmation'
+import CountrySelection from './country-selection'
 
 type Props = {
   isOpen: boolean
@@ -9,7 +9,7 @@ type Props = {
   onChange: (selection: { country: string; state: string }) => void
 }
 
-const RuleModal = (props: Props) => {
+const CountryModal = (props: Props) => {
   const [selection, setSelection] = useState<{ country: string; state: string }>({
     country: localStorage.getItem('country') ?? 'DE',
     state: localStorage.getItem('state') ?? '',
@@ -33,12 +33,16 @@ const RuleModal = (props: Props) => {
     <Modal isOpen={props.isOpen} onClose={onClose} size="lg" scrollBehavior="inside">
       <ModalOverlay />
       {confirm ? (
-        <RuleConfirmation selection={selection} setConfirm={setConfirm} onSave={onSave} />
+        <CountryConfirmation selection={selection} setConfirm={setConfirm} onSave={onSave} />
       ) : (
-        <RuleSelection selection={selection} setSelection={setSelection} setConfirm={setConfirm} />
+        <CountrySelection
+          selection={selection}
+          setSelection={setSelection}
+          setConfirm={setConfirm}
+        />
       )}
     </Modal>
   )
 }
 
-export default RuleModal
+export default CountryModal

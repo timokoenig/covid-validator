@@ -6,7 +6,7 @@ import countries from '../../utils/countries'
 import purpose from '../../utils/purpose'
 import Flag from '../flag'
 import PurposeModal from '../modal/purpose'
-import RuleModal from '../modal/rule'
+import RulesModal from '../modal/rules'
 
 const CardHeader = () => {
   const { t } = useTranslation('country')
@@ -64,7 +64,7 @@ const CardHeader = () => {
           <ChevronDownIcon mt="1" flex="1 0 100%" w={6} h={6} color="white" />
         </Button>
       </Box>
-      <RuleModal isOpen={isOpenRule} onClose={onCloseRule} onChange={setSelection} />
+      <RulesModal isOpen={isOpenRule} onClose={onCloseRule} />
       <PurposeModal
         isOpen={isOpenPurpose}
         onClose={onClosePurpose}
