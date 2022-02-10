@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
 import { Box } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
+import React, { useState } from 'react'
+import CameraScanView from './camera-scan-view'
 import CameraStartView from './camera-start-view'
-import CameraScanView from './camera-scan.view'
 
 const CardHeader = dynamic(() => import('./card-header'), {
   ssr: false,
