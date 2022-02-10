@@ -62,7 +62,7 @@ const SettingsModal = (props: Props) => {
   return (
     <>
       {' '}
-      <Modal isOpen={props.isOpen} onClose={() => {}} size="lg" scrollBehavior="inside">
+      <Modal isOpen={props.isOpen} onClose={props.onClose} size="lg" scrollBehavior="inside">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{t('modal.settings')}</ModalHeader>
