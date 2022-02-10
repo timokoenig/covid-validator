@@ -68,6 +68,8 @@
   "modal.settings.darkmode": "Dark Mode",
   "modal.settings.language": "Preferred Language",
   "modal.settings.counter": "Scan Counter",
+  "modal.settings.purpose": "Purpose of Use",
+  "modal.settings.rules": "rules active",
 
   "modal.result.valid": "VALID",
   "modal.result.notvalid": "NOT VALID",

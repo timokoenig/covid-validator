@@ -14,6 +14,7 @@ import {
 import moment from 'moment'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { app } from '../../state/app'
 import { Language, Rule, Rules } from '../../utils/certlogic'
 import countries from '../../utils/countries'
 import rules from '../../utils/eu-dcc-rules.json'
@@ -26,9 +27,10 @@ type Props = {
 
 const RulesModal = (props: Props) => {
   const { t } = useTranslation('common')
+  const appState = app.use()
   const allCountries = countries(useTranslation('country').t)
-  const country = allCountries.find(item => item.code == 'DE') ?? allCountries[0]
-  const state = country.states.find(item => item.code == 'HH') ?? country.states[0]
+  const country = allCountries.find(item => item.code == appState.country) ?? allCountries[0]
+  const state = country.states.find(item => item.code == appState.state) ?? country.states[0]
 
   const preferredLanguage = localStorage.getItem('i18nextLng')?.substring(0, 2) ?? 'en'
   const countryRules: Rule[] = (rules as Rules).rules

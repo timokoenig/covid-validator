@@ -68,6 +68,8 @@
   "modal.settings.darkmode": "Dunkler Modus",
   "modal.settings.language": "Bevorzugte Sprache",
   "modal.settings.counter": "Scan-Zähler",
+  "modal.settings.purpose": "Verwendungszweck",
+  "modal.settings.rules": "Regeln aktiv",
 
   "modal.result.valid": "GÜLTIG",
   "modal.result.notvalid": "UNGÜLTIG",

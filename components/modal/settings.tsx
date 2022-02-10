@@ -1,21 +1,33 @@
-import React, { useEffect, useState } from 'react'
+import useColorMode from '@/utils/color-mode'
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalCloseButton,
-  ModalBody,
+  Box,
+  Button,
   FormControl,
   FormLabel,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Select,
   Switch,
   Text,
-  Select,
+  useDisclosure,
 } from '@chakra-ui/react'
-import useColorMode from '@/utils/color-mode'
+import moment from 'moment'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { app } from '../../state/app'
 import { showCounter, toggle } from '../../state/show-counter'
+import { Rules } from '../../utils/certlogic'
+import countries from '../../utils/countries'
+import rules from '../../utils/eu-dcc-rules.json'
+import Flag from '../flag'
+import CountryModal from './country'
+import PurposeModal from './purpose'
+import RulesModal from './rules'
 
 const availableLanguages = ['en', 'de']
 
@@ -32,47 +44,106 @@ const SettingsModal = (props: Props) => {
   const { toggleColorMode, newColorMode } = useColorMode()
   const showCounterComponent = showCounter.use()
   const { t, i18n } = useTranslation('common')
+  const { t: tCountry } = useTranslation('country')
+  const { isOpen: isOpenCountry, onOpen: onOpenCountry, onClose: onCloseCountry } = useDisclosure()
+  const { isOpen: isOpenPurpose, onOpen: onOpenPurpose, onClose: onClosePurpose } = useDisclosure()
+  const { isOpen: isOpenRules, onOpen: onOpenRules, onClose: onCloseRules } = useDisclosure()
+  const appState = app.use()
+
+  const allCountries = countries(tCountry)
+  const country = allCountries.find(item => item.code == appState.country) ?? allCountries[0]
+  const state = country.states.find(item => item.code == appState.state) ?? country.states[0]
+  const ruleCount = (rules as Rules).rules
+    .filter(rule => moment() >= moment(rule.ValidFrom) && moment() < moment(rule.ValidTo))
+    .filter(item => item.Country == country.code).length
 
   useEffect(() => {
     i18n.changeLanguage(lang).catch(console.log)
   }, [lang, i18n])
 
   return (
-    <Modal isOpen={props.isOpen} onClose={() => {}} size="lg" scrollBehavior="inside">
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>{t('modal.settings')}</ModalHeader>
-        <ModalCloseButton onClick={props.onClose} />
-        <ModalBody>
-          <FormControl display="flex" alignItems="center" mb="5">
-            <FormLabel flex="1">{t('modal.settings.darkmode')}</FormLabel>
-            <Switch size="lg" onChange={toggleColorMode} isChecked={newColorMode == 'light'} />
-          </FormControl>
+    <>
+      {' '}
+      <Modal isOpen={props.isOpen} onClose={() => {}} size="lg" scrollBehavior="inside">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>{t('modal.settings')}</ModalHeader>
+          <ModalCloseButton onClick={props.onClose} />
+          <ModalBody>
+            <Box mb="5" display="flex" flexDirection="row">
+              <Box display="flex" alignItems="center" mr="5">
+                <Flag country={country.code.toLowerCase()} size={25} />
+              </Box>
+              <Box flex="1">
+                <Text fontWeight="semibold">{country.name}</Text>
+                <Text>{state.name}</Text>
+              </Box>
+              <Button variant="outline" onClick={onOpenCountry}>
+                {t('change')}
+              </Button>
+            </Box>
 
-          <FormControl display="flex" alignItems="center" mb="5">
-            <FormLabel flex="1">{t('modal.settings.language')}</FormLabel>
-            <Select value={lang} onChange={e => setLang(e.target.value)} width="100">
-              {availableLanguages.map(key => (
-                <option key={key} value={key}>
-                  {t(`lang.${key}`)}
-                </option>
-              ))}
-            </Select>
-          </FormControl>
+            {country.code === 'DE' && (
+              <Box my="5" display="flex" flexDirection="row">
+                <Box flex="1">
+                  <Text>{t('modal.settings.purpose')}</Text>
+                  <Text fontWeight="semibold">{appState.purpose}</Text>
+                </Box>
+                <Button variant="outline" onClick={onOpenPurpose}>
+                  {t('change')}
+                </Button>
+              </Box>
+            )}
 
-          <FormControl display="flex" alignItems="center" mb="5">
-            <FormLabel flex="1">{t('modal.settings.counter')}</FormLabel>
-            <Switch size="lg" onChange={toggle} isChecked={showCounterComponent} />
-          </FormControl>
-        </ModalBody>
+            <Box my="5" display="flex" flexDirection="row">
+              <Box flex="1" display="flex" flexDirection="column">
+                <Text fontWeight="semibold">
+                  {ruleCount} {t('modal.settings.rules')}
+                </Text>
+                <Text>
+                  ({t('modal.rules.updated')} {moment(rules.updatedAt).format('DD.MM.YYYY')})
+                </Text>
+              </Box>
+              <Button variant="outline" onClick={onOpenRules}>
+                {t('show')}
+              </Button>
+            </Box>
 
-        <ModalFooter>
-          <Text textAlign="center" flex="1">
-            {t('version')} {props.version}
-          </Text>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+            <hr />
+
+            <FormControl display="flex" alignItems="center" my="5">
+              <FormLabel flex="1">{t('modal.settings.language')}</FormLabel>
+              <Select value={lang} onChange={e => setLang(e.target.value)} width="100">
+                {availableLanguages.map(key => (
+                  <option key={key} value={key}>
+                    {t(`lang.${key}`)}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
+
+            <FormControl display="flex" alignItems="center" mb="5">
+              <FormLabel flex="1">{t('modal.settings.darkmode')}</FormLabel>
+              <Switch size="lg" onChange={toggleColorMode} isChecked={newColorMode == 'light'} />
+            </FormControl>
+
+            <FormControl display="flex" alignItems="center" mb="5">
+              <FormLabel flex="1">{t('modal.settings.counter')}</FormLabel>
+              <Switch size="lg" onChange={toggle} isChecked={showCounterComponent} />
+            </FormControl>
+          </ModalBody>
+
+          <ModalFooter>
+            <Text textAlign="center" flex="1">
+              {t('version')} {props.version}
+            </Text>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <CountryModal isOpen={isOpenCountry} onClose={onCloseCountry} />
+      <PurposeModal isOpen={isOpenPurpose} onClose={onClosePurpose} />
+      <RulesModal isOpen={isOpenRules} onClose={onCloseRules} />
+    </>
   )
 }
 
