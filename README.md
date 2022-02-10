@@ -2,6 +2,13 @@
 
 Check EU Digitial Covid Certificates with ease and validate them against local or country rules.
 
+**Features**
+
+📱 Scan and verify EU Digital Covid Certificates
+🌍 Validate against country or local rules
+🎟 Scan Counter to keep track of admission criteria at local venues
+📴 Works offline
+
 ### What is the purpose of CovidValidator?
 
 **CovidValidator** allows you to scan and validate EU Digital Covid Certificates based on country or local rules. It gives the person that checks the certificate only as little personal information as possible to protect the users' privacy. This web app is an alternative to other existing products because it does not rely on certain app stores or country restrictions.
