@@ -22,7 +22,7 @@ type Props = {
   onClose: () => void
 }
 
-const RulesModal = (props: Props) => {
+const OverviewModal = (props: Props) => {
   const { t } = useTranslation('common')
   const { isOpen: isOpenCountry, onOpen: onOpenCountry, onClose: onCloseCountry } = useDisclosure()
   const { isOpen: isOpenPurpose, onOpen: onOpenPurpose, onClose: onClosePurpose } = useDisclosure()
@@ -76,4 +76,4 @@ const RulesModal = (props: Props) => {
   )
 }
 
-export default RulesModal
+export default OverviewModal

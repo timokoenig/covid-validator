@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next'
 import countries from '../../utils/countries'
 import purpose from '../../utils/purpose'
 import Flag from '../flag'
+import RulesModal from '../modal/overview'
 import PurposeModal from '../modal/purpose'
-import RulesModal from '../modal/rules'
 
 const CardHeader = () => {
   const { t } = useTranslation('country')
