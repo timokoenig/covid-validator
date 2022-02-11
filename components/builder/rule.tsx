@@ -17,6 +17,24 @@ const Rule = (props: Props) => {
           <DeleteIcon width="3" height="3" />
         </Button>
       </Flex>
+      <Box my="5">
+        <Text fontWeight="semibold">Description</Text>
+        <Text>
+          <Text as="span" fontWeight="semibold">
+            DE
+          </Text>
+          : Vaccination date needs to be between 14 and 270 days
+        </Text>
+      </Box>
+      <Box my="5">
+        <Text fontWeight="semibold">Pre-Condition (condition when a rule should be checked)</Text>
+        <Text>Vaccination; BioNTech</Text>
+      </Box>
+      <Box my="5">
+        <Text fontWeight="semibold">Condition (condition what should be checked)</Text>
+        <Text>Date &gt; VaccinationDate + 14 days</Text>
+        <Text>Date &lt; VaccinationDate + 270 days</Text>
+      </Box>
     </Box>
   )
 }

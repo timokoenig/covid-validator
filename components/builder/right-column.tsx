@@ -19,7 +19,7 @@ const RightColumn = (props: Props) => {
   }
 
   return (
-    <Box flex="1" px="10" py="5" display="flex" flexDirection="column">
+    <Box flex="1" px="10" py="5" display="flex" flexDirection="column" overflow="scroll">
       {props.rules.length === 0 && <Placeholder />}
       <SimpleGrid mb="5" spacing="5">
         {props.rules.map(rule => (
