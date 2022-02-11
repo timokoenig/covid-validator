@@ -1,0 +1,81 @@
+{
+  "subtitle": "Scanner et vérifier les certificats numériques COVID de l'UE",
+  "abort": "Abandonner",
+  "save": "Sauvegarder",
+  "close": "Fermer",
+  "continue": "Continuer",
+  "back": "Retour",
+  "version": "Version",
+  "sponsor": "Supporter",
+  "privacy": "Politique de confidentialité",
+
+  "imprint": "Mentions légales",
+  "imprint.information": "Informations fournies en vertu des articles 5 TMG",
+  "imprint.legal": "DIVULGATION JURIDIQUE",
+  "imprint.contact": "INFORMATIONS DE CONTACT",
+  "imprint.email": "Email",
+
+  "vaccination": "Vaccination",
+  "recovery": "Rétablissement",
+  "test": "Test",
+
+  "meta.description": "Vérifier facilement les certificats numériques COVID de l'UE et les valider par rapport aux règles nationales et locales",
+
+  "information.purpose": "Quel est le but de COVID Validator?",
+  "information.purpose.message": "COVID Validator allows you to scan and validate EU Digital COVID Certificates based on country or local rules. It gives the person that checks the certificate only as little personal information as possible to protect the users&apos; privacy. This web app is an alternative to other existing products because it does not rely on certain app stores or country restrictions.",
+  "information.beta": "What does <1>BETA</1> mean?",
+  "information.beta.message": "The web app is still in active development and might contain minor bugs. The production use of this app is not recommended yet, so please use it with caution. Updates will come regularly. You can follow the development on <1>Github</1>.",
+  "information.rules": "What rules are being used?",
+  "information.rules.message": "At the moment the app uses the official EU entry rules to validate the certificate. These rules are being provided by the member countries of the Digital COVID Certificate. It is a known problem that those rules might be out of date and does not reflect state or local regulations. This project is working on a custom rule builder that allows more precise rules for local regulations. You can follow the development <1>here</1>.",
+  "information.issue": "What to do if something is not working?",
+  "information.issue.message": "First check if you have selected the correct country and rules. Then try to connect your device to the internet to download the latest data. If your problem still occurs, go to <1>Github</1> and create an issue.",
+  "information.certificate": "What is the EU Digital COVID Certificate?",
+  "information.certificate.message": "You can find more information about it on <1>the offical website of the EU</1>.",
+
+  "scan.button": "Vérifier le certificat",
+  "scan.message": "Tenez le code QR devant votre appareil photo.",
+  "scan.error": "Erreur de caméra",
+  "scan.error.message": "Haben Sie die Kameraerlaubnis akzeptiert?",
+  "scan.multiscan": "Scanner le certificat de test pour",
+  "scan.note.permission": "Assurez-vous toujours d'avoir la permission de vérifier le certificat de l'autre personne!",
+  "scan.note.rules": "Vérifiez les règles sélectionnées et confirmez-les avec votre réglementation locale. Dans le cas contraire, les validations de certificats pourraient être invalidées.",
+
+  "camera.close": "Fermer la caméra",
+
+  "modal.purpose": "Sélectionnez le but de l'utilisation",
+
+  "modal.rules": "Choisir le pays et les règles",
+  "modal.rules.updated": "mis à jour le",
+  "modal.rules.comingsoon": "Bientôt disponible",
+  "modal.rules.confirmation": "Veuillez confirmer que ces règles répondent à vos besoins",
+  "modal.rules.confirmation.confirm": "Confirmer la sélection",
+
+  "modal.settings": "Réglages",
+  "modal.settings.darkmode": "Mode sombre",
+  "modal.settings.language": "Langue préférée",
+
+  "modal.result.valid": "VALIDE",
+  "modal.result.notvalid": "NON VALIDE",
+  "modal.result.testrequired": "CERTIFICAT DE TEST REQUIS",
+  "modal.result.technicallyinvalid": "TECHNIQUEMENT NON VALIDE",
+  "modal.result.name": "Nom",
+  "modal.result.birthdate": "Date de Naissance",
+  "modal.result.rulecount": "Règles vérifiées",
+  "modal.result.scannext": "Scanner le certificat",
+
+  "onboarding.message": "COVID Validator vous permet de scanner et de vérifier les <b>Certificats numériques COVID de l'UE</b> en fonction des règles nationales ou locales. Le processus d'analyse et de validation se déroule localement dans votre navigateur.",
+  "onboarding.list": "Le site web",
+  "onboarding.list.0": "n'enregistre pas d'informations personnelles",
+  "onboarding.list.1": "ne partage aucune information avec d'autres",
+  "onboarding.list.2": "n'utilise pas de cookies (les données requises sont enregistrées dans la mémoire locale de votre navigateur).",
+  "onboarding.list.3": "est Open Source et peut être trouvé sur <1>GitHub</1>",
+  "onboarding.list.4": "est hébergé en Allemagne par <1>Hetzner Online GmbH</1>",
+  "onboarding.privacy": "En savoir plus sur la politique de confidentialité",
+  "onboarding.privacy.accept": "J'accepte la politique de confidentialité",
+
+  "lang": {
+    "en": "Anglais",
+    "de": "Allemand",
+    "fr": "Français"
+  }
+}
