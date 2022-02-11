@@ -8,6 +8,7 @@ import {
   Input,
   Link,
   SimpleGrid,
+  Spacer,
   Text,
 } from '@chakra-ui/react'
 import React from 'react'
@@ -21,7 +22,7 @@ const BuilderPage = () => {
     <>
       <PageMeta allowIndex={false} />
       <Flex color="white" height="100vh">
-        <Box bg="gray.700" px="10" py="5" minWidth="300">
+        <Box bg="gray.700" px="10" py="5" minWidth="300" display="flex" flexDirection="column">
           <Center flexDirection="column" mb="5">
             <Heading as="h1" size="lg" flex="1">
               <Link href="/" _hover={{ textDecoration: 'none' }}>
@@ -47,9 +48,11 @@ const BuilderPage = () => {
               <Input placeholder="Comment" />
             </FormControl>
           </Box>
-          <Box mt="5" mb="10" p="5" rounded="25" backgroundColor="white">
+          <Box mt="5" mb="5" p="5" rounded="25" backgroundColor="white">
             <QRCode value="hey" />
           </Box>
+          <Text>Scan QR code to import on other devices</Text>
+          <Spacer />
           <hr />
           <Center flexDirection="column" mt="5">
             <Box>
