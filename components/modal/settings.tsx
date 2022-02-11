@@ -17,6 +17,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import moment from 'moment'
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { app, resetCounter, toggleCounter } from '../../state/app'
@@ -46,6 +47,7 @@ const SettingsModal = (props: Props) => {
   const { isOpen: isOpenCountry, onOpen: onOpenCountry, onClose: onCloseCountry } = useDisclosure()
   const { isOpen: isOpenPurpose, onOpen: onOpenPurpose, onClose: onClosePurpose } = useDisclosure()
   const { isOpen: isOpenRules, onOpen: onOpenRules, onClose: onCloseRules } = useDisclosure()
+  const router = useRouter()
   const appState = app.use()
 
   const allCountries = countries(tCountry)
@@ -61,7 +63,6 @@ const SettingsModal = (props: Props) => {
 
   return (
     <>
-      {' '}
       <Modal isOpen={props.isOpen} onClose={props.onClose} size="lg" scrollBehavior="inside">
         <ModalOverlay />
         <ModalContent>
@@ -105,6 +106,14 @@ const SettingsModal = (props: Props) => {
               <Button variant="outline" onClick={onOpenRules}>
                 {t('show')}
               </Button>
+            </Box>
+
+            <Box my="5" display="flex" flexDirection="row">
+              <Box flex="1" display="flex" flexDirection="column">
+                <Button variant="outline" onClick={() => router.push('/builder')}>
+                  Open Rule Builder
+                </Button>
+              </Box>
             </Box>
 
             <hr />
