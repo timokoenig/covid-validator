@@ -35,7 +35,7 @@ const OnboardingModal = (props: Props) => {
     <Modal isOpen={props.isOpen} onClose={() => {}} size="lg" scrollBehavior="inside">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Covid Validator</ModalHeader>
+        <ModalHeader>CovidValidator</ModalHeader>
         <ModalBody>
           <Text>{parse(t('onboarding.message'))}</Text>
           <Heading size="sm" mt="5">

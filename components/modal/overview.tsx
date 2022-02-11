@@ -46,7 +46,7 @@ const OverviewModal = (props: Props) => {
       <Modal isOpen={props.isOpen} onClose={() => {}} size="lg" scrollBehavior="inside">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Covid Validator</ModalHeader>
+          <ModalHeader>CovidValidator</ModalHeader>
           <ModalCloseButton onClick={props.onClose} />
           <ModalBody>
             <Box mb="5" display="flex" flexDirection="row">

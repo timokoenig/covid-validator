@@ -1,6 +1,6 @@
 {
-  "name": "Covid Validator",
-  "short_name": "Covid Validator",
+  "name": "CovidValidator",
+  "short_name": "CovidValidator",
   "description": "Check EU Digitial Covid Certificates with ease and validate them against country and local rules",
   "theme_color": "#FFFFFF",
   "background_color": "#FFFFFF",
