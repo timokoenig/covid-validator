@@ -13,20 +13,21 @@ import {
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import QRCode from 'react-qr-code'
+import { CustomRules } from '~/utils/certlogic'
 
 type Props = {
-  rule: string
+  rule: CustomRules
   isNewRule: boolean
   onLoad: () => void
   onSave: () => void
-  onChange: (name: string) => void
+  onChange: (rule: CustomRules) => void
   onDelete: () => void
 }
 
 const LeftColumn = (props: Props) => {
   const { t } = useTranslation('common')
   return (
-    <Box bg="gray.700" px="10" py="5" minWidth="300" display="flex" flexDirection="column">
+    <Box bg="gray.700" px="10" py="5" minWidth="378" display="flex" flexDirection="column">
       <Center flexDirection="column" mb="5">
         <Heading as="h1" size="lg" flex="1">
           <Link href="/" _hover={{ textDecoration: 'none' }}>
@@ -42,18 +43,21 @@ const LeftColumn = (props: Props) => {
         <Button flex="1" onClick={props.onLoad}>
           Load
         </Button>
-        {props.rule !== '' && (
-          <Button flex="1" colorScheme="blue" onClick={props.onSave}>
-            Save
-          </Button>
-        )}
+        <Button
+          flex="1"
+          colorScheme="blue"
+          onClick={props.onSave}
+          disabled={props.rule.name === ''}
+        >
+          Save
+        </Button>
       </SimpleGrid>
       <Box mb="10">
         <FormControl mb="5">
           <Input
             placeholder="Name (required)"
-            value={props.rule}
-            onChange={e => props.onChange(e.target.value)}
+            value={props.rule.name}
+            onChange={e => props.onChange({ ...props.rule, name: e.target.value })}
           />
         </FormControl>
         <FormControl>
@@ -67,10 +71,14 @@ const LeftColumn = (props: Props) => {
           </Button>
         </Box>
       )}
-      <Box mt="5" mb="5" p="5" rounded="25" backgroundColor="white">
-        <QRCode value="hey" />
-      </Box>
-      <Text>Scan QR code to import on other devices</Text>
+      {props.rule.id !== '' && (
+        <>
+          <Box mt="5" mb="5" p="5" rounded="25" backgroundColor="white">
+            <QRCode value="hey" />
+          </Box>
+          <Text>Scan QR code to import on other devices</Text>
+        </>
+      )}
       <Spacer />
       <hr />
       <Center flexDirection="column" mt="5">
