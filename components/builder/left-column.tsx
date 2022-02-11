@@ -42,9 +42,11 @@ const LeftColumn = (props: Props) => {
         <Button flex="1" onClick={props.onLoad}>
           Load
         </Button>
-        <Button flex="1" colorScheme="blue" onClick={props.onSave}>
-          Save
-        </Button>
+        {props.rule !== '' && (
+          <Button flex="1" colorScheme="blue" onClick={props.onSave}>
+            Save
+          </Button>
+        )}
       </SimpleGrid>
       <Box mb="10">
         <FormControl mb="5">
