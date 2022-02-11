@@ -1,8 +1,10 @@
 import { DeleteIcon } from '@chakra-ui/icons'
 import { Box, Button, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
+import { Rule as RuleModel } from '../../utils/certlogic'
 
 type Props = {
+  rule: RuleModel
   onDelete: () => void
 }
 
@@ -11,7 +13,10 @@ const Rule = (props: Props) => {
     <Box borderRadius="10" backgroundColor="gray.700" padding="5">
       <Flex>
         <Box flex="1" display="flex" flexDireaction="row" alignItems="center">
-          <Text fontWeight="semibold">V0.0.0.0</Text>
+          <Box>
+            <Text fontWeight="semibold">{props.rule.Identifier}</Text>
+            <Text>Version {props.rule.Version}</Text>
+          </Box>
         </Box>
         <Button colorScheme="red" onClick={props.onDelete}>
           <DeleteIcon width="3" height="3" />
