@@ -43,15 +43,6 @@ const BuilderPage = () => {
             <FormControl mb="5">
               <Input placeholder="Name" />
             </FormControl>
-            <FormControl mb="5">
-              <Input placeholder="ValidFrom" />
-            </FormControl>
-            <FormControl mb="5">
-              <Input placeholder="ValidTo" />
-            </FormControl>
-            <FormControl mb="5">
-              <Input placeholder="Country" />
-            </FormControl>
             <FormControl>
               <Input placeholder="Comment" />
             </FormControl>
