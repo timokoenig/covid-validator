@@ -1,6 +1,6 @@
 import { AddIcon } from '@chakra-ui/icons'
 import { Box, Button, SimpleGrid } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import Placeholder from './placeholder'
 import Rule from './rule'
 
@@ -10,19 +10,22 @@ type Props = {
 }
 
 const RightColumn = (props: Props) => {
+  const [rules, setRules] = useState<string[]>([])
   const onAdd = () => {
-    props.onChange([...props.rules, '1'])
+    // props.onChange([...props.rules, '1'])
+    setRules([...rules, '1'])
   }
 
   const onDelete = () => {
-    props.onChange([])
+    // props.onChange([])
+    setRules([])
   }
 
   return (
     <Box flex="1" px="10" py="5" display="flex" flexDirection="column" overflow="scroll">
-      {props.rules.length === 0 && <Placeholder />}
+      {rules.length === 0 && <Placeholder />}
       <SimpleGrid mb="5" spacing="5">
-        {props.rules.map(rule => (
+        {rules.map(rule => (
           <Rule key={rule} onDelete={onDelete} />
         ))}
       </SimpleGrid>
