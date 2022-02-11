@@ -14,7 +14,14 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import QRCode from 'react-qr-code'
 
-const LeftColumn = () => {
+type Props = {
+  rule: string
+  onLoad: () => void
+  onSave: () => void
+  onChange: (name: string) => void
+}
+
+const LeftColumn = (props: Props) => {
   const { t } = useTranslation('common')
   return (
     <Box bg="gray.700" px="10" py="5" minWidth="300" display="flex" flexDirection="column">
@@ -30,14 +37,20 @@ const LeftColumn = () => {
         <Text fontSize="xl">Rule Builder</Text>
       </Center>
       <SimpleGrid mb="5" display="flex" spacing="5">
-        <Button flex="1">Load</Button>
-        <Button flex="1" colorScheme="blue">
+        <Button flex="1" onClick={props.onLoad}>
+          Load
+        </Button>
+        <Button flex="1" colorScheme="blue" onClick={props.onSave}>
           Save
         </Button>
       </SimpleGrid>
       <Box mb="10">
         <FormControl mb="5">
-          <Input placeholder="Name" />
+          <Input
+            placeholder="Name (required)"
+            value={props.rule}
+            onChange={e => props.onChange(e.target.value)}
+          />
         </FormControl>
         <FormControl>
           <Input placeholder="Comment" />

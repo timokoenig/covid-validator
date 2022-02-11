@@ -5,10 +5,10 @@ export type AppState = {
   state: string
   purpose: string
   counter: number
-  showCounter: false
+  showCounter: boolean
 }
 
-export const app = entity(
+export const app = entity<AppState>(
   { country: 'DE', state: '', purpose: '3G', counter: 0, showCounter: false },
   [persistence('app')]
 )
