@@ -1,4 +1,6 @@
+import { ChevronRightIcon } from '@chakra-ui/icons'
 import {
+  Button,
   List,
   ListItem,
   Modal,
@@ -8,6 +10,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Spacer,
   Text,
 } from '@chakra-ui/react'
 import React from 'react'
@@ -17,6 +20,7 @@ import { builder } from '../../../state/builder'
 type Props = {
   isOpen: boolean
   onClose: () => void
+  onClick: (rule: string) => void
 }
 
 const LoadModal = (props: Props) => {
@@ -33,7 +37,18 @@ const LoadModal = (props: Props) => {
           <List>
             {builderState.rules.length === 0 && <Text>No custom rules available</Text>}
             {builderState.rules.map(rule => (
-              <ListItem key={rule}>{rule}</ListItem>
+              <ListItem key={rule} display="flex">
+                <Button
+                  variant="ghost"
+                  flex="1"
+                  justifyContent="left"
+                  onClick={() => props.onClick(rule)}
+                >
+                  {rule}
+                  <Spacer />
+                  <ChevronRightIcon width="5" height="5" />
+                </Button>
+              </ListItem>
             ))}
           </List>
         </ModalBody>

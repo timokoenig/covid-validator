@@ -15,6 +15,11 @@ const BuilderPage = () => {
   const [rule, setRule] = useState<string>('')
   const isNewRule = !builderState.rules.includes(rule)
 
+  const onLoad = (item: string) => {
+    setRule(item)
+    onClose()
+  }
+
   const onSave = () => {
     if (rule === '') return
     setRules([...builderState.rules.filter(r => r !== rule), rule])
@@ -51,7 +56,7 @@ const BuilderPage = () => {
         />
         <RightColumn rules={[]} onChange={() => {}} />
       </Flex>
-      <LoadModal isOpen={isOpen} onClose={onClose} />
+      <LoadModal isOpen={isOpen} onClose={onClose} onClick={onLoad} />
       <ConfirmModal rule={rule} isOpen={isOpenDelete} onClose={onDelete} />
     </>
   )
