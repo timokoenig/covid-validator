@@ -16,9 +16,11 @@ import QRCode from 'react-qr-code'
 
 type Props = {
   rule: string
+  isNewRule: boolean
   onLoad: () => void
   onSave: () => void
   onChange: (name: string) => void
+  onDelete: () => void
 }
 
 const LeftColumn = (props: Props) => {
@@ -56,6 +58,13 @@ const LeftColumn = (props: Props) => {
           <Input placeholder="Comment" />
         </FormControl>
       </Box>
+      {!props.isNewRule && (
+        <Box mb="5" display="flex">
+          <Button size="sm" variant="ghost" colorScheme="red" flex="1" onClick={props.onDelete}>
+            Delete Rule
+          </Button>
+        </Box>
+      )}
       <Box mt="5" mb="5" p="5" rounded="25" backgroundColor="white">
         <QRCode value="hey" />
       </Box>
