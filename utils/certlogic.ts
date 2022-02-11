@@ -11,6 +11,13 @@ export type Rules = {
   rules: Rule[]
 }
 
+export type CustomRules = {
+  id: string
+  name: string
+  description: string
+  rules: Rule[]
+}
+
 export type Language = {
   lang: string
   desc: string
