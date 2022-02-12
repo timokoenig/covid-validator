@@ -10,7 +10,7 @@ import {
   Spacer,
   Text,
 } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import QRCode from 'react-qr-code'
 import { CustomRule } from '../../utils/certlogic'
@@ -27,6 +27,12 @@ type Props = {
 
 const LeftColumn = (props: Props) => {
   const { t } = useTranslation('common')
+  const [qrcode, setQrcode] = useState<string>('')
+
+  useEffect(() => {
+    customRuleExport(props.customRule).then(setQrcode).catch(console.log)
+  }, [props])
+
   return (
     <Box bg="gray.700" px="10" py="5" minWidth="378" display="flex" flexDirection="column">
       <Center flexDirection="column" mb="5">
@@ -79,7 +85,7 @@ const LeftColumn = (props: Props) => {
       {props.customRule.id !== '' && (
         <>
           <Box mt="5" mb="5" p="5" rounded="25" backgroundColor="white">
-            <QRCode value={customRuleExport(props.customRule)} />
+            <QRCode value={qrcode} />
           </Box>
           <Text>Scan QR code to import on other devices</Text>
         </>
