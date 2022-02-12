@@ -2,22 +2,22 @@ import { AddIcon } from '@chakra-ui/icons'
 import { Box, Button, SimpleGrid } from '@chakra-ui/react'
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import { CustomRules, Rule } from '../../utils/certlogic'
+import { CustomRule, Rule } from '../../utils/certlogic'
 import NoData from './no-data'
 import Placeholder from './placeholder'
 import RuleComponent from './rule'
 
 type Props = {
-  rules: CustomRules
-  onChange: (rules: CustomRules) => void
+  customRule: CustomRule
+  onChange: (customRule: CustomRule) => void
 }
 
 const RightColumn = (props: Props) => {
   const onAdd = () => {
     props.onChange({
-      ...props.rules,
+      ...props.customRule,
       rules: [
-        ...props.rules.rules,
+        ...props.customRule.rules,
         {
           Identifier: uuidv4(),
           Type: 'Acceptance',
@@ -39,12 +39,13 @@ const RightColumn = (props: Props) => {
 
   const onDelete = (rule: Rule) => {
     props.onChange({
-      ...props.rules,
-      rules: props.rules.rules.filter(r => r.Identifier !== rule.Identifier),
+      ...props.customRule,
+      rules: props.customRule.rules.filter(r => r.Identifier !== rule.Identifier),
     })
   }
 
-  if (props.rules.id === '') {
+  // Show instructions as long as the rule is not saved
+  if (props.customRule.id === '') {
     return (
       <Box flex="1" px="10" py="5" display="flex" flexDirection="column" overflow="scroll">
         <NoData />
@@ -54,9 +55,9 @@ const RightColumn = (props: Props) => {
 
   return (
     <Box flex="1" px="10" py="5" display="flex" flexDirection="column" overflow="scroll">
-      {props.rules.rules.length === 0 && <Placeholder />}
+      {props.customRule.rules.length === 0 && <Placeholder />}
       <SimpleGrid mb="5" spacing="5">
-        {props.rules.rules.map(rule => (
+        {props.customRule.rules.map(rule => (
           <RuleComponent key={rule.Identifier} rule={rule} onDelete={() => onDelete(rule)} />
         ))}
       </SimpleGrid>

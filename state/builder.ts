@@ -1,12 +1,12 @@
 import { entity, persistence } from 'simpler-state'
-import { CustomRules } from '../utils/certlogic'
+import { CustomRule } from '../utils/certlogic'
 
 export type BuilderState = {
-  rules: CustomRules[]
+  customRules: CustomRule[]
 }
 
-export const builder = entity<BuilderState>({ rules: [] }, [persistence('builder')])
+export const builder = entity<BuilderState>({ customRules: [] }, [persistence('builder')])
 
-export const setRules = (rules: CustomRules[]) => {
-  builder.set({ ...builder.get(), rules })
+export const setRules = (customRules: CustomRule[]) => {
+  builder.set({ ...builder.get(), customRules })
 }

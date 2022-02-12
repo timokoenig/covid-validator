@@ -7,42 +7,29 @@ import LoadModal from '../components/builder/modal/load'
 import RightColumn from '../components/builder/right-column'
 import PageMeta from '../components/page-meta'
 import { builder, setRules } from '../state/builder'
-import { CustomRules } from '../utils/certlogic'
+import { CustomRule } from '../utils/certlogic'
 
 const BuilderPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { isOpen: isOpenDelete, onOpen: onOpenDelete, onClose: onCloseDelete } = useDisclosure()
   const toast = useToast()
   const builderState = builder.use()
-  const [rule, setRule] = useState<CustomRules>({
+  const [currentCustomRule, setCurrentCustomRule] = useState<CustomRule>({
     id: '',
     name: '',
     description: '',
     rules: [],
   })
-  const isNewRule = builderState.rules.find(r => r.id == rule.id) === undefined
 
-  const onLoad = (item: CustomRules) => {
-    setRule(item)
+  // new rule if current rule is not saved in the builder state
+  const isNewRule = builderState.customRules.find(r => r.id == currentCustomRule.id) === undefined
+
+  const onLoad = (customRule: CustomRule) => {
+    setCurrentCustomRule(customRule)
     onClose()
   }
 
-  const onSave = () => {
-    if (rule.name === '') return
-    const savedRule = { ...rule, id: rule.id === '' ? uuidv4() : rule.id }
-    setRules([...builderState.rules.filter(r => r.id !== rule.id), savedRule])
-    setRule(savedRule)
-    toast({
-      title: 'Rules saved',
-      status: 'success',
-      duration: 3000,
-    })
-  }
-
-  const onUpdate = (rules: CustomRules) => {
-    const updatedRule = { ...rules, id: rules.id === '' ? uuidv4() : rule.id }
-    setRules([...builderState.rules.filter(r => r.id !== rule.id), updatedRule])
-    setRule(updatedRule)
+  const showToast = () => {
     toast({
       title: 'Rules updated',
       status: 'success',
@@ -50,16 +37,30 @@ const BuilderPage = () => {
     })
   }
 
+  const onSave = () => {
+    if (currentCustomRule.name === '') return
+    const savedRule = {
+      ...currentCustomRule,
+      id: currentCustomRule.id === '' ? uuidv4() : currentCustomRule.id,
+    }
+    setRules([...builderState.customRules.filter(r => r.id !== currentCustomRule.id), savedRule])
+    setCurrentCustomRule(savedRule)
+    showToast()
+  }
+
+  const onUpdate = (customRule: CustomRule) => {
+    const updatedRule = { ...customRule, id: customRule.id === '' ? uuidv4() : customRule.id }
+    setRules([...builderState.customRules.filter(r => r.id !== customRule.id), updatedRule])
+    setCurrentCustomRule(updatedRule)
+    showToast()
+  }
+
   const onDelete = (confirm: boolean) => {
     onCloseDelete()
     if (!confirm) return
-    setRules([...builderState.rules.filter(r => r !== rule)])
-    setRule({ id: '', name: '', description: '', rules: [] })
-    toast({
-      title: 'Rule deleted',
-      status: 'success',
-      duration: 3000,
-    })
+    setRules([...builderState.customRules.filter(r => r.id !== currentCustomRule.id)])
+    setCurrentCustomRule({ id: '', name: '', description: '', rules: [] })
+    showToast()
   }
 
   return (
@@ -67,17 +68,17 @@ const BuilderPage = () => {
       <PageMeta allowIndex={false} />
       <Flex color="white" height="100vh">
         <LeftColumn
-          rule={rule}
+          customRule={currentCustomRule}
           isNewRule={isNewRule}
           onLoad={onOpen}
           onSave={onSave}
-          onChange={setRule}
+          onChange={setCurrentCustomRule}
           onDelete={onOpenDelete}
         />
-        <RightColumn rules={rule} onChange={onUpdate} />
+        <RightColumn customRule={currentCustomRule} onChange={onUpdate} />
       </Flex>
       <LoadModal isOpen={isOpen} onClose={onClose} onClick={onLoad} />
-      <ConfirmModal rule={rule.name} isOpen={isOpenDelete} onClose={onDelete} />
+      <ConfirmModal ruleName={currentCustomRule.name} isOpen={isOpenDelete} onClose={onDelete} />
     </>
   )
 }

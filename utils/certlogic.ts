@@ -11,7 +11,7 @@ export type Rules = {
   rules: Rule[]
 }
 
-export type CustomRules = {
+export type CustomRule = {
   id: string
   name: string
   description: string
