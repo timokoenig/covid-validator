@@ -13,14 +13,14 @@ import {
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import QRCode from 'react-qr-code'
-import { CustomRules } from '~/utils/certlogic'
+import { CustomRule } from '~/utils/certlogic'
 
 type Props = {
-  rule: CustomRules
+  customRule: CustomRule
   isNewRule: boolean
   onLoad: () => void
   onSave: () => void
-  onChange: (rule: CustomRules) => void
+  onChange: (customRule: CustomRule) => void
   onDelete: () => void
 }
 
@@ -47,7 +47,7 @@ const LeftColumn = (props: Props) => {
           flex="1"
           colorScheme="blue"
           onClick={props.onSave}
-          disabled={props.rule.name === ''}
+          disabled={props.customRule.name === ''}
         >
           Save
         </Button>
@@ -56,12 +56,16 @@ const LeftColumn = (props: Props) => {
         <FormControl mb="5">
           <Input
             placeholder="Name (required)"
-            value={props.rule.name}
-            onChange={e => props.onChange({ ...props.rule, name: e.target.value })}
+            value={props.customRule.name}
+            onChange={e => props.onChange({ ...props.customRule, name: e.target.value })}
           />
         </FormControl>
         <FormControl>
-          <Input placeholder="Comment" />
+          <Input
+            placeholder="Description"
+            value={props.customRule.description}
+            onChange={e => props.onChange({ ...props.customRule, description: e.target.value })}
+          />
         </FormControl>
       </Box>
       {!props.isNewRule && (
@@ -71,7 +75,7 @@ const LeftColumn = (props: Props) => {
           </Button>
         </Box>
       )}
-      {props.rule.id !== '' && (
+      {props.customRule.id !== '' && (
         <>
           <Box mt="5" mb="5" p="5" rounded="25" backgroundColor="white">
             <QRCode value="hey" />

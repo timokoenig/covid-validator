@@ -12,7 +12,7 @@ import React from 'react'
 // import { useTranslation } from 'react-i18next'
 
 type Props = {
-  rule: string
+  ruleName: string
   isOpen: boolean
   onClose: (confirm: boolean) => void
 }
@@ -34,7 +34,7 @@ const ConfirmModal = (props: Props) => {
           <Text>
             The rule{' '}
             <Text as="span" fontWeight="semibold">
-              {props.rule}
+              {props.ruleName}
             </Text>{' '}
             will be deleted irrevocably from your device. It will not delete the rule from other
             devices.
