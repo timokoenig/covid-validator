@@ -12,17 +12,16 @@ import {
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 // import { useTranslation } from 'react-i18next'
+import tests from '../../../../utils/tests'
 
 type Props = {
   onClose: () => void
-  onClick: (item: string) => void
+  onClick: (items: string[]) => void
 }
 
 const VaccineSelection = (props: Props) => {
-  const [tests, setTests] = useState<string[]>([])
+  const [selectedTests, setSelectedTests] = useState<string[]>([])
   // const { t } = useTranslation('common')
-
-  const items = ['PCR', 'Antigen']
 
   return (
     <ModalContent>
@@ -36,8 +35,8 @@ const VaccineSelection = (props: Props) => {
       <ModalCloseButton onClick={props.onClose} />
       <ModalBody>
         <List>
-          {items.map(item => (
-            <ListItem key={item} display="flex">
+          {tests.map(item => (
+            <ListItem key={item.id} display="flex">
               <Button
                 isFullWidth
                 h="auto"
@@ -47,24 +46,24 @@ const VaccineSelection = (props: Props) => {
                 variant="ghost"
                 justifyContent="left"
                 onClick={() =>
-                  tests.includes(item)
-                    ? setTests(tests.filter(v => v !== item))
-                    : setTests([...tests, item])
+                  selectedTests.includes(item.id)
+                    ? setSelectedTests(selectedTests.filter(v => v !== item.id))
+                    : setSelectedTests([...selectedTests, item.id])
                 }
               >
                 <Checkbox
-                  isChecked={tests.includes(item)}
+                  isChecked={selectedTests.includes(item.id)}
                   mr="5"
                   maxW="100%"
                   py="4"
                   wordBreak="break-all"
                   onChange={e =>
                     e.target.checked
-                      ? setTests(tests.filter(v => v !== item))
-                      : setTests([...tests, item])
+                      ? setSelectedTests(selectedTests.filter(v => v !== item.id))
+                      : setSelectedTests([...selectedTests, item.id])
                   }
                 >
-                  {item}
+                  {item.name}
                 </Checkbox>
               </Button>
             </ListItem>
@@ -73,7 +72,9 @@ const VaccineSelection = (props: Props) => {
       </ModalBody>
 
       <ModalFooter>
-        <Button colorScheme="blue">Continue</Button>
+        <Button colorScheme="blue" onClick={() => props.onClick(selectedTests)}>
+          Continue
+        </Button>
       </ModalFooter>
     </ModalContent>
   )
