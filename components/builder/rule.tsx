@@ -6,6 +6,7 @@ import { Rule as RuleModel } from '../../utils/certlogic'
 type Props = {
   rule: RuleModel
   onDelete: () => void
+  onEdit: () => void
 }
 
 const Rule = (props: Props) => {
@@ -18,6 +19,9 @@ const Rule = (props: Props) => {
             <Text>Version {props.rule.Version}</Text>
           </Box>
         </Box>
+        <Button colorScheme="blue" onClick={props.onEdit} mr="5">
+          Edit
+        </Button>
         <Button colorScheme="red" onClick={props.onDelete}>
           <DeleteIcon width="3" height="3" />
         </Button>

@@ -58,7 +58,7 @@ const RightColumn = (props: Props) => {
       {props.customRule.rules.length === 0 && <Placeholder />}
       <SimpleGrid mb="5" spacing="5">
         {props.customRule.rules.map(rule => (
-          <RuleComponent key={rule.Identifier} rule={rule} onDelete={() => onDelete(rule)} />
+          <RuleComponent key={rule.Identifier} rule={rule} onDelete={() => onDelete(rule)} onEdit={() => void} />
         ))}
       </SimpleGrid>
       <Button
