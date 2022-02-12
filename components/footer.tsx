@@ -1,6 +1,6 @@
+import { Box, Center, Link, Text } from '@chakra-ui/react'
 import React from 'react'
-import { Center, Text, Link, Box } from '@chakra-ui/react'
-import { useTranslation, Trans } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 
 const Footer = () => {
   const { t } = useTranslation('common')
@@ -19,6 +19,10 @@ const Footer = () => {
         </Text>
       </Center>
       <Box mb="20" textAlign="center">
+        <Link href="/builder" px="2" display="inline-block">
+          {t('builder')}
+        </Link>
+        |
         <Link
           href="https://github.com/timokoenig/covid-validator"
           target="_blank"
