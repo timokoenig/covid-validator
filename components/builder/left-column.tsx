@@ -13,7 +13,8 @@ import {
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import QRCode from 'react-qr-code'
-import { CustomRule } from '~/utils/certlogic'
+import { CustomRule } from '../../utils/certlogic'
+import customRuleExport from '../../utils/custom-rule-export'
 
 type Props = {
   customRule: CustomRule
@@ -78,7 +79,7 @@ const LeftColumn = (props: Props) => {
       {props.customRule.id !== '' && (
         <>
           <Box mt="5" mb="5" p="5" rounded="25" backgroundColor="white">
-            <QRCode value="hey" />
+            <QRCode value={customRuleExport(props.customRule)} />
           </Box>
           <Text>Scan QR code to import on other devices</Text>
         </>
