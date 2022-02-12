@@ -14,14 +14,14 @@ type Props = {
 
 const WizardModal = (props: Props) => {
   const [type, setType] = useState<string>('')
-  const [vaccine, setVaccine] = useState<string>('')
-  const [test, setTest] = useState<string>('')
+  const [vaccines, setVaccines] = useState<string[]>([])
+  const [tests, setTests] = useState<string[]>([])
   // const { t } = useTranslation('common')
 
   const onClose = () => {
     setType('')
-    setVaccine('')
-    setTest('')
+    setVaccines([])
+    setTests([])
     props.onClose()
   }
 
@@ -29,13 +29,13 @@ const WizardModal = (props: Props) => {
     if (type === '') {
       return <TypeSelection onClose={onClose} onClick={setType} />
     }
-    if (type === 'Vaccination' && vaccine === '') {
-      return <VaccineSelection onClose={onClose} onClick={setVaccine} />
+    if (type === 'Vaccination' && vaccines.length === 0) {
+      return <VaccineSelection onClose={onClose} onClick={setVaccines} />
     }
-    if (type === 'Test' && test === '') {
-      return <TestSelection onClose={onClose} onClick={setTest} />
+    if (type === 'Test' && tests.length === 0) {
+      return <TestSelection onClose={onClose} onClick={setTests} />
     }
-    return <RuleSelection type={type} vaccine={vaccine} onClose={onClose} />
+    return <RuleSelection type={type} vaccines={vaccines} tests={tests} onClose={onClose} />
   }
 
   return (

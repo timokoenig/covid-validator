@@ -12,7 +12,8 @@ import React from 'react'
 
 type Props = {
   type: string
-  vaccine: string
+  vaccines: string[]
+  tests: string[]
   onClose: () => void
 }
 
@@ -25,7 +26,8 @@ const RuleSelection = (props: Props) => {
       <ModalCloseButton onClick={props.onClose} />
       <ModalBody>
         <Text>{props.type}</Text>
-        <Text>{props.vaccine}</Text>
+        <Text>{props.vaccines}</Text>
+        <Text>{props.tests}</Text>
         {/* <List>
           {items.map(item => (
             <ListItem key={item} display="flex">
