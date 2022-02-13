@@ -1,4 +1,4 @@
-import { ChevronLeftIcon } from '@chakra-ui/icons'
+import { ChevronLeftIcon, DeleteIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
@@ -30,6 +30,21 @@ const EditImmunizationRules = (props: Props) => {
     setRules(props.customRule.immunizationRules)
   }, [props.customRule])
 
+  const onCreate = (rule: ImmunizationRule) => {
+    setRules([...rules, rule])
+  }
+
+  const onDelete = (rule: ImmunizationRule) => {
+    setRules(rules.filter(r => r.id !== rule.id))
+  }
+
+  const onSave = () => {
+    props.onChange({
+      ...props.customRule,
+      immunizationRules: rules,
+    })
+  }
+
   return (
     <>
       <Box flex="1" px="10" py="5" display="flex" flexDirection="column" overflow="scroll">
@@ -38,7 +53,7 @@ const EditImmunizationRules = (props: Props) => {
             <ChevronLeftIcon width="5" height="5" />
           </Button>
           <Heading flex="1">Immunzation Rules</Heading>
-          <Button colorScheme="blue" onClick={() => {}} isDisabled={true}>
+          <Button colorScheme="blue" onClick={onSave}>
             Save
           </Button>
         </Box>
@@ -54,6 +69,7 @@ const EditImmunizationRules = (props: Props) => {
               <Th>Vaccine</Th>
               <Th>Dose Rule</Th>
               <Th>Type</Th>
+              <Th />
             </Tr>
           </Thead>
           <Tbody>
@@ -66,6 +82,11 @@ const EditImmunizationRules = (props: Props) => {
                 </Td>
                 <Td>{rule.rule}</Td>
                 <Td>{rule.type}</Td>
+                <Td>
+                  <Button colorScheme="red" onClick={() => onDelete(rule)}>
+                    <DeleteIcon width="4" height="4" />
+                  </Button>
+                </Td>
               </Tr>
             ))}
             {/* <Tr>
@@ -96,11 +117,7 @@ const EditImmunizationRules = (props: Props) => {
           </Tbody>
         </Table>
       </Box>
-      <ImmunizationWizardModal
-        isOpen={isOpen}
-        onClose={onClose}
-        onCreate={rule => setRules([...rules, rule])}
-      />
+      <ImmunizationWizardModal isOpen={isOpen} onClose={onClose} onCreate={onCreate} />
     </>
   )
 }

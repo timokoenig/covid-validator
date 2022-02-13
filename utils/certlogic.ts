@@ -25,6 +25,7 @@ export const IMMUNIZATION_TYPE_FULL_RECOVERY = 'full-recovery'
 export const IMMUNIZATION_TYPE_BOOSTER = 'booster'
 
 export type ImmunizationRule = {
+  id: string
   medicalProducts: string[]
   rule: string
   type: string
