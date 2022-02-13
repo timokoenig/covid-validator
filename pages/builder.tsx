@@ -33,6 +33,7 @@ const BuilderPage = () => {
       name: '',
       description: '',
       rules: [],
+      immunizationRules: [],
     })
   }
 
