@@ -15,7 +15,19 @@ export type CustomRule = {
   id: string
   name: string
   description: string
+  immunizationRules: ImmunizationRule[]
   rules: Rule[]
+}
+
+export const IMMUNIZATION_TYPE_PARTIAL = 'partial'
+export const IMMUNIZATION_TYPE_FULL = 'full'
+export const IMMUNIZATION_TYPE_FULL_RECOVERY = 'full-recovery'
+export const IMMUNIZATION_TYPE_BOOSTER = 'booster'
+
+export type ImmunizationRule = {
+  medicalProducts: string[]
+  rule: string
+  type: string
 }
 
 export type Language = {
