@@ -9,17 +9,15 @@ import {
   Text,
 } from '@chakra-ui/react'
 import React from 'react'
-// import { useTranslation } from 'react-i18next'
 
 type Props = {
-  ruleName: string
+  title: string
+  message: string | JSX.Element
   isOpen: boolean
   onClose: (confirm: boolean) => void
 }
 
 const ConfirmModal = (props: Props) => {
-  // const { t } = useTranslation('common')
-
   return (
     <Modal
       isOpen={props.isOpen}
@@ -29,16 +27,9 @@ const ConfirmModal = (props: Props) => {
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Are you sure to delete the rule?</ModalHeader>
+        <ModalHeader>{props.title}</ModalHeader>
         <ModalBody>
-          <Text>
-            The rule{' '}
-            <Text as="span" fontWeight="semibold">
-              {props.ruleName}
-            </Text>{' '}
-            will be deleted irrevocably from your device. It will not delete the rule from other
-            devices.
-          </Text>
+          {typeof props.message === 'string' ? <Text>{props.message}</Text> : props.message}
         </ModalBody>
 
         <ModalFooter>
