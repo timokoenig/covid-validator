@@ -13,6 +13,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import {
   ImmunizationRule,
   IMMUNIZATION_TYPE_BOOSTER,
@@ -37,6 +38,7 @@ const RuleSelection = (props: Props) => {
 
   const onAdd = () => {
     props.onCreate({
+      id: uuidv4(),
       medicalProducts: props.vaccines,
       rule: `${dn} ${symbol} ${sn}`,
       type,

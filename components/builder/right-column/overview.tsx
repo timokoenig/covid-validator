@@ -1,4 +1,3 @@
-import { AddIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
@@ -83,25 +82,21 @@ const Overview = (props: Props) => {
               <Tr>
                 <Th>Vaccine</Th>
                 <Th>Dose Rule</Th>
-                <Th>Note</Th>
+                <Th>Type</Th>
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
-                <Td>BioNTech</Td>
-                <Td>2 == 2</Td>
-                <Td>Full Immunization</Td>
-              </Tr>
-              <Tr>
-                <Td>BioNTech</Td>
-                <Td>2 == 2</Td>
-                <Td>Full Immunization</Td>
-              </Tr>
-              <Tr>
-                <Td>BioNTech</Td>
-                <Td>2 == 2</Td>
-                <Td>Full Immunization</Td>
-              </Tr>
+              {props.customRule.immunizationRules.map(rule => (
+                <Tr key={rule.id}>
+                  <Td>
+                    {rule.medicalProducts.map(mp => (
+                      <Text key={mp}>{mp}</Text>
+                    ))}
+                  </Td>
+                  <Td>{rule.rule}</Td>
+                  <Td>{rule.type}</Td>
+                </Tr>
+              ))}
             </Tbody>
           </Table>
         </Box>
@@ -109,10 +104,12 @@ const Overview = (props: Props) => {
           <Text flex="1" fontWeight="semibold">
             Certificate Rules
           </Text>
-          <Button colorScheme="blue">Add</Button>
+          <Button colorScheme="blue" onClick={onOpen}>
+            Add
+          </Button>
         </Box>
-        {/* {props.customRule.rules.length === 0 && <Placeholder />} */}
         <SimpleGrid mb="5" spacing="5">
+          {props.customRule.rules.length === 0 && <Text>No rules available</Text>}
           {props.customRule.rules.map(rule => (
             <RuleComponent
               key={rule.Identifier}
@@ -122,17 +119,6 @@ const Overview = (props: Props) => {
             />
           ))}
         </SimpleGrid>
-        <Button
-          border="2px"
-          borderStyle="dashed"
-          borderColor="gray.700"
-          backgroundColor="transparent"
-          flex="0 1"
-          p="5"
-          onClick={onOpen}
-        >
-          <AddIcon width="3" height="3" />
-        </Button>
       </Box>
       <WizardModal isOpen={isOpen} onClose={onClose} />
     </>
