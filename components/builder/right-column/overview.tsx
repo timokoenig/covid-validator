@@ -1,18 +1,17 @@
 import { AddIcon } from '@chakra-ui/icons'
-import { Box, Button, SimpleGrid, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Heading, SimpleGrid, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
-import { CustomRule, Rule } from '../../utils/certlogic'
-import WizardModal from './modal/wizard'
-import NoData from './no-data'
-import Placeholder from './placeholder'
-import RuleComponent from './rule'
+import { CustomRule, Rule } from '../../../utils/certlogic'
+import WizardModal from '../modal/wizard'
+import RuleComponent from '../rule'
 
 type Props = {
   customRule: CustomRule
   onChange: (customRule: CustomRule) => void
+  onEdit: () => void
 }
 
-const RightColumn = (props: Props) => {
+const Overview = (props: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   // const onAdd = () => {
@@ -46,19 +45,16 @@ const RightColumn = (props: Props) => {
     })
   }
 
-  // Show instructions as long as the rule is not saved
-  if (props.customRule.id === '') {
-    return (
-      <Box flex="1" px="10" py="5" display="flex" flexDirection="column" overflow="scroll">
-        <NoData />
-      </Box>
-    )
-  }
-
   return (
     <>
       <Box flex="1" px="10" py="5" display="flex" flexDirection="column" overflow="scroll">
-        {props.customRule.rules.length === 0 && <Placeholder />}
+        <Box display="flex" flexDirection="row" mb="5">
+          <Heading flex="1">{props.customRule.name}</Heading>
+          <Button colorScheme="blue" onClick={props.onEdit}>
+            Edit
+          </Button>
+        </Box>
+        {/* {props.customRule.rules.length === 0 && <Placeholder />} */}
         <SimpleGrid mb="5" spacing="5">
           {props.customRule.rules.map(rule => (
             <RuleComponent
@@ -86,4 +82,4 @@ const RightColumn = (props: Props) => {
   )
 }
 
-export default RightColumn
+export default Overview

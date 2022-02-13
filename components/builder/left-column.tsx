@@ -1,40 +1,42 @@
+import { ChevronRightIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
   Center,
-  FormControl,
   Heading,
-  Input,
   Link,
+  List,
+  ListItem,
   SimpleGrid,
   Spacer,
   Text,
 } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import QRCode from 'react-qr-code'
+import { builder } from '../../state/builder'
 import { CustomRule } from '../../utils/certlogic'
-import customRuleExport from '../../utils/custom-rule-export'
 
 type Props = {
-  customRule: CustomRule
-  isNewRule: boolean
+  customRule: CustomRule | null
   onLoad: () => void
-  onSave: () => void
+  onCreate: () => void
   onChange: (customRule: CustomRule) => void
-  onDelete: () => void
 }
 
 const LeftColumn = (props: Props) => {
   const { t } = useTranslation('common')
-  const [qrcode, setQrcode] = useState<string>('')
-
-  useEffect(() => {
-    customRuleExport(props.customRule).then(setQrcode).catch(console.log)
-  }, [props])
+  const builderState = builder.use()
 
   return (
-    <Box bg="gray.700" px="10" py="5" minWidth="378" display="flex" flexDirection="column">
+    <Box
+      bg="gray.700"
+      px="10"
+      py="5"
+      minWidth="350"
+      display="flex"
+      flexDirection="column"
+      overflow="scroll"
+    >
       <Center flexDirection="column" mb="5">
         <Heading as="h1" size="lg" flex="1">
           <Link href="/" _hover={{ textDecoration: 'none' }}>
@@ -44,52 +46,32 @@ const LeftColumn = (props: Props) => {
             BETA
           </Text>
         </Heading>
-        <Text fontSize="xl">Rule Builder</Text>
+        <Text fontSize="xl">{t('builder')}</Text>
       </Center>
       <SimpleGrid mb="5" display="flex" spacing="5">
         <Button flex="1" onClick={props.onLoad}>
           Load
         </Button>
-        <Button
-          flex="1"
-          colorScheme="blue"
-          onClick={props.onSave}
-          disabled={props.customRule.name === ''}
-        >
-          Save
+        <Button flex="1" onClick={props.onCreate} colorScheme="blue">
+          New
         </Button>
       </SimpleGrid>
-      <Box mb="10">
-        <FormControl mb="5">
-          <Input
-            placeholder="Name (required)"
-            value={props.customRule.name}
-            onChange={e => props.onChange({ ...props.customRule, name: e.target.value })}
-          />
-        </FormControl>
-        <FormControl>
-          <Input
-            placeholder="Description"
-            value={props.customRule.description}
-            onChange={e => props.onChange({ ...props.customRule, description: e.target.value })}
-          />
-        </FormControl>
-      </Box>
-      {!props.isNewRule && (
-        <Box mb="5" display="flex">
-          <Button size="sm" variant="ghost" colorScheme="red" flex="1" onClick={props.onDelete}>
-            Delete Rule
-          </Button>
-        </Box>
-      )}
-      {props.customRule.id !== '' && (
-        <>
-          <Box mt="5" mb="5" p="5" rounded="25" backgroundColor="white">
-            <QRCode value={qrcode} />
-          </Box>
-          <Text>Scan QR code to import on other devices</Text>
-        </>
-      )}
+      <List>
+        {builderState.customRules.map(customRule => (
+          <ListItem key={customRule.id} display="flex">
+            <Button
+              variant={customRule.id === props.customRule?.id ? 'solid' : 'ghost'}
+              flex="1"
+              justifyContent="left"
+              onClick={() => props.onChange(customRule)}
+            >
+              {customRule.name}
+              <Spacer />
+              <ChevronRightIcon width="5" height="5" />
+            </Button>
+          </ListItem>
+        ))}
+      </List>
       <Spacer />
       <hr />
       <Center flexDirection="column" mt="5">
