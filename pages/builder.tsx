@@ -7,6 +7,7 @@ import RightColumn from '../components/builder/right-column'
 import PageMeta from '../components/page-meta'
 import { builder, setRules } from '../state/builder'
 import { CustomRule } from '../utils/certlogic'
+import defaultImmunizationRulesGermany from '../utils/default-immunization-rules-germany'
 
 const BuilderPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -33,7 +34,7 @@ const BuilderPage = () => {
       name: '',
       description: '',
       rules: [],
-      immunizationRules: [],
+      immunizationRules: defaultImmunizationRulesGermany,
     })
   }
 

@@ -1,0 +1,212 @@
+const defaultImmunizationRulesGermany = [
+  {
+    id: 'c9df38ff-c16b-4817-a7aa-39ec7e47cf0d',
+    medicalProducts: ['EU/1/20/1528', 'EU/1/20/1507', 'EU/1/21/1529', 'EU/1/21/1618'],
+    rule: {
+      and: [
+        {
+          '==': [
+            {
+              var: 'payload.v.0.dn',
+            },
+            1,
+          ],
+        },
+        {
+          '==': [
+            {
+              var: 'payload.v.0.sn',
+            },
+            2,
+          ],
+        },
+        {
+          '==': [
+            {
+              var: 'payload.v.0.dn',
+            },
+            {
+              var: 'payload.v.0.sd',
+            },
+          ],
+        },
+      ],
+    },
+    type: 'partial',
+  },
+  {
+    id: 'b9411ec3-e933-43bf-a354-e24cb10df385',
+    medicalProducts: [
+      'EU/1/20/1528',
+      'EU/1/20/1507',
+      'EU/1/21/1529',
+      'EU/1/21/1618',
+      'EU/1/20/1525',
+    ],
+    rule: {
+      and: [
+        {
+          '==': [
+            {
+              var: 'payload.v.0.dn',
+            },
+            2,
+          ],
+        },
+        {
+          '==': [
+            {
+              var: 'payload.v.0.sn',
+            },
+            2,
+          ],
+        },
+        {
+          '==': [
+            {
+              var: 'payload.v.0.dn',
+            },
+            {
+              var: 'payload.v.0.sd',
+            },
+          ],
+        },
+      ],
+    },
+    type: 'full',
+  },
+  {
+    id: '3b6770c1-8249-4051-98da-526207e3c566',
+    medicalProducts: ['EU/1/20/1528', 'EU/1/20/1507', 'EU/1/21/1529', 'EU/1/21/1618'],
+    rule: {
+      and: [
+        {
+          '==': [
+            {
+              var: 'payload.v.0.dn',
+            },
+            1,
+          ],
+        },
+        {
+          '==': [
+            {
+              var: 'payload.v.0.sn',
+            },
+            1,
+          ],
+        },
+        {
+          '==': [
+            {
+              var: 'payload.v.0.dn',
+            },
+            {
+              var: 'payload.v.0.sd',
+            },
+          ],
+        },
+      ],
+    },
+    type: 'full-recovery',
+  },
+  {
+    id: '7143a493-c8f2-48b3-9ec4-56bcd60f1271',
+    medicalProducts: [
+      'EU/1/20/1528',
+      'EU/1/20/1507',
+      'EU/1/21/1529',
+      'EU/1/21/1618',
+      'EU/1/20/1525',
+    ],
+    rule: {
+      and: [
+        {
+          '==': [
+            {
+              var: 'payload.v.0.dn',
+            },
+            3,
+          ],
+        },
+        {
+          '==': [
+            {
+              var: 'payload.v.0.sn',
+            },
+            3,
+          ],
+        },
+        {
+          '==': [
+            {
+              var: 'payload.v.0.dn',
+            },
+            {
+              var: 'payload.v.0.sd',
+            },
+          ],
+        },
+      ],
+    },
+    type: 'booster',
+  },
+  {
+    id: '2ef68ed9-faf1-404b-92ab-9ad2335ab4d8',
+    medicalProducts: [
+      'EU/1/20/1528',
+      'EU/1/20/1507',
+      'EU/1/21/1529',
+      'EU/1/21/1618',
+      'EU/1/20/1525',
+    ],
+    rule: {
+      '>': [
+        {
+          var: 'payload.v.0.dn',
+        },
+        {
+          var: 'payload.v.0.sd',
+        },
+      ],
+    },
+    type: 'booster',
+  },
+  {
+    id: '34af00af-72c8-4b32-bc71-1bee8127776a',
+    medicalProducts: ['EU/1/20/1525'],
+    rule: {
+      and: [
+        {
+          '==': [
+            {
+              var: 'payload.v.0.dn',
+            },
+            1,
+          ],
+        },
+        {
+          '==': [
+            {
+              var: 'payload.v.0.sn',
+            },
+            1,
+          ],
+        },
+        {
+          '==': [
+            {
+              var: 'payload.v.0.dn',
+            },
+            {
+              var: 'payload.v.0.sd',
+            },
+          ],
+        },
+      ],
+    },
+    type: 'partial',
+  },
+]
+
+export default defaultImmunizationRulesGermany
