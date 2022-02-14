@@ -61,6 +61,14 @@ const Rule = (props: Props) => {
             )}
           </Box>
         )}
+        {props.rule.type === 'Recovery' && (
+          <Box>
+            {props.rule.validFrom && (
+              <Text>Date &gt; positive PCR + {props.rule.validFrom} days</Text>
+            )}
+            {props.rule.validTo && <Text>Date &lt; positive PCR + {props.rule.validTo} days</Text>}
+          </Box>
+        )}
       </Box>
       <Box my="5">
         <Text fontWeight="semibold">Result</Text>
