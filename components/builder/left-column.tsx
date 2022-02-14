@@ -49,9 +49,9 @@ const LeftColumn = (props: Props) => {
         <Text fontSize="xl">{t('builder')}</Text>
       </Center>
       <SimpleGrid mb="5" display="flex" spacing="5">
-        <Button flex="1" onClick={props.onLoad}>
+        {/* <Button flex="1" onClick={props.onLoad}>
           Load
-        </Button>
+        </Button> */}
         <Button flex="1" onClick={props.onCreate} colorScheme="blue">
           New
         </Button>
