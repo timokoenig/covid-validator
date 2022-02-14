@@ -38,13 +38,29 @@ const Rule = (props: Props) => {
       </Box>
       <Box my="5">
         <Text fontWeight="semibold">Condition (what should be checked)</Text>
-        {props.rule.immunizationStatus && (
-          <Text>{immunizationTypeName(props.rule.immunizationStatus)}</Text>
+        {props.rule.type === 'Vaccination' && (
+          <Box>
+            {props.rule.immunizationStatus && (
+              <Text>{immunizationTypeName(props.rule.immunizationStatus)}</Text>
+            )}
+            {props.rule.validFrom && (
+              <Text>Date &gt; VaccinationDate + {props.rule.validFrom} days</Text>
+            )}
+            {props.rule.validTo && (
+              <Text>Date &lt; VaccinationDate + {props.rule.validTo} days</Text>
+            )}
+          </Box>
         )}
-        {props.rule.validFrom && (
-          <Text>Date &gt; VaccinationDate + {props.rule.validFrom} days</Text>
+        {props.rule.type === 'Test' && (
+          <Box>
+            {props.rule.validFrom && (
+              <Text>Date &gt; SampleCollection + {props.rule.validFrom} hours</Text>
+            )}
+            {props.rule.validTo && (
+              <Text>Date &lt; SampleCollection + {props.rule.validTo} hours</Text>
+            )}
+          </Box>
         )}
-        {props.rule.validFrom && <Text>Date &lt; VaccinationDate + {props.rule.validTo} days</Text>}
       </Box>
       <Box my="5">
         <Text fontWeight="semibold">Result</Text>
