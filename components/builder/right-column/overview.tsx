@@ -21,6 +21,7 @@ type Props = {
   customRule: CustomRule
   onChange: (customRule: CustomRule) => void
   onEdit: () => void
+  onEditCertificateRule: () => void
   onEditImmunizationRules: () => void
 }
 
@@ -56,6 +57,11 @@ const Overview = (props: Props) => {
       ...props.customRule,
       rules: props.customRule.rules.filter(r => r.Identifier !== rule.Identifier),
     })
+  }
+
+  const onAddRule = () => {
+    onClose()
+    props.onEditCertificateRule()
   }
 
   return (
@@ -120,7 +126,7 @@ const Overview = (props: Props) => {
           ))}
         </SimpleGrid>
       </Box>
-      <WizardModal isOpen={isOpen} onClose={onClose} />
+      <WizardModal isOpen={isOpen} onClose={onClose} onAdd={onAddRule} />
     </>
   )
 }
