@@ -30,30 +30,6 @@ type Props = {
 const Overview = (props: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  // const onAdd = () => {
-  //   props.onChange({
-  //     ...props.customRule,
-  //     rules: [
-  //       ...props.customRule.rules,
-  //       {
-  //         Identifier: uuidv4(),
-  //         Type: 'Acceptance',
-  //         Country: 'DE',
-  //         Version: '1.0.0',
-  //         SchemaVersion: '1.0.0',
-  //         Engine: 'CERTLOGIC',
-  //         EngineVersion: '0.7.5',
-  //         CertificateType: 'Vaccination',
-  //         Description: [],
-  //         ValidFrom: '',
-  //         ValidTo: '',
-  //         AffectedFields: [],
-  //         Logic: null,
-  //       },
-  //     ],
-  //   })
-  // }
-
   const onAddRule = (rule: CertificateRule) => {
     onClose()
     props.onEditCertificateRule(rule)

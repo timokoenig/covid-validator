@@ -2,6 +2,7 @@
 import { ChevronLeftIcon, DeleteIcon } from '@chakra-ui/icons'
 import { Box, Button, Heading, Input, Select, Text, useDisclosure } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { encodeCertificateRule } from '../../../utils/certificate-rule'
 import {
   CertificateRule,
   CustomRule,
@@ -227,6 +228,17 @@ const EditCertificateRule = (props: Props) => {
               )}
             </Box>
           ))}
+        </Box>
+        <Box mb="10">
+          <Text fontSize="xs">
+            <pre>
+              {JSON.stringify(
+                encodeCertificateRule(props.customRule, props.certificateRule),
+                null,
+                2
+              )}
+            </pre>
+          </Text>
         </Box>
       </Box>
       <LanguageModal isOpen={isOpen} onClose={onClose} onClick={onAddTranslation} />
