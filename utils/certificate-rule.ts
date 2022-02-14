@@ -5,255 +5,320 @@ import { CertificateRule, CustomRule, Rule } from './certlogic'
 export function encodeCertificateRule(
   customRule: CustomRule,
   certificateRule: CertificateRule
-): Rule {
-  // certificateRule.type === 'Vaccination'
-  const immunizationRules = customRule.immunizationRules.filter(
-    rule => rule.type === certificateRule.immunizationStatus
-  )
-  const activeImmunizationRules = [
-    ...new Set(
-      certificateRule.medicalProducts
-        ?.map(mp => immunizationRules.filter(rule => rule.medicalProducts.includes(mp)))
-        .flat(1)
-    ),
-  ].map(rule => rule.rule)
-  // at least one must pass to continue
+): Rule | null {
+  if (certificateRule.type === 'Vaccination') {
+    const immunizationRules = customRule.immunizationRules.filter(
+      rule => rule.type === certificateRule.immunizationStatus
+    )
+    const activeImmunizationRules = [
+      ...new Set(
+        certificateRule.medicalProducts
+          ?.map(mp => immunizationRules.filter(rule => rule.medicalProducts.includes(mp)))
+          .flat(1)
+      ),
+    ].map(rule => rule.rule)
 
-  const logic: any = {
-    if: [
-      // precondition
+    const conditions: any[] = [
       {
-        and: [
-          { var: 'payload.v.0' },
+        or: activeImmunizationRules,
+      },
+    ]
+    if (certificateRule.validFrom) {
+      conditions.push({
+        'not-before': [
           {
-            in: [
+            plusTime: [
               {
-                var: 'payload.v.0.mp',
+                var: 'external.validationClock',
               },
-              certificateRule.medicalProducts,
+              0,
+              'day',
+            ],
+          },
+          {
+            plusTime: [
+              {
+                var: 'payload.v.0.dt',
+              },
+              certificateRule.validFrom,
+              'day',
             ],
           },
         ],
-      },
-      // condition
-      {
+      })
+    }
+    if (certificateRule.validTo) {
+      conditions.push({
+        'not-after': [
+          {
+            plusTime: [
+              {
+                var: 'external.validationClock',
+              },
+              0,
+              'day',
+            ],
+          },
+          {
+            plusTime: [
+              {
+                var: 'payload.v.0.dt',
+              },
+              certificateRule.validTo,
+              'day',
+            ],
+          },
+        ],
+      })
+    }
+
+    return {
+      Identifier: certificateRule.id,
+      Type: 'Acceptance',
+      Country: 'DE',
+      Version: '1.0.0',
+      SchemaVersion: '1.0.0',
+      Engine: 'CERTLOGIC',
+      EngineVersion: '0.7.5',
+      CertificateType: certificateRule.type,
+      Description: certificateRule.translations,
+      ValidFrom: '2022-01-01T00:00:00Z',
+      ValidTo: '2023-01-01T00:00:00Z',
+      AffectedFields: [
+        'payload.v.0',
+        'payload.v.0.mp',
+        'payload.v.0.dt',
+        'payload.v.0.dn',
+        'payload.v.0.sn',
+      ],
+      Logic: {
         if: [
+          // precondition
           {
             and: [
-              /// TODO immunizationRules
+              { var: 'payload.v.0' },
               {
-                or: activeImmunizationRules,
-              },
-              /// TODO validFrom
-              {
-                'not-before': [
+                in: [
                   {
-                    plusTime: [
-                      {
-                        var: 'external.validationClock',
-                      },
-                      0,
-                      'day',
-                    ],
+                    var: 'payload.v.0.mp',
                   },
-                  {
-                    plusTime: [
-                      {
-                        var: 'payload.v.0.dt',
-                      },
-                      certificateRule.validFrom,
-                      'day',
-                    ],
-                  },
-                ],
-              },
-              /// TODO validTo
-              {
-                'not-after': [
-                  {
-                    plusTime: [
-                      {
-                        var: 'external.validationClock',
-                      },
-                      0,
-                      'day',
-                    ],
-                  },
-                  {
-                    plusTime: [
-                      {
-                        var: 'payload.v.0.dt',
-                      },
-                      certificateRule.validTo,
-                      'day',
-                    ],
-                  },
+                  certificateRule.medicalProducts,
                 ],
               },
             ],
           },
-          // if condition is true, we return the certificates result type
-          certificateRule.result,
-          // if condition is false, we return false
-          false,
+          // condition
+          {
+            if: [
+              {
+                and: conditions,
+              },
+              // if condition is true, we return the certificates result type
+              certificateRule.result,
+              // if condition is false, we return false
+              false,
+            ],
+          },
+          // otherwise return true
+          true,
         ],
       },
-      // otherwise return true
-      true,
-    ],
+    }
   }
 
-  return {
-    Identifier: certificateRule.id,
-    Type: 'Acceptance',
-    Country: 'DE',
-    Version: '1.0.0',
-    SchemaVersion: '1.0.0',
-    Engine: 'CERTLOGIC',
-    EngineVersion: '0.7.5',
-    CertificateType: certificateRule.type,
-    Description: certificateRule.translations,
-    ValidFrom: '2022-01-01T00:00:00Z',
-    ValidTo: '2023-01-01T00:00:00Z',
-    AffectedFields: [
-      'payload.v.0',
-      'payload.v.0.mp',
-      'payload.v.0.dn',
-      'payload.v.0.sn',
-      'payload.v.0.dt',
-    ],
-    Logic: logic,
+  if (certificateRule.type === 'Test') {
+    const conditions: any[] = [
+      // negative result
+      {
+        '===': [
+          {
+            var: 'payload.t.0.tr',
+          },
+          '260415000',
+        ],
+      },
+    ]
+    if (certificateRule.validFrom) {
+      conditions.push({
+        'not-before': [
+          {
+            plusTime: [
+              {
+                var: 'external.validationClock',
+              },
+              0,
+              'day',
+            ],
+          },
+          {
+            plusTime: [
+              {
+                var: 'payload.t.0.sc',
+              },
+              certificateRule.validFrom,
+              'day',
+            ],
+          },
+        ],
+      })
+    }
+    if (certificateRule.validTo) {
+      conditions.push({
+        'not-after': [
+          {
+            plusTime: [
+              {
+                var: 'external.validationClock',
+              },
+              0,
+              'day',
+            ],
+          },
+          {
+            plusTime: [
+              {
+                var: 'payload.t.0.sc',
+              },
+              certificateRule.validTo,
+              'day',
+            ],
+          },
+        ],
+      })
+    }
+    return {
+      Identifier: certificateRule.id,
+      Type: 'Acceptance',
+      Country: 'DE',
+      Version: '1.0.0',
+      SchemaVersion: '1.0.0',
+      Engine: 'CERTLOGIC',
+      EngineVersion: '0.7.5',
+      CertificateType: certificateRule.type,
+      Description: certificateRule.translations,
+      ValidFrom: '2022-01-01T00:00:00Z',
+      ValidTo: '2023-01-01T00:00:00Z',
+      AffectedFields: ['payload.t.0', 'payload.t.0.tt', 'payload.t.0.tr', 'payload.t.0.sc'],
+      Logic: {
+        if: [
+          // precondition
+          {
+            and: [
+              { var: 'payload.t.0' },
+              {
+                in: [
+                  {
+                    var: 'payload.t.0.tt',
+                  },
+                  certificateRule.medicalProducts,
+                ],
+              },
+            ],
+          },
+          // condition
+          {
+            if: [
+              {
+                and: conditions,
+              },
+              // if condition is true, we return the certificates result type
+              certificateRule.result,
+              // if condition is false, we return false
+              false,
+            ],
+          },
+          // otherwise return true
+          true,
+        ],
+      },
+    }
   }
+
+  if (certificateRule.type === 'Recovery') {
+    const conditions: any[] = []
+    if (certificateRule.validFrom) {
+      conditions.push({
+        'not-before': [
+          {
+            plusTime: [
+              {
+                var: 'external.validationClock',
+              },
+              0,
+              'day',
+            ],
+          },
+          {
+            plusTime: [
+              {
+                var: 'payload.r.0.fr',
+              },
+              certificateRule.validFrom,
+              'day',
+            ],
+          },
+        ],
+      })
+    }
+    if (certificateRule.validTo) {
+      conditions.push({
+        'not-after': [
+          {
+            plusTime: [
+              {
+                var: 'external.validationClock',
+              },
+              0,
+              'day',
+            ],
+          },
+          {
+            plusTime: [
+              {
+                var: 'payload.r.0.fr',
+              },
+              certificateRule.validTo,
+              'day',
+            ],
+          },
+        ],
+      })
+    }
+    return {
+      Identifier: certificateRule.id,
+      Type: 'Acceptance',
+      Country: 'DE',
+      Version: '1.0.0',
+      SchemaVersion: '1.0.0',
+      Engine: 'CERTLOGIC',
+      EngineVersion: '0.7.5',
+      CertificateType: certificateRule.type,
+      Description: certificateRule.translations,
+      ValidFrom: '2022-01-01T00:00:00Z',
+      ValidTo: '2023-01-01T00:00:00Z',
+      AffectedFields: ['payload.r.0', 'payload.r.0.fr'],
+      Logic: {
+        if: [
+          // precondition
+          { var: 'payload.r.0' },
+          // condition
+          {
+            if: [
+              {
+                and: conditions,
+              },
+              // if condition is true, we return the certificates result type
+              certificateRule.result,
+              // if condition is false, we return false
+              false,
+            ],
+          },
+          // otherwise return true
+          true,
+        ],
+      },
+    }
+  }
+
+  return null
 }
-
-// {
-//   "if": [
-//     {
-//       "var": "payload.v.0"
-//     },
-// {
-//   "in": [
-//     {
-//       "var": "payload.v.0.mp"
-//     },
-//     [
-//       "EU/1/20/1528",
-//       "EU/1/20/1507",
-//       "EU/1/21/1529",
-//       "EU/1/20/1525"
-//     ]
-//   ]
-// },
-//     true
-//   ]
-// }
-
-// {
-//   "if": [
-//     {
-//       "var": "payload.v.0"
-//     },
-//     {
-//       "if": [
-// {
-//   "not-before": [
-//     {
-//       "plusTime": [
-//         {
-//           "var": "external.validationClock"
-//         },
-//         0,
-//         "day"
-//       ]
-//     },
-//     {
-//       "plusTime": [
-//         {
-//           "var": "payload.v.0.dt"
-//         },
-//         15,
-//         "day"
-//       ]
-//     }
-//   ]
-// },
-//         true,
-//         {
-//           "if": [
-//             {
-//               ">": [
-//                 {
-//                   "var": "payload.v.0.dn"
-//                 },
-//                 2
-//               ]
-//             },
-//             true,
-//             {
-//               "if": [
-//                 {
-//                   "and": [
-//                     {
-//                       ">": [
-//                         {
-//                           "var": "payload.v.0.dn"
-//                         },
-//                         1
-//                       ]
-//                     },
-//                     {
-//                       "===": [
-//                         {
-//                           "var": "payload.v.0.mp"
-//                         },
-//                         "EU/1/20/1525"
-//                       ]
-//                     }
-//                   ]
-//                 },
-//                 true,
-//                 {
-//                   "and": [
-//                     {
-//                       "and": [
-//                         {
-//                           "===": [
-//                             {
-//                               "var": "payload.v.0.sd"
-//                             },
-//                             1
-//                           ]
-//                         },
-//                         {
-//                           "===": [
-//                             {
-//                               "var": "payload.v.0.dn"
-//                             },
-//                             1
-//                           ]
-//                         }
-//                       ]
-//                     },
-//                     {
-//                       "in": [
-//                         {
-//                           "var": "payload.v.0.mp"
-//                         },
-//                         [
-//                           "EU/1/20/1528",
-//                           "EU/1/20/1507",
-//                           "EU/1/21/1529"
-//                         ]
-//                       ]
-//                     }
-//                   ]
-//                 }
-//               ]
-//             }
-//           ]
-//         }
-//       ]
-//     },
-//     true
-//   ]
-// }

@@ -35,7 +35,7 @@ export function encodeImmunizationRule(dn: string, sn: string, symbol: string): 
       var: 'payload.v.0.dn',
     },
     {
-      var: 'payload.v.0.sd',
+      var: 'payload.v.0.sn',
     },
   ]
   rules.push(rule)
