@@ -40,12 +40,6 @@ const RuleSelection = (props: Props) => {
   // const { t } = useTranslation('common')
 
   const onAdd = () => {
-    console.log({
-      id: uuidv4(),
-      medicalProducts: props.vaccines,
-      rule: encodeImmunizationRule(dn, sn, symbol),
-      type,
-    })
     props.onCreate({
       id: uuidv4(),
       medicalProducts: props.vaccines,
