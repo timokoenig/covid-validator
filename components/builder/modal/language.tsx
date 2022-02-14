@@ -26,7 +26,7 @@ const LanguageModal = (props: Props) => {
 
   const languages = [
     { lang: 'de', desc: 'German' },
-    { lang: 'en', desc: 'English' },
+    // { lang: 'en', desc: 'English' },
   ]
 
   return (
