@@ -14,6 +14,7 @@ import {
 } from '../../../utils/certlogic'
 import tests from '../../../utils/tests'
 import vaccines from '../../../utils/vaccines'
+import ConfirmModal from '../../modal/confirm'
 import LanguageModal from '../modal/language'
 
 type Props = {
@@ -25,6 +26,7 @@ type Props = {
 
 const EditCertificateRule = (props: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen: isOpenConfirm, onOpen: onOpenConfirm, onClose: onCloseConfirm } = useDisclosure()
   const [result, setResult] = useState<boolean>(props.certificateRule.result)
   const [validFrom, setValidFrom] = useState<number | undefined>(props.certificateRule.validFrom)
   const [validTo, setValidTo] = useState<number | undefined>(props.certificateRule.validTo)
@@ -36,6 +38,9 @@ const EditCertificateRule = (props: Props) => {
       ? [{ lang: 'en', desc: '' }]
       : props.certificateRule.translations
   )
+
+  const isEditMode =
+    props.customRule.rules.find(r => r.id === props.certificateRule.id) !== undefined
 
   const onAddTranslation = (lang: string) => {
     onClose()
@@ -77,6 +82,15 @@ const EditCertificateRule = (props: Props) => {
     })
   }
 
+  const onDelete = (confirm: boolean) => {
+    onCloseConfirm()
+    if (!confirm) return
+    props.onChange({
+      ...props.customRule,
+      rules: props.customRule.rules.filter(r => r.id !== props.certificateRule.id),
+    })
+  }
+
   return (
     <>
       <Box flex="1" px="10" py="5" display="flex" flexDirection="column" overflow="scroll">
@@ -85,6 +99,11 @@ const EditCertificateRule = (props: Props) => {
             <ChevronLeftIcon width="5" height="5" />
           </Button>
           <Heading flex="1">Certificate Rule</Heading>
+          {isEditMode && (
+            <Button colorScheme="red" variant="ghost" onClick={onOpenConfirm} mr="5">
+              Delete
+            </Button>
+          )}
           <Button colorScheme="blue" onClick={onSave}>
             Save
           </Button>
@@ -211,6 +230,12 @@ const EditCertificateRule = (props: Props) => {
         </Box>
       </Box>
       <LanguageModal isOpen={isOpen} onClose={onClose} onClick={onAddTranslation} />
+      <ConfirmModal
+        title="Are you sure?"
+        message="The certificate rule will be deleted irrevocably from your device. It will not be delete from other devices."
+        isOpen={isOpenConfirm}
+        onClose={onDelete}
+      />
     </>
   )
 }
