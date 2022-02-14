@@ -13,6 +13,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import React from 'react'
+import { encodeCertificateRule } from '../../../utils/certificate-rule'
 import { CertificateRule, CustomRule, immunizationTypeName } from '../../../utils/certlogic'
 import { decodeImmunizationRule } from '../../../utils/immunization-rule'
 import vaccines from '../../../utils/vaccines'
@@ -34,6 +35,9 @@ const Overview = (props: Props) => {
     onClose()
     props.onEditCertificateRule(rule)
   }
+
+  // TODO remove at some point. Currently we can use this to get the encoded certificate rules for a given customRule
+  console.log(props.customRule.rules.map(rule => encodeCertificateRule(props.customRule, rule)))
 
   return (
     <>
