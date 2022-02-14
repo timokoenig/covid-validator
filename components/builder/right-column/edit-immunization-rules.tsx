@@ -13,7 +13,9 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import { CustomRule, ImmunizationRule } from '../../../utils/certlogic'
+import { CustomRule, ImmunizationRule, immunizationTypeName } from '../../../utils/certlogic'
+import { decodeImmunizationRule } from '../../../utils/immunization-rule'
+import vaccines from '../../../utils/vaccines'
 import ImmunizationWizardModal from '../modal/immunization-wizard'
 
 type Props = {
@@ -73,22 +75,26 @@ const EditImmunizationRules = (props: Props) => {
             </Tr>
           </Thead>
           <Tbody>
-            {rules.map(rule => (
-              <Tr key={rule.medicalProducts.join('') + rule.rule}>
-                <Td>
-                  {rule.medicalProducts.map(mp => (
-                    <Text key={mp}>{mp}</Text>
-                  ))}
-                </Td>
-                <Td>{rule.rule}</Td>
-                <Td>{rule.type}</Td>
-                <Td>
-                  <Button colorScheme="red" onClick={() => onDelete(rule)}>
-                    <DeleteIcon width="4" height="4" />
-                  </Button>
-                </Td>
-              </Tr>
-            ))}
+            {rules.map(rule => {
+              const decodedRule = decodeImmunizationRule(rule.rule)
+              const logic = `${decodedRule.dn} ${decodedRule.symbol} ${decodedRule.sn}`
+              return (
+                <Tr key={rule.id}>
+                  <Td>
+                    {rule.medicalProducts.map(mp => (
+                      <Text key={mp}>{vaccines.find(v => v.id === mp)?.name}</Text>
+                    ))}
+                  </Td>
+                  <Td>{logic}</Td>
+                  <Td>{immunizationTypeName(rule.type)}</Td>
+                  <Td>
+                    <Button colorScheme="red" onClick={() => onDelete(rule)}>
+                      <DeleteIcon width="4" height="4" />
+                    </Button>
+                  </Td>
+                </Tr>
+              )
+            })}
             {/* <Tr>
               <Td>BioNTech</Td>
               <Td>1 == 1</Td>

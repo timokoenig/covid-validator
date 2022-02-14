@@ -24,10 +24,25 @@ export const IMMUNIZATION_TYPE_FULL = 'full'
 export const IMMUNIZATION_TYPE_FULL_RECOVERY = 'full-recovery'
 export const IMMUNIZATION_TYPE_BOOSTER = 'booster'
 
+export function immunizationTypeName(type: string): string {
+  switch (type) {
+    case IMMUNIZATION_TYPE_PARTIAL:
+      return 'Partial Immunization'
+    case IMMUNIZATION_TYPE_FULL:
+      return 'Full Immunization'
+    case IMMUNIZATION_TYPE_FULL_RECOVERY:
+      return 'Full Immunization after Recovery'
+    case IMMUNIZATION_TYPE_BOOSTER:
+      return 'Booster Immunization'
+    default:
+      return ''
+  }
+}
+
 export type ImmunizationRule = {
   id: string
   medicalProducts: string[]
-  rule: string
+  rule: any
   type: string
 }
 

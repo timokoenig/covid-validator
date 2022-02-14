@@ -13,7 +13,9 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import React from 'react'
-import { CustomRule, Rule } from '../../../utils/certlogic'
+import { CustomRule, immunizationTypeName, Rule } from '../../../utils/certlogic'
+import { decodeImmunizationRule } from '../../../utils/immunization-rule'
+import vaccines from '../../../utils/vaccines'
 import WizardModal from '../modal/wizard'
 import RuleComponent from '../rule'
 
@@ -73,7 +75,7 @@ const Overview = (props: Props) => {
             Edit
           </Button>
         </Box>
-        {props.customRule.description !== '' && <Text mb="5">Hello</Text>}
+        {props.customRule.description !== '' && <Text mb="5">{props.customRule.description}</Text>}
         <Box backgroundColor="gray.700" borderRadius="5" mb="10">
           <Box display="flex" alignItems="center" flexDirection="row" m="5">
             <Text flex="1" fontWeight="semibold">
@@ -92,17 +94,21 @@ const Overview = (props: Props) => {
               </Tr>
             </Thead>
             <Tbody>
-              {props.customRule.immunizationRules.map(rule => (
-                <Tr key={rule.id}>
-                  <Td>
-                    {rule.medicalProducts.map(mp => (
-                      <Text key={mp}>{mp}</Text>
-                    ))}
-                  </Td>
-                  <Td>{rule.rule}</Td>
-                  <Td>{rule.type}</Td>
-                </Tr>
-              ))}
+              {props.customRule.immunizationRules.map(rule => {
+                const decodedRule = decodeImmunizationRule(rule.rule)
+                const logic = `${decodedRule.dn} ${decodedRule.symbol} ${decodedRule.sn}`
+                return (
+                  <Tr key={rule.id}>
+                    <Td>
+                      {rule.medicalProducts.map(mp => (
+                        <Text key={mp}>{vaccines.find(vac => vac.id === mp)?.name}</Text>
+                      ))}
+                    </Td>
+                    <Td>{logic}</Td>
+                    <Td>{immunizationTypeName(rule.type)}</Td>
+                  </Tr>
+                )
+              })}
             </Tbody>
           </Table>
         </Box>
