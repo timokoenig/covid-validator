@@ -1,39 +1,72 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { Box, Modal, ModalOverlay } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
+import { CertificateRule } from '../../../../utils/certlogic'
 import TestSelection from './test-selection'
 import TypeSelection from './type-selection'
 import VaccineSelection from './vaccine-selection'
-// import { useTranslation } from 'react-i18next'
 
 type Props = {
   isOpen: boolean
   onClose: () => void
-  onAdd: () => void
+  onAdd: (data: CertificateRule) => void
 }
 
 const WizardModal = (props: Props) => {
   const [type, setType] = useState<string>('')
-  const [vaccines, setVaccines] = useState<string[]>([])
-  const [tests, setTests] = useState<string[]>([])
-  // const { t } = useTranslation('common')
 
   const onClose = () => {
     setType('')
-    setVaccines([])
-    setTests([])
     props.onClose()
   }
 
   const Body = (): JSX.Element => {
     if (type === '') {
-      return <TypeSelection onClose={onClose} onClick={props.onAdd} />
+      return (
+        <TypeSelection
+          onClose={onClose}
+          onClick={selection => {
+            if (selection === 'Recovery') {
+              props.onAdd({ id: uuidv4(), result: true, type: 'Recovery', translations: [] })
+              return
+            }
+            setType(selection)
+          }}
+        />
+      )
     }
-    if (type === 'Vaccination' && vaccines.length === 0) {
-      return <VaccineSelection onClose={onClose} onClick={setVaccines} />
+    if (type === 'Vaccination') {
+      return (
+        <VaccineSelection
+          onClose={onClose}
+          onClick={vaccines => {
+            props.onAdd({
+              id: uuidv4(),
+              result: true,
+              type,
+              medicalProducts: vaccines,
+              translations: [],
+            })
+          }}
+        />
+      )
     }
-    if (type === 'Test' && tests.length === 0) {
-      return <TestSelection onClose={onClose} onClick={setTests} />
+    if (type === 'Test') {
+      return (
+        <TestSelection
+          onClose={onClose}
+          onClick={tests => {
+            props.onAdd({
+              id: uuidv4(),
+              result: true,
+              type,
+              medicalProducts: tests,
+              translations: [],
+            })
+          }}
+        />
+      )
     }
     return <Box />
   }

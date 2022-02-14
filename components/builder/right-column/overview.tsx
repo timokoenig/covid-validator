@@ -13,7 +13,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import React from 'react'
-import { CustomRule, immunizationTypeName, Rule } from '../../../utils/certlogic'
+import { CertificateRule, CustomRule, immunizationTypeName } from '../../../utils/certlogic'
 import { decodeImmunizationRule } from '../../../utils/immunization-rule'
 import vaccines from '../../../utils/vaccines'
 import WizardModal from '../modal/wizard'
@@ -23,7 +23,7 @@ type Props = {
   customRule: CustomRule
   onChange: (customRule: CustomRule) => void
   onEdit: () => void
-  onEditCertificateRule: () => void
+  onEditCertificateRule: (rule: CertificateRule) => void
   onEditImmunizationRules: () => void
 }
 
@@ -54,16 +54,16 @@ const Overview = (props: Props) => {
   //   })
   // }
 
-  const onDelete = (rule: Rule) => {
+  const onDelete = (rule: CertificateRule) => {
     props.onChange({
       ...props.customRule,
-      rules: props.customRule.rules.filter(r => r.Identifier !== rule.Identifier),
+      rules: props.customRule.rules.filter(r => r.id !== rule.id),
     })
   }
 
-  const onAddRule = () => {
+  const onAddRule = (rule: CertificateRule) => {
     onClose()
-    props.onEditCertificateRule()
+    props.onEditCertificateRule(rule)
   }
 
   return (
@@ -124,10 +124,10 @@ const Overview = (props: Props) => {
           {props.customRule.rules.length === 0 && <Text>No rules available</Text>}
           {props.customRule.rules.map(rule => (
             <RuleComponent
-              key={rule.Identifier}
+              key={rule.id}
               rule={rule}
               onDelete={() => onDelete(rule)}
-              onEdit={() => {}}
+              onEdit={() => props.onEditCertificateRule(rule)}
             />
           ))}
         </SimpleGrid>

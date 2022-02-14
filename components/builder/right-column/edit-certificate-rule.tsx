@@ -2,20 +2,40 @@
 import { ChevronLeftIcon, DeleteIcon } from '@chakra-ui/icons'
 import { Box, Button, Heading, Input, Select, Text, useDisclosure } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { CustomRule, Language } from '../../../utils/certlogic'
+import {
+  CertificateRule,
+  CustomRule,
+  immunizationTypeName,
+  IMMUNIZATION_TYPE_BOOSTER,
+  IMMUNIZATION_TYPE_FULL,
+  IMMUNIZATION_TYPE_FULL_RECOVERY,
+  IMMUNIZATION_TYPE_PARTIAL,
+  Language,
+} from '../../../utils/certlogic'
+import tests from '../../../utils/tests'
+import vaccines from '../../../utils/vaccines'
 import LanguageModal from '../modal/language'
 
 type Props = {
   customRule: CustomRule
+  certificateRule: CertificateRule
   onChange: (customRule: CustomRule) => void
   onBack: () => void
 }
 
 const EditCertificateRule = (props: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [translations, setTranslations] = useState<Language[]>([{ lang: 'en', desc: '' }])
-
-  const type = 'vaccination'
+  const [result, setResult] = useState<boolean>(props.certificateRule.result)
+  const [validFrom, setValidFrom] = useState<number | undefined>(props.certificateRule.validFrom)
+  const [validTo, setValidTo] = useState<number | undefined>(props.certificateRule.validTo)
+  const [immunizationStatus, setImmunizationStatus] = useState<string | undefined>(
+    props.certificateRule.immunizationStatus
+  )
+  const [translations, setTranslations] = useState<Language[]>(
+    props.certificateRule.translations.length === 0
+      ? [{ lang: 'en', desc: '' }]
+      : props.certificateRule.translations
+  )
 
   const onAddTranslation = (lang: string) => {
     onClose()
@@ -41,7 +61,20 @@ const EditCertificateRule = (props: Props) => {
 
   const onSave = () => {
     // TODO check if everything is set
-    // then save rule
+    props.onChange({
+      ...props.customRule,
+      rules: [
+        ...props.customRule.rules.filter(r => r.id !== props.certificateRule.id),
+        {
+          ...props.certificateRule,
+          translations,
+          result,
+          validFrom,
+          validTo,
+          immunizationStatus,
+        },
+      ],
+    })
   }
 
   return (
@@ -64,13 +97,24 @@ const EditCertificateRule = (props: Props) => {
           <Box display="flex" flexDirection="row">
             <Box flex="1">
               <Text fontWeight="semibold">Certificate Type</Text>
-              <Text>Vaccination</Text>
+              <Text>{props.certificateRule.type}</Text>
             </Box>
-            <Box flex="1">
-              <Text fontWeight="semibold">Vaccines</Text>
-              <Text>BioNTech</Text>
-              <Text>Moderna</Text>
-            </Box>
+            {props.certificateRule.type === 'Vaccination' && (
+              <Box flex="1">
+                <Text fontWeight="semibold">Vaccines</Text>
+                {props.certificateRule.medicalProducts?.map(mp => (
+                  <Text key={mp}>{vaccines.find(v => v.id === mp)?.name}</Text>
+                ))}
+              </Box>
+            )}
+            {props.certificateRule.type === 'Test' && (
+              <Box flex="1">
+                <Text fontWeight="semibold">Tests</Text>
+                {props.certificateRule.medicalProducts?.map(mp => (
+                  <Text key={mp}>{tests.find(t => t.id === mp)?.name}</Text>
+                ))}
+              </Box>
+            )}
           </Box>
         </Box>
         <Box mb="10">
@@ -78,31 +122,63 @@ const EditCertificateRule = (props: Props) => {
             Condition (what should be checked)
           </Text>
           <Box display="flex" flexDirection="row" mb="5">
-            {type === 'vaccination' && (
+            {props.certificateRule.type === 'Vaccination' && (
               <Box flex="1">
                 <Text fontWeight="semibold">Type</Text>
-                <Select value="full" width={200}>
-                  <option value="full">Full Vaccination</option>
-                  <option value="booster">Booster</option>
+                <Select
+                  value={immunizationStatus}
+                  width={200}
+                  onChange={e => setImmunizationStatus(e.target.selectedOptions[0].value)}
+                >
+                  <option value={IMMUNIZATION_TYPE_PARTIAL}>
+                    {immunizationTypeName(IMMUNIZATION_TYPE_PARTIAL)}
+                  </option>
+                  <option value={IMMUNIZATION_TYPE_FULL}>
+                    {immunizationTypeName(IMMUNIZATION_TYPE_FULL)}
+                  </option>
+                  <option value={IMMUNIZATION_TYPE_FULL_RECOVERY}>
+                    {immunizationTypeName(IMMUNIZATION_TYPE_FULL_RECOVERY)}
+                  </option>
+                  <option value={IMMUNIZATION_TYPE_BOOSTER}>
+                    {immunizationTypeName(IMMUNIZATION_TYPE_BOOSTER)}
+                  </option>
                 </Select>
               </Box>
             )}
             <Box flex="1">
               <Text fontWeight="semibold">Result</Text>
-              <Select value="valid" width={200}>
-                <option value="valid">VALID</option>
-                <option value="invalid">INVALID</option>
+              <Select
+                value={result ? 'true' : 'false'}
+                width={200}
+                onChange={e => setResult(e.target.selectedOptions[0].value === 'true')}
+              >
+                <option value="true">VALID</option>
+                <option value="false">INVALID</option>
               </Select>
             </Box>
           </Box>
           <Box display="flex" flexDirection="row">
             <Box flex="1">
               <Text fontWeight="semibold">ValidFrom (optional)</Text>
-              <Input placeholder="in days" style={{ width: 200 }} />
+              <Input
+                placeholder="in days"
+                value={validFrom}
+                style={{ width: 200 }}
+                onChange={e =>
+                  setValidFrom(e.target.value === '' ? undefined : parseInt(e.target.value, 10))
+                }
+              />
             </Box>
             <Box flex="1">
               <Text fontWeight="semibold">ValidTo (optional)</Text>
-              <Input placeholder="in days" style={{ width: 200 }} />
+              <Input
+                placeholder="in days"
+                value={validTo}
+                style={{ width: 200 }}
+                onChange={e =>
+                  setValidTo(e.target.value === '' ? undefined : parseInt(e.target.value, 10))
+                }
+              />
             </Box>
           </Box>
         </Box>
