@@ -36,11 +36,11 @@ const Rule = (props: Props) => {
         </Text>
       </Box>
       <Box my="5">
-        <Text fontWeight="semibold">Pre-Condition (condition when a rule should be checked)</Text>
+        <Text fontWeight="semibold">Pre-Condition (when a rule should be checked)</Text>
         <Text>Vaccination; BioNTech</Text>
       </Box>
       <Box my="5">
-        <Text fontWeight="semibold">Condition (condition what should be checked)</Text>
+        <Text fontWeight="semibold">Condition (what should be checked)</Text>
         <Text>Date &gt; VaccinationDate + 14 days</Text>
         <Text>Date &lt; VaccinationDate + 270 days</Text>
       </Box>

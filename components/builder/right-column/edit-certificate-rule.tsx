@@ -59,7 +59,7 @@ const EditCertificateRule = (props: Props) => {
         <Text mb="10">Some explanation what this is</Text>
         <Box mb="10">
           <Text fontSize="xl" fontWeight="semibold" mb="2">
-            Pre-Condition (condition when a rule should be checked)
+            Pre-Condition (when a rule should be checked)
           </Text>
           <Box display="flex" flexDirection="row">
             <Box flex="1">
@@ -75,7 +75,7 @@ const EditCertificateRule = (props: Props) => {
         </Box>
         <Box mb="10">
           <Text fontSize="xl" fontWeight="semibold" mb="2">
-            Condition (condition what should be checked)
+            Condition (what should be checked)
           </Text>
           <Box display="flex" flexDirection="row" mb="5">
             {type === 'vaccination' && (
