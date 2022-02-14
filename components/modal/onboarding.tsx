@@ -84,17 +84,18 @@ const OnboardingModal = (props: Props) => {
           <Button
             isFullWidth
             h="auto"
+            p="0"
             position="relative"
             overflowWrap="anywhere"
             whiteSpace="normal"
-            onClick={() => setAccepted(!accepted)}
           >
             <Checkbox
               isChecked={accepted}
-              mr="5"
-              maxW="100%"
+              w="100%"
+              h="100%"
               p="4"
-              onChange={e => setAccepted(!e.target.checked)}
+              px="8"
+              onChange={e => setAccepted(e.target.checked)}
               wordBreak="break-all"
             >
               {t('onboarding.privacy.accept')}
