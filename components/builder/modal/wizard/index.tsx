@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { Modal, ModalOverlay } from '@chakra-ui/react'
+import { Box, Modal, ModalOverlay } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import RuleSelection from './rule-selection'
 import TestSelection from './test-selection'
 import TypeSelection from './type-selection'
 import VaccineSelection from './vaccine-selection'
@@ -10,6 +9,7 @@ import VaccineSelection from './vaccine-selection'
 type Props = {
   isOpen: boolean
   onClose: () => void
+  onAdd: () => void
 }
 
 const WizardModal = (props: Props) => {
@@ -27,7 +27,7 @@ const WizardModal = (props: Props) => {
 
   const Body = (): JSX.Element => {
     if (type === '') {
-      return <TypeSelection onClose={onClose} onClick={setType} />
+      return <TypeSelection onClose={onClose} onClick={props.onAdd} />
     }
     if (type === 'Vaccination' && vaccines.length === 0) {
       return <VaccineSelection onClose={onClose} onClick={setVaccines} />
@@ -35,7 +35,7 @@ const WizardModal = (props: Props) => {
     if (type === 'Test' && tests.length === 0) {
       return <TestSelection onClose={onClose} onClick={setTests} />
     }
-    return <RuleSelection type={type} vaccines={vaccines} tests={tests} onClose={onClose} />
+    return <Box />
   }
 
   return (
