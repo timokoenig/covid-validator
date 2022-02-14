@@ -1,6 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import { ChevronLeftIcon, DeleteIcon } from '@chakra-ui/icons'
-import { Box, Button, Heading, Input, Select, Text, useDisclosure } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Heading,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  InputRightAddon,
+  Select,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { encodeCertificateRule } from '../../../utils/certificate-rule'
 import {
@@ -180,25 +191,33 @@ const EditCertificateRule = (props: Props) => {
           <Box display="flex" flexDirection="row">
             <Box flex="1">
               <Text fontWeight="semibold">ValidFrom (optional)</Text>
-              <Input
-                placeholder="in days"
-                value={validFrom}
-                style={{ width: 200 }}
-                onChange={e =>
-                  setValidFrom(e.target.value === '' ? undefined : parseInt(e.target.value, 10))
-                }
-              />
+              <InputGroup>
+                <Input
+                  value={validFrom}
+                  style={{ width: 200 }}
+                  onChange={e =>
+                    setValidFrom(e.target.value === '' ? undefined : parseInt(e.target.value, 10))
+                  }
+                />
+                <InputRightAddon
+                  children={props.certificateRule.type === 'Test' ? 'hours' : 'days'}
+                />
+              </InputGroup>
             </Box>
             <Box flex="1">
               <Text fontWeight="semibold">ValidTo (optional)</Text>
-              <Input
-                placeholder="in days"
-                value={validTo}
-                style={{ width: 200 }}
-                onChange={e =>
-                  setValidTo(e.target.value === '' ? undefined : parseInt(e.target.value, 10))
-                }
-              />
+              <InputGroup>
+                <Input
+                  value={validTo}
+                  style={{ width: 200 }}
+                  onChange={e =>
+                    setValidTo(e.target.value === '' ? undefined : parseInt(e.target.value, 10))
+                  }
+                />
+                <InputRightAddon
+                  children={props.certificateRule.type === 'Test' ? 'hours' : 'days'}
+                />
+              </InputGroup>
             </Box>
           </Box>
         </Box>
@@ -213,16 +232,18 @@ const EditCertificateRule = (props: Props) => {
           </Box>
           {translations.map(trans => (
             <Box key={trans.lang} display="flex" flexDirection="row" py="5">
-              <Box display="flex" alignItems="center">
-                <Text fontWeight="semibold">{trans.lang.toUpperCase()}</Text>
-              </Box>
-              <Input
-                value={trans.desc}
-                mx="5"
-                onChange={e => onChangeTranslation(trans.lang, e.target.value)}
-              />
+              <InputGroup>
+                <InputLeftAddon
+                  children={<Text fontWeight="semibold">{trans.lang.toUpperCase()}</Text>}
+                />
+                <Input
+                  value={trans.desc}
+                  onChange={e => onChangeTranslation(trans.lang, e.target.value)}
+                />
+              </InputGroup>
+
               {trans.lang !== 'en' && (
-                <Button colorScheme="red" onClick={() => onDeleteTranslation(trans.lang)}>
+                <Button colorScheme="red" onClick={() => onDeleteTranslation(trans.lang)} ml="5">
                   <DeleteIcon width="4" height="4" />
                 </Button>
               )}
