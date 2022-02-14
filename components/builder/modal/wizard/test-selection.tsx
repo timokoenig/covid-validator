@@ -45,22 +45,18 @@ const VaccineSelection = (props: Props) => {
                 whiteSpace="normal"
                 variant="ghost"
                 justifyContent="left"
-                onClick={() =>
-                  selectedTests.includes(item.id)
-                    ? setSelectedTests(selectedTests.filter(v => v !== item.id))
-                    : setSelectedTests([...selectedTests, item.id])
-                }
+                p="0"
               >
                 <Checkbox
                   isChecked={selectedTests.includes(item.id)}
-                  mr="5"
-                  maxW="100%"
-                  py="4"
+                  w="100%"
+                  h="100%"
+                  p="4"
                   wordBreak="break-all"
                   onChange={e =>
                     e.target.checked
-                      ? setSelectedTests(selectedTests.filter(v => v !== item.id))
-                      : setSelectedTests([...selectedTests, item.id])
+                      ? setSelectedTests([...selectedTests, item.id])
+                      : setSelectedTests(selectedTests.filter(v => v !== item.id))
                   }
                 >
                   {item.name}
