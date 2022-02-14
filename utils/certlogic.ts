@@ -16,7 +16,18 @@ export type CustomRule = {
   name: string
   description: string
   immunizationRules: ImmunizationRule[]
-  rules: Rule[]
+  rules: CertificateRule[]
+}
+
+export type CertificateRule = {
+  id: string
+  type: string
+  medicalProducts?: string[]
+  immunizationStatus?: string
+  result: boolean
+  validFrom?: number
+  validTo?: number
+  translations: Language[]
 }
 
 export const IMMUNIZATION_TYPE_PARTIAL = 'partial'
