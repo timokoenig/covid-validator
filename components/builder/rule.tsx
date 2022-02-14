@@ -1,4 +1,3 @@
-import { DeleteIcon } from '@chakra-ui/icons'
 import { Box, Button, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
 import { CertificateRule, immunizationTypeName } from '../../utils/certlogic'
@@ -7,7 +6,6 @@ import vaccines from '../../utils/vaccines'
 
 type Props = {
   rule: CertificateRule
-  onDelete: () => void
   onEdit: () => void
 }
 
@@ -20,11 +18,8 @@ const Rule = (props: Props) => {
             <Text>{props.rule.translations.find(t => t.lang === 'en')?.desc}</Text>
           </Box>
         </Box>
-        <Button colorScheme="blue" onClick={props.onEdit} mr="5">
+        <Button colorScheme="blue" onClick={props.onEdit}>
           Edit
-        </Button>
-        <Button colorScheme="red" onClick={props.onDelete}>
-          <DeleteIcon width="3" height="3" />
         </Button>
       </Flex>
       <Box my="5">

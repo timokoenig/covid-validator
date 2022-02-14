@@ -54,13 +54,6 @@ const Overview = (props: Props) => {
   //   })
   // }
 
-  const onDelete = (rule: CertificateRule) => {
-    props.onChange({
-      ...props.customRule,
-      rules: props.customRule.rules.filter(r => r.id !== rule.id),
-    })
-  }
-
   const onAddRule = (rule: CertificateRule) => {
     onClose()
     props.onEditCertificateRule(rule)
@@ -126,7 +119,6 @@ const Overview = (props: Props) => {
             <RuleComponent
               key={rule.id}
               rule={rule}
-              onDelete={() => onDelete(rule)}
               onEdit={() => props.onEditCertificateRule(rule)}
             />
           ))}

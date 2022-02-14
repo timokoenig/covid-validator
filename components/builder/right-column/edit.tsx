@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, DeleteIcon } from '@chakra-ui/icons'
+import { ChevronLeftIcon } from '@chakra-ui/icons'
 import { Box, Button, FormControl, Input, Spacer, Text, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { CustomRule } from '../../../utils/certlogic'
@@ -75,8 +75,8 @@ const Edit = (props: Props) => {
           )}
           <Spacer />
           {!addMode && (
-            <Button colorScheme="red" onClick={onOpen} mr="5">
-              <DeleteIcon width="3" height="3" />
+            <Button colorScheme="red" variant="ghost" onClick={onOpen} mr="5">
+              Delete
             </Button>
           )}
           <Button colorScheme="blue" isDisabled={!isDirty} onClick={onSave}>
