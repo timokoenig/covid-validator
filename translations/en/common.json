@@ -120,7 +120,7 @@
   "builder.rules.empty": "No rules available",
   "builder.placeholder": "Add or select custom rule to continue",
   "builder.delete.confirm": "Are you sure?",
-  "builder.delete.confirm.message": "The custom rule <1>x</1> will be deleted irrevocably from your device. It will not be delete from other devices.",
+  "builder.delete.confirm.message": "The custom rule will be deleted irrevocably from your device. It will not be delete from other devices.",
   "builder.edit.name.placeholder": "Name (required)",
   "builder.edit.description.placeholder": "Description",
   "builder.edit.validfrom": "Valid From (optional)",
