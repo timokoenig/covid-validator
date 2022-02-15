@@ -13,7 +13,7 @@ import {
   Spacer,
 } from '@chakra-ui/react'
 import React from 'react'
-// import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   isOpen: boolean
@@ -22,18 +22,15 @@ type Props = {
 }
 
 const LanguageModal = (props: Props) => {
-  // const { t } = useTranslation('common')
+  const { t } = useTranslation('common')
 
-  const languages = [
-    { lang: 'de', desc: 'German' },
-    // { lang: 'en', desc: 'English' },
-  ]
+  const languages = [{ lang: 'de', desc: 'German' }]
 
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose} size="lg" scrollBehavior="inside">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Select Language</ModalHeader>
+        <ModalHeader>{t('builder.modal.language')}</ModalHeader>
         <ModalCloseButton onClick={props.onClose} />
         <ModalBody>
           <List>

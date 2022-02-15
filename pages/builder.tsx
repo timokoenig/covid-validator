@@ -1,8 +1,8 @@
-import { Flex, useDisclosure, useToast } from '@chakra-ui/react'
+import { Flex, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { v4 as uuidv4 } from 'uuid'
 import LeftColumn from '../components/builder/left-column'
-import LoadModal from '../components/builder/modal/load'
 import RightColumn from '../components/builder/right-column'
 import PageMeta from '../components/page-meta'
 import { builder, setRules } from '../state/builder'
@@ -10,19 +10,14 @@ import { CustomRule } from '../utils/certlogic'
 import defaultImmunizationRulesGermany from '../utils/default-immunization-rules-germany'
 
 const BuilderPage = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { t } = useTranslation('common')
   const toast = useToast()
   const builderState = builder.use()
   const [currentCustomRule, setCurrentCustomRule] = useState<CustomRule | null>(null)
 
-  const onLoad = (customRule: CustomRule) => {
-    setCurrentCustomRule(customRule)
-    onClose()
-  }
-
   const showToast = () => {
     toast({
-      title: 'Rules updated',
+      title: t('builder.updated'),
       status: 'success',
       duration: 3000,
     })
@@ -34,6 +29,8 @@ const BuilderPage = () => {
       name: '',
       description: '',
       rules: [],
+      // at the moment we will prefill the immunization rules with the default for Germany
+      // might change it in the future
       immunizationRules: defaultImmunizationRulesGermany,
     })
   }
@@ -57,14 +54,11 @@ const BuilderPage = () => {
       <Flex color="white" height="100vh">
         <LeftColumn
           customRule={currentCustomRule}
-          onLoad={onOpen}
           onCreate={onCreate}
           onChange={setCurrentCustomRule}
         />
         <RightColumn customRule={currentCustomRule} onChange={onUpdate} onDelete={onDelete} />
       </Flex>
-      <LoadModal isOpen={isOpen} onClose={onClose} onClick={onLoad} />
-      {/* <ConfirmModal ruleName={currentCustomRule.name} isOpen={isOpenDelete} onClose={onDelete} /> */}
     </>
   )
 }

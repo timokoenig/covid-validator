@@ -9,10 +9,9 @@ import {
   ModalFooter,
   ModalHeader,
   Spacer,
-  Text,
 } from '@chakra-ui/react'
 import React from 'react'
-// import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   onClose: () => void
@@ -20,18 +19,13 @@ type Props = {
 }
 
 const TypeSelection = (props: Props) => {
-  // const { t } = useTranslation('common')
+  const { t } = useTranslation('common')
 
   const items = ['Vaccination', 'Recovery', 'Test']
 
   return (
     <ModalContent>
-      <ModalHeader>
-        Select Certificate Type <br />
-        <Text fontWeight="normal" fontSize="md">
-          Subheadling with instructions
-        </Text>
-      </ModalHeader>
+      <ModalHeader>{t('builder.modal.certificate')}</ModalHeader>
       <ModalCloseButton onClick={props.onClose} />
       <ModalBody>
         <List>
