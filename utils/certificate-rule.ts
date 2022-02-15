@@ -129,16 +129,8 @@ export function encodeCertificateRule(
                 ],
               },
               // condition
-              {
-                if: [
-                  condition,
-                  // if condition is true, we return the certificates result type
-                  true,
-                  // if condition is false, we return false
-                  false,
-                ],
-              },
-              // otherwise return true
+              condition,
+              // otherwise return false
               false,
             ],
           },
@@ -244,16 +236,8 @@ export function encodeCertificateRule(
                 ],
               },
               // condition
-              {
-                if: [
-                  condition,
-                  // if condition is true, we return the certificates result type
-                  true,
-                  // if condition is false, we return false
-                  false,
-                ],
-              },
-              // otherwise return true
+              condition,
+              // otherwise return false
               false,
             ],
           },
@@ -338,16 +322,9 @@ export function encodeCertificateRule(
         if: [
           // precondition
           { var: 'payload.r.0' },
-          {
-            // condition
-            if: [
-              condition,
-              // if condition is true, we return the certificates result type
-              true,
-              // if condition is false, we return false
-              false,
-            ],
-          },
+          // condition
+          condition,
+          // otherwise return false
           false,
         ],
       },
