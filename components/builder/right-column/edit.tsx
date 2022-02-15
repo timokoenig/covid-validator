@@ -41,6 +41,14 @@ const Edit = (props: Props) => {
     }
   }
 
+  const onDuplicate = () => {
+    props.onChange({
+      ...props.customRule,
+      id: '',
+      name: `${props.customRule.name} (copy)`,
+    })
+  }
+
   return (
     <>
       <Box flex="1" px="10" py="5" display="flex" flexDirection="column" overflow="scroll">
@@ -52,9 +60,14 @@ const Edit = (props: Props) => {
           )}
           <Spacer />
           {!addMode && (
-            <Button colorScheme="red" variant="ghost" onClick={onOpen} mr="5">
-              {t('delete')}
-            </Button>
+            <>
+              <Button variant="ghost" onClick={onDuplicate} mr="5">
+                {t('duplicate')}
+              </Button>
+              <Button colorScheme="red" variant="ghost" onClick={onOpen} mr="5">
+                {t('delete')}
+              </Button>
+            </>
           )}
           <Button colorScheme="blue" isDisabled={!isDirty} onClick={onSave}>
             {t('save')}
