@@ -375,6 +375,9 @@ test('Recovery after 10 days; INVALID', () => {
 test('Recovery after 30 days; VALID', () => {
   expect(validate(recoveryDCC, countryRules, moment('2022-02-09').toDate())).toBeTruthy()
 })
+test('Recovery after 100 days; INVALID', () => {
+  expect(validate(recoveryDCC, countryRules, moment('2022-04-20').toDate())).toBeFalsy()
+})
 
 /////////////////// Test ///////////////////
 test('Antigen after 10 hours; VALID', () => {
