@@ -10,6 +10,7 @@ import {
   Th,
   Thead,
   Tr,
+  useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react'
 import React from 'react'
@@ -47,7 +48,7 @@ const Overview = (props: Props) => {
           </Button>
         </Box>
         {props.customRule.description !== '' && <Text mb="5">{props.customRule.description}</Text>}
-        <Box backgroundColor="gray.700" borderRadius="5" mb="10">
+        <Box backgroundColor={useColorModeValue('gray.200', 'gray.700')} borderRadius="5" mb="10">
           <Box display="flex" alignItems="center" flexDirection="row" m="5">
             <Text flex="1" fontWeight="semibold">
               {t('builder.rules.immunization')}

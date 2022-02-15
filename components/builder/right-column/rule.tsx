@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { CertificateRule, immunizationTypeName } from '../../../utils/certlogic'
@@ -13,7 +13,7 @@ type Props = {
 const Rule = (props: Props) => {
   const { t } = useTranslation('common')
   return (
-    <Box borderRadius="10" backgroundColor="gray.700" padding="5">
+    <Box borderRadius="10" backgroundColor={useColorModeValue('gray.200', 'gray.700')} padding="5">
       <Flex>
         <Box flex="1" display="flex" flexDireaction="row" alignItems="center">
           <Box>

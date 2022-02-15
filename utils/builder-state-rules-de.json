@@ -51,7 +51,7 @@
             },
             {
               "lang": "de",
-              "desc": "Die Probenahme für einen NAA-Test (z.B. PCR) darf maximal 72 Stunden zurückliegen."
+              "desc": "Die Probenahme für einen NAA-Test (z.B. PCR) darf maximal 48 Stunden zurückliegen."
             }
           ],
           "validTo": 48
