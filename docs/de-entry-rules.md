@@ -45,9 +45,9 @@ The data is based on the information provided by [pei.de](https://www.pei.de/DE/
 
 ## Recovery
 
-| Status    | ValidFrom | ValidTo | Note                                                       |
-| --------- | --------- | ------- | ---------------------------------------------------------- |
-| Recovered | 28 days   | 90 days | Recovered since date of the first positive PCR test result |
+| Status    | ValidFrom | ValidTo  | Note                                                       |
+| --------- | --------- | -------- | ---------------------------------------------------------- |
+| Recovered | 28 days   | 180 days | Recovered since date of the first positive PCR test result |
 
 ## Test
 
