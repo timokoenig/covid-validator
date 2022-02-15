@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { evaluate } from 'certlogic-js'
 import moment from 'moment'
+import builderStateRulesDE from './builder-state-rules-de.json'
+import { encodeCertificateRule } from './certificate-rule'
 import { DCC } from './dcc'
 import countryBusinessRules from './eu-dcc-rules.json'
 
@@ -109,8 +112,32 @@ export function validateDCCRule(rule: Rule, parameters: Parameters): ValidationR
 export function validateDCCRules(
   dcc: DCC,
   country: string,
+  state: string,
   validationClock: Date
 ): DCCRuleValidationResult {
+  // TODO this is a temporary workaround to handle custom rule validation
+  if (country.toUpperCase() == 'DE' && state !== '') {
+    // At this point all states are similar thats why we have only one set of rules for it
+    const customRule = builderStateRulesDE.customRules.find(
+      rule => rule.id === 'de45d285-c750-4537-bb09-79910079a559'
+    )!
+    const rules = customRule.rules.map(rule => encodeCertificateRule(customRule, rule))
+    const results = rules.map(rule => {
+      if (rule === null) return { valid: false }
+      return validateDCCRule(rule, {
+        payload: dcc.data.payload.hcert.dgc,
+        external: {
+          valueSets: [],
+          validationClock: validationClock.toISOString(),
+        },
+      })
+    })
+    const validRule = results.find(res => res.valid)
+    return {
+      results: [validRule as ValidationResult],
+      isValid: validRule !== undefined,
+    }
+  }
   const rules = countryBusinessRules as Rules
   const countryRules = rules.rules
     .filter(rule => rule.Country == country.toUpperCase())
