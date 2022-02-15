@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import moment from 'moment'
+import builderStateRulesDE from '../utils/builder-state-rules-de.json'
+import { encodeCertificateRule } from '../utils/certificate-rule'
 import { Rule, validateDCCRule } from '../utils/certlogic'
 import { DigitalGreenCertificate } from '../utils/dcc'
-import localRulesHamburg from '../utils/local-rules-hamburg.json'
 
 /// DCCs
 const vaccinationDCC: DigitalGreenCertificate = {
@@ -76,8 +77,13 @@ const testDCC: DigitalGreenCertificate = {
 }
 
 /// Helper functions
-function validate(dgc: DigitalGreenCertificate, rules: Rule[], validationClock: Date): boolean {
+function validate(
+  dgc: DigitalGreenCertificate,
+  rules: (Rule | null)[],
+  validationClock: Date
+): boolean {
   const results = rules.map(rule => {
+    if (rule === null) return { valid: false }
     return validateDCCRule(rule, {
       payload: dgc,
       external: {
@@ -90,6 +96,11 @@ function validate(dgc: DigitalGreenCertificate, rules: Rule[], validationClock: 
 }
 
 const date = moment('2022-02-15T20:00:00Z').toDate()
+
+const customRule = builderStateRulesDE.customRules.find(
+  rule => rule.id === 'de45d285-c750-4537-bb09-79910079a559'
+)!
+const localRulesHamburg = customRule.rules.map(rule => encodeCertificateRule(customRule, rule))
 
 /// Tests
 /////////////////// BioNTech ///////////////////
@@ -216,8 +227,8 @@ test('Recovery after 10 days; INVALID', () => {
 test('Recovery after 30 days; VALID', () => {
   expect(validate(recoveryDCC, localRulesHamburg, moment('2022-02-09').toDate())).toBeTruthy()
 })
-test('Recovery after 100 days; INVALID', () => {
-  expect(validate(recoveryDCC, localRulesHamburg, moment('2022-04-20').toDate())).toBeFalsy()
+test('Recovery after 190 days; INVALID', () => {
+  expect(validate(recoveryDCC, localRulesHamburg, moment('2022-07-19').toDate())).toBeFalsy()
 })
 
 /////////////////// Test ///////////////////
