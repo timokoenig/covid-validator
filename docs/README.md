@@ -6,4 +6,4 @@ Please DO NOT use these rules because they might be out-of-date. Inform yourself
 
 - [EU Entry Rules](./eu-entry-rules.md)
 - [DE Entry Rules](./de-entry-rules.md)
-  - [HH Local Rules](./de-hh-rules.md)
+  - [State Rules](./de-state-rules.md)
