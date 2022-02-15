@@ -77,7 +77,7 @@ const EditImmunizationRules = (props: Props) => {
           <Tbody>
             {rules.map(rule => {
               const decodedRule = decodeImmunizationRule(rule.rule)
-              const logic = `${decodedRule.dn} ${decodedRule.symbol} ${decodedRule.sn}`
+              const logic = `${decodedRule.dn} ${decodedRule.symbol} ${decodedRule.sd}`
               return (
                 <Tr key={rule.id}>
                   <Td>

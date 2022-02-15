@@ -1,0 +1,583 @@
+[
+  {
+    "Identifier": "c71e648b-04ff-4889-bf8d-bb0410e28680",
+    "Type": "Acceptance",
+    "Country": "DE",
+    "Version": "1.0.0",
+    "SchemaVersion": "1.0.0",
+    "Engine": "CERTLOGIC",
+    "EngineVersion": "0.7.5",
+    "CertificateType": "Recovery",
+    "Description": [
+      {
+        "lang": "en",
+        "desc": "The positive NAA test result (e.g., PCR) must be older than 28 days and not older than 90 days."
+      }
+    ],
+    "ValidFrom": "2022-01-01T00:00:00Z",
+    "ValidTo": "2023-01-01T00:00:00Z",
+    "AffectedFields": ["payload.r.0", "payload.r.0.fr"],
+    "Logic": {
+      "if": [
+        {
+          "var": "payload.r.0"
+        },
+        {
+          "if": [
+            {
+              "and": [
+                {
+                  "not-before": [
+                    {
+                      "plusTime": [
+                        {
+                          "var": "external.validationClock"
+                        },
+                        0,
+                        "day"
+                      ]
+                    },
+                    {
+                      "plusTime": [
+                        {
+                          "var": "payload.r.0.fr"
+                        },
+                        28,
+                        "day"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "not-after": [
+                    {
+                      "plusTime": [
+                        {
+                          "var": "external.validationClock"
+                        },
+                        0,
+                        "day"
+                      ]
+                    },
+                    {
+                      "plusTime": [
+                        {
+                          "var": "payload.r.0.fr"
+                        },
+                        90,
+                        "day"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            true,
+            false
+          ]
+        },
+        false
+      ]
+    }
+  },
+  {
+    "Identifier": "234cb87f-c16b-408b-b01a-2f362d406538",
+    "Type": "Acceptance",
+    "Country": "DE",
+    "Version": "1.0.0",
+    "SchemaVersion": "1.0.0",
+    "Engine": "CERTLOGIC",
+    "EngineVersion": "0.7.5",
+    "CertificateType": "Test",
+    "Description": [
+      {
+        "lang": "en",
+        "desc": "The sample for an antigen test (e.g., rapid test) must have been taken no longer than 24 hours ago."
+      }
+    ],
+    "ValidFrom": "2022-01-01T00:00:00Z",
+    "ValidTo": "2023-01-01T00:00:00Z",
+    "AffectedFields": ["payload.t.0", "payload.t.0.tt", "payload.t.0.tr", "payload.t.0.sc"],
+    "Logic": {
+      "if": [
+        {
+          "var": "payload.t.0"
+        },
+        {
+          "if": [
+            {
+              "in": [
+                {
+                  "var": "payload.t.0.tt"
+                },
+                ["LP217198-3"]
+              ]
+            },
+            {
+              "if": [
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "payload.t.0.tr"
+                        },
+                        "260415000"
+                      ]
+                    },
+                    {
+                      "not-after": [
+                        {
+                          "plusTime": [
+                            {
+                              "var": "external.validationClock"
+                            },
+                            0,
+                            "hour"
+                          ]
+                        },
+                        {
+                          "plusTime": [
+                            {
+                              "var": "payload.t.0.sc"
+                            },
+                            24,
+                            "hour"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                true,
+                false
+              ]
+            },
+            false
+          ]
+        },
+        false
+      ]
+    }
+  },
+  {
+    "Identifier": "4ddd697a-0ebf-4ed8-8b88-65a07d34e1ca",
+    "Type": "Acceptance",
+    "Country": "DE",
+    "Version": "1.0.0",
+    "SchemaVersion": "1.0.0",
+    "Engine": "CERTLOGIC",
+    "EngineVersion": "0.7.5",
+    "CertificateType": "Test",
+    "Description": [
+      {
+        "lang": "en",
+        "desc": "The sample for an NAA test (e.g., PCR) must have been taken no longer than 48 hours ago."
+      }
+    ],
+    "ValidFrom": "2022-01-01T00:00:00Z",
+    "ValidTo": "2023-01-01T00:00:00Z",
+    "AffectedFields": ["payload.t.0", "payload.t.0.tt", "payload.t.0.tr", "payload.t.0.sc"],
+    "Logic": {
+      "if": [
+        {
+          "var": "payload.t.0"
+        },
+        {
+          "if": [
+            {
+              "in": [
+                {
+                  "var": "payload.t.0.tt"
+                },
+                ["LP6464-4"]
+              ]
+            },
+            {
+              "if": [
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "payload.t.0.tr"
+                        },
+                        "260415000"
+                      ]
+                    },
+                    {
+                      "not-after": [
+                        {
+                          "plusTime": [
+                            {
+                              "var": "external.validationClock"
+                            },
+                            0,
+                            "hour"
+                          ]
+                        },
+                        {
+                          "plusTime": [
+                            {
+                              "var": "payload.t.0.sc"
+                            },
+                            48,
+                            "hour"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                true,
+                false
+              ]
+            },
+            false
+          ]
+        },
+        false
+      ]
+    }
+  },
+  {
+    "Identifier": "8bb12070-0e1e-44eb-8b9a-651ef0ec8a6d",
+    "Type": "Acceptance",
+    "Country": "DE",
+    "Version": "1.0.0",
+    "SchemaVersion": "1.0.0",
+    "Engine": "CERTLOGIC",
+    "EngineVersion": "0.7.5",
+    "CertificateType": "Vaccination",
+    "Description": [
+      {
+        "lang": "en",
+        "desc": "Complete vaccination series must be at least 14 days ago and not longer than 270 days ago"
+      }
+    ],
+    "ValidFrom": "2022-01-01T00:00:00Z",
+    "ValidTo": "2023-01-01T00:00:00Z",
+    "AffectedFields": [
+      "payload.v.0",
+      "payload.v.0.mp",
+      "payload.v.0.dt",
+      "payload.v.0.dn",
+      "payload.v.0.sd"
+    ],
+    "Logic": {
+      "if": [
+        {
+          "var": "payload.v.0"
+        },
+        {
+          "if": [
+            {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "payload.v.0.mp"
+                    },
+                    ["EU/1/20/1528", "EU/1/20/1507", "EU/1/21/1529", "EU/1/21/1618", "EU/1/20/1525"]
+                  ]
+                },
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "payload.v.0.dn"
+                        },
+                        2
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "payload.v.0.sd"
+                        },
+                        2
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "payload.v.0.dn"
+                        },
+                        {
+                          "var": "payload.v.0.sd"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "if": [
+                {
+                  "and": [
+                    {
+                      "not-before": [
+                        {
+                          "plusTime": [
+                            {
+                              "var": "external.validationClock"
+                            },
+                            0,
+                            "day"
+                          ]
+                        },
+                        {
+                          "plusTime": [
+                            {
+                              "var": "payload.v.0.dt"
+                            },
+                            15,
+                            "day"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "not-after": [
+                        {
+                          "plusTime": [
+                            {
+                              "var": "external.validationClock"
+                            },
+                            0,
+                            "day"
+                          ]
+                        },
+                        {
+                          "plusTime": [
+                            {
+                              "var": "payload.v.0.dt"
+                            },
+                            270,
+                            "day"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                true,
+                false
+              ]
+            },
+            false
+          ]
+        },
+        false
+      ]
+    }
+  },
+  {
+    "Identifier": "b05f5bc4-d799-4ab9-8cdf-fcae383deafa",
+    "Type": "Acceptance",
+    "Country": "DE",
+    "Version": "1.0.0",
+    "SchemaVersion": "1.0.0",
+    "Engine": "CERTLOGIC",
+    "EngineVersion": "0.7.5",
+    "CertificateType": "Vaccination",
+    "Description": [
+      {
+        "lang": "en",
+        "desc": "Complete vaccination series after recovery must not be older than 270 days"
+      }
+    ],
+    "ValidFrom": "2022-01-01T00:00:00Z",
+    "ValidTo": "2023-01-01T00:00:00Z",
+    "AffectedFields": [
+      "payload.v.0",
+      "payload.v.0.mp",
+      "payload.v.0.dt",
+      "payload.v.0.dn",
+      "payload.v.0.sd"
+    ],
+    "Logic": {
+      "if": [
+        {
+          "var": "payload.v.0"
+        },
+        {
+          "if": [
+            {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "payload.v.0.mp"
+                    },
+                    ["EU/1/20/1528", "EU/1/20/1507", "EU/1/21/1529", "EU/1/21/1618"]
+                  ]
+                },
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "payload.v.0.dn"
+                        },
+                        1
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "payload.v.0.sd"
+                        },
+                        1
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "payload.v.0.dn"
+                        },
+                        {
+                          "var": "payload.v.0.sd"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "if": [
+                {
+                  "not-after": [
+                    {
+                      "plusTime": [
+                        {
+                          "var": "external.validationClock"
+                        },
+                        0,
+                        "day"
+                      ]
+                    },
+                    {
+                      "plusTime": [
+                        {
+                          "var": "payload.v.0.dt"
+                        },
+                        270,
+                        "day"
+                      ]
+                    }
+                  ]
+                },
+                true,
+                false
+              ]
+            },
+            false
+          ]
+        },
+        false
+      ]
+    }
+  },
+  {
+    "Identifier": "dbdc940c-ef3f-4745-a8ba-324ca4260794",
+    "Type": "Acceptance",
+    "Country": "DE",
+    "Version": "1.0.0",
+    "SchemaVersion": "1.0.0",
+    "Engine": "CERTLOGIC",
+    "EngineVersion": "0.7.5",
+    "CertificateType": "Vaccination",
+    "Description": [
+      {
+        "lang": "en",
+        "desc": "Valid booster vaccination series"
+      }
+    ],
+    "ValidFrom": "2022-01-01T00:00:00Z",
+    "ValidTo": "2023-01-01T00:00:00Z",
+    "AffectedFields": [
+      "payload.v.0",
+      "payload.v.0.mp",
+      "payload.v.0.dt",
+      "payload.v.0.dn",
+      "payload.v.0.sd"
+    ],
+    "Logic": {
+      "if": [
+        {
+          "var": "payload.v.0"
+        },
+        {
+          "if": [
+            {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "payload.v.0.mp"
+                    },
+                    ["EU/1/20/1528", "EU/1/20/1507", "EU/1/21/1529", "EU/1/21/1618", "EU/1/20/1525"]
+                  ]
+                },
+                {
+                  "if": [
+                    {
+                      "and": [
+                        {
+                          "===": [
+                            {
+                              "var": "payload.v.0.dn"
+                            },
+                            3
+                          ]
+                        },
+                        {
+                          "===": [
+                            {
+                              "var": "payload.v.0.sd"
+                            },
+                            3
+                          ]
+                        },
+                        {
+                          "===": [
+                            {
+                              "var": "payload.v.0.dn"
+                            },
+                            {
+                              "var": "payload.v.0.sd"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    true,
+                    {
+                      ">": [
+                        {
+                          "var": "payload.v.0.dn"
+                        },
+                        {
+                          "var": "payload.v.0.sd"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "if": [true, true, false]
+            },
+            false
+          ]
+        },
+        false
+      ]
+    }
+  }
+]

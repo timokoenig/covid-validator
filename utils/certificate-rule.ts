@@ -2,6 +2,17 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { CertificateRule, CustomRule, Rule } from './certlogic'
 
+function createOrOperation(rules: any[]): any {
+  const arr = rules
+  const con = arr.shift()
+  if (arr.length == 0) {
+    return con
+  }
+  return {
+    if: [con, true, createOrOperation(arr)],
+  }
+}
+
 export function encodeCertificateRule(
   customRule: CustomRule,
   certificateRule: CertificateRule
@@ -17,12 +28,12 @@ export function encodeCertificateRule(
           .flat(1)
       ),
     ].map(rule => rule.rule)
+    const activeImmunizationPreCondition =
+      activeImmunizationRules.length > 1
+        ? createOrOperation(activeImmunizationRules)
+        : activeImmunizationRules[0]
 
-    const conditions: any[] = [
-      {
-        or: activeImmunizationRules,
-      },
-    ]
+    const conditions: any[] = []
     if (certificateRule.validFrom) {
       conditions.push({
         'not-before': [
@@ -71,7 +82,14 @@ export function encodeCertificateRule(
         ],
       })
     }
-
+    const condition =
+      conditions.length == 0
+        ? true
+        : conditions.length == 1
+        ? conditions[0]
+        : {
+            and: conditions,
+          }
     return {
       Identifier: certificateRule.id,
       Type: 'Acceptance',
@@ -89,38 +107,42 @@ export function encodeCertificateRule(
         'payload.v.0.mp',
         'payload.v.0.dt',
         'payload.v.0.dn',
-        'payload.v.0.sn',
+        'payload.v.0.sd',
       ],
       Logic: {
         if: [
-          // precondition
-          {
-            and: [
-              { var: 'payload.v.0' },
-              {
-                in: [
-                  {
-                    var: 'payload.v.0.mp',
-                  },
-                  certificateRule.medicalProducts,
-                ],
-              },
-            ],
-          },
-          // condition
+          { var: 'payload.v.0' },
           {
             if: [
+              // precondition
               {
-                and: conditions,
+                and: [
+                  {
+                    in: [
+                      {
+                        var: 'payload.v.0.mp',
+                      },
+                      certificateRule.medicalProducts,
+                    ],
+                  },
+                  activeImmunizationPreCondition,
+                ],
               },
-              // if condition is true, we return the certificates result type
-              certificateRule.result,
-              // if condition is false, we return false
+              // condition
+              {
+                if: [
+                  condition,
+                  // if condition is true, we return the certificates result type
+                  true,
+                  // if condition is false, we return false
+                  false,
+                ],
+              },
+              // otherwise return true
               false,
             ],
           },
-          // otherwise return true
-          true,
+          false,
         ],
       },
     }
@@ -186,6 +208,14 @@ export function encodeCertificateRule(
         ],
       })
     }
+    const condition =
+      conditions.length == 0
+        ? true
+        : conditions.length == 1
+        ? conditions[0]
+        : {
+            and: conditions,
+          }
     return {
       Identifier: certificateRule.id,
       Type: 'Acceptance',
@@ -201,10 +231,10 @@ export function encodeCertificateRule(
       AffectedFields: ['payload.t.0', 'payload.t.0.tt', 'payload.t.0.tr', 'payload.t.0.sc'],
       Logic: {
         if: [
-          // precondition
+          { var: 'payload.t.0' },
           {
-            and: [
-              { var: 'payload.t.0' },
+            if: [
+              // precondition
               {
                 in: [
                   {
@@ -213,22 +243,21 @@ export function encodeCertificateRule(
                   certificateRule.medicalProducts,
                 ],
               },
-            ],
-          },
-          // condition
-          {
-            if: [
+              // condition
               {
-                and: conditions,
+                if: [
+                  condition,
+                  // if condition is true, we return the certificates result type
+                  true,
+                  // if condition is false, we return false
+                  false,
+                ],
               },
-              // if condition is true, we return the certificates result type
-              certificateRule.result,
-              // if condition is false, we return false
+              // otherwise return true
               false,
             ],
           },
-          // otherwise return true
-          true,
+          false,
         ],
       },
     }
@@ -284,6 +313,14 @@ export function encodeCertificateRule(
         ],
       })
     }
+    const condition =
+      conditions.length == 0
+        ? true
+        : conditions.length == 1
+        ? conditions[0]
+        : {
+            and: conditions,
+          }
     return {
       Identifier: certificateRule.id,
       Type: 'Acceptance',
@@ -301,20 +338,17 @@ export function encodeCertificateRule(
         if: [
           // precondition
           { var: 'payload.r.0' },
-          // condition
           {
+            // condition
             if: [
-              {
-                and: conditions,
-              },
+              condition,
               // if condition is true, we return the certificates result type
-              certificateRule.result,
+              true,
               // if condition is false, we return false
               false,
             ],
           },
-          // otherwise return true
-          true,
+          false,
         ],
       },
     }

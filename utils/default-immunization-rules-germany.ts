@@ -5,7 +5,7 @@ const defaultImmunizationRulesGermany = [
     rule: {
       and: [
         {
-          '==': [
+          '===': [
             {
               var: 'payload.v.0.dn',
             },
@@ -13,15 +13,15 @@ const defaultImmunizationRulesGermany = [
           ],
         },
         {
-          '==': [
+          '===': [
             {
-              var: 'payload.v.0.sn',
+              var: 'payload.v.0.sd',
             },
             2,
           ],
         },
         {
-          '==': [
+          '===': [
             {
               var: 'payload.v.0.dn',
             },
@@ -46,7 +46,7 @@ const defaultImmunizationRulesGermany = [
     rule: {
       and: [
         {
-          '==': [
+          '===': [
             {
               var: 'payload.v.0.dn',
             },
@@ -54,15 +54,15 @@ const defaultImmunizationRulesGermany = [
           ],
         },
         {
-          '==': [
+          '===': [
             {
-              var: 'payload.v.0.sn',
+              var: 'payload.v.0.sd',
             },
             2,
           ],
         },
         {
-          '==': [
+          '===': [
             {
               var: 'payload.v.0.dn',
             },
@@ -81,7 +81,7 @@ const defaultImmunizationRulesGermany = [
     rule: {
       and: [
         {
-          '==': [
+          '===': [
             {
               var: 'payload.v.0.dn',
             },
@@ -89,15 +89,15 @@ const defaultImmunizationRulesGermany = [
           ],
         },
         {
-          '==': [
+          '===': [
             {
-              var: 'payload.v.0.sn',
+              var: 'payload.v.0.sd',
             },
             1,
           ],
         },
         {
-          '==': [
+          '===': [
             {
               var: 'payload.v.0.dn',
             },
@@ -122,7 +122,7 @@ const defaultImmunizationRulesGermany = [
     rule: {
       and: [
         {
-          '==': [
+          '===': [
             {
               var: 'payload.v.0.dn',
             },
@@ -130,15 +130,15 @@ const defaultImmunizationRulesGermany = [
           ],
         },
         {
-          '==': [
+          '===': [
             {
-              var: 'payload.v.0.sn',
+              var: 'payload.v.0.sd',
             },
             3,
           ],
         },
         {
-          '==': [
+          '===': [
             {
               var: 'payload.v.0.dn',
             },
@@ -178,7 +178,7 @@ const defaultImmunizationRulesGermany = [
     rule: {
       and: [
         {
-          '==': [
+          '===': [
             {
               var: 'payload.v.0.dn',
             },
@@ -186,15 +186,15 @@ const defaultImmunizationRulesGermany = [
           ],
         },
         {
-          '==': [
+          '===': [
             {
-              var: 'payload.v.0.sn',
+              var: 'payload.v.0.sd',
             },
             1,
           ],
         },
         {
-          '==': [
+          '===': [
             {
               var: 'payload.v.0.dn',
             },

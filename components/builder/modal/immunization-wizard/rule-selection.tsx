@@ -34,8 +34,8 @@ type Props = {
 
 const RuleSelection = (props: Props) => {
   const [dn, setDn] = useState<string>('')
-  const [sn, setSn] = useState<string>('')
-  const [symbol, setSymbol] = useState<string>('==')
+  const [sd, setSd] = useState<string>('')
+  const [symbol, setSymbol] = useState<string>('===')
   const [type, setType] = useState<string>(IMMUNIZATION_TYPE_PARTIAL)
   // const { t } = useTranslation('common')
 
@@ -43,7 +43,7 @@ const RuleSelection = (props: Props) => {
     props.onCreate({
       id: uuidv4(),
       medicalProducts: props.vaccines,
-      rule: encodeImmunizationRule(dn, sn, symbol),
+      rule: encodeImmunizationRule(dn, sd, symbol),
       type,
     })
   }
@@ -92,7 +92,7 @@ const RuleSelection = (props: Props) => {
               onChange={e => setSymbol(e.target.selectedOptions[0].value)}
               textAlign="center"
             >
-              <option value="==">==</option>
+              <option value="===">==</option>
               <option value=">">&gt;</option>
               <option value=">=">&gt;=</option>
             </Select>
@@ -102,9 +102,9 @@ const RuleSelection = (props: Props) => {
               Series
             </Text>
             <Input
-              placeholder="sn"
-              value={sn}
-              onChange={e => setSn(e.target.value)}
+              placeholder="sd"
+              value={sd}
+              onChange={e => setSd(e.target.value)}
               textAlign="center"
             />
           </Box>
