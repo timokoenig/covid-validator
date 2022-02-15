@@ -10,6 +10,7 @@ import {
   SimpleGrid,
   Spacer,
   Text,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -28,7 +29,7 @@ const LeftColumn = (props: Props) => {
 
   return (
     <Box
-      bg="gray.700"
+      bg={useColorModeValue('gray.200', 'gray.700')}
       px="10"
       py="5"
       minWidth="350"

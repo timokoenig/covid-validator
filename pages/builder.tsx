@@ -51,7 +51,7 @@ const BuilderPage = () => {
   return (
     <>
       <PageMeta allowIndex={false} />
-      <Flex color="white" height="100vh">
+      <Flex height="100vh">
         <LeftColumn
           customRule={currentCustomRule}
           onCreate={onCreate}
