@@ -1,7 +1,7 @@
 import { ChevronLeftIcon } from '@chakra-ui/icons'
 import { Box, Button, FormControl, Input, Spacer, Text, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import { Trans, useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { CustomRule } from '../../../utils/certlogic'
 import ConfirmModal from '../../modal/confirm'
 
@@ -92,17 +92,7 @@ const Edit = (props: Props) => {
       </Box>
       <ConfirmModal
         title={t('builder.delete.confirm')}
-        message={
-          <Text>
-            <Trans i18nKey="builder.delete.confirm.message" t={t}>
-              x
-              <Text as="span" fontWeight="semibold" mx="1">
-                {name}
-              </Text>
-              y
-            </Trans>
-          </Text>
-        }
+        message={<Text>{t('builder.delete.confirm.message')}</Text>}
         isOpen={isOpen}
         onClose={onDelete}
       />
