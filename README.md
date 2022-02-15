@@ -69,6 +69,12 @@ The [EU DCC Validation Rules](https://ec.europa.eu/health/system/files/2021-06/e
 
 For reference implementations, please refer to [github.com/ehn-dcc-development/dgc-business-rules](https://github.com/ehn-dcc-development/dgc-business-rules).
 
+## Custom Rule Builder
+
+The custom rule builder allows you to create your own rule set if the available rules do not meet your requirements. This feature is currently for experts only because it is quite complicated to interact with. Future updates will improve the usability.
+
+NOTE **Documentation will follow shortly**
+
 ## Getting Started
 
 ```sh
@@ -103,6 +109,10 @@ The app uses [i18next](https://www.i18next.com/) for internationalization. We wa
 4. Save and commit your changes
 
 Note: If you do not add a translation in any given language, the app will default to English.
+
+## More Information
+
+- [A collection of Country and State rules](./docs/README.md).
 
 ---
 
