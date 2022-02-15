@@ -162,7 +162,7 @@ export async function checkCertificate(data: string): Promise<ScanResult> {
   }
   // check dcc is multiscan is required
   // validate dcc against selected rules
-  const ruleResult = validateDCCRules(dcc, app.get().country, new Date())
+  const ruleResult = validateDCCRules(dcc, app.get().country, app.get().state, new Date())
   return {
     certificates: [
       {

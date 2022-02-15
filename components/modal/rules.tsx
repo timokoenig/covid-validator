@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   Box,
   ListItem,
@@ -15,6 +16,8 @@ import moment from 'moment'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { app } from '../../state/app'
+import builderStateRulesDE from '../../utils/builder-state-rules-de.json'
+import { encodeCertificateRule } from '../../utils/certificate-rule'
 import { Language, Rule, Rules } from '../../utils/certlogic'
 import countries from '../../utils/countries'
 import rules from '../../utils/eu-dcc-rules.json'
@@ -33,9 +36,18 @@ const RulesModal = (props: Props) => {
   const state = country.states.find(item => item.code == appState.state) ?? country.states[0]
 
   const preferredLanguage = localStorage.getItem('i18nextLng')?.substring(0, 2) ?? 'en'
-  const countryRules: Rule[] = (rules as Rules).rules
+  let countryRules: Rule[] = (rules as Rules).rules
     .filter(rule => moment() >= moment(rule.ValidFrom) && moment() < moment(rule.ValidTo))
     .filter(rule => rule.Country == country.code)
+
+  // TODO temporary solution for state rules
+  if (appState.country.toUpperCase() === 'DE' && appState.state !== '') {
+    const customRule = builderStateRulesDE.customRules.find(
+      rule => rule.id === 'de45d285-c750-4537-bb09-79910079a559'
+    )!
+    countryRules = customRule.rules.map(rule => encodeCertificateRule(customRule, rule))
+  }
+
   const mapLanguage = (rule: Rule): Language | null => {
     if (rule.Description.length == 0) return null
     return (

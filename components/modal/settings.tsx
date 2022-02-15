@@ -51,9 +51,14 @@ const SettingsModal = (props: Props) => {
   const allCountries = countries(tCountry)
   const country = allCountries.find(item => item.code == appState.country) ?? allCountries[0]
   const state = country.states.find(item => item.code == appState.state) ?? country.states[0]
-  const ruleCount = (rules as Rules).rules
+  let ruleCount = (rules as Rules).rules
     .filter(rule => moment() >= moment(rule.ValidFrom) && moment() < moment(rule.ValidTo))
     .filter(item => item.Country == country.code).length
+
+  // TODO temporary solution for state rules
+  if (appState.country.toUpperCase() === 'DE' && appState.state !== '') {
+    ruleCount = 6
+  }
 
   useEffect(() => {
     i18n.changeLanguage(lang).catch(console.log)
