@@ -1,6 +1,7 @@
 import { ChevronLeftIcon } from '@chakra-ui/icons'
 import { Box, Button, FormControl, Input, Spacer, Text, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
 import { CustomRule } from '../../../utils/certlogic'
 import ConfirmModal from '../../modal/confirm'
 
@@ -12,41 +13,17 @@ type Props = {
 }
 
 const Edit = (props: Props) => {
+  const { t } = useTranslation('common')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [name, setName] = useState<string>(props.customRule.name)
   const [description, setDescription] = useState<string>(props.customRule.description)
   const addMode = props.customRule.id === ''
   const isDirty = name !== props.customRule.name || description !== props.customRule.description
-  // const { isOpen, onOpen, onClose } = useDisclosure()
 
   useEffect(() => {
     setName(props.customRule.name)
     setDescription(props.customRule.description)
   }, [props.customRule])
-
-  // const onAdd = () => {
-  //   props.onChange({
-  //     ...props.customRule,
-  //     rules: [
-  //       ...props.customRule.rules,
-  //       {
-  //         Identifier: uuidv4(),
-  //         Type: 'Acceptance',
-  //         Country: 'DE',
-  //         Version: '1.0.0',
-  //         SchemaVersion: '1.0.0',
-  //         Engine: 'CERTLOGIC',
-  //         EngineVersion: '0.7.5',
-  //         CertificateType: 'Vaccination',
-  //         Description: [],
-  //         ValidFrom: '',
-  //         ValidTo: '',
-  //         AffectedFields: [],
-  //         Logic: null,
-  //       },
-  //     ],
-  //   })
-  // }
 
   const onSave = () => {
     if (name === '') return
@@ -76,24 +53,24 @@ const Edit = (props: Props) => {
           <Spacer />
           {!addMode && (
             <Button colorScheme="red" variant="ghost" onClick={onOpen} mr="5">
-              Delete
+              {t('delete')}
             </Button>
           )}
           <Button colorScheme="blue" isDisabled={!isDirty} onClick={onSave}>
-            Save
+            {t('save')}
           </Button>
         </Box>
         <Box mb="10">
           <FormControl mb="5">
             <Input
-              placeholder="Name (required)"
+              placeholder={t('builder.edit.name.placeholder')}
               value={name}
               onChange={e => setName(e.target.value)}
             />
           </FormControl>
           <FormControl>
             <Input
-              placeholder="Description"
+              placeholder={t('builder.edit.description.placeholder')}
               value={description}
               onChange={e => setDescription(e.target.value)}
             />
@@ -101,14 +78,16 @@ const Edit = (props: Props) => {
         </Box>
       </Box>
       <ConfirmModal
-        title="Are you sure?"
+        title={t('builder.delete.confirm')}
         message={
           <Text>
-            The custom rule
-            <Text as="span" fontWeight="semibold" mx="1">
-              {name}
-            </Text>
-            will be deleted irrevocably from your device. It will not be delete from other devices.
+            <Trans i18nKey="builder.delete.confirm.message" t={t}>
+              x
+              <Text as="span" fontWeight="semibold" mx="1">
+                {name}
+              </Text>
+              y
+            </Trans>
           </Text>
         }
         isOpen={isOpen}

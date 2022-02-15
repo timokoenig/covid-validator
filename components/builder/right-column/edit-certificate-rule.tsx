@@ -13,7 +13,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { encodeCertificateRule } from '../../../utils/certificate-rule'
+import { useTranslation } from 'react-i18next'
 import {
   CertificateRule,
   CustomRule,
@@ -37,9 +37,9 @@ type Props = {
 }
 
 const EditCertificateRule = (props: Props) => {
+  const { t } = useTranslation('common')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { isOpen: isOpenConfirm, onOpen: onOpenConfirm, onClose: onCloseConfirm } = useDisclosure()
-  const [result, setResult] = useState<boolean>(props.certificateRule.result)
   const [validFrom, setValidFrom] = useState<number | undefined>(props.certificateRule.validFrom)
   const [validTo, setValidTo] = useState<number | undefined>(props.certificateRule.validTo)
   const [immunizationStatus, setImmunizationStatus] = useState<string | undefined>(
@@ -62,11 +62,11 @@ const EditCertificateRule = (props: Props) => {
 
   const onChangeTranslation = (lang: string, desc: string) => {
     const updated: Language[] = []
-    for (const t of translations) {
-      if (t.lang === lang) {
+    for (const trans of translations) {
+      if (trans.lang === lang) {
         updated.push({ lang, desc })
       } else {
-        updated.push(t)
+        updated.push(trans)
       }
     }
     setTranslations(updated)
@@ -85,7 +85,6 @@ const EditCertificateRule = (props: Props) => {
         {
           ...props.certificateRule,
           translations,
-          result,
           validFrom,
           validTo,
           immunizationStatus,
@@ -110,29 +109,28 @@ const EditCertificateRule = (props: Props) => {
           <Button onClick={props.onBack} mr="5">
             <ChevronLeftIcon width="5" height="5" />
           </Button>
-          <Heading flex="1">Certificate Rule</Heading>
+          <Heading flex="1">{t('builder.rules.certificate')}</Heading>
           {isEditMode && (
             <Button colorScheme="red" variant="ghost" onClick={onOpenConfirm} mr="5">
-              Delete
+              {t('delete')}
             </Button>
           )}
           <Button colorScheme="blue" onClick={onSave}>
-            Save
+            {t('save')}
           </Button>
         </Box>
-        <Text mb="10">Some explanation what this is</Text>
         <Box mb="10">
           <Text fontSize="xl" fontWeight="semibold" mb="2">
-            Pre-Condition (when a rule should be checked)
+            {t('builder.precondition')}
           </Text>
           <Box display="flex" flexDirection="row">
             <Box flex="1">
-              <Text fontWeight="semibold">Certificate Type</Text>
+              <Text fontWeight="semibold">{t('builder.certificate.type')}</Text>
               <Text>{props.certificateRule.type}</Text>
             </Box>
             {props.certificateRule.type === 'Vaccination' && (
               <Box flex="1">
-                <Text fontWeight="semibold">Vaccines</Text>
+                <Text fontWeight="semibold">{t('vaccines')}</Text>
                 {props.certificateRule.medicalProducts?.map(mp => (
                   <Text key={mp}>{vaccines.find(v => v.id === mp)?.name}</Text>
                 ))}
@@ -140,9 +138,9 @@ const EditCertificateRule = (props: Props) => {
             )}
             {props.certificateRule.type === 'Test' && (
               <Box flex="1">
-                <Text fontWeight="semibold">Tests</Text>
+                <Text fontWeight="semibold">{t('tests')}</Text>
                 {props.certificateRule.medicalProducts?.map(mp => (
-                  <Text key={mp}>{tests.find(t => t.id === mp)?.name}</Text>
+                  <Text key={mp}>{tests.find(trans => trans.id === mp)?.name}</Text>
                 ))}
               </Box>
             )}
@@ -150,12 +148,12 @@ const EditCertificateRule = (props: Props) => {
         </Box>
         <Box mb="10">
           <Text fontSize="xl" fontWeight="semibold" mb="2">
-            Condition (what should be checked)
+            {t('builder.condition')}
           </Text>
           <Box display="flex" flexDirection="row" mb="5">
             {props.certificateRule.type === 'Vaccination' && (
               <Box flex="1">
-                <Text fontWeight="semibold">Type</Text>
+                <Text fontWeight="semibold">{t('type')}</Text>
                 <Select
                   value={immunizationStatus}
                   width={200}
@@ -176,21 +174,10 @@ const EditCertificateRule = (props: Props) => {
                 </Select>
               </Box>
             )}
-            <Box flex="1">
-              <Text fontWeight="semibold">Result</Text>
-              <Select
-                value={result ? 'true' : 'false'}
-                width={200}
-                onChange={e => setResult(e.target.selectedOptions[0].value === 'true')}
-              >
-                <option value="true">VALID</option>
-                <option value="false">INVALID</option>
-              </Select>
-            </Box>
           </Box>
           <Box display="flex" flexDirection="row">
             <Box flex="1">
-              <Text fontWeight="semibold">ValidFrom (optional)</Text>
+              <Text fontWeight="semibold">{t('builder.edit.validfrom')}</Text>
               <InputGroup>
                 <Input
                   value={validFrom}
@@ -200,12 +187,12 @@ const EditCertificateRule = (props: Props) => {
                   }
                 />
                 <InputRightAddon
-                  children={props.certificateRule.type === 'Test' ? 'hours' : 'days'}
+                  children={props.certificateRule.type === 'Test' ? t('hours') : t('days')}
                 />
               </InputGroup>
             </Box>
             <Box flex="1">
-              <Text fontWeight="semibold">ValidTo (optional)</Text>
+              <Text fontWeight="semibold">{t('builder.edit.validto')}</Text>
               <InputGroup>
                 <Input
                   value={validTo}
@@ -224,10 +211,10 @@ const EditCertificateRule = (props: Props) => {
         <Box mb="10">
           <Box display="flex" flexDirection="row">
             <Text fontSize="xl" fontWeight="semibold" flex="1">
-              Translations
+              {t('builder.edit.translations')}
             </Text>
             <Button colorScheme="blue" onClick={onOpen}>
-              Add
+              {t('add')}
             </Button>
           </Box>
           {translations.map(trans => (
@@ -250,22 +237,11 @@ const EditCertificateRule = (props: Props) => {
             </Box>
           ))}
         </Box>
-        <Box mb="10">
-          <Text fontSize="xs">
-            <pre>
-              {JSON.stringify(
-                encodeCertificateRule(props.customRule, props.certificateRule),
-                null,
-                2
-              )}
-            </pre>
-          </Text>
-        </Box>
       </Box>
       <LanguageModal isOpen={isOpen} onClose={onClose} onClick={onAddTranslation} />
       <ConfirmModal
-        title="Are you sure?"
-        message="The certificate rule will be deleted irrevocably from your device. It will not be delete from other devices."
+        title={t('builder.rule.delete')}
+        message={t('builder.rule.delete.message')}
         isOpen={isOpenConfirm}
         onClose={onDelete}
       />

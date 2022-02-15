@@ -28,7 +28,7 @@ const WizardModal = (props: Props) => {
           onClose={onClose}
           onClick={selection => {
             if (selection === 'Recovery') {
-              props.onAdd({ id: uuidv4(), result: true, type: 'Recovery', translations: [] })
+              props.onAdd({ id: uuidv4(), type: 'Recovery', translations: [] })
               return
             }
             setType(selection)
@@ -43,7 +43,6 @@ const WizardModal = (props: Props) => {
           onClick={vaccines => {
             props.onAdd({
               id: uuidv4(),
-              result: true,
               type,
               medicalProducts: vaccines,
               translations: [],
@@ -59,7 +58,6 @@ const WizardModal = (props: Props) => {
           onClick={tests => {
             props.onAdd({
               id: uuidv4(),
-              result: true,
               type,
               medicalProducts: tests,
               translations: [],

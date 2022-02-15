@@ -13,6 +13,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { CustomRule, ImmunizationRule, immunizationTypeName } from '../../../utils/certlogic'
 import { decodeImmunizationRule } from '../../../utils/immunization-rule'
 import vaccines from '../../../utils/vaccines'
@@ -25,6 +26,7 @@ type Props = {
 }
 
 const EditImmunizationRules = (props: Props) => {
+  const { t } = useTranslation('common')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [rules, setRules] = useState<ImmunizationRule[]>(props.customRule.immunizationRules)
 
@@ -54,23 +56,22 @@ const EditImmunizationRules = (props: Props) => {
           <Button onClick={props.onBack} mr="5">
             <ChevronLeftIcon width="5" height="5" />
           </Button>
-          <Heading flex="1">Immunzation Rules</Heading>
+          <Heading flex="1">{t('builder.rules.immunization')}</Heading>
           <Button colorScheme="blue" onClick={onSave}>
-            Save
+            {t('save')}
           </Button>
         </Box>
-        <Text mb="10">Some explanation what this is</Text>
         <Box textAlign="right">
           <Button colorScheme="blue" onClick={onOpen}>
-            Add Rule
+            {t('builder.rules.add')}
           </Button>
         </Box>
         <Table>
           <Thead>
             <Tr>
-              <Th>Vaccine</Th>
-              <Th>Dose Rule</Th>
-              <Th>Type</Th>
+              <Th>{t('vaccine')}</Th>
+              <Th>{t('builder.rules.dose')}</Th>
+              <Th>{t('type')}</Th>
               <Th />
             </Tr>
           </Thead>
@@ -95,31 +96,6 @@ const EditImmunizationRules = (props: Props) => {
                 </Tr>
               )
             })}
-            {/* <Tr>
-              <Td>BioNTech</Td>
-              <Td>1 == 1</Td>
-              <Td>Partial Immunization</Td>
-            </Tr>
-            <Tr>
-              <Td>BioNTech</Td>
-              <Td>2 == 2</Td>
-              <Td>Full Immunization</Td>
-            </Tr>
-            <Tr>
-              <Td>BioNTech</Td>
-              <Td>1 == 1</Td>
-              <Td>Full Immunization after Recovery</Td>
-            </Tr>
-            <Tr>
-              <Td>BioNTech</Td>
-              <Td>* &gt; 2</Td>
-              <Td>Booster</Td>
-            </Tr>
-            <Tr>
-              <Td>BioNTech</Td>
-              <Td>* &gt; *</Td>
-              <Td>Booster</Td>
-            </Tr> */}
           </Tbody>
         </Table>
       </Box>

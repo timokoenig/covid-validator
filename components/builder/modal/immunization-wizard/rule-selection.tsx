@@ -13,6 +13,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { v4 as uuidv4 } from 'uuid'
 import {
   ImmunizationRule,
@@ -24,7 +25,6 @@ import {
 } from '../../../../utils/certlogic'
 import { encodeImmunizationRule } from '../../../../utils/immunization-rule'
 import vaccines from '../../../../utils/vaccines'
-// import { useTranslation } from 'react-i18next'
 
 type Props = {
   vaccines: string[]
@@ -37,7 +37,7 @@ const RuleSelection = (props: Props) => {
   const [sd, setSd] = useState<string>('')
   const [symbol, setSymbol] = useState<string>('===')
   const [type, setType] = useState<string>(IMMUNIZATION_TYPE_PARTIAL)
-  // const { t } = useTranslation('common')
+  const { t } = useTranslation('common')
 
   const onAdd = () => {
     props.onCreate({
@@ -50,11 +50,11 @@ const RuleSelection = (props: Props) => {
 
   return (
     <ModalContent>
-      <ModalHeader>Select Rules</ModalHeader>
+      <ModalHeader>{t('builder.modal.rule')}</ModalHeader>
       <ModalCloseButton onClick={props.onClose} />
       <ModalBody>
         <Box mb="5">
-          <Text fontWeight="semibold">Valid for</Text>
+          <Text fontWeight="semibold">{t('builder.modal.rule.validfor')}</Text>
           {props.vaccines.map(v => (
             <Text key={v}>{vaccines.find(vac => vac.id === v)?.name}</Text>
           ))}
@@ -76,7 +76,7 @@ const RuleSelection = (props: Props) => {
         <SimpleGrid columns={3} spacing="5" my="5" alignItems="bottom">
           <Box>
             <Text textAlign="center" mb="2">
-              Dose
+              {t('dose')}
             </Text>
             <Input
               placeholder="dn"
@@ -92,14 +92,14 @@ const RuleSelection = (props: Props) => {
               onChange={e => setSymbol(e.target.selectedOptions[0].value)}
               textAlign="center"
             >
-              <option value="===">==</option>
+              <option value="===">===</option>
               <option value=">">&gt;</option>
               <option value=">=">&gt;=</option>
             </Select>
           </Box>
           <Box>
             <Text textAlign="center" mb="2">
-              Series
+              {t('series')}
             </Text>
             <Input
               placeholder="sd"
@@ -109,33 +109,11 @@ const RuleSelection = (props: Props) => {
             />
           </Box>
         </SimpleGrid>
-        <Text>
-          You can use * as a wildcard.
-          <br />
-          For example, `* &gt; *` will select all certificates where dose number is greater than
-          series number
-        </Text>
-        {/* <List>
-          {items.map(item => (
-            <ListItem key={item} display="flex">
-              <Button
-                variant="ghost"
-                flex="1"
-                justifyContent="left"
-                // onClick={() => props.onClick(item)}
-              >
-                {item}
-                <Spacer />
-                <ChevronRightIcon width="5" height="5" />
-              </Button>
-            </ListItem>
-          ))}
-        </List> */}
       </ModalBody>
 
       <ModalFooter>
         <Button colorScheme="blue" onClick={onAdd}>
-          Save
+          {t('save')}
         </Button>
       </ModalFooter>
     </ModalContent>

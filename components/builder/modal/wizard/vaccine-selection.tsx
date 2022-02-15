@@ -8,10 +8,9 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Text,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
-// import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import vaccines from '../../../../utils/vaccines'
 
 type Props = {
@@ -21,17 +20,11 @@ type Props = {
 
 const VaccineSelection = (props: Props) => {
   const [selectedVaccines, setSelectedVaccines] = useState<string[]>([])
-  // const { t } = useTranslation('common')
+  const { t } = useTranslation('common')
 
   return (
     <ModalContent>
-      <ModalHeader>
-        Select Vaccine
-        <br />
-        <Text fontWeight="normal" fontSize="md">
-          Subheadling with instructions
-        </Text>
-      </ModalHeader>
+      <ModalHeader>{t('builder.modal.vaccine')}</ModalHeader>
       <ModalCloseButton onClick={props.onClose} />
       <ModalBody>
         <List>
@@ -69,7 +62,7 @@ const VaccineSelection = (props: Props) => {
 
       <ModalFooter>
         <Button colorScheme="blue" onClick={() => props.onClick(selectedVaccines)}>
-          Continue
+          {t('continue')}
         </Button>
       </ModalFooter>
     </ModalContent>

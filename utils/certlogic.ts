@@ -24,7 +24,6 @@ export type CertificateRule = {
   type: string
   medicalProducts?: string[]
   immunizationStatus?: string
-  result: boolean
   validFrom?: number
   validTo?: number
   translations: Language[]

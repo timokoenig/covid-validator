@@ -1,15 +1,15 @@
-import React from 'react'
 import {
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
+  Button,
   ModalBody,
   ModalCloseButton,
-  Button,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
 } from '@chakra-ui/react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import CountryList from './country-list'
 import BoxShadow from './box-shadow'
+import CountryList from './country-list'
 
 type Props = {
   selection: { country: string; state: string }
@@ -17,7 +17,7 @@ type Props = {
   setConfirm: (confirm: boolean) => void
 }
 
-const RuleSelection = (props: Props) => {
+const CountrySelection = (props: Props) => {
   const { t } = useTranslation('common')
   return (
     <ModalContent>
@@ -40,4 +40,4 @@ const RuleSelection = (props: Props) => {
   )
 }
 
-export default RuleSelection
+export default CountrySelection
