@@ -43,7 +43,9 @@ const RuleConfirmation = (props: Props) => {
     const customRule = builderStateRulesDE.customRules.find(
       rule => rule.id === 'de45d285-c750-4537-bb09-79910079a559'
     )!
-    countryRules = customRule.rules.map(rule => encodeCertificateRule(customRule, rule))
+    countryRules = customRule.rules
+      .map(rule => encodeCertificateRule(customRule, rule))
+      .flatMap(r => (r ? [r] : []))
   }
 
   const mapLanguage = (rule: Rule): Language | null => {

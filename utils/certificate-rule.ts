@@ -16,7 +16,7 @@ function createOrOperation(rules: any[]): any {
 export function encodeCertificateRule(
   customRule: CustomRule,
   certificateRule: CertificateRule
-): Rule {
+): Rule | null {
   // Test
   if (certificateRule.type === 'Test') {
     const conditions: any[] = [
@@ -211,124 +211,128 @@ export function encodeCertificateRule(
   }
 
   // Vaccination
-  const immunizationRules = customRule.immunizationRules.filter(
-    rule => rule.type === certificateRule.immunizationStatus
-  )
-  const activeImmunizationRules = [
-    ...new Set(
-      certificateRule.medicalProducts
-        ?.map(mp => immunizationRules.filter(rule => rule.medicalProducts.includes(mp)))
-        .flat(1)
-    ),
-  ].map(rule => rule.rule)
-  const activeImmunizationPreCondition =
-    activeImmunizationRules.length > 1
-      ? createOrOperation(activeImmunizationRules)
-      : activeImmunizationRules[0]
+  if (certificateRule.type === 'Vaccination') {
+    const immunizationRules = customRule.immunizationRules.filter(
+      rule => rule.type === certificateRule.immunizationStatus
+    )
+    const activeImmunizationRules = [
+      ...new Set(
+        certificateRule.medicalProducts
+          ?.map(mp => immunizationRules.filter(rule => rule.medicalProducts.includes(mp)))
+          .flat(1)
+      ),
+    ].map(rule => rule.rule)
+    const activeImmunizationPreCondition =
+      activeImmunizationRules.length > 1
+        ? createOrOperation(activeImmunizationRules)
+        : activeImmunizationRules[0]
 
-  const conditions: any[] = []
-  if (certificateRule.validFrom) {
-    conditions.push({
-      'not-before': [
-        {
-          plusTime: [
-            {
-              var: 'external.validationClock',
-            },
-            0,
-            'day',
-          ],
-        },
-        {
-          plusTime: [
-            {
-              var: 'payload.v.0.dt',
-            },
-            certificateRule.validFrom,
-            'day',
-          ],
-        },
+    const conditions: any[] = []
+    if (certificateRule.validFrom) {
+      conditions.push({
+        'not-before': [
+          {
+            plusTime: [
+              {
+                var: 'external.validationClock',
+              },
+              0,
+              'day',
+            ],
+          },
+          {
+            plusTime: [
+              {
+                var: 'payload.v.0.dt',
+              },
+              certificateRule.validFrom,
+              'day',
+            ],
+          },
+        ],
+      })
+    }
+    if (certificateRule.validTo) {
+      conditions.push({
+        'not-after': [
+          {
+            plusTime: [
+              {
+                var: 'external.validationClock',
+              },
+              0,
+              'day',
+            ],
+          },
+          {
+            plusTime: [
+              {
+                var: 'payload.v.0.dt',
+              },
+              certificateRule.validTo,
+              'day',
+            ],
+          },
+        ],
+      })
+    }
+    const condition =
+      conditions.length == 0
+        ? true
+        : conditions.length == 1
+        ? conditions[0]
+        : {
+            and: conditions,
+          }
+    return {
+      Identifier: certificateRule.id,
+      Type: 'Acceptance',
+      Country: 'DE',
+      Version: '1.0.0',
+      SchemaVersion: '1.0.0',
+      Engine: 'CERTLOGIC',
+      EngineVersion: '0.7.5',
+      CertificateType: certificateRule.type,
+      Description: certificateRule.translations,
+      ValidFrom: '2022-01-01T00:00:00Z',
+      ValidTo: '2023-01-01T00:00:00Z',
+      AffectedFields: [
+        'payload.v.0',
+        'payload.v.0.mp',
+        'payload.v.0.dt',
+        'payload.v.0.dn',
+        'payload.v.0.sd',
       ],
-    })
+      Logic: {
+        if: [
+          { var: 'payload.v.0' },
+          {
+            if: [
+              // precondition
+              {
+                and: [
+                  {
+                    in: [
+                      {
+                        var: 'payload.v.0.mp',
+                      },
+                      certificateRule.medicalProducts,
+                    ],
+                  },
+                  activeImmunizationPreCondition,
+                ],
+              },
+              // condition
+              condition,
+              // otherwise return false
+              false,
+            ],
+          },
+          false,
+        ],
+      },
+    }
   }
-  if (certificateRule.validTo) {
-    conditions.push({
-      'not-after': [
-        {
-          plusTime: [
-            {
-              var: 'external.validationClock',
-            },
-            0,
-            'day',
-          ],
-        },
-        {
-          plusTime: [
-            {
-              var: 'payload.v.0.dt',
-            },
-            certificateRule.validTo,
-            'day',
-          ],
-        },
-      ],
-    })
-  }
-  const condition =
-    conditions.length == 0
-      ? true
-      : conditions.length == 1
-      ? conditions[0]
-      : {
-          and: conditions,
-        }
-  return {
-    Identifier: certificateRule.id,
-    Type: 'Acceptance',
-    Country: 'DE',
-    Version: '1.0.0',
-    SchemaVersion: '1.0.0',
-    Engine: 'CERTLOGIC',
-    EngineVersion: '0.7.5',
-    CertificateType: certificateRule.type,
-    Description: certificateRule.translations,
-    ValidFrom: '2022-01-01T00:00:00Z',
-    ValidTo: '2023-01-01T00:00:00Z',
-    AffectedFields: [
-      'payload.v.0',
-      'payload.v.0.mp',
-      'payload.v.0.dt',
-      'payload.v.0.dn',
-      'payload.v.0.sd',
-    ],
-    Logic: {
-      if: [
-        { var: 'payload.v.0' },
-        {
-          if: [
-            // precondition
-            {
-              and: [
-                {
-                  in: [
-                    {
-                      var: 'payload.v.0.mp',
-                    },
-                    certificateRule.medicalProducts,
-                  ],
-                },
-                activeImmunizationPreCondition,
-              ],
-            },
-            // condition
-            condition,
-            // otherwise return false
-            false,
-          ],
-        },
-        false,
-      ],
-    },
-  }
+
+  return null
 }
