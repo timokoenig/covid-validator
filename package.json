@@ -27,7 +27,7 @@
     "base45": "^2.0.1",
     "bignumber.js": "^9.0.2",
     "cbor": "^8.1.0",
-    "certlogic-js": "^1.1.1",
+    "certlogic-js": "^1.1.2",
     "cose-js": "^0.8.3",
     "emotion-theming": "^11.0.0",
     "flag-icons": "^6.0.3",

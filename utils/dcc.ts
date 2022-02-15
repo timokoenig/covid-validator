@@ -91,7 +91,7 @@ type Name = {
   fnt: string
 }
 
-type DigitalGreenCertificate = {
+export type DigitalGreenCertificate = {
   nam: Name
   dob?: string
   v?: Vaccination[]
@@ -144,6 +144,7 @@ class DCCParseError extends Error {}
 export async function checkCertificate(data: string): Promise<ScanResult> {
   // parse dcc
   const dcc = await parseDCC(data)
+  console.log(dcc)
   // verify dcc
   const verified = await verifyDCC(dcc)
   const isExpired = dcc.data.payload.exp ? moment() > moment(dcc.data.payload.exp) : false

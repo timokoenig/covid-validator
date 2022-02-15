@@ -13,31 +13,31 @@ The data is based on the information provided by [pei.de](https://www.pei.de/DE/
 | BioNTech        | EU/1/20/1528    | 1/2  | Partial Immunization | -         | -        |                                                          |
 | BioNTech        | EU/1/20/1528    | 2/2  | Full Immunization    | 14 days   | 270 days |                                                          |
 | BioNTech        | EU/1/20/1528    | 1/1  | Full Immunization    | -         | 270 days | Full Immunization after recovery                         |
-| BioNTech        | EU/1/20/1528    | 3/3  | Booster              | -         | -        | Booster after full immunization ((dn == sn) && sn > 2)   |
-| BioNTech        | EU/1/20/1528    | 2/1  | Booster              | -         | -        | Booster after full immunization after recovery (dn > sn) |
+| BioNTech        | EU/1/20/1528    | 3/3  | Booster              | -         | -        | Booster after full immunization ((dn == sd) && sd > 2)   |
+| BioNTech        | EU/1/20/1528    | 2/1  | Booster              | -         | -        | Booster after full immunization after recovery (dn > sd) |
 |                 |                 |      |                      |           |          |                                                          |
 | Moderna         | EU/1/20/1507    | 1/2  | Partial Immunization | -         | -        |                                                          |
 | Moderna         | EU/1/20/1507    | 2/2  | Full Immunization    | 14 days   | 270 days |                                                          |
 | Moderna         | EU/1/20/1507    | 1/1  | Full Immunization    | -         | 270 days | Full Immunization after recovery                         |
-| Moderna         | EU/1/20/1507    | 3/3  | Booster              | -         | -        | Booster after full immunization ((dn == sn) && sn > 2)   |
-| Moderna         | EU/1/20/1507    | 2/1  | Booster              | -         | -        | Booster after full immunization after recovery (dn > sn) |
+| Moderna         | EU/1/20/1507    | 3/3  | Booster              | -         | -        | Booster after full immunization ((dn == sd) && sd > 2)   |
+| Moderna         | EU/1/20/1507    | 2/1  | Booster              | -         | -        | Booster after full immunization after recovery (dn > sd) |
 |                 |                 |      |                      |           |          |                                                          |
 | AstraZeneca     | EU/1/21/1529    | 1/2  | Partial Immunization | -         | -        |                                                          |
 | AstraZeneca     | EU/1/21/1529    | 2/2  | Full Immunization    | 14 days   | 270 days |                                                          |
 | AstraZeneca     | EU/1/21/1529    | 1/1  | Full Immunization    | -         | 270 days | Full Immunization after recovery                         |
-| AstraZeneca     | EU/1/21/1529    | 3/3  | Booster              | -         | -        | Booster after full immunization ((dn == sn) && sn > 2)   |
-| AstraZeneca     | EU/1/21/1529    | 2/1  | Booster              | -         | -        | Booster after full immunization after recovery (dn > sn) |
+| AstraZeneca     | EU/1/21/1529    | 3/3  | Booster              | -         | -        | Booster after full immunization ((dn == sd) && sd > 2)   |
+| AstraZeneca     | EU/1/21/1529    | 2/1  | Booster              | -         | -        | Booster after full immunization after recovery (dn > sd) |
 |                 |                 |      |                      |           |          |                                                          |
 | Novavax         | EU/1/21/1618    | 1/2  | Partial Immunization | -         | -        |                                                          |
 | Novavax         | EU/1/21/1618    | 2/2  | Full Immunization    | 14 days   | 270 days |                                                          |
 | Novavax         | EU/1/21/1618    | 1/1  | Full Immunization    | -         | 270 days | Full Immunization after recovery                         |
-| Novavax         | EU/1/21/1618    | 3/3  | Booster              | -         | -        | Booster after full immunization ((dn == sn) && sn > 2)   |
-| Novavax         | EU/1/21/1618    | 2/1  | Booster              | -         | -        | Booster after full immunization after recovery (dn > sn) |
+| Novavax         | EU/1/21/1618    | 3/3  | Booster              | -         | -        | Booster after full immunization ((dn == sd) && sd > 2)   |
+| Novavax         | EU/1/21/1618    | 2/1  | Booster              | -         | -        | Booster after full immunization after recovery (dn > sd) |
 |                 |                 |      |                      |           |          |                                                          |
 | Johnson&Johnson | EU/1/20/1525    | 1/1  | Partial Immunization | -         | -        | New regulation starting 01/15/2022                       |
 | Johnson&Johnson | EU/1/20/1525    | 2/2  | Full Immunization    | 14 days   | 270 days |                                                          |
-| Johnson&Johnson | EU/1/20/1525    | 3/3  | Booster              | -         | -        | Booster after full immunization ((dn == sn) && sn > 1)   |
-| Johnson&Johnson | EU/1/20/1525    | 2/1  | Booster              | -         | -        | Booster after full immunization (dn > sn)                |
+| Johnson&Johnson | EU/1/20/1525    | 3/3  | Booster              | -         | -        | Booster after full immunization ((dn == sd) && sd > 1)   |
+| Johnson&Johnson | EU/1/20/1525    | 2/1  | Booster              | -         | -        | Booster after full immunization (dn > sd)                |
 
 **Edge cases that can not be identified**
 
