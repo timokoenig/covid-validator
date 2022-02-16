@@ -1,5 +1,11 @@
 <img src="./assets/covidvalidator.png" alt="Logo Covid Validator" />
 
+<div align="center">
+
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/timokoenig/covid-validator/Build%20and%20run%20unit%20tests) [![GitHub issues](https://img.shields.io/github/issues/timokoenig/covid-validator)](https://github.com/timokoenig/covid-validator/issues) ![GitHub last commit](https://img.shields.io/github/last-commit/timokoenig/covid-validator) ![Website](https://img.shields.io/website?down_message=offline&label=webapp&up_message=online&url=https%3A%2F%2Fcovidvalidator.app)
+
+</div>
+
 Check EU Digitial Covid Certificates with ease and validate them against local or country rules.
 
 **Features**
