@@ -1,10 +1,10 @@
+import jpeg from 'jpeg-js'
+import jsQR from 'jsqr'
 import React, { useEffect, useRef } from 'react'
 import Webcam from 'react-webcam'
-import jsQR from 'jsqr'
-import jpeg from 'jpeg-js'
 
 const DELAY = 500
-const SIZE = 400
+const SIZE = 800
 
 type Props = {
   onData: (data: string) => void
