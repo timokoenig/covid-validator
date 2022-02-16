@@ -79,6 +79,8 @@
   "modal.result.birthdate": "Geburtsdatum",
   "modal.result.rulecount": "Überprüfte Regeln",
   "modal.result.scannext": "Zertifikat scannen",
+  "modal.result.wrongqrcode": "Falscher QR-Code",
+  "modal.result.wrongqrcode.message": "Der gescannte QR-Code ist kein gültiges digitales COVID-Zertifikat",
 
   "onboarding.message": "CovidValidator ermöglicht es Ihnen, <b>digitale COVID-Zertifikate der EU</b> zu scannen und basierend auf länderspezifischen oder lokalen Regeln zu validieren. Der Scan- und Überprüfungsprozess findet lokal in Ihrem Browser statt.",
   "onboarding.list": "Diese Webseite",

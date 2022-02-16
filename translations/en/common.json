@@ -97,6 +97,8 @@
   "modal.result.birthdate": "Birthdate",
   "modal.result.rulecount": "Rules checked",
   "modal.result.scannext": "Scan Certificate",
+  "modal.result.wrongqrcode": "Wrong QR Code",
+  "modal.result.wrongqrcode.message": "The scanned QR code is not a valid Digital Covid Certificate",
 
   "onboarding.message": "CovidValidator allows you to scan and validate <b>EU Digital Covid Certificates</b> based on country or local rules. The scan and validation process happens locally in your browser.",
   "onboarding.list": "The website",

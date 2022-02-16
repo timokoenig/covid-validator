@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { checkCertificate, ScanResult } from '../../utils/dcc'
 import ResultModal from '../modal/result'
+import WrongQRCodeModal from '../modal/result/wrong-qr-code'
 import CameraActionBar from './camera-action-bar'
 import LoadingIndicator from './loading-indicator'
 
@@ -18,6 +19,11 @@ type Props = {
 const CameraScanView = (props: Props) => {
   const { t } = useTranslation('common')
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const {
+    isOpen: isOpenWrongQRCode,
+    onOpen: onOpenWrongQRCode,
+    onClose: onCloseWrongQRCode,
+  } = useDisclosure()
   const [error, setError] = useState<string | null>(null)
   const [scannerFacingMode, setScannerFacingMode] = useState<string>('environment')
   const [loading, setLoading] = useState<boolean>(false)
@@ -78,8 +84,12 @@ const CameraScanView = (props: Props) => {
               enableScan={!loading}
               facingMode={scannerFacingMode}
               onData={qrcode => {
-                if (!qrcode.startsWith('HC1:')) return
-                // TODO show error for wrongly scanned qr code
+                if (!qrcode.startsWith('HC1:')) {
+                  // User scanned a non-DCC QR code
+                  setLoading(true)
+                  onOpenWrongQRCode()
+                  return
+                }
                 setLoading(true)
                 setData(qrcode)
               }}
@@ -136,6 +146,13 @@ const CameraScanView = (props: Props) => {
       {scanResult !== undefined && (
         <ResultModal isOpen={isOpen} onClose={onModalClose} result={scanResult} />
       )}
+      <WrongQRCodeModal
+        isOpen={isOpenWrongQRCode}
+        onClose={() => {
+          setLoading(false)
+          onCloseWrongQRCode()
+        }}
+      />
     </>
   )
 }
