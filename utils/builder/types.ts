@@ -1,15 +1,17 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
-type JSONValue = string | number | boolean | JSONObject | JSONArray
+export type JSONValue = string | number | boolean | JSONObject | JSONArray
 
-interface JSONObject {
+export interface JSONObject {
   [x: string]: JSONValue
 }
 
-interface JSONArray extends Array<JSONValue> {}
+export interface JSONArray extends Array<JSONValue> {}
 
 export interface BType {
-  jsonLogic(): JSONObject
+  jsonLogic(): JSONValue
 }
+
+export interface BTypeEmpty extends BType {}
 
 export interface BTypeIf extends BType {
   condition: BType
@@ -17,14 +19,17 @@ export interface BTypeIf extends BType {
   false: BType
 }
 
-export interface BTypeVar extends BType {
-  variable: string
+export interface BTypeValue extends BType {
+  value: string
 }
 
-export const DURATION_HOURS = 'hours'
-export const DURATION_DAYS = 'days'
+export interface BTypeVar extends BTypeValue {}
 
-export interface BTypeDate extends BTypeVar {
+export const DURATION_HOURS = 'hour'
+export const DURATION_DAYS = 'day'
+
+export interface BTypeDate extends BType {
+  value: BTypeVar
   number: number
   duration: string
 }
@@ -34,8 +39,8 @@ export const OPERATOR_GREATER = '>'
 export const OPERATOR_GREATER_EQUALS = '>='
 
 export interface BTypeCompare extends BType {
-  varA: BTypeVar
-  varB: BTypeVar
+  varA: BTypeValue
+  varB: BTypeValue
   operator: string
 }
 
@@ -43,6 +48,11 @@ export const OPERATOR_DATE_BEFORE = 'date-before'
 export const OPERATOR_DATE_AFTER = 'date-after'
 
 export interface BTypeCompareDate extends BTypeCompare {}
+
+export interface BTypeCompareIn extends BType {
+  var: BTypeVar
+  values: string[]
+}
 
 export interface BTypeAnd extends BType {
   conditions: BType[]
