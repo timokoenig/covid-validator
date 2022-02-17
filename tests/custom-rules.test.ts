@@ -126,12 +126,12 @@ test('BioNTech; Full Immunization shortly after vaccination; INVALID', () => {
 
   expect(validate(dcc, localRulesHamburg, moment('2022-01-10').toDate())).toBeFalsy()
 })
-test('BioNTech; Full Immunization in one year; INVALID', () => {
+test('BioNTech; Full Immunization in one year; VALID', () => {
   const dcc = { ...vaccinationDCC }
   dcc.v![0].dn = 2
   dcc.v![0].sd = 2
 
-  expect(validate(dcc, localRulesHamburg, moment('2023-02-15').toDate())).toBeFalsy()
+  expect(validate(dcc, localRulesHamburg, moment('2023-02-15').toDate())).toBeTruthy()
 })
 test('BioNTech; Full Immunization after Recovery; VALID', () => {
   const dcc = { ...vaccinationDCC }

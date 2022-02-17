@@ -27,7 +27,7 @@ The data is based on the information provided by [pei.de](https://www.pei.de/DE/
 
 ### Immunization
 
-Everything as described in [DE Entry Rules](./de-entry-rules.md)
+Everything as described in [DE Entry Rules](./de-entry-rules.md), except the full immunization does not have an expiration date.
 
 ### Recovery
 
@@ -44,7 +44,7 @@ Everything as described in [DE Entry Rules](./de-entry-rules.md)
 
 ### Immunization
 
-Everything as described in [DE Entry Rules](./de-entry-rules.md)
+Everything as described in [DE Entry Rules](./de-entry-rules.md), except the full immunization does not have an expiration date.
 
 ### Recovery
 
@@ -61,7 +61,7 @@ Everything as described in [DE Entry Rules](./de-entry-rules.md)
 
 ### Immunization
 
-Everything as described in [DE Entry Rules](./de-entry-rules.md)
+Everything as described in [DE Entry Rules](./de-entry-rules.md), except the full immunization does not have an expiration date.
 
 ### Recovery
 
@@ -78,7 +78,7 @@ Everything as described in [DE Entry Rules](./de-entry-rules.md)
 
 ### Immunization
 
-Everything as described in [DE Entry Rules](./de-entry-rules.md)
+Everything as described in [DE Entry Rules](./de-entry-rules.md), except the full immunization does not have an expiration date.
 
 ### Recovery
 
@@ -95,7 +95,7 @@ Everything as described in [DE Entry Rules](./de-entry-rules.md)
 
 ### Immunization
 
-Everything as described in [DE Entry Rules](./de-entry-rules.md)
+Everything as described in [DE Entry Rules](./de-entry-rules.md), except the full immunization does not have an expiration date.
 
 ### Recovery
 
@@ -112,7 +112,7 @@ Everything as described in [DE Entry Rules](./de-entry-rules.md)
 
 ### Immunization
 
-Everything as described in [DE Entry Rules](./de-entry-rules.md)
+Everything as described in [DE Entry Rules](./de-entry-rules.md), except the full immunization does not have an expiration date.
 
 ### Recovery
 
@@ -129,7 +129,7 @@ Everything as described in [DE Entry Rules](./de-entry-rules.md)
 
 ### Immunization
 
-Everything as described in [DE Entry Rules](./de-entry-rules.md)
+Everything as described in [DE Entry Rules](./de-entry-rules.md), except the full immunization does not have an expiration date.
 
 ### Recovery
 
@@ -146,7 +146,7 @@ Everything as described in [DE Entry Rules](./de-entry-rules.md)
 
 ### Immunization
 
-Everything as described in [DE Entry Rules](./de-entry-rules.md)
+Everything as described in [DE Entry Rules](./de-entry-rules.md), except the full immunization does not have an expiration date.
 
 ### Recovery
 
@@ -163,7 +163,7 @@ Everything as described in [DE Entry Rules](./de-entry-rules.md)
 
 ### Immunization
 
-Everything as described in [DE Entry Rules](./de-entry-rules.md)
+Everything as described in [DE Entry Rules](./de-entry-rules.md), except the full immunization does not have an expiration date.
 
 ### Recovery
 
@@ -180,7 +180,7 @@ Everything as described in [DE Entry Rules](./de-entry-rules.md)
 
 ### Immunization
 
-Everything as described in [DE Entry Rules](./de-entry-rules.md)
+Everything as described in [DE Entry Rules](./de-entry-rules.md), except the full immunization does not have an expiration date.
 
 ### Recovery
 
@@ -197,7 +197,7 @@ Everything as described in [DE Entry Rules](./de-entry-rules.md)
 
 ### Immunization
 
-Everything as described in [DE Entry Rules](./de-entry-rules.md)
+Everything as described in [DE Entry Rules](./de-entry-rules.md), except the full immunization does not have an expiration date.
 
 ### Recovery
 
@@ -214,7 +214,7 @@ Everything as described in [DE Entry Rules](./de-entry-rules.md)
 
 ### Immunization
 
-Everything as described in [DE Entry Rules](./de-entry-rules.md)
+Everything as described in [DE Entry Rules](./de-entry-rules.md), except the full immunization does not have an expiration date.
 
 ### Recovery
 
@@ -231,7 +231,7 @@ Everything as described in [DE Entry Rules](./de-entry-rules.md)
 
 ### Immunization
 
-Everything as described in [DE Entry Rules](./de-entry-rules.md)
+Everything as described in [DE Entry Rules](./de-entry-rules.md), except the full immunization does not have an expiration date.
 
 ### Recovery
 
@@ -248,7 +248,7 @@ Everything as described in [DE Entry Rules](./de-entry-rules.md)
 
 ### Immunization
 
-Everything as described in [DE Entry Rules](./de-entry-rules.md)
+Everything as described in [DE Entry Rules](./de-entry-rules.md), except the full immunization does not have an expiration date.
 
 ### Recovery
 
@@ -265,7 +265,7 @@ Everything as described in [DE Entry Rules](./de-entry-rules.md)
 
 ### Immunization
 
-Everything as described in [DE Entry Rules](./de-entry-rules.md)
+Everything as described in [DE Entry Rules](./de-entry-rules.md), except the full immunization does not have an expiration date.
 
 ### Recovery
 
@@ -282,7 +282,7 @@ Everything as described in [DE Entry Rules](./de-entry-rules.md)
 
 ### Immunization
 
-Everything as described in [DE Entry Rules](./de-entry-rules.md)
+Everything as described in [DE Entry Rules](./de-entry-rules.md), except the full immunization does not have an expiration date.
 
 ### Recovery
 
