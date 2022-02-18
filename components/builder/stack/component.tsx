@@ -19,7 +19,13 @@ import { BType, BTypeIf, BTypeValue, BTypeVar } from '~/utils/builder/types'
 // )
 
 const BComponentVar = (props: BComponentProps<BTypeVar>) => (
-  <Box py="3" backgroundColor="red" borderRadius="10">
+  <Box
+    py="3"
+    pl="3"
+    backgroundColor="gray.700"
+    borderTopLeftRadius="10"
+    borderBottomLeftRadius="10"
+  >
     <Text>
       <Text as="span" fontWeight="semibold">
         VAR:
@@ -30,7 +36,13 @@ const BComponentVar = (props: BComponentProps<BTypeVar>) => (
 )
 
 const BComponentValue = (props: BComponentProps<BTypeValue>) => (
-  <Box py="3" backgroundColor="red" borderRadius="10">
+  <Box
+    py="3"
+    pl="3"
+    backgroundColor="gray.700"
+    borderTopLeftRadius="10"
+    borderBottomLeftRadius="10"
+  >
     <Text>
       <Text as="span" fontWeight="semibold">
         VALUE:
@@ -50,10 +62,22 @@ const BComponentValue = (props: BComponentProps<BTypeValue>) => (
 )
 
 const BComponentIf = (props: BComponentProps<BTypeIf>) => (
-  <Box backgroundColor="gray.700" pt="5" pl="5" borderRadius="10">
+  <Box
+    backgroundColor="gray.700"
+    pt="5"
+    pl="5"
+    borderTopLeftRadius="10"
+    borderBottomLeftRadius="10"
+  >
     <Heading size="md">IF</Heading>
-    <Stack backgroundColor="gray.700" borderRadius="10">
-      <Box backgroundColor="gray.700">
+    <Stack>
+      <Box
+        backgroundColor="gray.800"
+        py="1"
+        pl="1"
+        borderTopLeftRadius="10"
+        borderBottomLeftRadius="10"
+      >
         <BComponent
           data={props.data.condition}
           onChange={data => {
@@ -63,7 +87,13 @@ const BComponentIf = (props: BComponentProps<BTypeIf>) => (
           }}
         />
       </Box>
-      <Box>
+      <Box
+        backgroundColor="gray.800"
+        py="1"
+        pl="1"
+        borderTopLeftRadius="10"
+        borderBottomLeftRadius="10"
+      >
         <Heading size="sm">THEN</Heading>
         <BComponent
           data={props.data.conditionTrue}
@@ -74,7 +104,13 @@ const BComponentIf = (props: BComponentProps<BTypeIf>) => (
           }}
         />
       </Box>
-      <Box>
+      <Box
+        backgroundColor="gray.800"
+        py="1"
+        pl="1"
+        borderTopLeftRadius="10"
+        borderBottomLeftRadius="10"
+      >
         <Heading size="sm">ELSE</Heading>
         <BComponent
           data={props.data.conditionFalse}

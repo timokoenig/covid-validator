@@ -17,7 +17,7 @@ const BuilderStack = (props: Props) => {
   }
 
   return (
-    <Stack>
+    <Stack borderRadius="10" overflow="hidden">
       <BComponent data={encodedData} onChange={onChange} />
     </Stack>
   )
