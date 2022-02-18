@@ -17,8 +17,8 @@ import {
   JSONArray,
   JSONObject,
   JSONValue,
-  OPERATOR_DATE_AFTER,
-  OPERATOR_DATE_BEFORE,
+  OPERATOR_DATE_NOT_AFTER,
+  OPERATOR_DATE_NOT_BEFORE,
   OPERATOR_EQUALS,
   OPERATOR_GREATER,
   OPERATOR_GREATER_EQUALS,
@@ -163,7 +163,7 @@ export class BClassCompareDate implements BTypeCompareDate {
   constructor(
     variableA: BTypeValue = new BClassValue(),
     variableB: BTypeValue = new BClassValue(),
-    operator: string = OPERATOR_DATE_BEFORE
+    operator: string = OPERATOR_DATE_NOT_BEFORE
   ) {
     this.variableA = variableA
     this.variableB = variableB
@@ -320,7 +320,7 @@ export function encode(data: JSONValue): BType {
     if (OPERATOR_EQUALS in data || OPERATOR_GREATER in data || OPERATOR_GREATER_EQUALS in data) {
       return new BClassCompare().encode(data)
     }
-    if (OPERATOR_DATE_BEFORE in data || OPERATOR_DATE_AFTER in data) {
+    if (OPERATOR_DATE_NOT_BEFORE in data || OPERATOR_DATE_NOT_AFTER in data) {
       return new BClassCompareDate().encode(data)
     }
   } else if (typeof data == 'string' || typeof data == 'number' || typeof data == 'boolean') {

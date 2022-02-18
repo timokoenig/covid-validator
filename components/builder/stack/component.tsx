@@ -24,8 +24,8 @@ import {
   BTypeIf,
   BTypeValue,
   BTypeVar,
-  OPERATOR_DATE_AFTER,
-  OPERATOR_DATE_BEFORE,
+  OPERATOR_DATE_NOT_AFTER,
+  OPERATOR_DATE_NOT_BEFORE,
   OPERATOR_EQUALS,
   OPERATOR_GREATER,
   OPERATOR_GREATER_EQUALS,
@@ -58,15 +58,19 @@ const BaseComponent = (props: {
   </Box>
 )
 
-const BComponentEmpty = () => (
+const BComponentEmpty = (props: { onClick: () => void }) => (
   <Button
     py="3"
     borderStyle="dashed"
     borderWidth="2px"
-    borderColor="gray.600"
+    borderColor="gray.500"
     backgroundColor="transparent"
     borderRadius="10"
     isFullWidth
+    onClick={e => {
+      e.stopPropagation()
+      props.onClick()
+    }}
   >
     ADD
   </Button>
@@ -94,17 +98,6 @@ const BComponentValue = (props: BComponentProps<BTypeValue>) => (
           ? 'TRUE'
           : 'FALSE'
         : props.data.value}
-      <Button
-        size="xs"
-        ml="5"
-        onClick={() => {
-          const tmp = props.data
-          tmp.value = !tmp.value
-          props.onChange(tmp)
-        }}
-      >
-        Edit
-      </Button>
     </Text>
   </BaseComponent>
 )
@@ -116,141 +109,123 @@ const BComponentDate = (props: BComponentProps<BTypeDate>) => (
         DATE:
       </Text>{' '}
       {`${props.data.value.value} + ${props.data.number} ${props.data.duration}`}
-      <Button
-        size="xs"
-        ml="5"
-        onClick={() => {
-          const tmp = props.data
-          // tmp.value = !tmp.value
-          props.onChange(tmp)
-        }}
-      >
-        Edit
-      </Button>
     </Text>
   </BaseComponent>
 )
 
 const BComponentCompare = (props: BComponentProps<BTypeCompare>) => (
-  <BaseComponent styles={props.styles}>
-    <Text mb="2">
-      <Text as="span" fontWeight="semibold">
-        {props.data.operator === OPERATOR_EQUALS
-          ? 'EQUALS'
-          : props.data.operator === OPERATOR_GREATER
-          ? 'GREATER'
-          : props.data.operator === OPERATOR_GREATER_EQUALS
-          ? 'GREATER EQUALS'
-          : ''}
-      </Text>
-      <Button
-        size="xs"
-        ml="5"
-        onClick={() => {
-          const tmp = props.data
-          // tmp.value = !tmp.value
-          props.onChange(tmp)
-        }}
+  <BaseComponent styles={{ padding: 0 }}>
+    <HStack>
+      <Box
+        backgroundColor="gray.800"
+        borderRadius="10"
+        borderRight="3px solid"
+        borderRightColor="gray.800"
       >
-        Edit
-      </Button>
-    </Text>
-    <Box
-      py="1"
-      pl="1"
-      backgroundColor="gray.800"
-      borderTopLeftRadius="10"
-      borderBottomLeftRadius="10"
-    >
-      <BComponent
-        data={props.data.variableA}
-        onChange={_ => {
-          const tmp = props.data
-          // tmp.condition = data
-          props.onChange(tmp)
-        }}
-      />
-    </Box>
-    <Box
-      py="1"
-      pl="1"
-      backgroundColor="gray.800"
-      borderTopLeftRadius="10"
-      borderBottomLeftRadius="10"
-    >
-      <BComponent
-        data={props.data.variableB}
-        onChange={_ => {
-          const tmp = props.data
-          // tmp.condition = data
-          props.onChange(tmp)
-        }}
-      />
-    </Box>
+        <BComponent
+          data={props.data.variableA}
+          styles={{ borderRadius: 10, paddingRight: 12 }}
+          onChange={_ => {
+            const tmp = props.data
+            // tmp.condition = data
+            props.onChange(tmp)
+          }}
+        />
+      </Box>
+
+      <Text mb="2">
+        <Text as="span" fontWeight="semibold">
+          {props.data.operator === OPERATOR_EQUALS
+            ? 'EQUALS'
+            : props.data.operator === OPERATOR_GREATER
+            ? 'GREATER'
+            : props.data.operator === OPERATOR_GREATER_EQUALS
+            ? 'GREATER EQUALS'
+            : ''}
+        </Text>
+      </Text>
+
+      <Box
+        backgroundColor="gray.800"
+        borderRadius="10"
+        flex="1"
+        borderLeft="3px solid"
+        borderLeftColor="gray.800"
+      >
+        <BComponent
+          data={props.data.variableB}
+          styles={{ padding: '12' }}
+          onChange={_ => {
+            const tmp = props.data
+            // tmp.condition = data
+            props.onChange(tmp)
+          }}
+        />
+      </Box>
+    </HStack>
   </BaseComponent>
 )
 
 const BComponentCompareDate = (props: BComponentProps<BTypeCompareDate>) => (
-  <BaseComponent styles={props.styles}>
-    <Text mb="2">
-      <Text as="span" fontWeight="semibold">
-        {props.data.operator === OPERATOR_DATE_BEFORE
-          ? 'BEFORE'
-          : props.data.operator === OPERATOR_DATE_AFTER
-          ? 'AFTER'
-          : ''}
-      </Text>
-      <Button
-        size="xs"
-        ml="5"
-        onClick={() => {
-          const tmp = props.data
-          // tmp.value = !tmp.value
-          props.onChange(tmp)
-        }}
+  <BaseComponent styles={{ padding: 0 }}>
+    <HStack>
+      <Box
+        backgroundColor="gray.800"
+        borderRadius="10"
+        borderRight="3px solid"
+        borderRightColor="gray.800"
       >
-        Edit
-      </Button>
-    </Text>
-    <Box
-      py="1"
-      pl="1"
-      backgroundColor="gray.800"
-      borderTopLeftRadius="10"
-      borderBottomLeftRadius="10"
-    >
-      <BComponent
-        data={props.data.variableA}
-        onChange={_ => {
-          const tmp = props.data
-          // tmp.condition = data
-          props.onChange(tmp)
-        }}
-      />
-    </Box>
-    <Box
-      py="1"
-      pl="1"
-      backgroundColor="gray.800"
-      borderTopLeftRadius="10"
-      borderBottomLeftRadius="10"
-    >
-      <BComponent
-        data={props.data.variableB}
-        onChange={_ => {
-          const tmp = props.data
-          // tmp.condition = data
-          props.onChange(tmp)
-        }}
-      />
-    </Box>
+        <BComponent
+          data={props.data.variableA}
+          styles={{ borderRadius: 10, paddingRight: 12 }}
+          onChange={_ => {
+            const tmp = props.data
+            // tmp.condition = data
+            props.onChange(tmp)
+          }}
+        />
+      </Box>
+
+      <Text mb="2">
+        <Text as="span" fontWeight="semibold">
+          {props.data.operator === OPERATOR_DATE_NOT_BEFORE
+            ? 'NOT BEFORE'
+            : props.data.operator === OPERATOR_DATE_NOT_AFTER
+            ? 'NOT AFTER'
+            : ''}
+        </Text>
+      </Text>
+
+      <Box
+        backgroundColor="gray.800"
+        borderRadius="10"
+        flex="1"
+        borderLeft="3px solid"
+        borderLeftColor="gray.800"
+      >
+        <BComponent
+          data={props.data.variableB}
+          styles={{ padding: '12' }}
+          onChange={_ => {
+            const tmp = props.data
+            // tmp.condition = data
+            props.onChange(tmp)
+          }}
+        />
+      </Box>
+    </HStack>
   </BaseComponent>
 )
 
 const BComponentCompareIn = (props: BComponentProps<BTypeCompareIn>) => (
   <BaseComponent styles={{ padding: 0 }}>
     <HStack>
-      <Box backgroundColor="gray.800" borderRadius="10">
+      <Box
+        backgroundColor="gray.800"
+        borderRadius="10"
+        borderRight="3px solid"
+        borderRightColor="gray.800"
+      >
         <BComponent
           data={props.data.variable}
           styles={{ borderRadius: 10, paddingRight: 12 }}
@@ -270,6 +245,8 @@ const BComponentCompareIn = (props: BComponentProps<BTypeCompareIn>) => (
         backgroundColor="gray.700"
         borderTopLeftRadius="10"
         borderBottomLeftRadius="10"
+        borderLeft="3px solid"
+        borderLeftColor="gray.800"
         flex="1"
         padding="3"
         _hover={{
@@ -348,17 +325,6 @@ const BComponentAnd = (props: BComponentProps<BTypeAnd>) => (
       <Text as="span" fontWeight="semibold">
         AND
       </Text>
-      <Button
-        size="xs"
-        ml="5"
-        onClick={() => {
-          const tmp = props.data
-          // tmp.value = !tmp.value
-          props.onChange(tmp)
-        }}
-      >
-        Edit
-      </Button>
     </Text>
     <VStack>
       {props.data.conditions.map((c, index) => (
@@ -381,6 +347,7 @@ const BComponentAnd = (props: BComponentProps<BTypeAnd>) => (
           />
         </Box>
       ))}
+      <BComponentEmpty onClick={() => {}} />
     </VStack>
   </BaseComponent>
 )
@@ -454,7 +421,7 @@ export const BComponent = (props: BComponentProps<BType>) => {
     return <BComponentAnd data={props.data} styles={props.styles} onChange={props.onChange} />
   }
   if (props.data instanceof BClassEmpty) {
-    return <BComponentEmpty />
+    return <BComponentEmpty onClick={() => {}} />
   }
   return <Box />
 }

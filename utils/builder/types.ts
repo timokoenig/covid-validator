@@ -48,8 +48,8 @@ export interface BTypeCompare extends BType {
   operator: string
 }
 
-export const OPERATOR_DATE_BEFORE = 'date-before'
-export const OPERATOR_DATE_AFTER = 'date-after'
+export const OPERATOR_DATE_NOT_BEFORE = 'not-before'
+export const OPERATOR_DATE_NOT_AFTER = 'not-after'
 
 export interface BTypeCompareDate extends BTypeCompare {}
 
