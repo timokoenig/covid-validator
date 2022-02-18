@@ -13,7 +13,7 @@ const EmptyComponent = () => {
     if: [
       { var: 'payload.v.0' },
       {
-        in: [{ var: 'payload.0.1.2' }, ['1', '2', '3']],
+        and: [{ var: 'payload.0.1.2' }, { var: 'payload.0.1.2' }, true, false, 'hellp'],
       },
       false,
     ],

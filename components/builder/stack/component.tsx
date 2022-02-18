@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { Box, Button, Heading, HStack, Stack, Text } from '@chakra-ui/react'
+import { Box, Button, Heading, HStack, Stack, Text, VStack } from '@chakra-ui/react'
 import React, { CSSProperties } from 'react'
 import {
+  BClassAnd,
   BClassCertificateType,
   BClassCompare,
   BClassCompareDate,
@@ -14,6 +15,7 @@ import {
 } from '~/utils/builder/classes'
 import {
   BType,
+  BTypeAnd,
   BTypeCertificateType,
   BTypeCompare,
   BTypeCompareDate,
@@ -87,7 +89,11 @@ const BComponentValue = (props: BComponentProps<BTypeValue>) => (
       <Text as="span" fontWeight="semibold">
         VALUE:
       </Text>{' '}
-      {props.data.value === true ? 'true' : 'false'}
+      {typeof props.data.value === 'boolean'
+        ? props.data.value
+          ? 'TRUE'
+          : 'FALSE'
+        : props.data.value}
       <Button
         size="xs"
         ml="5"
@@ -336,6 +342,49 @@ const BComponentIf = (props: BComponentProps<BTypeIf>) => (
   </BaseComponent>
 )
 
+const BComponentAnd = (props: BComponentProps<BTypeAnd>) => (
+  <BaseComponent styles={props.styles}>
+    <Text mb="2">
+      <Text as="span" fontWeight="semibold">
+        AND
+      </Text>
+      <Button
+        size="xs"
+        ml="5"
+        onClick={() => {
+          const tmp = props.data
+          // tmp.value = !tmp.value
+          props.onChange(tmp)
+        }}
+      >
+        Edit
+      </Button>
+    </Text>
+    <VStack>
+      {props.data.conditions.map((c, index) => (
+        <Box
+          key={index}
+          backgroundColor="gray.800"
+          py="1"
+          pl="1"
+          borderTopLeftRadius="10"
+          borderBottomLeftRadius="10"
+          width="100%"
+        >
+          <BComponent
+            data={c}
+            onChange={_ => {
+              const tmp = props.data
+              // tmp.condition = data
+              props.onChange(tmp)
+            }}
+          />
+        </Box>
+      ))}
+    </VStack>
+  </BaseComponent>
+)
+
 const BComponentCertificateType = (props: BComponentProps<BTypeCertificateType>) => (
   <BaseComponent>
     <Heading size="md" mb="2">
@@ -400,6 +449,9 @@ export const BComponent = (props: BComponentProps<BType>) => {
   }
   if (props.data instanceof BClassCompareIn) {
     return <BComponentCompareIn data={props.data} styles={props.styles} onChange={props.onChange} />
+  }
+  if (props.data instanceof BClassAnd) {
+    return <BComponentAnd data={props.data} styles={props.styles} onChange={props.onChange} />
   }
   if (props.data instanceof BClassEmpty) {
     return <BComponentEmpty />
