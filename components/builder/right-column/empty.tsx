@@ -13,7 +13,7 @@ const EmptyComponent = () => {
     if: [
       { var: 'payload.v.0' },
       {
-        'date-before': [{ var: 'payload.0.1.2' }, { var: 'payload.0.1.2' }],
+        in: [{ var: 'payload.0.1.2' }, ['1', '2', '3']],
       },
       false,
     ],

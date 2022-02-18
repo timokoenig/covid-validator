@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { Box, Button, Heading, Stack, Text } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Button, Heading, HStack, Stack, Text } from '@chakra-ui/react'
+import React, { CSSProperties } from 'react'
 import {
   BClassCertificateType,
   BClassCompare,
   BClassCompareDate,
+  BClassCompareIn,
   BClassDate,
   BClassEmpty,
   BClassIf,
@@ -16,6 +17,7 @@ import {
   BTypeCertificateType,
   BTypeCompare,
   BTypeCompareDate,
+  BTypeCompareIn,
   BTypeDate,
   BTypeIf,
   BTypeValue,
@@ -27,16 +29,28 @@ import {
   OPERATOR_GREATER_EQUALS,
 } from '~/utils/builder/types'
 
-const BaseComponent = (props: { children: JSX.Element | JSX.Element[] }) => (
+const BaseComponent = (props: {
+  children: JSX.Element | JSX.Element[]
+  styles?: CSSProperties
+}) => (
   <Box
+    as="button"
     py="3"
     pl="3"
+    display="block"
+    width="100%"
+    textAlign="left"
     backgroundColor="gray.700"
     borderTopLeftRadius="10"
     borderBottomLeftRadius="10"
     _hover={{
       background: 'gray.600',
     }}
+    onClick={e => {
+      e.stopPropagation()
+      alert('ok')
+    }}
+    style={props.styles}
   >
     {props.children}
   </Box>
@@ -57,7 +71,7 @@ const BComponentEmpty = () => (
 )
 
 const BComponentVar = (props: BComponentProps<BTypeVar>) => (
-  <BaseComponent>
+  <BaseComponent styles={props.styles}>
     <Text>
       <Text as="span" fontWeight="semibold">
         VAR:
@@ -68,7 +82,7 @@ const BComponentVar = (props: BComponentProps<BTypeVar>) => (
 )
 
 const BComponentValue = (props: BComponentProps<BTypeValue>) => (
-  <BaseComponent>
+  <BaseComponent styles={props.styles}>
     <Text>
       <Text as="span" fontWeight="semibold">
         VALUE:
@@ -90,7 +104,7 @@ const BComponentValue = (props: BComponentProps<BTypeValue>) => (
 )
 
 const BComponentDate = (props: BComponentProps<BTypeDate>) => (
-  <BaseComponent>
+  <BaseComponent styles={props.styles}>
     <Text>
       <Text as="span" fontWeight="semibold">
         DATE:
@@ -112,7 +126,7 @@ const BComponentDate = (props: BComponentProps<BTypeDate>) => (
 )
 
 const BComponentCompare = (props: BComponentProps<BTypeCompare>) => (
-  <BaseComponent>
+  <BaseComponent styles={props.styles}>
     <Text mb="2">
       <Text as="span" fontWeight="semibold">
         {props.data.operator === OPERATOR_EQUALS
@@ -171,7 +185,7 @@ const BComponentCompare = (props: BComponentProps<BTypeCompare>) => (
 )
 
 const BComponentCompareDate = (props: BComponentProps<BTypeCompareDate>) => (
-  <BaseComponent>
+  <BaseComponent styles={props.styles}>
     <Text mb="2">
       <Text as="span" fontWeight="semibold">
         {props.data.operator === OPERATOR_DATE_BEFORE
@@ -224,6 +238,41 @@ const BComponentCompareDate = (props: BComponentProps<BTypeCompareDate>) => (
         }}
       />
     </Box>
+  </BaseComponent>
+)
+
+const BComponentCompareIn = (props: BComponentProps<BTypeCompareIn>) => (
+  <BaseComponent styles={{ padding: 0 }}>
+    <HStack>
+      <Box backgroundColor="gray.800" borderRadius="10">
+        <BComponent
+          data={props.data.variable}
+          styles={{ borderRadius: 10, paddingRight: 12 }}
+          onChange={_ => {
+            const tmp = props.data
+            // tmp.condition = data
+            props.onChange(tmp)
+          }}
+        />
+      </Box>
+      <Text fontWeight="semibold" px="10">
+        IN
+      </Text>
+      <Box
+        as="button"
+        display="flex"
+        backgroundColor="gray.700"
+        borderTopLeftRadius="10"
+        borderBottomLeftRadius="10"
+        flex="1"
+        padding="3"
+        _hover={{
+          background: 'gray.600',
+        }}
+      >
+        {props.data.values.join(', ')}
+      </Box>
+    </HStack>
   </BaseComponent>
 )
 
@@ -315,30 +364,42 @@ const BComponentCertificateType = (props: BComponentProps<BTypeCertificateType>)
 
 type BComponentProps<T> = {
   data: T
+  styles?: CSSProperties
   onChange: (data: T) => void
 }
 
 export const BComponent = (props: BComponentProps<BType>) => {
   if (props.data instanceof BClassIf) {
-    return <BComponentIf data={props.data} onChange={props.onChange} />
+    return <BComponentIf data={props.data} styles={props.styles} onChange={props.onChange} />
   }
   if (props.data instanceof BClassValue) {
-    return <BComponentValue data={props.data} onChange={props.onChange} />
+    return <BComponentValue data={props.data} styles={props.styles} onChange={props.onChange} />
   }
   if (props.data instanceof BClassVar) {
-    return <BComponentVar data={props.data} onChange={props.onChange} />
+    return <BComponentVar data={props.data} styles={props.styles} onChange={props.onChange} />
   }
   if (props.data instanceof BClassCertificateType) {
-    return <BComponentCertificateType data={props.data} onChange={props.onChange} />
+    return (
+      <BComponentCertificateType
+        data={props.data}
+        styles={props.styles}
+        onChange={props.onChange}
+      />
+    )
   }
   if (props.data instanceof BClassDate) {
-    return <BComponentDate data={props.data} onChange={props.onChange} />
+    return <BComponentDate data={props.data} styles={props.styles} onChange={props.onChange} />
   }
   if (props.data instanceof BClassCompare) {
-    return <BComponentCompare data={props.data} onChange={props.onChange} />
+    return <BComponentCompare data={props.data} styles={props.styles} onChange={props.onChange} />
   }
   if (props.data instanceof BClassCompareDate) {
-    return <BComponentCompareDate data={props.data} onChange={props.onChange} />
+    return (
+      <BComponentCompareDate data={props.data} styles={props.styles} onChange={props.onChange} />
+    )
+  }
+  if (props.data instanceof BClassCompareIn) {
+    return <BComponentCompareIn data={props.data} styles={props.styles} onChange={props.onChange} />
   }
   if (props.data instanceof BClassEmpty) {
     return <BComponentEmpty />
