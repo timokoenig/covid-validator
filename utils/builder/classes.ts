@@ -1,6 +1,7 @@
 import {
   BType,
   BTypeAnd,
+  BTypeCertificateType,
   BTypeCompare,
   BTypeCompareDate,
   BTypeCompareIn,
@@ -8,6 +9,9 @@ import {
   BTypeIf,
   BTypeValue,
   BTypeVar,
+  CERTIFICATE_TYPE_RECOVERY,
+  CERTIFICATE_TYPE_TEST,
+  CERTIFICATE_TYPE_VACCINATION,
   DURATION_DAYS,
   DURATION_HOURS,
   JSONArray,
@@ -236,8 +240,61 @@ export class BClassAnd implements BTypeAnd {
 //   }
 // }
 
+export class BClassCertificateType implements BTypeCertificateType {
+  type: string
+  conditionTrue: BType
+
+  constructor(
+    type: string = CERTIFICATE_TYPE_VACCINATION,
+    conditionTrue: BType = new BClassEmpty()
+  ) {
+    this.type = type
+    this.conditionTrue = conditionTrue
+  }
+
+  encode(data: JSONValue): BType {
+    const obj = data as JSONObject
+    const arr = obj.if as JSONArray
+    const typeVar = (arr[0] as JSONObject).var as string
+
+    let type = CERTIFICATE_TYPE_VACCINATION
+    if (typeVar === 'payload.t.0') {
+      type = CERTIFICATE_TYPE_TEST
+    }
+    if (this.type === 'pyaload.r.0') {
+      type = CERTIFICATE_TYPE_RECOVERY
+    }
+
+    return new BClassCertificateType(type, encode(arr[1] as JSONObject))
+  }
+
+  decode(): JSONValue {
+    let typeVar = 'payload.v.0'
+    if (this.type === CERTIFICATE_TYPE_TEST) {
+      typeVar = 'payload.t.0'
+    }
+    if (this.type === CERTIFICATE_TYPE_RECOVERY) {
+      typeVar = 'payload.r.0'
+    }
+
+    return {
+      type: 'certificate-type',
+      if: [{ var: typeVar }, this.conditionTrue.decode(), false],
+    }
+  }
+}
+
 export function encode(data: JSONValue): BType {
+  if (data === null) {
+    return new BClassEmpty()
+  }
   if (typeof data === 'object') {
+    if ('type' in data) {
+      // custom types
+      if (data.type === 'certificate-type') {
+        return new BClassCertificateType().encode(data)
+      }
+    }
     if ('var' in data) {
       return new BClassVar().encode(data)
     }

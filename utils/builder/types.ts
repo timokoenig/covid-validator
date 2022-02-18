@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 export type Value = string | number | boolean
 
-export type JSONValue = string | number | boolean | JSONObject | JSONArray
+export type JSONValue = string | number | boolean | JSONObject | JSONArray | null
 
 export interface JSONObject {
   [x: string]: JSONValue
@@ -74,3 +74,12 @@ export interface BTypeAnd extends BType {
 // export interface BTypeImmunizationStatus extends BType {
 //   status: string
 // }
+
+export const CERTIFICATE_TYPE_VACCINATION = 'Vaccination'
+export const CERTIFICATE_TYPE_TEST = 'Test'
+export const CERTIFICATE_TYPE_RECOVERY = 'Recovery'
+
+export interface BTypeCertificateType extends BType {
+  type: string
+  conditionTrue: BType
+}
