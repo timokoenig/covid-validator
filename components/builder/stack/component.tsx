@@ -25,6 +25,9 @@ const BComponentVar = (props: BComponentProps<BTypeVar>) => (
     backgroundColor="gray.700"
     borderTopLeftRadius="10"
     borderBottomLeftRadius="10"
+    _hover={{
+      background: 'gray.600',
+    }}
   >
     <Text>
       <Text as="span" fontWeight="semibold">
@@ -42,6 +45,9 @@ const BComponentValue = (props: BComponentProps<BTypeValue>) => (
     backgroundColor="gray.700"
     borderTopLeftRadius="10"
     borderBottomLeftRadius="10"
+    _hover={{
+      background: 'gray.600',
+    }}
   >
     <Text>
       <Text as="span" fontWeight="semibold">
@@ -49,13 +55,15 @@ const BComponentValue = (props: BComponentProps<BTypeValue>) => (
       </Text>{' '}
       {props.data.value === true ? 'true' : 'false'}
       <Button
+        size="xs"
+        ml="5"
         onClick={() => {
           const tmp = props.data
           tmp.value = !tmp.value
           props.onChange(tmp)
         }}
       >
-        Boom
+        Edit
       </Button>
     </Text>
   </Box>
@@ -68,6 +76,9 @@ const BComponentIf = (props: BComponentProps<BTypeIf>) => (
     pl="5"
     borderTopLeftRadius="10"
     borderBottomLeftRadius="10"
+    _hover={{
+      background: 'gray.600',
+    }}
   >
     <Heading size="md">IF</Heading>
     <Stack>
