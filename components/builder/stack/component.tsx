@@ -34,17 +34,18 @@ import {
 const BaseComponent = (props: {
   children: JSX.Element | JSX.Element[]
   styles?: CSSProperties
+  depth: number
 }) => (
   <Box
-    as="button"
     py="3"
     pl="3"
     display="block"
     width="100%"
     textAlign="left"
-    backgroundColor="gray.700"
+    backgroundColor={`rgba(74, 85, 104, ${1 - props.depth * 0.1})`}
     borderTopLeftRadius="10"
     borderBottomLeftRadius="10"
+    cursor="pointer"
     _hover={{
       background: 'gray.600',
     }}
@@ -77,7 +78,7 @@ const BComponentEmpty = (props: { onClick: () => void }) => (
 )
 
 const BComponentVar = (props: BComponentProps<BTypeVar>) => (
-  <BaseComponent styles={props.styles}>
+  <BaseComponent styles={props.styles} depth={props.depth}>
     <Text>
       <Text as="span" fontWeight="semibold">
         VAR:
@@ -88,7 +89,7 @@ const BComponentVar = (props: BComponentProps<BTypeVar>) => (
 )
 
 const BComponentValue = (props: BComponentProps<BTypeValue>) => (
-  <BaseComponent styles={props.styles}>
+  <BaseComponent styles={props.styles} depth={props.depth}>
     <Text>
       <Text as="span" fontWeight="semibold">
         VALUE:
@@ -103,7 +104,7 @@ const BComponentValue = (props: BComponentProps<BTypeValue>) => (
 )
 
 const BComponentDate = (props: BComponentProps<BTypeDate>) => (
-  <BaseComponent styles={props.styles}>
+  <BaseComponent styles={props.styles} depth={props.depth}>
     <Text>
       <Text as="span" fontWeight="semibold">
         DATE:
@@ -114,7 +115,7 @@ const BComponentDate = (props: BComponentProps<BTypeDate>) => (
 )
 
 const BComponentCompare = (props: BComponentProps<BTypeCompare>) => (
-  <BaseComponent styles={{ padding: 0 }}>
+  <BaseComponent styles={{ padding: 0 }} depth={props.depth}>
     <HStack>
       <Box
         backgroundColor="gray.800"
@@ -125,6 +126,7 @@ const BComponentCompare = (props: BComponentProps<BTypeCompare>) => (
         <BComponent
           data={props.data.variableA}
           styles={{ borderRadius: 10, paddingRight: 12 }}
+          depth={props.depth}
           onChange={_ => {
             const tmp = props.data
             // tmp.condition = data
@@ -133,16 +135,14 @@ const BComponentCompare = (props: BComponentProps<BTypeCompare>) => (
         />
       </Box>
 
-      <Text mb="2">
-        <Text as="span" fontWeight="semibold">
-          {props.data.operator === OPERATOR_EQUALS
-            ? 'EQUALS'
-            : props.data.operator === OPERATOR_GREATER
-            ? 'GREATER'
-            : props.data.operator === OPERATOR_GREATER_EQUALS
-            ? 'GREATER EQUALS'
-            : ''}
-        </Text>
+      <Text as="span" fontWeight="semibold" px="10">
+        {props.data.operator === OPERATOR_EQUALS
+          ? 'EQUALS'
+          : props.data.operator === OPERATOR_GREATER
+          ? 'GREATER'
+          : props.data.operator === OPERATOR_GREATER_EQUALS
+          ? 'GREATER EQUALS'
+          : ''}
       </Text>
 
       <Box
@@ -155,6 +155,7 @@ const BComponentCompare = (props: BComponentProps<BTypeCompare>) => (
         <BComponent
           data={props.data.variableB}
           styles={{ padding: '12' }}
+          depth={props.depth}
           onChange={_ => {
             const tmp = props.data
             // tmp.condition = data
@@ -167,7 +168,7 @@ const BComponentCompare = (props: BComponentProps<BTypeCompare>) => (
 )
 
 const BComponentCompareDate = (props: BComponentProps<BTypeCompareDate>) => (
-  <BaseComponent styles={{ padding: 0 }}>
+  <BaseComponent styles={{ padding: 0 }} depth={props.depth}>
     <HStack>
       <Box
         backgroundColor="gray.800"
@@ -178,6 +179,7 @@ const BComponentCompareDate = (props: BComponentProps<BTypeCompareDate>) => (
         <BComponent
           data={props.data.variableA}
           styles={{ borderRadius: 10, paddingRight: 12 }}
+          depth={props.depth}
           onChange={_ => {
             const tmp = props.data
             // tmp.condition = data
@@ -186,14 +188,12 @@ const BComponentCompareDate = (props: BComponentProps<BTypeCompareDate>) => (
         />
       </Box>
 
-      <Text mb="2">
-        <Text as="span" fontWeight="semibold">
-          {props.data.operator === OPERATOR_DATE_NOT_BEFORE
-            ? 'NOT BEFORE'
-            : props.data.operator === OPERATOR_DATE_NOT_AFTER
-            ? 'NOT AFTER'
-            : ''}
-        </Text>
+      <Text fontWeight="semibold" px="10">
+        {props.data.operator === OPERATOR_DATE_NOT_BEFORE
+          ? 'NOT BEFORE'
+          : props.data.operator === OPERATOR_DATE_NOT_AFTER
+          ? 'NOT AFTER'
+          : ''}
       </Text>
 
       <Box
@@ -206,6 +206,7 @@ const BComponentCompareDate = (props: BComponentProps<BTypeCompareDate>) => (
         <BComponent
           data={props.data.variableB}
           styles={{ padding: '12' }}
+          depth={props.depth}
           onChange={_ => {
             const tmp = props.data
             // tmp.condition = data
@@ -218,7 +219,7 @@ const BComponentCompareDate = (props: BComponentProps<BTypeCompareDate>) => (
 )
 
 const BComponentCompareIn = (props: BComponentProps<BTypeCompareIn>) => (
-  <BaseComponent styles={{ padding: 0 }}>
+  <BaseComponent styles={{ padding: 0 }} depth={props.depth}>
     <HStack>
       <Box
         backgroundColor="gray.800"
@@ -228,6 +229,7 @@ const BComponentCompareIn = (props: BComponentProps<BTypeCompareIn>) => (
       >
         <BComponent
           data={props.data.variable}
+          depth={props.depth}
           styles={{ borderRadius: 10, paddingRight: 12 }}
           onChange={_ => {
             const tmp = props.data
@@ -240,6 +242,18 @@ const BComponentCompareIn = (props: BComponentProps<BTypeCompareIn>) => (
         IN
       </Text>
       <Box
+        backgroundColor="gray.800"
+        borderRadius="10"
+        borderLeft="3px solid"
+        borderLeftColor="gray.800"
+        flex="1"
+        flexDirection="column"
+      >
+        <BaseComponent depth={props.depth + 1}>
+          <Text>{props.data.values.join(', ')}</Text>
+        </BaseComponent>
+      </Box>
+      {/* <Box
         as="button"
         display="flex"
         backgroundColor="gray.700"
@@ -253,14 +267,14 @@ const BComponentCompareIn = (props: BComponentProps<BTypeCompareIn>) => (
           background: 'gray.600',
         }}
       >
-        {props.data.values.join(', ')}
-      </Box>
+
+      </Box> */}
     </HStack>
   </BaseComponent>
 )
 
 const BComponentIf = (props: BComponentProps<BTypeIf>) => (
-  <BaseComponent>
+  <BaseComponent styles={props.styles} depth={props.depth}>
     <Heading size="md" mb="2">
       IF
     </Heading>
@@ -274,6 +288,7 @@ const BComponentIf = (props: BComponentProps<BTypeIf>) => (
       >
         <BComponent
           data={props.data.condition}
+          depth={props.depth}
           onChange={data => {
             const tmp = props.data
             tmp.condition = data
@@ -281,6 +296,9 @@ const BComponentIf = (props: BComponentProps<BTypeIf>) => (
           }}
         />
       </Box>
+      <Heading size="sm" p="1">
+        THEN
+      </Heading>
       <Box
         backgroundColor="gray.800"
         py="1"
@@ -288,9 +306,9 @@ const BComponentIf = (props: BComponentProps<BTypeIf>) => (
         borderTopLeftRadius="10"
         borderBottomLeftRadius="10"
       >
-        <Heading size="sm">THEN</Heading>
         <BComponent
           data={props.data.conditionTrue}
+          depth={props.depth}
           onChange={data => {
             const tmp = props.data
             tmp.conditionTrue = data
@@ -298,6 +316,9 @@ const BComponentIf = (props: BComponentProps<BTypeIf>) => (
           }}
         />
       </Box>
+      <Heading size="sm" p="1">
+        ELSE
+      </Heading>
       <Box
         backgroundColor="gray.800"
         py="1"
@@ -305,9 +326,9 @@ const BComponentIf = (props: BComponentProps<BTypeIf>) => (
         borderTopLeftRadius="10"
         borderBottomLeftRadius="10"
       >
-        <Heading size="sm">ELSE</Heading>
         <BComponent
           data={props.data.conditionFalse}
+          depth={props.depth}
           onChange={data => {
             const tmp = props.data
             tmp.conditionFalse = data
@@ -320,7 +341,7 @@ const BComponentIf = (props: BComponentProps<BTypeIf>) => (
 )
 
 const BComponentAnd = (props: BComponentProps<BTypeAnd>) => (
-  <BaseComponent styles={props.styles}>
+  <BaseComponent styles={props.styles} depth={props.depth}>
     <Text mb="2">
       <Text as="span" fontWeight="semibold">
         AND
@@ -339,6 +360,7 @@ const BComponentAnd = (props: BComponentProps<BTypeAnd>) => (
         >
           <BComponent
             data={c}
+            depth={props.depth}
             onChange={_ => {
               const tmp = props.data
               // tmp.condition = data
@@ -353,7 +375,7 @@ const BComponentAnd = (props: BComponentProps<BTypeAnd>) => (
 )
 
 const BComponentCertificateType = (props: BComponentProps<BTypeCertificateType>) => (
-  <BaseComponent>
+  <BaseComponent styles={props.styles} depth={props.depth}>
     <Heading size="md" mb="2">
       {props.data.type}
     </Heading>
@@ -367,6 +389,7 @@ const BComponentCertificateType = (props: BComponentProps<BTypeCertificateType>)
       >
         <BComponent
           data={props.data.conditionTrue}
+          depth={props.depth}
           onChange={data => {
             const tmp = props.data
             tmp.conditionTrue = data
@@ -381,44 +404,100 @@ const BComponentCertificateType = (props: BComponentProps<BTypeCertificateType>)
 type BComponentProps<T> = {
   data: T
   styles?: CSSProperties
+  depth: number
   onChange: (data: T) => void
 }
 
 export const BComponent = (props: BComponentProps<BType>) => {
   if (props.data instanceof BClassIf) {
-    return <BComponentIf data={props.data} styles={props.styles} onChange={props.onChange} />
+    return (
+      <BComponentIf
+        data={props.data}
+        styles={props.styles}
+        depth={props.depth + 1}
+        onChange={props.onChange}
+      />
+    )
   }
   if (props.data instanceof BClassValue) {
-    return <BComponentValue data={props.data} styles={props.styles} onChange={props.onChange} />
+    return (
+      <BComponentValue
+        data={props.data}
+        styles={props.styles}
+        depth={props.depth + 1}
+        onChange={props.onChange}
+      />
+    )
   }
   if (props.data instanceof BClassVar) {
-    return <BComponentVar data={props.data} styles={props.styles} onChange={props.onChange} />
+    return (
+      <BComponentVar
+        data={props.data}
+        styles={props.styles}
+        depth={props.depth + 1}
+        onChange={props.onChange}
+      />
+    )
   }
   if (props.data instanceof BClassCertificateType) {
     return (
       <BComponentCertificateType
         data={props.data}
         styles={props.styles}
+        depth={props.depth + 1}
         onChange={props.onChange}
       />
     )
   }
   if (props.data instanceof BClassDate) {
-    return <BComponentDate data={props.data} styles={props.styles} onChange={props.onChange} />
+    return (
+      <BComponentDate
+        data={props.data}
+        styles={props.styles}
+        depth={props.depth + 1}
+        onChange={props.onChange}
+      />
+    )
   }
   if (props.data instanceof BClassCompare) {
-    return <BComponentCompare data={props.data} styles={props.styles} onChange={props.onChange} />
+    return (
+      <BComponentCompare
+        data={props.data}
+        styles={props.styles}
+        depth={props.depth + 1}
+        onChange={props.onChange}
+      />
+    )
   }
   if (props.data instanceof BClassCompareDate) {
     return (
-      <BComponentCompareDate data={props.data} styles={props.styles} onChange={props.onChange} />
+      <BComponentCompareDate
+        data={props.data}
+        styles={props.styles}
+        depth={props.depth + 1}
+        onChange={props.onChange}
+      />
     )
   }
   if (props.data instanceof BClassCompareIn) {
-    return <BComponentCompareIn data={props.data} styles={props.styles} onChange={props.onChange} />
+    return (
+      <BComponentCompareIn
+        data={props.data}
+        styles={props.styles}
+        depth={props.depth + 1}
+        onChange={props.onChange}
+      />
+    )
   }
   if (props.data instanceof BClassAnd) {
-    return <BComponentAnd data={props.data} styles={props.styles} onChange={props.onChange} />
+    return (
+      <BComponentAnd
+        data={props.data}
+        styles={props.styles}
+        depth={props.depth + 1}
+        onChange={props.onChange}
+      />
+    )
   }
   if (props.data instanceof BClassEmpty) {
     return <BComponentEmpty onClick={() => {}} />
