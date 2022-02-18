@@ -3,6 +3,7 @@ import { Box, Button, Heading, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
 import {
   BClassCertificateType,
+  BClassCompare,
   BClassDate,
   BClassEmpty,
   BClassIf,
@@ -12,10 +13,14 @@ import {
 import {
   BType,
   BTypeCertificateType,
+  BTypeCompare,
   BTypeDate,
   BTypeIf,
   BTypeValue,
   BTypeVar,
+  OPERATOR_EQUALS,
+  OPERATOR_GREATER,
+  OPERATOR_GREATER_EQUALS,
 } from '~/utils/builder/types'
 
 const BaseComponent = (props: { children: JSX.Element | JSX.Element[] }) => (
@@ -102,9 +107,70 @@ const BComponentDate = (props: BComponentProps<BTypeDate>) => (
   </BaseComponent>
 )
 
+const BComponentCompare = (props: BComponentProps<BTypeCompare>) => (
+  <BaseComponent>
+    <Text mb="2">
+      <Text as="span" fontWeight="semibold">
+        {props.data.operator === OPERATOR_EQUALS
+          ? 'EQUALS'
+          : props.data.operator === OPERATOR_GREATER
+          ? 'GREATER'
+          : props.data.operator === OPERATOR_GREATER_EQUALS
+          ? 'GREATER EQUALS'
+          : ''}
+      </Text>
+      <Button
+        size="xs"
+        ml="5"
+        onClick={() => {
+          const tmp = props.data
+          // tmp.value = !tmp.value
+          props.onChange(tmp)
+        }}
+      >
+        Edit
+      </Button>
+    </Text>
+    <Box
+      py="1"
+      pl="1"
+      backgroundColor="gray.800"
+      borderTopLeftRadius="10"
+      borderBottomLeftRadius="10"
+    >
+      <BComponent
+        data={props.data.variableA}
+        onChange={_ => {
+          const tmp = props.data
+          // tmp.condition = data
+          props.onChange(tmp)
+        }}
+      />
+    </Box>
+    <Box
+      py="1"
+      pl="1"
+      backgroundColor="gray.800"
+      borderTopLeftRadius="10"
+      borderBottomLeftRadius="10"
+    >
+      <BComponent
+        data={props.data.variableB}
+        onChange={_ => {
+          const tmp = props.data
+          // tmp.condition = data
+          props.onChange(tmp)
+        }}
+      />
+    </Box>
+  </BaseComponent>
+)
+
 const BComponentIf = (props: BComponentProps<BTypeIf>) => (
   <BaseComponent>
-    <Heading size="md">IF</Heading>
+    <Heading size="md" mb="2">
+      IF
+    </Heading>
     <Stack>
       <Box
         backgroundColor="gray.800"
@@ -162,7 +228,9 @@ const BComponentIf = (props: BComponentProps<BTypeIf>) => (
 
 const BComponentCertificateType = (props: BComponentProps<BTypeCertificateType>) => (
   <BaseComponent>
-    <Heading size="md">{props.data.type}</Heading>
+    <Heading size="md" mb="2">
+      {props.data.type}
+    </Heading>
     <Stack>
       <Box
         backgroundColor="gray.800"
@@ -204,6 +272,9 @@ export const BComponent = (props: BComponentProps<BType>) => {
   }
   if (props.data instanceof BClassDate) {
     return <BComponentDate data={props.data} onChange={props.onChange} />
+  }
+  if (props.data instanceof BClassCompare) {
+    return <BComponentCompare data={props.data} onChange={props.onChange} />
   }
   if (props.data instanceof BClassEmpty) {
     return <BComponentEmpty />

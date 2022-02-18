@@ -13,11 +13,7 @@ const EmptyComponent = () => {
     if: [
       { var: 'payload.v.0' },
       {
-        if: [
-          { var: 'payload.0.1.2' },
-          { plusTime: [{ var: 'payload.v.0.tt' }, 0, 'hours'] },
-          false,
-        ],
+        '===': [{ var: 'payload.0.1.2' }, { var: 'payload.0.1.2' }],
       },
       false,
     ],
