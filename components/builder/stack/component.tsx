@@ -4,6 +4,7 @@ import React from 'react'
 import {
   BClassCertificateType,
   BClassCompare,
+  BClassCompareDate,
   BClassDate,
   BClassEmpty,
   BClassIf,
@@ -14,10 +15,13 @@ import {
   BType,
   BTypeCertificateType,
   BTypeCompare,
+  BTypeCompareDate,
   BTypeDate,
   BTypeIf,
   BTypeValue,
   BTypeVar,
+  OPERATOR_DATE_AFTER,
+  OPERATOR_DATE_BEFORE,
   OPERATOR_EQUALS,
   OPERATOR_GREATER,
   OPERATOR_GREATER_EQUALS,
@@ -117,6 +121,63 @@ const BComponentCompare = (props: BComponentProps<BTypeCompare>) => (
           ? 'GREATER'
           : props.data.operator === OPERATOR_GREATER_EQUALS
           ? 'GREATER EQUALS'
+          : ''}
+      </Text>
+      <Button
+        size="xs"
+        ml="5"
+        onClick={() => {
+          const tmp = props.data
+          // tmp.value = !tmp.value
+          props.onChange(tmp)
+        }}
+      >
+        Edit
+      </Button>
+    </Text>
+    <Box
+      py="1"
+      pl="1"
+      backgroundColor="gray.800"
+      borderTopLeftRadius="10"
+      borderBottomLeftRadius="10"
+    >
+      <BComponent
+        data={props.data.variableA}
+        onChange={_ => {
+          const tmp = props.data
+          // tmp.condition = data
+          props.onChange(tmp)
+        }}
+      />
+    </Box>
+    <Box
+      py="1"
+      pl="1"
+      backgroundColor="gray.800"
+      borderTopLeftRadius="10"
+      borderBottomLeftRadius="10"
+    >
+      <BComponent
+        data={props.data.variableB}
+        onChange={_ => {
+          const tmp = props.data
+          // tmp.condition = data
+          props.onChange(tmp)
+        }}
+      />
+    </Box>
+  </BaseComponent>
+)
+
+const BComponentCompareDate = (props: BComponentProps<BTypeCompareDate>) => (
+  <BaseComponent>
+    <Text mb="2">
+      <Text as="span" fontWeight="semibold">
+        {props.data.operator === OPERATOR_DATE_BEFORE
+          ? 'BEFORE'
+          : props.data.operator === OPERATOR_DATE_AFTER
+          ? 'AFTER'
           : ''}
       </Text>
       <Button
@@ -275,6 +336,9 @@ export const BComponent = (props: BComponentProps<BType>) => {
   }
   if (props.data instanceof BClassCompare) {
     return <BComponentCompare data={props.data} onChange={props.onChange} />
+  }
+  if (props.data instanceof BClassCompareDate) {
+    return <BComponentCompareDate data={props.data} onChange={props.onChange} />
   }
   if (props.data instanceof BClassEmpty) {
     return <BComponentEmpty />

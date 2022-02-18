@@ -174,7 +174,11 @@ export class BClassCompareDate implements BTypeCompareDate {
     const obj = data as JSONObject
     const keys = Object.keys(obj)
     const arr = obj[keys[0]] as JSONArray
-    return new BClassCompare(encode(arr[0]) as BTypeValue, encode(arr[1]) as BTypeValue, keys[0])
+    return new BClassCompareDate(
+      encode(arr[0]) as BTypeValue,
+      encode(arr[1]) as BTypeValue,
+      keys[0]
+    )
   }
 
   decode(): JSONValue {
