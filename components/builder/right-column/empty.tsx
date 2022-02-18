@@ -12,7 +12,13 @@ const EmptyComponent = () => {
     type: 'certificate-type',
     if: [
       { var: 'payload.v.0' },
-      { if: [{ var: 'payload.0.1.2' }, { if: [{ var: 'payload.0.1.2' }, false, false] }, false] },
+      {
+        if: [
+          { var: 'payload.0.1.2' },
+          { plusTime: [{ var: 'payload.v.0.tt' }, 0, 'hours'] },
+          false,
+        ],
+      },
       false,
     ],
   })

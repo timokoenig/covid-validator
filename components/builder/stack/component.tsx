@@ -3,12 +3,20 @@ import { Box, Button, Heading, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
 import {
   BClassCertificateType,
+  BClassDate,
   BClassEmpty,
   BClassIf,
   BClassValue,
   BClassVar,
 } from '~/utils/builder/classes'
-import { BType, BTypeCertificateType, BTypeIf, BTypeValue, BTypeVar } from '~/utils/builder/types'
+import {
+  BType,
+  BTypeCertificateType,
+  BTypeDate,
+  BTypeIf,
+  BTypeValue,
+  BTypeVar,
+} from '~/utils/builder/types'
 
 const BaseComponent = (props: { children: JSX.Element | JSX.Element[] }) => (
   <Box
@@ -63,6 +71,28 @@ const BComponentValue = (props: BComponentProps<BTypeValue>) => (
         onClick={() => {
           const tmp = props.data
           tmp.value = !tmp.value
+          props.onChange(tmp)
+        }}
+      >
+        Edit
+      </Button>
+    </Text>
+  </BaseComponent>
+)
+
+const BComponentDate = (props: BComponentProps<BTypeDate>) => (
+  <BaseComponent>
+    <Text>
+      <Text as="span" fontWeight="semibold">
+        DATE:
+      </Text>{' '}
+      {`${props.data.value.value} + ${props.data.number} ${props.data.duration}`}
+      <Button
+        size="xs"
+        ml="5"
+        onClick={() => {
+          const tmp = props.data
+          // tmp.value = !tmp.value
           props.onChange(tmp)
         }}
       >
@@ -171,6 +201,9 @@ export const BComponent = (props: BComponentProps<BType>) => {
   }
   if (props.data instanceof BClassCertificateType) {
     return <BComponentCertificateType data={props.data} onChange={props.onChange} />
+  }
+  if (props.data instanceof BClassDate) {
+    return <BComponentDate data={props.data} onChange={props.onChange} />
   }
   if (props.data instanceof BClassEmpty) {
     return <BComponentEmpty />
