@@ -296,126 +296,144 @@ const BComponentCompareIn = (props: BComponentProps<BTypeCompareIn>) => (
           <Text>{props.data.values.join(', ')}</Text>
         </BaseComponent>
       </Box>
-      {/* <Box
-        as="button"
-        display="flex"
-        backgroundColor="gray.700"
-        borderTopLeftRadius="10"
-        borderBottomLeftRadius="10"
-        borderLeft="3px solid"
-        borderLeftColor="gray.800"
-        flex="1"
-        padding="3"
-        _hover={{
-          background: 'gray.600',
-        }}
-      >
-
-      </Box> */}
     </HStack>
   </BaseComponent>
 )
 
-const BComponentIf = (props: BComponentProps<BTypeIf>) => (
-  <BaseComponent styles={props.styles} depth={props.depth}>
-    <Heading size="md" mb="2">
-      IF
-    </Heading>
-    <Stack>
-      <Box
-        backgroundColor="gray.800"
-        py="1"
-        pl="1"
-        borderTopLeftRadius="10"
-        borderBottomLeftRadius="10"
-      >
-        <BComponent
-          data={props.data.condition}
-          depth={props.depth}
-          onChange={data => {
-            const tmp = props.data
-            tmp.condition = data
-            props.onChange(tmp)
-          }}
-        />
-      </Box>
-      <Heading size="sm" p="1">
-        THEN
-      </Heading>
-      <Box
-        backgroundColor="gray.800"
-        py="1"
-        pl="1"
-        borderTopLeftRadius="10"
-        borderBottomLeftRadius="10"
-      >
-        <BComponent
-          data={props.data.conditionTrue}
-          depth={props.depth}
-          onChange={data => {
-            const tmp = props.data
-            tmp.conditionTrue = data
-            props.onChange(tmp)
-          }}
-        />
-      </Box>
-      <Heading size="sm" p="1">
-        ELSE
-      </Heading>
-      <Box
-        backgroundColor="gray.800"
-        py="1"
-        pl="1"
-        borderTopLeftRadius="10"
-        borderBottomLeftRadius="10"
-      >
-        <BComponent
-          data={props.data.conditionFalse}
-          depth={props.depth}
-          onChange={data => {
-            const tmp = props.data
-            tmp.conditionFalse = data
-            props.onChange(tmp)
-          }}
-        />
-      </Box>
-    </Stack>
-  </BaseComponent>
-)
+const BComponentIf = (props: BComponentProps<BTypeIf>) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  return (
+    <>
+      <BaseComponent styles={props.styles} depth={props.depth} onClick={onOpen}>
+        <Heading size="md" mb="2">
+          IF
+        </Heading>
+        <Stack>
+          <Box
+            backgroundColor="gray.800"
+            py="1"
+            pl="1"
+            borderTopLeftRadius="10"
+            borderBottomLeftRadius="10"
+          >
+            <BComponent
+              data={props.data.condition}
+              depth={props.depth}
+              onChange={data => {
+                const tmp = props.data
+                tmp.condition = data
+                props.onChange(tmp)
+              }}
+            />
+          </Box>
+          <Heading size="sm" p="1">
+            THEN
+          </Heading>
+          <Box
+            backgroundColor="gray.800"
+            py="1"
+            pl="1"
+            borderTopLeftRadius="10"
+            borderBottomLeftRadius="10"
+          >
+            <BComponent
+              data={props.data.conditionTrue}
+              depth={props.depth}
+              onChange={data => {
+                const tmp = props.data
+                tmp.conditionTrue = data
+                props.onChange(tmp)
+              }}
+            />
+          </Box>
+          <Heading size="sm" p="1">
+            ELSE
+          </Heading>
+          <Box
+            backgroundColor="gray.800"
+            py="1"
+            pl="1"
+            borderTopLeftRadius="10"
+            borderBottomLeftRadius="10"
+          >
+            <BComponent
+              data={props.data.conditionFalse}
+              depth={props.depth}
+              onChange={data => {
+                const tmp = props.data
+                tmp.conditionFalse = data
+                props.onChange(tmp)
+              }}
+            />
+          </Box>
+        </Stack>
+      </BaseComponent>
+      <BuilderModal
+        data={props.data}
+        isOpen={isOpen}
+        onClose={onClose}
+        onClick={type => props.onChange(type as BTypeIf)}
+      />
+    </>
+  )
+}
 
-const BComponentAnd = (props: BComponentProps<BTypeAnd>) => (
-  <BaseComponent styles={props.styles} depth={props.depth}>
-    <Text mb="2">
-      <Text as="span" fontWeight="semibold">
-        AND
-      </Text>
-    </Text>
-    <VStack>
-      {props.data.conditions.map((c, index) => (
-        <Box
-          key={index}
-          backgroundColor="gray.800"
-          py="1"
-          pl="1"
-          borderTopLeftRadius="10"
-          borderBottomLeftRadius="10"
-          width="100%"
-        >
-          <BComponent
-            data={c}
+const BComponentAnd = (props: BComponentProps<BTypeAnd>) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  return (
+    <>
+      <BaseComponent styles={props.styles} depth={props.depth} onClick={onOpen}>
+        <Text mb="2">
+          <Text as="span" fontWeight="semibold">
+            AND
+          </Text>
+        </Text>
+        <VStack>
+          {props.data.conditions.map((c, index) => (
+            <Box
+              key={index}
+              backgroundColor="gray.800"
+              py="1"
+              pl="1"
+              borderTopLeftRadius="10"
+              borderBottomLeftRadius="10"
+              width="100%"
+            >
+              <BComponent
+                data={c}
+                depth={props.depth}
+                onChange={data => {
+                  const tmp = props.data
+                  if (data instanceof BClassEmpty) {
+                    tmp.conditions.splice(index, 1)
+                  } else {
+                    tmp.conditions[index] = data
+                  }
+                  props.onChange(tmp)
+                }}
+              />
+            </Box>
+          ))}
+          <BComponentEmpty
+            data={new BClassEmpty()}
             depth={props.depth}
-            onChange={_ => {
+            onChange={type => {
               const tmp = props.data
-              // tmp.condition = data
+              tmp.conditions.push(type)
               props.onChange(tmp)
             }}
           />
-        </Box>
-      ))}
-      <BComponentEmpty data={new BClassEmpty()} depth={props.depth} onChange={() => {}} />
-    </VStack>
-  </BaseComponent>
-)
+        </VStack>
+      </BaseComponent>
+      <BuilderModal
+        data={props.data}
+        isOpen={isOpen}
+        onClose={onClose}
+        onClick={type => props.onChange(type as BTypeAnd)}
+      />
+    </>
+  )
+}
 
 const BComponentCertificateType = (props: BComponentProps<BTypeCertificateType>) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -449,10 +467,7 @@ const BComponentCertificateType = (props: BComponentProps<BTypeCertificateType>)
         data={props.data}
         isOpen={isOpen}
         onClose={onClose}
-        onClick={type => {
-          props.onChange(type as BTypeCertificateType)
-          onClose()
-        }}
+        onClick={type => props.onChange(type as BTypeCertificateType)}
       />
     </>
   )

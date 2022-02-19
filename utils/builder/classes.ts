@@ -127,13 +127,13 @@ export class BClassDate implements BTypeDate {
 }
 
 export class BClassCompare implements BTypeCompare {
-  variableA: BTypeValue
-  variableB: BTypeValue
+  variableA: BType
+  variableB: BType
   operator: string
 
   constructor(
-    variableA: BTypeValue = new BClassValue(),
-    variableB: BTypeValue = new BClassValue(),
+    variableA: BType = new BClassEmpty(),
+    variableB: BType = new BClassEmpty(),
     operator: string = OPERATOR_EQUALS
   ) {
     this.variableA = variableA
@@ -145,7 +145,7 @@ export class BClassCompare implements BTypeCompare {
     const obj = data as JSONObject
     const keys = Object.keys(obj)
     const arr = obj[keys[0]] as JSONArray
-    return new BClassCompare(encode(arr[0]) as BTypeValue, encode(arr[1]) as BTypeValue, keys[0])
+    return new BClassCompare(encode(arr[0]), encode(arr[1]), keys[0])
   }
 
   decode(): JSONValue {
@@ -156,13 +156,13 @@ export class BClassCompare implements BTypeCompare {
 }
 
 export class BClassCompareDate implements BTypeCompareDate {
-  variableA: BTypeValue
-  variableB: BTypeValue
+  variableA: BType
+  variableB: BType
   operator: string
 
   constructor(
-    variableA: BTypeValue = new BClassValue(),
-    variableB: BTypeValue = new BClassValue(),
+    variableA: BType = new BClassEmpty(),
+    variableB: BType = new BClassEmpty(),
     operator: string = OPERATOR_DATE_NOT_BEFORE
   ) {
     this.variableA = variableA
@@ -174,11 +174,7 @@ export class BClassCompareDate implements BTypeCompareDate {
     const obj = data as JSONObject
     const keys = Object.keys(obj)
     const arr = obj[keys[0]] as JSONArray
-    return new BClassCompareDate(
-      encode(arr[0]) as BTypeValue,
-      encode(arr[1]) as BTypeValue,
-      keys[0]
-    )
+    return new BClassCompareDate(encode(arr[0]), encode(arr[1]), keys[0])
   }
 
   decode(): JSONValue {
@@ -189,10 +185,10 @@ export class BClassCompareDate implements BTypeCompareDate {
 }
 
 export class BClassCompareIn implements BTypeCompareIn {
-  variable: BTypeVar
+  variable: BType
   values: string[]
 
-  constructor(variable: BTypeVar = new BClassVar(), values: string[] = []) {
+  constructor(variable: BType = new BClassEmpty(), values: string[] = []) {
     this.variable = variable
     this.values = values
   }
@@ -200,7 +196,7 @@ export class BClassCompareIn implements BTypeCompareIn {
   encode(data: JSONValue): BType {
     const obj = data as JSONObject
     const arr = obj.in as JSONArray
-    return new BClassCompareIn(encode(arr[0]) as BTypeVar, arr[1] as string[])
+    return new BClassCompareIn(encode(arr[0]), arr[1] as string[])
   }
 
   decode(): JSONValue {

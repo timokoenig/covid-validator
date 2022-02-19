@@ -66,14 +66,7 @@ const ValueBody = (props: {
           </Button>
         )}
         <Spacer />
-        <Button
-          onClick={() => {
-            props.onClick(value)
-            props.onClose()
-          }}
-        >
-          Done
-        </Button>
+        <Button onClick={() => props.onClick(value)}>Done</Button>
       </ModalFooter>
     </ModalContent>
   )
@@ -160,6 +153,34 @@ const DateBody = (props: {
     </ModalContent>
   )
 }
+
+const IfBody = (props: { onClose: () => void; onDelete: () => void }) => (
+  <ModalContent>
+    <ModalHeader>IF</ModalHeader>
+    <ModalCloseButton onClick={props.onClose} />
+    <ModalBody />
+    <ModalFooter>
+      <Button variant="ghost" colorScheme="red" onClick={props.onDelete}>
+        Delete
+      </Button>
+      <Spacer />
+    </ModalFooter>
+  </ModalContent>
+)
+
+const AndBody = (props: { onClose: () => void; onDelete: () => void }) => (
+  <ModalContent>
+    <ModalHeader>AND</ModalHeader>
+    <ModalCloseButton onClick={props.onClose} />
+    <ModalBody />
+    <ModalFooter>
+      <Button variant="ghost" colorScheme="red" onClick={props.onDelete}>
+        Delete
+      </Button>
+      <Spacer />
+    </ModalFooter>
+  </ModalContent>
+)
 
 const CertificateTypeBody = (props: {
   editMode: boolean
@@ -255,30 +276,44 @@ const BuilderModal = (props: Props) => {
   const [type, setType] = useState<string>('')
 
   useEffect(() => {
-    if (props.data === undefined) {
-      setType('')
-      return
-    }
     if (props.data instanceof BClassCertificateType) {
       setType('Certificate Type')
+      return
     }
     if (props.data instanceof BClassValue) {
       setType('Value')
+      return
     }
     if (props.data instanceof BClassVar) {
       setType('Var')
+      return
     }
     if (props.data instanceof BClassDate) {
       setType('Date')
+      return
     }
+    if (props.data instanceof BClassIf) {
+      setType('IF')
+      return
+    }
+    if (props.data instanceof BClassAnd) {
+      setType('AND')
+      return
+    }
+    setType('')
   }, [])
 
+  const onClose = () => {
+    setType('')
+    props.onClose()
+  }
+
   return (
-    <Modal isOpen={props.isOpen} onClose={props.onClose} size="lg" scrollBehavior="inside">
+    <Modal isOpen={props.isOpen} onClose={onClose} size="lg" scrollBehavior="inside">
       <ModalOverlay />
       {type === '' && (
         <SelectionBody
-          onClose={props.onClose}
+          onClose={onClose}
           onClick={(selection: string) => {
             switch (selection) {
               case 'Certificate Type':
@@ -290,18 +325,23 @@ const BuilderModal = (props: Props) => {
                 break
               case 'Compare':
                 props.onClick(new BClassCompare())
+                onClose()
                 break
               case 'Compare Date':
                 props.onClick(new BClassCompareDate())
+                onClose()
                 break
               case 'Compare In':
                 props.onClick(new BClassCompareIn())
+                onClose()
                 break
               case 'IF':
                 props.onClick(new BClassIf())
+                onClose()
                 break
               case 'AND':
                 props.onClick(new BClassAnd())
+                onClose()
                 break
               default:
                 break
@@ -312,54 +352,81 @@ const BuilderModal = (props: Props) => {
       {type === 'Certificate Type' && (
         <CertificateTypeBody
           editMode={props.data !== undefined}
-          onClose={props.onClose}
+          onClose={onClose}
           onClick={(selection: string) => {
             if (props.data === undefined) {
               props.onClick(new BClassCertificateType(selection))
+              onClose()
               return
             }
             const bType = props.data as BTypeCertificateType
             bType.type = selection
             props.onClick(bType)
+            onClose()
           }}
           onDelete={() => {
             props.onClick(new BClassEmpty())
+            onClose()
           }}
         />
       )}
       {type === 'Value' && (
         <ValueBody
           data={props.data as BTypeValue}
-          onClose={props.onClose}
+          onClose={onClose}
           onClick={(value: string) => {
             props.onClick(new BClassValue(value))
+            onClose()
           }}
           onDelete={() => {
             props.onClick(new BClassEmpty())
+            onClose()
           }}
         />
       )}
       {type === 'Var' && (
         <VarBody
           data={props.data as BTypeVar}
-          onClose={props.onClose}
+          onClose={onClose}
           onClick={(value: string) => {
             props.onClick(new BClassVar(value))
+            onClose()
           }}
           onDelete={() => {
             props.onClick(new BClassEmpty())
+            onClose()
           }}
         />
       )}
       {type === 'Date' && (
         <DateBody
           data={props.data as BTypeDate}
-          onClose={props.onClose}
+          onClose={onClose}
           onClick={(value: string, number: number, duration: string) => {
             props.onClick(new BClassDate(new BClassValue(value), number, duration))
+            onClose()
           }}
           onDelete={() => {
             props.onClick(new BClassEmpty())
+            onClose()
+          }}
+        />
+      )}
+      {type === 'IF' && (
+        <IfBody
+          onClose={onClose}
+          onDelete={() => {
+            props.onClick(new BClassEmpty())
+            onClose()
+          }}
+        />
+      )}
+      {type === 'AND' && (
+        <AndBody
+          onClose={onClose}
+          onDelete={() => {
+            props.onClick(new BClassEmpty())
+            onClose()
           }}
         />
       )}

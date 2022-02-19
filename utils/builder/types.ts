@@ -43,8 +43,8 @@ export const OPERATOR_GREATER = '>'
 export const OPERATOR_GREATER_EQUALS = '>='
 
 export interface BTypeCompare extends BType {
-  variableA: BTypeValue
-  variableB: BTypeValue
+  variableA: BType
+  variableB: BType
   operator: string
 }
 
@@ -54,7 +54,7 @@ export const OPERATOR_DATE_NOT_AFTER = 'not-after'
 export interface BTypeCompareDate extends BTypeCompare {}
 
 export interface BTypeCompareIn extends BType {
-  variable: BTypeVar
+  variable: BType
   values: string[]
 }
 
