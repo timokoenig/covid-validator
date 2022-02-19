@@ -28,7 +28,7 @@ import {
   BClassValue,
   BClassVar,
 } from '~/utils/builder/classes'
-import { BType, BTypeCertificateType, BTypeValue } from '~/utils/builder/types'
+import { BType, BTypeCertificateType, BTypeValue, BTypeVar } from '~/utils/builder/types'
 // import { useTranslation } from 'react-i18next'
 
 const customTypes = ['Certificate Type', 'Vaccination Status']
@@ -36,18 +36,51 @@ const types = ['Value', 'Var', 'Date', 'Compare', 'Compare Date', 'Compare In', 
 const certificateTypes = ['Vaccination', 'Test', 'Recovery']
 
 const ValueBody = (props: {
-  data?: BType
+  data?: BTypeValue
   onClose: () => void
   onClick: (value: string) => void
   onDelete: () => void
 }) => {
-  const [value, setValue] = useState<string>(
-    props.data ? ((props.data as BTypeValue).value as string) : ''
-  )
+  const [value, setValue] = useState<string>(props.data ? (props.data.value as string) : '')
 
   return (
     <ModalContent>
       <ModalHeader>Value</ModalHeader>
+      <ModalCloseButton onClick={props.onClose} />
+      <ModalBody>
+        <Input value={value} onChange={e => setValue(e.target.value)} />
+      </ModalBody>
+      <ModalFooter>
+        {props.data && (
+          <Button variant="ghost" colorScheme="red" onClick={props.onDelete}>
+            Delete
+          </Button>
+        )}
+        <Spacer />
+        <Button
+          onClick={() => {
+            props.onClick(value)
+            props.onClose()
+          }}
+        >
+          Done
+        </Button>
+      </ModalFooter>
+    </ModalContent>
+  )
+}
+
+const VarBody = (props: {
+  data?: BTypeVar
+  onClose: () => void
+  onClick: (value: string) => void
+  onDelete: () => void
+}) => {
+  const [value, setValue] = useState<string>(props.data ? (props.data.value as string) : '')
+
+  return (
+    <ModalContent>
+      <ModalHeader>Variable</ModalHeader>
       <ModalCloseButton onClick={props.onClose} />
       <ModalBody>
         <Input value={value} onChange={e => setValue(e.target.value)} />
@@ -176,6 +209,9 @@ const BuilderModal = (props: Props) => {
     if (props.data instanceof BClassValue) {
       setType('Value')
     }
+    if (props.data instanceof BClassVar) {
+      setType('Var')
+    }
   }, [])
 
   return (
@@ -189,10 +225,8 @@ const BuilderModal = (props: Props) => {
               case 'Certificate Type':
               case 'Vaccination Status':
               case 'Value':
-                setType(selection)
-                break
               case 'Var':
-                props.onClick(new BClassVar(''))
+                setType(selection)
                 break
               case 'Date':
                 props.onClick(new BClassDate())
@@ -238,10 +272,22 @@ const BuilderModal = (props: Props) => {
       )}
       {type === 'Value' && (
         <ValueBody
-          data={props.data}
+          data={props.data as BTypeValue}
           onClose={props.onClose}
           onClick={(value: string) => {
             props.onClick(new BClassValue(value))
+          }}
+          onDelete={() => {
+            props.onClick(new BClassEmpty())
+          }}
+        />
+      )}
+      {type === 'Var' && (
+        <VarBody
+          data={props.data as BTypeVar}
+          onClose={props.onClose}
+          onClick={(value: string) => {
+            props.onClick(new BClassVar(value))
           }}
           onDelete={() => {
             props.onClick(new BClassEmpty())

@@ -87,16 +87,27 @@ const BComponentEmpty = (props: BComponentProps<BTypeEmpty>) => {
   )
 }
 
-const BComponentVar = (props: BComponentProps<BTypeVar>) => (
-  <BaseComponent styles={props.styles} depth={props.depth}>
-    <Text>
-      <Text as="span" fontWeight="semibold">
-        VAR:
-      </Text>{' '}
-      {props.data.value}
-    </Text>
-  </BaseComponent>
-)
+const BComponentVar = (props: BComponentProps<BTypeVar>) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  return (
+    <>
+      <BaseComponent styles={props.styles} depth={props.depth} onClick={onOpen}>
+        <Text>
+          <Text as="span" fontWeight="semibold">
+            VAR:
+          </Text>{' '}
+          {props.data.value}
+        </Text>
+      </BaseComponent>
+      <BuilderModal
+        data={props.data}
+        isOpen={isOpen}
+        onClose={onClose}
+        onClick={type => props.onChange(type as BTypeVar)}
+      />
+    </>
+  )
+}
 
 const BComponentValue = (props: BComponentProps<BTypeValue>) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
