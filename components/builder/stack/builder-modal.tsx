@@ -32,11 +32,18 @@ import {
 import {
   BType,
   BTypeCertificateType,
+  BTypeCompare,
+  BTypeCompareDate,
   BTypeDate,
   BTypeValue,
   BTypeVar,
   DURATION_DAYS,
   DURATION_HOURS,
+  OPERATOR_DATE_NOT_AFTER,
+  OPERATOR_DATE_NOT_BEFORE,
+  OPERATOR_EQUALS,
+  OPERATOR_GREATER,
+  OPERATOR_GREATER_EQUALS,
 } from '~/utils/builder/types'
 // import { useTranslation } from 'react-i18next'
 
@@ -182,6 +189,85 @@ const AndBody = (props: { onClose: () => void; onDelete: () => void }) => (
   </ModalContent>
 )
 
+const CompareBody = (props: {
+  data?: BTypeCompare
+  onClose: () => void
+  onClick: (selection: string) => void
+  onDelete: () => void
+}) => {
+  const [value, setValue] = useState<string>(props.data ? props.data.operator : OPERATOR_EQUALS)
+
+  return (
+    <ModalContent>
+      <ModalHeader>Compare</ModalHeader>
+      <ModalCloseButton onClick={props.onClose} />
+      <ModalBody>
+        <Select value={value} onChange={e => setValue(e.target.value)}>
+          <option value={OPERATOR_EQUALS}>{OPERATOR_EQUALS}</option>
+          <option value={OPERATOR_GREATER}>{OPERATOR_GREATER}</option>
+          <option value={OPERATOR_GREATER_EQUALS}>{OPERATOR_GREATER_EQUALS}</option>
+        </Select>
+      </ModalBody>
+      <ModalFooter>
+        {props.data && (
+          <Button variant="ghost" colorScheme="red" onClick={props.onDelete}>
+            Delete
+          </Button>
+        )}
+        <Spacer />
+        <Button
+          onClick={() => {
+            props.onClick(value)
+            props.onClose()
+          }}
+        >
+          Done
+        </Button>
+      </ModalFooter>
+    </ModalContent>
+  )
+}
+
+const CompareDateBody = (props: {
+  data?: BTypeCompareDate
+  onClose: () => void
+  onClick: (selection: string) => void
+  onDelete: () => void
+}) => {
+  const [value, setValue] = useState<string>(
+    props.data ? props.data.operator : OPERATOR_DATE_NOT_AFTER
+  )
+
+  return (
+    <ModalContent>
+      <ModalHeader>Compare Date</ModalHeader>
+      <ModalCloseButton onClick={props.onClose} />
+      <ModalBody>
+        <Select value={value} onChange={e => setValue(e.target.value)}>
+          <option value={OPERATOR_DATE_NOT_AFTER}>{OPERATOR_DATE_NOT_AFTER}</option>
+          <option value={OPERATOR_DATE_NOT_BEFORE}>{OPERATOR_DATE_NOT_BEFORE}</option>
+        </Select>
+      </ModalBody>
+      <ModalFooter>
+        {props.data && (
+          <Button variant="ghost" colorScheme="red" onClick={props.onDelete}>
+            Delete
+          </Button>
+        )}
+        <Spacer />
+        <Button
+          onClick={() => {
+            props.onClick(value)
+            props.onClose()
+          }}
+        >
+          Done
+        </Button>
+      </ModalFooter>
+    </ModalContent>
+  )
+}
+
 const CertificateTypeBody = (props: {
   editMode: boolean
   onClose: () => void
@@ -300,6 +386,14 @@ const BuilderModal = (props: Props) => {
       setType('AND')
       return
     }
+    if (props.data instanceof BClassCompare) {
+      setType('Compare')
+      return
+    }
+    if (props.data instanceof BClassCompareDate) {
+      setType('Compare Date')
+      return
+    }
     setType('')
   }, [])
 
@@ -404,6 +498,48 @@ const BuilderModal = (props: Props) => {
           onClose={onClose}
           onClick={(value: string, number: number, duration: string) => {
             props.onClick(new BClassDate(new BClassValue(value), number, duration))
+            onClose()
+          }}
+          onDelete={() => {
+            props.onClick(new BClassEmpty())
+            onClose()
+          }}
+        />
+      )}
+      {type === 'Compare' && (
+        <CompareBody
+          data={props.data as BTypeCompare}
+          onClose={onClose}
+          onClick={(selection: string) => {
+            if (props.data === undefined) {
+              props.onClick(new BClassCompare(new BClassEmpty(), new BClassEmpty(), selection))
+              onClose()
+              return
+            }
+            const bType = props.data as BTypeCompare
+            bType.operator = selection
+            props.onClick(bType)
+            onClose()
+          }}
+          onDelete={() => {
+            props.onClick(new BClassEmpty())
+            onClose()
+          }}
+        />
+      )}
+      {type === 'Compare Date' && (
+        <CompareDateBody
+          data={props.data as BTypeCompareDate}
+          onClose={onClose}
+          onClick={(selection: string) => {
+            if (props.data === undefined) {
+              props.onClick(new BClassCompareDate(new BClassEmpty(), new BClassEmpty(), selection))
+              onClose()
+              return
+            }
+            const bType = props.data as BTypeCompareDate
+            bType.operator = selection
+            props.onClick(bType)
             onClose()
           }}
           onDelete={() => {
