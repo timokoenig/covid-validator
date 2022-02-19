@@ -13,6 +13,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Select,
   Spacer,
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
@@ -28,7 +29,15 @@ import {
   BClassValue,
   BClassVar,
 } from '~/utils/builder/classes'
-import { BType, BTypeCertificateType, BTypeValue, BTypeVar } from '~/utils/builder/types'
+import {
+  BType,
+  BTypeCertificateType,
+  BTypeDate,
+  BTypeValue,
+  BTypeVar,
+  DURATION_DAYS,
+  DURATION_HOURS,
+} from '~/utils/builder/types'
 // import { useTranslation } from 'react-i18next'
 
 const customTypes = ['Certificate Type', 'Vaccination Status']
@@ -95,6 +104,53 @@ const VarBody = (props: {
         <Button
           onClick={() => {
             props.onClick(value)
+            props.onClose()
+          }}
+        >
+          Done
+        </Button>
+      </ModalFooter>
+    </ModalContent>
+  )
+}
+
+const DateBody = (props: {
+  data?: BTypeDate
+  onClose: () => void
+  onClick: (value: string, number: number, duration: string) => void
+  onDelete: () => void
+}) => {
+  const [value, setValue] = useState<string>(props.data ? (props.data.value.value as string) : '')
+  const [valueNumber, setValueNumber] = useState<string>(
+    props.data ? props.data.number.toString() : '0'
+  )
+  const [valueDuration, setValueDuration] = useState<string>(
+    props.data ? props.data.duration : DURATION_HOURS
+  )
+
+  return (
+    <ModalContent>
+      <ModalHeader>Value</ModalHeader>
+      <ModalCloseButton onClick={props.onClose} />
+      <ModalBody>
+        <Input value={value} placeholder="value" onChange={e => setValue(e.target.value)} />
+        +
+        <Input value={valueNumber} onChange={e => setValueNumber(e.target.value)} />
+        <Select value={valueDuration} onChange={e => setValueDuration(e.target.value)}>
+          <option value={DURATION_HOURS}>{DURATION_HOURS}</option>
+          <option value={DURATION_DAYS}>{DURATION_DAYS}</option>
+        </Select>
+      </ModalBody>
+      <ModalFooter>
+        {props.data && (
+          <Button variant="ghost" colorScheme="red" onClick={props.onDelete}>
+            Delete
+          </Button>
+        )}
+        <Spacer />
+        <Button
+          onClick={() => {
+            props.onClick(value, parseInt(valueNumber, 10), valueDuration)
             props.onClose()
           }}
         >
@@ -212,6 +268,9 @@ const BuilderModal = (props: Props) => {
     if (props.data instanceof BClassVar) {
       setType('Var')
     }
+    if (props.data instanceof BClassDate) {
+      setType('Date')
+    }
   }, [])
 
   return (
@@ -226,10 +285,8 @@ const BuilderModal = (props: Props) => {
               case 'Vaccination Status':
               case 'Value':
               case 'Var':
-                setType(selection)
-                break
               case 'Date':
-                props.onClick(new BClassDate())
+                setType(selection)
                 break
               case 'Compare':
                 props.onClick(new BClassCompare())
@@ -288,6 +345,18 @@ const BuilderModal = (props: Props) => {
           onClose={props.onClose}
           onClick={(value: string) => {
             props.onClick(new BClassVar(value))
+          }}
+          onDelete={() => {
+            props.onClick(new BClassEmpty())
+          }}
+        />
+      )}
+      {type === 'Date' && (
+        <DateBody
+          data={props.data as BTypeDate}
+          onClose={props.onClose}
+          onClick={(value: string, number: number, duration: string) => {
+            props.onClick(new BClassDate(new BClassValue(value), number, duration))
           }}
           onDelete={() => {
             props.onClick(new BClassEmpty())

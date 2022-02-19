@@ -135,16 +135,27 @@ const BComponentValue = (props: BComponentProps<BTypeValue>) => {
   )
 }
 
-const BComponentDate = (props: BComponentProps<BTypeDate>) => (
-  <BaseComponent styles={props.styles} depth={props.depth}>
-    <Text>
-      <Text as="span" fontWeight="semibold">
-        DATE:
-      </Text>{' '}
-      {`${props.data.value.value} + ${props.data.number} ${props.data.duration}`}
-    </Text>
-  </BaseComponent>
-)
+const BComponentDate = (props: BComponentProps<BTypeDate>) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  return (
+    <>
+      <BaseComponent styles={props.styles} depth={props.depth} onClick={onOpen}>
+        <Text>
+          <Text as="span" fontWeight="semibold">
+            DATE:
+          </Text>{' '}
+          {`${props.data.value.value} + ${props.data.number} ${props.data.duration}`}
+        </Text>
+      </BaseComponent>
+      <BuilderModal
+        data={props.data}
+        isOpen={isOpen}
+        onClose={onClose}
+        onClick={type => props.onChange(type as BTypeDate)}
+      />
+    </>
+  )
+}
 
 const BComponentCompare = (props: BComponentProps<BTypeCompare>) => (
   <BaseComponent styles={{ padding: 0 }} depth={props.depth}>
