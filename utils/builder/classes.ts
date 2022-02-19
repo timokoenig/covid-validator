@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import {
   BType,
   BTypeAnd,
@@ -7,6 +8,7 @@ import {
   BTypeCompareIn,
   BTypeDate,
   BTypeIf,
+  BTypeImmunizationStatus,
   BTypeValue,
   BTypeVar,
   CERTIFICATE_TYPE_RECOVERY,
@@ -14,6 +16,7 @@ import {
   CERTIFICATE_TYPE_VACCINATION,
   DURATION_DAYS,
   DURATION_HOURS,
+  IMMUNIZATION_STATUS_FULL,
   JSONArray,
   JSONObject,
   JSONValue,
@@ -284,6 +287,57 @@ export class BClassCertificateType implements BTypeCertificateType {
   }
 }
 
+export class BClassImmunizationStatus implements BTypeImmunizationStatus {
+  status: string
+  vaccines: string[]
+  conditionTrue: BType
+
+  constructor(
+    status: string = IMMUNIZATION_STATUS_FULL,
+    vaccines: string[] = [],
+    conditionTrue: BType = new BClassEmpty()
+  ) {
+    this.status = status
+    this.vaccines = vaccines
+    this.conditionTrue = conditionTrue
+  }
+
+  encode(data: JSONValue): BType {
+    const obj = data as JSONObject
+    const arr = obj.if as JSONArray
+    const status = obj.status as string
+    const vaccines = (
+      (((arr[0] as JSONObject).and as JSONArray)[0] as JSONObject).in as JSONArray
+    )[1] as string[]
+
+    return new BClassImmunizationStatus(status, vaccines, encode(arr[1] as JSONObject))
+  }
+
+  decode(): JSONValue {
+    return {
+      type: 'immunization-status',
+      status: this.status,
+      if: [
+        {
+          and: [
+            {
+              in: [
+                {
+                  var: 'payload.v.0.mp',
+                },
+                this.vaccines,
+              ],
+            },
+            {}, // here comes an or operation for all immunization status queries
+          ],
+        },
+        this.conditionTrue.decode(),
+        false,
+      ],
+    }
+  }
+}
+
 export function encode(data: JSONValue): BType {
   if (data === null) {
     return new BClassEmpty()
@@ -293,6 +347,9 @@ export function encode(data: JSONValue): BType {
       // custom types
       if (data.type === 'certificate-type') {
         return new BClassCertificateType().encode(data)
+      }
+      if (data.type === 'immunization-status') {
+        return new BClassImmunizationStatus().encode(data)
       }
     }
     if ('var' in data) {

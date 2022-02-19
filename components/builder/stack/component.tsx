@@ -10,6 +10,7 @@ import {
   BClassDate,
   BClassEmpty,
   BClassIf,
+  BClassImmunizationStatus,
   BClassValue,
   BClassVar,
 } from '~/utils/builder/classes'
@@ -23,6 +24,7 @@ import {
   BTypeDate,
   BTypeEmpty,
   BTypeIf,
+  BTypeImmunizationStatus,
   BTypeValue,
   BTypeVar,
   OPERATOR_DATE_NOT_AFTER,
@@ -497,6 +499,45 @@ const BComponentCertificateType = (props: BComponentProps<BTypeCertificateType>)
   )
 }
 
+const BComponentImmunizationStatus = (props: BComponentProps<BTypeImmunizationStatus>) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  return (
+    <>
+      <BaseComponent styles={props.styles} depth={props.depth} onClick={onOpen}>
+        <Heading size="md" mb="2">
+          {props.data.status}
+        </Heading>
+        <Text mb="2">{props.data.vaccines.join(', ')}</Text>
+        <Stack>
+          <Box
+            backgroundColor="gray.800"
+            py="1"
+            pl="1"
+            borderTopLeftRadius="10"
+            borderBottomLeftRadius="10"
+          >
+            <BComponent
+              data={props.data.conditionTrue}
+              depth={props.depth}
+              onChange={data => {
+                const tmp = props.data
+                tmp.conditionTrue = data
+                props.onChange(tmp)
+              }}
+            />
+          </Box>
+        </Stack>
+      </BaseComponent>
+      <BuilderModal
+        data={props.data}
+        isOpen={isOpen}
+        onClose={onClose}
+        onClick={type => props.onChange(type as BTypeImmunizationStatus)}
+      />
+    </>
+  )
+}
+
 type BComponentProps<T> = {
   data: T
   styles?: CSSProperties
@@ -538,6 +579,16 @@ export const BComponent = (props: BComponentProps<BType>) => {
   if (props.data instanceof BClassCertificateType) {
     return (
       <BComponentCertificateType
+        data={props.data}
+        styles={props.styles}
+        depth={props.depth + 1}
+        onChange={props.onChange}
+      />
+    )
+  }
+  if (props.data instanceof BClassImmunizationStatus) {
+    return (
+      <BComponentImmunizationStatus
         data={props.data}
         styles={props.styles}
         depth={props.depth + 1}

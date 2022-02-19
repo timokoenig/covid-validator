@@ -3,6 +3,7 @@ import { ChevronRightIcon, DeleteIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
+  Checkbox,
   Heading,
   Input,
   List,
@@ -27,6 +28,7 @@ import {
   BClassDate,
   BClassEmpty,
   BClassIf,
+  BClassImmunizationStatus,
   BClassValue,
   BClassVar,
 } from '~/utils/builder/classes'
@@ -37,6 +39,7 @@ import {
   BTypeCompareDate,
   BTypeCompareIn,
   BTypeDate,
+  BTypeImmunizationStatus,
   BTypeValue,
   BTypeVar,
   DURATION_DAYS,
@@ -47,11 +50,13 @@ import {
   OPERATOR_GREATER,
   OPERATOR_GREATER_EQUALS,
 } from '~/utils/builder/types'
+import vaccines from '~/utils/vaccines'
 // import { useTranslation } from 'react-i18next'
 
-const customTypes = ['Certificate Type', 'Vaccination Status']
+const customTypes = ['Certificate Type', 'Immunization Status']
 const types = ['Value', 'Var', 'Date', 'Compare', 'Compare Date', 'Compare In', 'IF', 'AND']
 const certificateTypes = ['Vaccination', 'Test', 'Recovery']
+const immunizationStatus = ['partial', 'full', 'full-recovery', 'booster']
 
 const ValueBody = (props: {
   data?: BTypeValue
@@ -374,6 +379,85 @@ const CertificateTypeBody = (props: {
   </ModalContent>
 )
 
+const ImmunizationStatusBody = (props: {
+  editMode: boolean
+  onClose: () => void
+  onClick: (status: string, vaccines: string[]) => void
+  onDelete: () => void
+}) => {
+  const [status, setStatus] = useState<string>('')
+  const [selectedVaccines, setSelectedVaccines] = useState<string[]>([])
+  return (
+    <ModalContent>
+      <ModalHeader>Immunization Status</ModalHeader>
+      <ModalCloseButton onClick={props.onClose} />
+      <ModalBody>
+        {status === '' ? (
+          <List>
+            {immunizationStatus.map(item => (
+              <ListItem key={item} display="flex">
+                <Button
+                  variant="ghost"
+                  flex="1"
+                  justifyContent="left"
+                  onClick={() => setStatus(item)}
+                >
+                  {item}
+                  <Spacer />
+                  <ChevronRightIcon width="5" height="5" />
+                </Button>
+              </ListItem>
+            ))}
+          </List>
+        ) : (
+          <List>
+            {vaccines.map(item => (
+              <ListItem key={item.id} display="flex">
+                <Button
+                  isFullWidth
+                  h="auto"
+                  position="relative"
+                  overflowWrap="anywhere"
+                  whiteSpace="normal"
+                  variant="ghost"
+                  justifyContent="left"
+                  p="0"
+                >
+                  <Checkbox
+                    isChecked={selectedVaccines.includes(item.id)}
+                    w="100%"
+                    h="100%"
+                    p="4"
+                    wordBreak="break-all"
+                    onChange={e =>
+                      e.target.checked
+                        ? setSelectedVaccines([...selectedVaccines, item.id])
+                        : setSelectedVaccines(selectedVaccines.filter(v => v !== item.id))
+                    }
+                  >
+                    {item.name}
+                  </Checkbox>
+                </Button>
+              </ListItem>
+            ))}
+          </List>
+        )}
+      </ModalBody>
+      <ModalFooter>
+        {props.editMode && (
+          <Button variant="ghost" colorScheme="red" onClick={props.onDelete}>
+            Delete
+          </Button>
+        )}
+        <Spacer />
+        {status !== '' && (
+          <Button onClick={() => props.onClick(status, selectedVaccines)}>Done</Button>
+        )}
+      </ModalFooter>
+    </ModalContent>
+  )
+}
+
 const SelectionBody = (props: { onClose: () => void; onClick: (selection: string) => void }) => (
   <ModalContent>
     <ModalHeader>Select Component</ModalHeader>
@@ -434,6 +518,10 @@ const BuilderModal = (props: Props) => {
       setType('Certificate Type')
       return
     }
+    if (props.data instanceof BClassImmunizationStatus) {
+      setType('Immunization Status')
+      return
+    }
     if (props.data instanceof BClassValue) {
       setType('Value')
       return
@@ -483,7 +571,7 @@ const BuilderModal = (props: Props) => {
           onClick={(selection: string) => {
             switch (selection) {
               case 'Certificate Type':
-              case 'Vaccination Status':
+              case 'Immunization Status':
               case 'Value':
               case 'Var':
               case 'Date':
@@ -524,6 +612,28 @@ const BuilderModal = (props: Props) => {
             }
             const bType = props.data as BTypeCertificateType
             bType.type = selection
+            props.onClick(bType)
+            onClose()
+          }}
+          onDelete={() => {
+            props.onClick(new BClassEmpty())
+            onClose()
+          }}
+        />
+      )}
+      {type === 'Immunization Status' && (
+        <ImmunizationStatusBody
+          editMode={props.data !== undefined}
+          onClose={onClose}
+          onClick={(status: string, selectedVaccines: string[]) => {
+            if (props.data === undefined) {
+              props.onClick(new BClassImmunizationStatus(status, selectedVaccines))
+              onClose()
+              return
+            }
+            const bType = props.data as BTypeImmunizationStatus
+            bType.status = status
+            bType.vaccines = selectedVaccines
             props.onClick(bType)
             onClose()
           }}

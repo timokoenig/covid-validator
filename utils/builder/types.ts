@@ -10,7 +10,6 @@ export interface JSONObject {
 export interface JSONArray extends Array<JSONValue> {}
 
 export interface BType {
-  // readonly type: string
   encode(data: JSONValue): BType
   decode(): JSONValue
 }
@@ -62,24 +61,22 @@ export interface BTypeAnd extends BType {
   conditions: BType[]
 }
 
-// export interface BTypeOr extends BType {
-//   conditions: BType[]
-// }
-
-// export const IMMUNIZATION_STATUS_PARTIAL = 'partial'
-// export const IMMUNIZATION_STATUS_FULL = 'full'
-// export const IMMUNIZATION_STATUS_FULL_RECOVERY = 'full-recovery'
-// export const IMMUNIZATION_STATUS_BOOSTER = 'booster'
-
-// export interface BTypeImmunizationStatus extends BType {
-//   status: string
-// }
-
 export const CERTIFICATE_TYPE_VACCINATION = 'Vaccination'
 export const CERTIFICATE_TYPE_TEST = 'Test'
 export const CERTIFICATE_TYPE_RECOVERY = 'Recovery'
 
 export interface BTypeCertificateType extends BType {
   type: string
+  conditionTrue: BType
+}
+
+export const IMMUNIZATION_STATUS_PARTIAL = 'partial'
+export const IMMUNIZATION_STATUS_FULL = 'full'
+export const IMMUNIZATION_STATUS_FULL_RECOVERY = 'full-recovery'
+export const IMMUNIZATION_STATUS_BOOSTER = 'booster'
+
+export interface BTypeImmunizationStatus extends BType {
+  status: string
+  vaccines: string[]
   conditionTrue: BType
 }
