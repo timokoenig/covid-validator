@@ -14,7 +14,7 @@ import {
   BClassImmunizationStatus,
   BClassValue,
   BClassVar,
-} from '~/utils/builder/classes'
+} from '../../../utils/builder/classes'
 import {
   BType,
   BTypeAnd,
@@ -33,7 +33,7 @@ import {
   OPERATOR_EQUALS,
   OPERATOR_GREATER,
   OPERATOR_GREATER_EQUALS,
-} from '~/utils/builder/types'
+} from '../../../utils/builder/types'
 import vaccines from '../../../utils/vaccines'
 import BuilderModal from './builder-modal'
 

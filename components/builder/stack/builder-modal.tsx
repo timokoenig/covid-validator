@@ -556,10 +556,9 @@ const BuilderModal = (props: Props) => {
       return
     }
     setType('')
-  }, [])
+  }, [props.isOpen])
 
   const onClose = () => {
-    setType('')
     props.onClose()
   }
 
