@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { Box, Button, Heading, HStack, Stack, Text, useDisclosure, VStack } from '@chakra-ui/react'
 import React, { CSSProperties } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   BClassAnd,
   BClassCertificateType,
@@ -33,6 +34,7 @@ import {
   OPERATOR_GREATER,
   OPERATOR_GREATER_EQUALS,
 } from '~/utils/builder/types'
+import vaccines from '../../../utils/vaccines'
 import BuilderModal from './builder-modal'
 
 const BaseComponent = (props: {
@@ -500,14 +502,17 @@ const BComponentCertificateType = (props: BComponentProps<BTypeCertificateType>)
 }
 
 const BComponentImmunizationStatus = (props: BComponentProps<BTypeImmunizationStatus>) => {
+  const { t } = useTranslation('common')
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
       <BaseComponent styles={props.styles} depth={props.depth} onClick={onOpen}>
         <Heading size="md" mb="2">
-          {props.data.status}
+          {t(props.data.status)}
         </Heading>
-        <Text mb="2">{props.data.vaccines.join(', ')}</Text>
+        <Text mb="2">
+          {props.data.vaccines.map(v => vaccines.find(vac => vac.id == v)?.name ?? v).join(', ')}
+        </Text>
         <Stack>
           <Box
             backgroundColor="gray.800"

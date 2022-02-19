@@ -45,6 +45,11 @@
   "test": "Test",
   "tests": "Tests",
 
+  "partial": "Partial Immunization",
+  "full": "Full Immunization",
+  "full-recovery": "Full Immunization after Recovery",
+  "booster": "Booster Immunization",
+
   "3G": "Vaccinated or Recovered or Test",
   "2G+": "Vaccinated or Recoverd + Test or Booster",
   "2G": "Vaccinated or Recoverd",

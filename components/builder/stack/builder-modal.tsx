@@ -19,6 +19,7 @@ import {
   Spacer,
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   BClassAnd,
   BClassCertificateType,
@@ -51,7 +52,6 @@ import {
   OPERATOR_GREATER_EQUALS,
 } from '~/utils/builder/types'
 import vaccines from '~/utils/vaccines'
-// import { useTranslation } from 'react-i18next'
 
 const customTypes = ['Certificate Type', 'Immunization Status']
 const types = ['Value', 'Var', 'Date', 'Compare', 'Compare Date', 'Compare In', 'IF', 'AND']
@@ -385,6 +385,7 @@ const ImmunizationStatusBody = (props: {
   onClick: (status: string, vaccines: string[]) => void
   onDelete: () => void
 }) => {
+  const { t } = useTranslation('common')
   const [status, setStatus] = useState<string>('')
   const [selectedVaccines, setSelectedVaccines] = useState<string[]>([])
   return (
@@ -402,7 +403,7 @@ const ImmunizationStatusBody = (props: {
                   justifyContent="left"
                   onClick={() => setStatus(item)}
                 >
-                  {item}
+                  {t(item)}
                   <Spacer />
                   <ChevronRightIcon width="5" height="5" />
                 </Button>
