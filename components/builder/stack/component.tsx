@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { Box, Button, Heading, HStack, Stack, Text, VStack } from '@chakra-ui/react'
+import { Box, Button, Heading, HStack, Stack, Text, useDisclosure, VStack } from '@chakra-ui/react'
 import React, { CSSProperties } from 'react'
 import {
   BClassAnd,
@@ -21,6 +21,7 @@ import {
   BTypeCompareDate,
   BTypeCompareIn,
   BTypeDate,
+  BTypeEmpty,
   BTypeIf,
   BTypeValue,
   BTypeVar,
@@ -30,11 +31,13 @@ import {
   OPERATOR_GREATER,
   OPERATOR_GREATER_EQUALS,
 } from '~/utils/builder/types'
+import BuilderModal from './builder-modal'
 
 const BaseComponent = (props: {
   children: JSX.Element | JSX.Element[]
   styles?: CSSProperties
   depth: number
+  onClick?: () => void
 }) => (
   <Box
     py="3"
@@ -51,7 +54,8 @@ const BaseComponent = (props: {
     }}
     onClick={e => {
       e.stopPropagation()
-      alert('ok')
+      if (props.onClick === undefined) return
+      props.onClick()
     }}
     style={props.styles}
   >
@@ -59,23 +63,29 @@ const BaseComponent = (props: {
   </Box>
 )
 
-const BComponentEmpty = (props: { onClick: () => void }) => (
-  <Button
-    py="3"
-    borderStyle="dashed"
-    borderWidth="2px"
-    borderColor="gray.500"
-    backgroundColor="transparent"
-    borderRadius="10"
-    isFullWidth
-    onClick={e => {
-      e.stopPropagation()
-      props.onClick()
-    }}
-  >
-    ADD
-  </Button>
-)
+const BComponentEmpty = (props: BComponentProps<BTypeEmpty>) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  return (
+    <>
+      <Button
+        py="3"
+        borderStyle="dashed"
+        borderWidth="2px"
+        borderColor="gray.500"
+        backgroundColor="transparent"
+        borderRadius="10"
+        isFullWidth
+        onClick={e => {
+          e.stopPropagation()
+          onOpen()
+        }}
+      >
+        ADD
+      </Button>
+      <BuilderModal isOpen={isOpen} onClose={onClose} onClick={props.onChange} />
+    </>
+  )
+}
 
 const BComponentVar = (props: BComponentProps<BTypeVar>) => (
   <BaseComponent styles={props.styles} depth={props.depth}>
@@ -88,20 +98,31 @@ const BComponentVar = (props: BComponentProps<BTypeVar>) => (
   </BaseComponent>
 )
 
-const BComponentValue = (props: BComponentProps<BTypeValue>) => (
-  <BaseComponent styles={props.styles} depth={props.depth}>
-    <Text>
-      <Text as="span" fontWeight="semibold">
-        VALUE:
-      </Text>{' '}
-      {typeof props.data.value === 'boolean'
-        ? props.data.value
-          ? 'TRUE'
-          : 'FALSE'
-        : props.data.value}
-    </Text>
-  </BaseComponent>
-)
+const BComponentValue = (props: BComponentProps<BTypeValue>) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  return (
+    <>
+      <BaseComponent styles={props.styles} depth={props.depth} onClick={onOpen}>
+        <Text>
+          <Text as="span" fontWeight="semibold">
+            VALUE:
+          </Text>{' '}
+          {typeof props.data.value === 'boolean'
+            ? props.data.value
+              ? 'TRUE'
+              : 'FALSE'
+            : props.data.value}
+        </Text>
+      </BaseComponent>
+      <BuilderModal
+        data={props.data}
+        isOpen={isOpen}
+        onClose={onClose}
+        onClick={type => props.onChange(type as BTypeValue)}
+      />
+    </>
+  )
+}
 
 const BComponentDate = (props: BComponentProps<BTypeDate>) => (
   <BaseComponent styles={props.styles} depth={props.depth}>
@@ -369,37 +390,51 @@ const BComponentAnd = (props: BComponentProps<BTypeAnd>) => (
           />
         </Box>
       ))}
-      <BComponentEmpty onClick={() => {}} />
+      <BComponentEmpty data={new BClassEmpty()} depth={props.depth} onChange={() => {}} />
     </VStack>
   </BaseComponent>
 )
 
-const BComponentCertificateType = (props: BComponentProps<BTypeCertificateType>) => (
-  <BaseComponent styles={props.styles} depth={props.depth}>
-    <Heading size="md" mb="2">
-      {props.data.type}
-    </Heading>
-    <Stack>
-      <Box
-        backgroundColor="gray.800"
-        py="1"
-        pl="1"
-        borderTopLeftRadius="10"
-        borderBottomLeftRadius="10"
-      >
-        <BComponent
-          data={props.data.conditionTrue}
-          depth={props.depth}
-          onChange={data => {
-            const tmp = props.data
-            tmp.conditionTrue = data
-            props.onChange(tmp)
-          }}
-        />
-      </Box>
-    </Stack>
-  </BaseComponent>
-)
+const BComponentCertificateType = (props: BComponentProps<BTypeCertificateType>) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  return (
+    <>
+      <BaseComponent styles={props.styles} depth={props.depth} onClick={onOpen}>
+        <Heading size="md" mb="2">
+          {props.data.type}
+        </Heading>
+        <Stack>
+          <Box
+            backgroundColor="gray.800"
+            py="1"
+            pl="1"
+            borderTopLeftRadius="10"
+            borderBottomLeftRadius="10"
+          >
+            <BComponent
+              data={props.data.conditionTrue}
+              depth={props.depth}
+              onChange={data => {
+                const tmp = props.data
+                tmp.conditionTrue = data
+                props.onChange(tmp)
+              }}
+            />
+          </Box>
+        </Stack>
+      </BaseComponent>
+      <BuilderModal
+        data={props.data}
+        isOpen={isOpen}
+        onClose={onClose}
+        onClick={type => {
+          props.onChange(type as BTypeCertificateType)
+          onClose()
+        }}
+      />
+    </>
+  )
+}
 
 type BComponentProps<T> = {
   data: T
@@ -500,7 +535,7 @@ export const BComponent = (props: BComponentProps<BType>) => {
     )
   }
   if (props.data instanceof BClassEmpty) {
-    return <BComponentEmpty onClick={() => {}} />
+    return <BComponentEmpty data={props.data} depth={props.depth + 1} onChange={props.onChange} />
   }
   return <Box />
 }

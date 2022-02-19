@@ -265,7 +265,7 @@ export class BClassCertificateType implements BTypeCertificateType {
     if (typeVar === 'payload.t.0') {
       type = CERTIFICATE_TYPE_TEST
     }
-    if (this.type === 'pyaload.r.0') {
+    if (typeVar === 'payload.r.0') {
       type = CERTIFICATE_TYPE_RECOVERY
     }
 
