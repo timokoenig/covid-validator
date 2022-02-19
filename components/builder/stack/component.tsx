@@ -283,44 +283,46 @@ const BComponentCompareDate = (props: BComponentProps<BTypeCompareDate>) => {
   )
 }
 
-const BComponentCompareIn = (props: BComponentProps<BTypeCompareIn>) => (
-  <BaseComponent styles={{ padding: 0 }} depth={props.depth}>
-    <HStack>
-      <Box
-        backgroundColor="gray.800"
-        borderRadius="10"
-        borderRight="3px solid"
-        borderRightColor="gray.800"
-      >
-        <BComponent
-          data={props.data.variable}
-          depth={props.depth}
-          styles={{ borderRadius: 10, paddingRight: 12 }}
-          onChange={_ => {
-            const tmp = props.data
-            // tmp.condition = data
-            props.onChange(tmp)
-          }}
-        />
-      </Box>
-      <Text fontWeight="semibold" px="10">
-        IN
-      </Text>
-      <Box
-        backgroundColor="gray.800"
-        borderRadius="10"
-        borderLeft="3px solid"
-        borderLeftColor="gray.800"
-        flex="1"
-        flexDirection="column"
-      >
-        <BaseComponent depth={props.depth + 1}>
-          <Text>{props.data.values.join(', ')}</Text>
-        </BaseComponent>
-      </Box>
-    </HStack>
-  </BaseComponent>
-)
+const BComponentCompareIn = (props: BComponentProps<BTypeCompareIn>) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  return (
+    <>
+      <BaseComponent styles={{ padding: 0 }} depth={props.depth} onClick={onOpen}>
+        <HStack>
+          <Box
+            backgroundColor="gray.800"
+            borderRadius="10"
+            borderRight="3px solid"
+            borderRightColor="gray.800"
+          >
+            <BComponent
+              data={props.data.variable}
+              depth={props.depth}
+              styles={{ borderRadius: 10, paddingRight: 12 }}
+              onChange={data => {
+                const tmp = props.data
+                tmp.variable = data
+                props.onChange(tmp)
+              }}
+            />
+          </Box>
+          <Text fontWeight="semibold" px="10">
+            IN
+          </Text>
+          <Box flex="1" flexDirection="column">
+            <Text>{props.data.values.join(', ')}</Text>
+          </Box>
+        </HStack>
+      </BaseComponent>
+      <BuilderModal
+        data={props.data}
+        isOpen={isOpen}
+        onClose={onClose}
+        onClick={type => props.onChange(type as BTypeCompareIn)}
+      />
+    </>
+  )
+}
 
 const BComponentIf = (props: BComponentProps<BTypeIf>) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
