@@ -46,16 +46,17 @@ const Edit = (props: Props) => {
   const onDuplicate = () => {
     props.onChange({
       ...props.customRule,
-      id: '',
-      name: `${props.customRule.name} (copy)`,
+      id: uuidv4(),
+      name: `${props.customRule.name} (${t('copy')})`,
     })
   }
 
+  // TODO fix default BuilderStateRuleDE to match type definition
   const copyExisting = () => {
     props.onChange({
       ...BuilderStateRuleDE,
       id: uuidv4(),
-      name: `${BuilderStateRuleDE.name} (copy)`,
+      name: `${BuilderStateRuleDE.name} (${t('copy')})`,
     })
   }
 

@@ -3,11 +3,11 @@ import { ChevronLeftIcon } from '@chakra-ui/icons'
 import { Box, Button, Heading, Text, useDisclosure } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { JSONObject } from '../../../utils/builder/types'
-import { CustomRule, ImmunizationRule } from '../../../utils/certlogic'
-import vaccines from '../../../utils/vaccines'
-import ConfirmModal from '../../modal/confirm'
-import BuilderStack from '../stack'
+import { JSONObject } from '../../../../utils/builder/types'
+import { CustomRule, ImmunizationRule } from '../../../../utils/certlogic'
+import vaccines from '../../../../utils/vaccines'
+import ConfirmModal from '../../../modal/confirm'
+import BuilderStack from '../../stack'
 
 type Props = {
   customRule: CustomRule

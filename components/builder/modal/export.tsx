@@ -22,6 +22,20 @@ type Props = {
 const LanguageModal = (props: Props) => {
   const { t } = useTranslation('common')
 
+  const exportedJSON = ((): string | null => {
+    if (props.customRule && !props.certificateRule) {
+      return JSON.stringify(exportRules(props.customRule), null, 2)
+    }
+    if (props.certificateRule) {
+      return JSON.stringify(
+        exportRule(props.certificateRule, props.customRule?.immunizationRules ?? []),
+        null,
+        2
+      )
+    }
+    return null
+  })()
+
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose} size="lg" scrollBehavior="inside">
       <ModalOverlay />
@@ -29,21 +43,7 @@ const LanguageModal = (props: Props) => {
         <ModalHeader>{t('export')}</ModalHeader>
         <ModalCloseButton onClick={props.onClose} />
         <ModalBody>
-          {props.customRule && !props.certificateRule && (
-            <pre>{JSON.stringify(exportRules(props.customRule), null, 2)}</pre>
-          )}
-          {props.certificateRule && (
-            <pre>
-              {JSON.stringify(
-                exportRule(props.certificateRule, props.customRule?.immunizationRules ?? []),
-                null,
-                2
-              )}
-            </pre>
-          )}
-          {props.customRule === undefined && props.certificateRule === undefined && (
-            <Text>{t('export.none')}</Text>
-          )}
+          {exportedJSON ? <pre>{exportedJSON}</pre> : <Text>{t('export.none')}</Text>}
         </ModalBody>
         <ModalFooter />
       </ModalContent>

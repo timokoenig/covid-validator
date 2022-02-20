@@ -1,17 +1,15 @@
-import { ChevronRightIcon } from '@chakra-ui/icons'
 import {
-  Button,
   List,
-  ListItem,
   ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Spacer,
 } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { CERTIFICATE_TYPE_ALL } from '../../../../utils/builder/types'
+import ListItem from '../../../list-item'
 
 type Props = {
   onClose: () => void
@@ -20,28 +18,14 @@ type Props = {
 
 const TypeSelection = (props: Props) => {
   const { t } = useTranslation('common')
-
-  const items = ['Vaccination', 'Recovery', 'Test']
-
   return (
     <ModalContent>
       <ModalHeader>{t('builder.modal.certificate')}</ModalHeader>
       <ModalCloseButton onClick={props.onClose} />
       <ModalBody>
         <List>
-          {items.map(item => (
-            <ListItem key={item} display="flex">
-              <Button
-                variant="ghost"
-                flex="1"
-                justifyContent="left"
-                onClick={() => props.onClick(item)}
-              >
-                {item}
-                <Spacer />
-                <ChevronRightIcon width="5" height="5" />
-              </Button>
-            </ListItem>
+          {CERTIFICATE_TYPE_ALL.map(item => (
+            <ListItem key={item} title={item} onClick={() => props.onClick(item)} />
           ))}
         </List>
       </ModalBody>

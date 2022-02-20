@@ -25,7 +25,7 @@ const ImmunizationWizardModal = (props: Props) => {
       id: uuidv4(),
       medicalProducts: vaccines,
       type,
-      // default rule for every new immunization rule to make it easier for the user
+      // default for every new immunization rule to make it easier for the user
       rule: new BClassCompare(
         new BClassVar('payload.v.0.dn'),
         new BClassVar('payload.v.0.sd'),

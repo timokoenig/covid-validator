@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components */
 import { Modal, ModalOverlay } from '@chakra-ui/react'
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
@@ -23,7 +22,7 @@ const WizardModal = (props: Props) => (
           id: uuidv4(),
           type: selection,
           translations: [],
-          // default rule for every new certificate rule to make it easier for the user
+          // default for every new certificate rule to make it easier for the user
           rule: new BClassCertificateType(selection).decode() as JSONObject,
         })
       }

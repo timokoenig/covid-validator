@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { CertificateRule, CustomRule, ImmunizationRule } from '../../../utils/certlogic'
+import EditCertificateRule from './detail/certificate-rule'
+import EditImmunizationRule from './detail/immunization-rule'
 import Edit from './edit'
-import EditCertificateRule from './edit-certificate-rule'
-import EditImmunizationRules from './edit-immunization-rules'
 import Empty from './empty'
 import Overview from './overview'
 
@@ -42,7 +42,7 @@ const RightColumn = (props: Props) => {
   }
   if (editModeImmunizationRule !== null) {
     return (
-      <EditImmunizationRules
+      <EditImmunizationRule
         customRule={props.customRule}
         immunizationRule={editModeImmunizationRule}
         onChange={props.onChange}

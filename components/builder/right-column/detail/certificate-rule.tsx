@@ -12,12 +12,12 @@ import {
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { JSONObject } from '../../../utils/builder/types'
-import { CertificateRule, CustomRule, Language } from '../../../utils/certlogic'
-import ConfirmModal from '../../modal/confirm'
-import ExportModal from '../modal/export'
-import LanguageModal from '../modal/language'
-import BuilderStack from '../stack'
+import { JSONObject } from '../../../../utils/builder/types'
+import { CertificateRule, CustomRule, Language } from '../../../../utils/certlogic'
+import ConfirmModal from '../../../modal/confirm'
+import ExportModal from '../../modal/export'
+import LanguageModal from '../../modal/language'
+import BuilderStack from '../../stack'
 
 type Props = {
   customRule: CustomRule

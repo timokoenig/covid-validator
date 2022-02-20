@@ -64,6 +64,11 @@ export interface BTypeAnd extends BType {
 export const CERTIFICATE_TYPE_VACCINATION = 'Vaccination'
 export const CERTIFICATE_TYPE_TEST = 'Test'
 export const CERTIFICATE_TYPE_RECOVERY = 'Recovery'
+export const CERTIFICATE_TYPE_ALL = [
+  CERTIFICATE_TYPE_VACCINATION,
+  CERTIFICATE_TYPE_TEST,
+  CERTIFICATE_TYPE_RECOVERY,
+]
 
 export interface BTypeCertificateType extends BType {
   type: string
@@ -74,6 +79,12 @@ export const IMMUNIZATION_STATUS_PARTIAL = 'partial'
 export const IMMUNIZATION_STATUS_FULL = 'full'
 export const IMMUNIZATION_STATUS_FULL_RECOVERY = 'full-recovery'
 export const IMMUNIZATION_STATUS_BOOSTER = 'booster'
+export const IMMUNIZATION_STATUS_ALL = [
+  IMMUNIZATION_STATUS_PARTIAL,
+  IMMUNIZATION_STATUS_FULL,
+  IMMUNIZATION_STATUS_FULL_RECOVERY,
+  IMMUNIZATION_STATUS_BOOSTER,
+]
 
 export interface BTypeImmunizationStatus extends BType {
   status: string

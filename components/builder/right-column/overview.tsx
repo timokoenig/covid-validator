@@ -1,12 +1,12 @@
-import { Box, Button, Heading, SimpleGrid, Text, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Heading, List, SimpleGrid, Text, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import ListItem from '../../../components/list-item'
 import { CertificateRule, CustomRule, ImmunizationRule } from '../../../utils/certlogic'
+import vaccines from '../../../utils/vaccines'
 import ExportModal from '../modal/export'
 import ImmunizationWizardModal from '../modal/immunization-wizard'
 import WizardModal from '../modal/wizard'
-import ImmunizationRuleComponent from './immunization-rule'
-import RuleComponent from './rule'
 
 type Props = {
   customRule: CustomRule
@@ -66,13 +66,18 @@ const Overview = (props: Props) => {
           {props.customRule.immunizationRules.length === 0 && (
             <Text>{t('builder.rules.empty')}</Text>
           )}
-          {props.customRule.immunizationRules.map(rule => (
-            <ImmunizationRuleComponent
-              key={rule.id}
-              rule={rule}
-              onEdit={() => props.onEditImmunizationRule(rule)}
-            />
-          ))}
+          <List>
+            {props.customRule.immunizationRules.map(rule => (
+              <ListItem
+                key={rule.id}
+                title={t(rule.type)}
+                subtitle={rule.medicalProducts
+                  .map(mp => vaccines.find(vac => vac.id === mp)?.name ?? mp)
+                  .join(', ')}
+                onClick={() => props.onEditImmunizationRule(rule)}
+              />
+            ))}
+          </List>
         </SimpleGrid>
 
         <Box display="flex" alignItems="center" flexDirection="row" mb="5">
@@ -85,13 +90,15 @@ const Overview = (props: Props) => {
         </Box>
         <SimpleGrid mb="5" spacing="5">
           {props.customRule.rules.length === 0 && <Text>{t('builder.rules.empty')}</Text>}
-          {props.customRule.rules.map(rule => (
-            <RuleComponent
-              key={rule.id}
-              rule={rule}
-              onEdit={() => props.onEditCertificateRule(rule)}
-            />
-          ))}
+          <List>
+            {props.customRule.rules.map(rule => (
+              <ListItem
+                key={rule.id}
+                title={rule.translations.find(trans => trans.lang === 'en')?.desc ?? rule.id}
+                onClick={() => props.onEditCertificateRule(rule)}
+              />
+            ))}
+          </List>
         </SimpleGrid>
       </Box>
       <WizardModal
