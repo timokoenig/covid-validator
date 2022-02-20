@@ -17,6 +17,7 @@ import {
 import parse from 'html-react-parser'
 import React, { useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
+import BoxShadow from './country/box-shadow'
 
 type Props = {
   isOpen: boolean
@@ -102,6 +103,7 @@ const OnboardingModal = (props: Props) => {
               {t('onboarding.privacy.accept')}
             </Checkbox>
           </Button>
+          <BoxShadow />
         </ModalBody>
 
         <ModalFooter>
