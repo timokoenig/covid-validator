@@ -28,6 +28,8 @@
   "type": "Type",
   "dose": "Dose",
   "series": "Series",
+  "export": "Export",
+  "export.none": "Nothing to export",
 
   "imprint": "Imprint",
   "imprint.information": "Information in accordance with Section 5 TMG",
@@ -143,6 +145,7 @@
   "builder.modal.certificate": "Select Certificate Type",
   "builder.modal.vaccine": "Select Vaccine",
   "builder.modal.type": "Select Type",
+  "builder.modal.export": "Export",
 
   "lang": {
     "en": "English",

@@ -2,6 +2,7 @@ import { Box, Button, Heading, SimpleGrid, Text, useDisclosure } from '@chakra-u
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { CertificateRule, CustomRule, ImmunizationRule } from '../../../utils/certlogic'
+import ExportModal from '../modal/export'
 import ImmunizationWizardModal from '../modal/immunization-wizard'
 import WizardModal from '../modal/wizard'
 import ImmunizationRuleComponent from './immunization-rule'
@@ -27,6 +28,7 @@ const Overview = (props: Props) => {
     onOpen: onOpenCertificate,
     onClose: onCloseCertificate,
   } = useDisclosure()
+  const { isOpen: isOpenExport, onOpen: onOpenExport, onClose: onCloseExport } = useDisclosure()
 
   const onAddCertificateRule = (rule: CertificateRule) => {
     onCloseCertificate()
@@ -43,6 +45,9 @@ const Overview = (props: Props) => {
       <Box flex="1" px="10" py="5" display="flex" flexDirection="column" overflow="scroll">
         <Box display="flex" flexDirection="row" mb="5">
           <Heading flex="1">{props.customRule.name}</Heading>
+          <Button variant="ghost" onClick={onOpenExport} mr="5">
+            {t('export')}
+          </Button>
           <Button colorScheme="blue" onClick={props.onEdit}>
             {t('edit')}
           </Button>
@@ -99,6 +104,7 @@ const Overview = (props: Props) => {
         onClose={onCloseImmunization}
         onAdd={onAddImmunizationRule}
       />
+      <ExportModal customRule={props.customRule} isOpen={isOpenExport} onClose={onCloseExport} />
     </>
   )
 }

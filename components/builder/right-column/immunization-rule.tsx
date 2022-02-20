@@ -1,8 +1,8 @@
 import { Box, Button, Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import vaccines from '~/utils/vaccines'
 import { ImmunizationRule, immunizationTypeName } from '../../../utils/certlogic'
+import vaccines from '../../../utils/vaccines'
 
 type Props = {
   rule: ImmunizationRule

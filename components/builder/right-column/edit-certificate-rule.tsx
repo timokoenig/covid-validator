@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next'
 import { JSONObject } from '../../../utils/builder/types'
 import { CertificateRule, CustomRule, Language } from '../../../utils/certlogic'
 import ConfirmModal from '../../modal/confirm'
+import ExportModal from '../modal/export'
 import LanguageModal from '../modal/language'
 import BuilderStack from '../stack'
 
@@ -29,6 +30,7 @@ const EditCertificateRule = (props: Props) => {
   const { t } = useTranslation('common')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { isOpen: isOpenConfirm, onOpen: onOpenConfirm, onClose: onCloseConfirm } = useDisclosure()
+  const { isOpen: isOpenExport, onOpen: onOpenExport, onClose: onCloseExport } = useDisclosure()
   const [data, setData] = useState<JSONObject | null>(props.certificateRule.rule)
   // const [validFrom, setValidFrom] = useState<number | undefined>(props.certificateRule.validFrom)
   // const [validTo, setValidTo] = useState<number | undefined>(props.certificateRule.validTo)
@@ -102,9 +104,14 @@ const EditCertificateRule = (props: Props) => {
           </Button>
           <Heading flex="1">{t('builder.rules.certificate')}</Heading>
           {isEditMode && (
-            <Button colorScheme="red" variant="ghost" onClick={onOpenConfirm} mr="5">
-              {t('delete')}
-            </Button>
+            <>
+              <Button variant="ghost" onClick={onOpenExport} mr="5">
+                {t('export')}
+              </Button>
+              <Button colorScheme="red" variant="ghost" onClick={onOpenConfirm} mr="5">
+                {t('delete')}
+              </Button>
+            </>
           )}
           <Button colorScheme="blue" onClick={onSave}>
             {t('save')}
@@ -155,6 +162,11 @@ const EditCertificateRule = (props: Props) => {
         <BuilderStack data={data} onChange={setData} />
       </Box>
       <LanguageModal isOpen={isOpen} onClose={onClose} onClick={onAddTranslation} />
+      <ExportModal
+        certificateRule={props.certificateRule}
+        isOpen={isOpenExport}
+        onClose={onCloseExport}
+      />
       <ConfirmModal
         title={t('builder.rule.delete')}
         message={t('builder.rule.delete.message')}
