@@ -51,6 +51,7 @@ import {
   OPERATOR_GREATER,
   OPERATOR_GREATER_EQUALS,
 } from '~/utils/builder/types'
+import { ImmunizationRule } from '~/utils/certlogic'
 import vaccines from '~/utils/vaccines'
 
 const customTypes = ['Certificate Type', 'Immunization Status']
@@ -505,6 +506,7 @@ const SelectionBody = (props: { onClose: () => void; onClick: (selection: string
 
 type Props = {
   data?: BType
+  immunizationRules?: ImmunizationRule[]
   isOpen: boolean
   onClose: () => void
   onClick: (type: BType) => void

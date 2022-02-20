@@ -33,7 +33,7 @@ export class BClassEmpty implements BType {
     return new BClassEmpty()
   }
 
-  decode(): JSONValue {
+  decode(_?: JSONArray): JSONValue {
     return {}
   }
 }
@@ -59,9 +59,13 @@ export class BClassIf implements BTypeIf {
     return new BClassIf(encode(arr[0]), encode(arr[1]), encode(arr[2]))
   }
 
-  decode(): JSONValue {
+  decode(immunizationRules?: JSONArray): JSONValue {
     return {
-      if: [this.condition.decode(), this.conditionTrue.decode(), this.conditionFalse.decode()],
+      if: [
+        this.condition.decode(immunizationRules),
+        this.conditionTrue.decode(immunizationRules),
+        this.conditionFalse.decode(immunizationRules),
+      ],
     }
   }
 }
@@ -77,7 +81,7 @@ export class BClassValue implements BTypeVar {
     return new BClassValue(data as string)
   }
 
-  decode(): JSONValue {
+  decode(_?: JSONArray): JSONValue {
     return this.value
   }
 }
@@ -94,7 +98,7 @@ export class BClassVar implements BTypeValue {
     return new BClassVar(obj.var as string)
   }
 
-  decode(): JSONValue {
+  decode(_?: JSONArray): JSONValue {
     return {
       var: this.value,
     }
@@ -122,9 +126,9 @@ export class BClassDate implements BTypeDate {
     return new BClassDate(encode(arr[0]) as BTypeValue, arr[1] as number, arr[2] as string)
   }
 
-  decode(): JSONValue {
+  decode(immunizationRules?: JSONArray): JSONValue {
     return {
-      plusTime: [this.value.decode(), this.number, this.duration],
+      plusTime: [this.value.decode(immunizationRules), this.number, this.duration],
     }
   }
 }
@@ -151,9 +155,12 @@ export class BClassCompare implements BTypeCompare {
     return new BClassCompare(encode(arr[0]), encode(arr[1]), keys[0])
   }
 
-  decode(): JSONValue {
+  decode(immunizationRules?: JSONArray): JSONValue {
     return {
-      [this.operator]: [this.variableA.decode(), this.variableB.decode()],
+      [this.operator]: [
+        this.variableA.decode(immunizationRules),
+        this.variableB.decode(immunizationRules),
+      ],
     }
   }
 }
@@ -180,9 +187,12 @@ export class BClassCompareDate implements BTypeCompareDate {
     return new BClassCompareDate(encode(arr[0]), encode(arr[1]), keys[0])
   }
 
-  decode(): JSONValue {
+  decode(immunizationRules?: JSONArray): JSONValue {
     return {
-      [this.operator]: [this.variableA.decode(), this.variableB.decode()],
+      [this.operator]: [
+        this.variableA.decode(immunizationRules),
+        this.variableB.decode(immunizationRules),
+      ],
     }
   }
 }
@@ -202,9 +212,9 @@ export class BClassCompareIn implements BTypeCompareIn {
     return new BClassCompareIn(encode(arr[0]), arr[1] as string[])
   }
 
-  decode(): JSONValue {
+  decode(immunizationRules?: JSONArray): JSONValue {
     return {
-      in: [this.variable.decode(), this.values],
+      in: [this.variable.decode(immunizationRules), this.values],
     }
   }
 }
@@ -222,26 +232,12 @@ export class BClassAnd implements BTypeAnd {
     return new BClassAnd(arr.map(a => encode(a)))
   }
 
-  decode(): JSONValue {
+  decode(immunizationRules?: JSONArray): JSONValue {
     return {
-      and: this.conditions.map(c => c.decode()),
+      and: this.conditions.map(c => c.decode(immunizationRules)),
     }
   }
 }
-
-// export class BClassImmunizationStatus implements BType {
-//   status: string
-//   // type: string = 'immunization-status'
-
-//   constructor(status: string = IMMUNIZATION_STATUS_FULL) {
-//     this.status = status
-//   }
-
-//   decode(): JSONValue {
-//     // TODO implement status json logic
-//     return {}
-//   }
-// }
 
 export class BClassCertificateType implements BTypeCertificateType {
   type: string
@@ -271,7 +267,7 @@ export class BClassCertificateType implements BTypeCertificateType {
     return new BClassCertificateType(type, encode(arr[1] as JSONObject))
   }
 
-  decode(): JSONValue {
+  decode(immunizationRules?: JSONArray): JSONValue {
     let typeVar = 'payload.v.0'
     if (this.type === CERTIFICATE_TYPE_TEST) {
       typeVar = 'payload.t.0'
@@ -282,7 +278,7 @@ export class BClassCertificateType implements BTypeCertificateType {
 
     return {
       type: 'certificate-type',
-      if: [{ var: typeVar }, this.conditionTrue.decode(), false],
+      if: [{ var: typeVar }, this.conditionTrue.decode(immunizationRules), false],
     }
   }
 }
@@ -313,7 +309,21 @@ export class BClassImmunizationStatus implements BTypeImmunizationStatus {
     return new BClassImmunizationStatus(status, vaccines, encode(arr[1] as JSONObject))
   }
 
-  decode(): JSONValue {
+  decode(immunizationRules?: JSONArray): JSONValue {
+    // filter all active immunization rules and add them to the immunization-status component
+    const tmpRules =
+      immunizationRules
+        ?.filter(rule => (rule as JSONObject).type === this.status)
+        .map(rule => rule as JSONObject) ?? []
+    const activeRules = [
+      ...new Set(
+        this.vaccines
+          .map(mp => tmpRules.filter(rule => (rule.medicalProducts as string[]).includes(mp)))
+          .flat(1)
+      ),
+    ].map(rule => rule.rule)
+    const activeRulesComp = activeRules.length > 1 ? createOrOperation(activeRules) : activeRules[0]
+
     return {
       type: 'immunization-status',
       status: this.status,
@@ -328,14 +338,25 @@ export class BClassImmunizationStatus implements BTypeImmunizationStatus {
                 this.vaccines,
               ],
             },
-            {}, // here comes an or operation for all immunization status queries
+            activeRulesComp,
           ],
         },
-        this.conditionTrue.decode(),
+        this.conditionTrue.decode(immunizationRules),
         false,
       ],
     }
   }
+}
+
+function createOrOperation(rules: JSONValue[]): JSONValue {
+  const arr = rules
+  const con = arr.shift()
+  if (arr.length == 0) {
+    return con as JSONObject
+  }
+  return {
+    if: [con, true, createOrOperation(arr)],
+  } as JSONObject
 }
 
 export function encode(data: JSONValue): BType {

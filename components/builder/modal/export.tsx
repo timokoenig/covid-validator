@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { CertificateRule, CustomRule } from '../../../utils/certlogic'
+import { CertificateRule, CustomRule, exportRule, exportRules } from '../../../utils/certlogic'
 
 type Props = {
   customRule?: CustomRule
@@ -29,8 +29,18 @@ const LanguageModal = (props: Props) => {
         <ModalHeader>{t('export')}</ModalHeader>
         <ModalCloseButton onClick={props.onClose} />
         <ModalBody>
-          {props.customRule && <pre>{JSON.stringify(props.customRule, null, 2)}</pre>}
-          {props.certificateRule && <pre>{JSON.stringify(props.certificateRule, null, 2)}</pre>}
+          {props.customRule && !props.certificateRule && (
+            <pre>{JSON.stringify(exportRules(props.customRule), null, 2)}</pre>
+          )}
+          {props.certificateRule && (
+            <pre>
+              {JSON.stringify(
+                exportRule(props.certificateRule, props.customRule?.immunizationRules ?? []),
+                null,
+                2
+              )}
+            </pre>
+          )}
           {props.customRule === undefined && props.certificateRule === undefined && (
             <Text>{t('export.none')}</Text>
           )}

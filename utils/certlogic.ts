@@ -5,6 +5,7 @@
 import { evaluate } from 'certlogic-js'
 import moment from 'moment'
 import builderStateRulesDE from './builder-state-rules-de.json'
+import { encode } from './builder/classes'
 import { JSONObject } from './builder/types'
 import { encodeCertificateRule } from './certificate-rule'
 import { DCC } from './dcc'
@@ -21,6 +22,22 @@ export type CustomRule = {
   description: string
   immunizationRules: ImmunizationRule[]
   rules: CertificateRule[]
+}
+
+export function exportRules(customRule: CustomRule): CertificateRule[] {
+  return customRule.rules.map(rule => {
+    return exportRule(rule, customRule.immunizationRules)
+  })
+}
+
+export function exportRule(
+  rule: CertificateRule,
+  immunizationRules: ImmunizationRule[]
+): CertificateRule {
+  return {
+    ...rule,
+    rule: encode(rule.rule).decode(immunizationRules) as JSONObject,
+  }
 }
 
 export type CertificateRule = {
@@ -116,9 +133,7 @@ export function validateDCCRules(
   // TODO this is a temporary workaround to handle custom rule validation
   if (country.toUpperCase() == 'DE' && state !== '') {
     // At this point all states are similar thats why we have only one set of rules for it
-    const customRule = builderStateRulesDE.customRules.find(
-      rule => rule.id === 'de45d285-c750-4537-bb09-79910079a559'
-    )!
+    const customRule = builderStateRulesDE as CustomRule
     const rules = customRule.rules.map(rule => encodeCertificateRule(customRule, rule))
     const results = rules.map(rule => {
       if (rule === null) return { valid: false }

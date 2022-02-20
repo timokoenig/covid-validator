@@ -155,6 +155,7 @@ const EditCertificateRule = (props: Props) => {
       </Box>
       <LanguageModal isOpen={isOpen} onClose={onClose} onClick={onAddTranslation} />
       <ExportModal
+        customRule={props.customRule}
         certificateRule={props.certificateRule}
         isOpen={isOpenExport}
         onClose={onCloseExport}
