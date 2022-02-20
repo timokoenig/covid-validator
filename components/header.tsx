@@ -28,8 +28,8 @@ const Header = (props: Props) => {
   return (
     <>
       <Box mb="5">
-        <Box display="flex">
-          <Heading as="h1" size="2xl" flex="1">
+        <Box display="flex" flexWrap="wrap">
+          <Heading as="h1" size="2xl" flex="1" mr="3">
             <Link href="/" _hover={{ textDecoration: 'none' }}>
               CovidValidator
             </Link>{' '}
