@@ -96,7 +96,7 @@ const OnboardingModal = (props: Props) => {
               p="4"
               px="8"
               onChange={e => setAccepted(e.target.checked)}
-              wordBreak="break-all"
+              wordBreak="break-word"
               justifyContent="center"
             >
               {t('onboarding.privacy.accept')}
