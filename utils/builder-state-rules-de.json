@@ -1,197 +1,193 @@
 {
-  "customRules": [
+  "id": "de45d285-c750-4537-bb09-79910079a559",
+  "name": "Hamburg",
+  "description": "",
+  "rules": [
     {
-      "id": "de45d285-c750-4537-bb09-79910079a559",
-      "name": "Hamburg",
-      "description": "",
-      "rules": [
+      "id": "c71e648b-04ff-4889-bf8d-bb0410e28680",
+      "result": true,
+      "type": "Recovery",
+      "translations": [
         {
-          "id": "c71e648b-04ff-4889-bf8d-bb0410e28680",
-          "result": true,
-          "type": "Recovery",
-          "translations": [
-            {
-              "lang": "en",
-              "desc": "The positive NAA test result (e.g., PCR) must be older than 28 days and not older than 180 days."
-            },
-            {
-              "lang": "de",
-              "desc": "Der positive NAA-Test (z.B. PCR) muss mindestens 28 Tage und maximal 180 Tage zurückliegen."
-            }
-          ],
-          "validFrom": 28,
-          "validTo": 180
+          "lang": "en",
+          "desc": "The positive NAA test result (e.g., PCR) must be older than 28 days and not older than 180 days."
         },
         {
-          "id": "234cb87f-c16b-408b-b01a-2f362d406538",
-          "result": true,
-          "type": "Test",
-          "medicalProducts": ["LP217198-3"],
-          "translations": [
-            {
-              "lang": "en",
-              "desc": "The sample for an antigen test (e.g., rapid test) must have been taken no longer than 24 hours ago."
-            },
-            {
-              "lang": "de",
-              "desc": "Die Probenahme für einen Antigen-Test (z.B. Schnelltest) darf maximal 24 Stunden zurückliegen."
-            }
-          ],
-          "validTo": 24
-        },
-        {
-          "id": "4ddd697a-0ebf-4ed8-8b88-65a07d34e1ca",
-          "result": true,
-          "type": "Test",
-          "medicalProducts": ["LP6464-4"],
-          "translations": [
-            {
-              "lang": "en",
-              "desc": "The sample for an NAA test (e.g., PCR) must have been taken no longer than 48 hours ago."
-            },
-            {
-              "lang": "de",
-              "desc": "Die Probenahme für einen NAA-Test (z.B. PCR) darf maximal 48 Stunden zurückliegen."
-            }
-          ],
-          "validTo": 48
-        },
-        {
-          "id": "dbdc940c-ef3f-4745-a8ba-324ca4260794",
-          "result": true,
-          "type": "Vaccination",
-          "medicalProducts": [
-            "EU/1/20/1528",
-            "EU/1/20/1507",
-            "EU/1/21/1529",
-            "EU/1/21/1618",
-            "EU/1/20/1525"
-          ],
-          "translations": [
-            { "lang": "en", "desc": "Valid booster vaccination" },
-            { "lang": "de", "desc": "Gültige Booster Impfung" }
-          ],
-          "immunizationStatus": "booster"
-        },
-        {
-          "id": "8bb12070-0e1e-44eb-8b9a-651ef0ec8a6d",
-          "result": true,
-          "type": "Vaccination",
-          "medicalProducts": [
-            "EU/1/20/1528",
-            "EU/1/20/1507",
-            "EU/1/21/1529",
-            "EU/1/21/1618",
-            "EU/1/20/1525"
-          ],
-          "translations": [
-            { "lang": "en", "desc": "Full vaccination must be at least 14 days ago." },
-            {
-              "lang": "de",
-              "desc": "Die vollständige Impfung muss mindestens 14 Tage zurückliegen."
-            }
-          ],
-          "validFrom": 15,
-          "immunizationStatus": "full"
-        },
-        {
-          "id": "b05f5bc4-d799-4ab9-8cdf-fcae383deafa",
-          "result": true,
-          "type": "Vaccination",
-          "medicalProducts": ["EU/1/20/1528", "EU/1/20/1507", "EU/1/21/1529", "EU/1/21/1618"],
-          "translations": [
-            { "lang": "en", "desc": "Full vaccination after recovery." },
-            { "lang": "de", "desc": "Vollständige Impfung nach Genesung." }
-          ],
-          "immunizationStatus": "full-recovery"
+          "lang": "de",
+          "desc": "Der positive NAA-Test (z.B. PCR) muss mindestens 28 Tage und maximal 180 Tage zurückliegen."
         }
       ],
-      "immunizationRules": [
+      "validFrom": 28,
+      "validTo": 180
+    },
+    {
+      "id": "234cb87f-c16b-408b-b01a-2f362d406538",
+      "result": true,
+      "type": "Test",
+      "medicalProducts": ["LP217198-3"],
+      "translations": [
         {
-          "id": "c9df38ff-c16b-4817-a7aa-39ec7e47cf0d",
-          "medicalProducts": ["EU/1/20/1528", "EU/1/20/1507", "EU/1/21/1529", "EU/1/21/1618"],
-          "rule": {
-            "and": [
-              { "===": [{ "var": "payload.v.0.dn" }, 1] },
-              { "===": [{ "var": "payload.v.0.sd" }, 2] },
-              { "===": [{ "var": "payload.v.0.dn" }, { "var": "payload.v.0.sd" }] }
-            ]
-          },
-          "type": "partial"
+          "lang": "en",
+          "desc": "The sample for an antigen test (e.g., rapid test) must have been taken no longer than 24 hours ago."
         },
         {
-          "id": "b9411ec3-e933-43bf-a354-e24cb10df385",
-          "medicalProducts": [
-            "EU/1/20/1528",
-            "EU/1/20/1507",
-            "EU/1/21/1529",
-            "EU/1/21/1618",
-            "EU/1/20/1525"
-          ],
-          "rule": {
-            "and": [
-              { "===": [{ "var": "payload.v.0.dn" }, 2] },
-              { "===": [{ "var": "payload.v.0.sd" }, 2] },
-              { "===": [{ "var": "payload.v.0.dn" }, { "var": "payload.v.0.sd" }] }
-            ]
-          },
-          "type": "full"
-        },
-        {
-          "id": "3b6770c1-8249-4051-98da-526207e3c566",
-          "medicalProducts": ["EU/1/20/1528", "EU/1/20/1507", "EU/1/21/1529", "EU/1/21/1618"],
-          "rule": {
-            "and": [
-              { "===": [{ "var": "payload.v.0.dn" }, 1] },
-              { "===": [{ "var": "payload.v.0.sd" }, 1] },
-              { "===": [{ "var": "payload.v.0.dn" }, { "var": "payload.v.0.sd" }] }
-            ]
-          },
-          "type": "full-recovery"
-        },
-        {
-          "id": "7143a493-c8f2-48b3-9ec4-56bcd60f1271",
-          "medicalProducts": [
-            "EU/1/20/1528",
-            "EU/1/20/1507",
-            "EU/1/21/1529",
-            "EU/1/21/1618",
-            "EU/1/20/1525"
-          ],
-          "rule": {
-            "and": [
-              { "===": [{ "var": "payload.v.0.dn" }, 3] },
-              { "===": [{ "var": "payload.v.0.sd" }, 3] },
-              { "===": [{ "var": "payload.v.0.dn" }, { "var": "payload.v.0.sd" }] }
-            ]
-          },
-          "type": "booster"
-        },
-        {
-          "id": "2ef68ed9-faf1-404b-92ab-9ad2335ab4d8",
-          "medicalProducts": [
-            "EU/1/20/1528",
-            "EU/1/20/1507",
-            "EU/1/21/1529",
-            "EU/1/21/1618",
-            "EU/1/20/1525"
-          ],
-          "rule": { ">": [{ "var": "payload.v.0.dn" }, { "var": "payload.v.0.sd" }] },
-          "type": "booster"
-        },
-        {
-          "id": "34af00af-72c8-4b32-bc71-1bee8127776a",
-          "medicalProducts": ["EU/1/20/1525"],
-          "rule": {
-            "and": [
-              { "===": [{ "var": "payload.v.0.dn" }, 1] },
-              { "===": [{ "var": "payload.v.0.sd" }, 1] },
-              { "===": [{ "var": "payload.v.0.dn" }, { "var": "payload.v.0.sd" }] }
-            ]
-          },
-          "type": "partial"
+          "lang": "de",
+          "desc": "Die Probenahme für einen Antigen-Test (z.B. Schnelltest) darf maximal 24 Stunden zurückliegen."
         }
-      ]
+      ],
+      "validTo": 24
+    },
+    {
+      "id": "4ddd697a-0ebf-4ed8-8b88-65a07d34e1ca",
+      "result": true,
+      "type": "Test",
+      "medicalProducts": ["LP6464-4"],
+      "translations": [
+        {
+          "lang": "en",
+          "desc": "The sample for an NAA test (e.g., PCR) must have been taken no longer than 48 hours ago."
+        },
+        {
+          "lang": "de",
+          "desc": "Die Probenahme für einen NAA-Test (z.B. PCR) darf maximal 48 Stunden zurückliegen."
+        }
+      ],
+      "validTo": 48
+    },
+    {
+      "id": "dbdc940c-ef3f-4745-a8ba-324ca4260794",
+      "result": true,
+      "type": "Vaccination",
+      "medicalProducts": [
+        "EU/1/20/1528",
+        "EU/1/20/1507",
+        "EU/1/21/1529",
+        "EU/1/21/1618",
+        "EU/1/20/1525"
+      ],
+      "translations": [
+        { "lang": "en", "desc": "Valid booster vaccination" },
+        { "lang": "de", "desc": "Gültige Booster Impfung" }
+      ],
+      "immunizationStatus": "booster"
+    },
+    {
+      "id": "8bb12070-0e1e-44eb-8b9a-651ef0ec8a6d",
+      "result": true,
+      "type": "Vaccination",
+      "medicalProducts": [
+        "EU/1/20/1528",
+        "EU/1/20/1507",
+        "EU/1/21/1529",
+        "EU/1/21/1618",
+        "EU/1/20/1525"
+      ],
+      "translations": [
+        { "lang": "en", "desc": "Full vaccination must be at least 14 days ago." },
+        {
+          "lang": "de",
+          "desc": "Die vollständige Impfung muss mindestens 14 Tage zurückliegen."
+        }
+      ],
+      "validFrom": 15,
+      "immunizationStatus": "full"
+    },
+    {
+      "id": "b05f5bc4-d799-4ab9-8cdf-fcae383deafa",
+      "result": true,
+      "type": "Vaccination",
+      "medicalProducts": ["EU/1/20/1528", "EU/1/20/1507", "EU/1/21/1529", "EU/1/21/1618"],
+      "translations": [
+        { "lang": "en", "desc": "Full vaccination after recovery." },
+        { "lang": "de", "desc": "Vollständige Impfung nach Genesung." }
+      ],
+      "immunizationStatus": "full-recovery"
+    }
+  ],
+  "immunizationRules": [
+    {
+      "id": "c9df38ff-c16b-4817-a7aa-39ec7e47cf0d",
+      "medicalProducts": ["EU/1/20/1528", "EU/1/20/1507", "EU/1/21/1529", "EU/1/21/1618"],
+      "rule": {
+        "and": [
+          { "===": [{ "var": "payload.v.0.dn" }, 1] },
+          { "===": [{ "var": "payload.v.0.sd" }, 2] },
+          { "===": [{ "var": "payload.v.0.dn" }, { "var": "payload.v.0.sd" }] }
+        ]
+      },
+      "type": "partial"
+    },
+    {
+      "id": "b9411ec3-e933-43bf-a354-e24cb10df385",
+      "medicalProducts": [
+        "EU/1/20/1528",
+        "EU/1/20/1507",
+        "EU/1/21/1529",
+        "EU/1/21/1618",
+        "EU/1/20/1525"
+      ],
+      "rule": {
+        "and": [
+          { "===": [{ "var": "payload.v.0.dn" }, 2] },
+          { "===": [{ "var": "payload.v.0.sd" }, 2] },
+          { "===": [{ "var": "payload.v.0.dn" }, { "var": "payload.v.0.sd" }] }
+        ]
+      },
+      "type": "full"
+    },
+    {
+      "id": "3b6770c1-8249-4051-98da-526207e3c566",
+      "medicalProducts": ["EU/1/20/1528", "EU/1/20/1507", "EU/1/21/1529", "EU/1/21/1618"],
+      "rule": {
+        "and": [
+          { "===": [{ "var": "payload.v.0.dn" }, 1] },
+          { "===": [{ "var": "payload.v.0.sd" }, 1] },
+          { "===": [{ "var": "payload.v.0.dn" }, { "var": "payload.v.0.sd" }] }
+        ]
+      },
+      "type": "full-recovery"
+    },
+    {
+      "id": "7143a493-c8f2-48b3-9ec4-56bcd60f1271",
+      "medicalProducts": [
+        "EU/1/20/1528",
+        "EU/1/20/1507",
+        "EU/1/21/1529",
+        "EU/1/21/1618",
+        "EU/1/20/1525"
+      ],
+      "rule": {
+        "and": [
+          { "===": [{ "var": "payload.v.0.dn" }, 3] },
+          { "===": [{ "var": "payload.v.0.sd" }, 3] },
+          { "===": [{ "var": "payload.v.0.dn" }, { "var": "payload.v.0.sd" }] }
+        ]
+      },
+      "type": "booster"
+    },
+    {
+      "id": "2ef68ed9-faf1-404b-92ab-9ad2335ab4d8",
+      "medicalProducts": [
+        "EU/1/20/1528",
+        "EU/1/20/1507",
+        "EU/1/21/1529",
+        "EU/1/21/1618",
+        "EU/1/20/1525"
+      ],
+      "rule": { ">": [{ "var": "payload.v.0.dn" }, { "var": "payload.v.0.sd" }] },
+      "type": "booster"
+    },
+    {
+      "id": "34af00af-72c8-4b32-bc71-1bee8127776a",
+      "medicalProducts": ["EU/1/20/1525"],
+      "rule": {
+        "and": [
+          { "===": [{ "var": "payload.v.0.dn" }, 1] },
+          { "===": [{ "var": "payload.v.0.sd" }, 1] },
+          { "===": [{ "var": "payload.v.0.dn" }, { "var": "payload.v.0.sd" }] }
+        ]
+      },
+      "type": "partial"
     }
   ]
 }

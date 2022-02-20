@@ -32,11 +32,6 @@ const EditCertificateRule = (props: Props) => {
   const { isOpen: isOpenConfirm, onOpen: onOpenConfirm, onClose: onCloseConfirm } = useDisclosure()
   const { isOpen: isOpenExport, onOpen: onOpenExport, onClose: onCloseExport } = useDisclosure()
   const [data, setData] = useState<JSONObject | null>(props.certificateRule.rule)
-  // const [validFrom, setValidFrom] = useState<number | undefined>(props.certificateRule.validFrom)
-  // const [validTo, setValidTo] = useState<number | undefined>(props.certificateRule.validTo)
-  // const [immunizationStatus, setImmunizationStatus] = useState<string | undefined>(
-  //   props.certificateRule.immunizationStatus
-  // )
   const [translations, setTranslations] = useState<Language[]>(
     props.certificateRule.translations.length === 0
       ? [{ lang: 'en', desc: '' }]
@@ -78,9 +73,6 @@ const EditCertificateRule = (props: Props) => {
           ...props.certificateRule,
           translations,
           rule: data,
-          // validFrom,
-          // validTo,
-          // immunizationStatus,
         },
       ],
     })
