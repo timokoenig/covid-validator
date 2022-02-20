@@ -1,9 +1,7 @@
 import { Box, Button, Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { CertificateRule, immunizationTypeName } from '../../../utils/certlogic'
-import tests from '../../../utils/tests'
-import vaccines from '../../../utils/vaccines'
+import { CertificateRule } from '../../../utils/certlogic'
 
 type Props = {
   rule: CertificateRule
@@ -17,14 +15,16 @@ const Rule = (props: Props) => {
       <Flex>
         <Box flex="1" display="flex" flexDireaction="row" alignItems="center">
           <Box>
-            <Text>{props.rule.translations.find(trans => trans.lang === 'en')?.desc}</Text>
+            <Text fontWeight="semibold">
+              {props.rule.translations.find(trans => trans.lang === 'en')?.desc}
+            </Text>
           </Box>
         </Box>
         <Button colorScheme="blue" onClick={props.onEdit}>
           {t('edit')}
         </Button>
       </Flex>
-      <Box my="5">
+      {/* <Box my="5">
         <Text fontWeight="semibold">{t('builder.precondition')}</Text>
         <Text>
           {props.rule.type};{' '}
@@ -84,8 +84,8 @@ const Rule = (props: Props) => {
               </Text>
             )}
           </Box>
-        )}
-      </Box>
+        )} */}
+      {/* </Box> */}
     </Box>
   )
 }

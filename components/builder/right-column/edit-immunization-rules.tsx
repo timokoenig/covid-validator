@@ -1,51 +1,51 @@
-import { ChevronLeftIcon, DeleteIcon } from '@chakra-ui/icons'
-import {
-  Box,
-  Button,
-  Heading,
-  Table,
-  Tbody,
-  Td,
-  Text,
-  Th,
-  Thead,
-  Tr,
-  useDisclosure,
-} from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+import { ChevronLeftIcon } from '@chakra-ui/icons'
+import { Box, Button, Heading, Text, useDisclosure } from '@chakra-ui/react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CustomRule, ImmunizationRule, immunizationTypeName } from '../../../utils/certlogic'
-import { decodeImmunizationRule } from '../../../utils/immunization-rule'
+import { JSONObject } from '../../../utils/builder/types'
+import { CustomRule, ImmunizationRule } from '../../../utils/certlogic'
 import vaccines from '../../../utils/vaccines'
-import ImmunizationWizardModal from '../modal/immunization-wizard'
+import ConfirmModal from '../../modal/confirm'
+import BuilderStack from '../stack'
 
 type Props = {
   customRule: CustomRule
+  immunizationRule: ImmunizationRule
   onChange: (customRule: CustomRule) => void
   onBack: () => void
 }
 
-const EditImmunizationRules = (props: Props) => {
+const EditImmunizationRule = (props: Props) => {
   const { t } = useTranslation('common')
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const [rules, setRules] = useState<ImmunizationRule[]>(props.customRule.immunizationRules)
+  const { isOpen: isOpenConfirm, onOpen: onOpenConfirm, onClose: onCloseConfirm } = useDisclosure()
+  const [data, setData] = useState<JSONObject | null>(props.immunizationRule.rule)
 
-  useEffect(() => {
-    setRules(props.customRule.immunizationRules)
-  }, [props.customRule])
-
-  const onCreate = (rule: ImmunizationRule) => {
-    setRules([...rules, rule])
-  }
-
-  const onDelete = (rule: ImmunizationRule) => {
-    setRules(rules.filter(r => r.id !== rule.id))
-  }
+  const isEditMode =
+    props.customRule.immunizationRules.find(r => r.id === props.immunizationRule.id) !== undefined
 
   const onSave = () => {
+    // TODO check if everything is set
     props.onChange({
       ...props.customRule,
-      immunizationRules: rules,
+      immunizationRules: [
+        ...props.customRule.immunizationRules.filter(r => r.id !== props.immunizationRule.id),
+        {
+          ...props.immunizationRule,
+          rule: data,
+        },
+      ],
+    })
+  }
+
+  const onDelete = (confirm: boolean) => {
+    onCloseConfirm()
+    if (!confirm) return
+    props.onChange({
+      ...props.customRule,
+      immunizationRules: props.customRule.immunizationRules.filter(
+        r => r.id !== props.immunizationRule.id
+      ),
     })
   }
 
@@ -57,51 +57,52 @@ const EditImmunizationRules = (props: Props) => {
             <ChevronLeftIcon width="5" height="5" />
           </Button>
           <Heading flex="1">{t('builder.rules.immunization')}</Heading>
+          {isEditMode && (
+            <Button colorScheme="red" variant="ghost" onClick={onOpenConfirm} mr="5">
+              {t('delete')}
+            </Button>
+          )}
           <Button colorScheme="blue" onClick={onSave}>
             {t('save')}
           </Button>
         </Box>
-        <Box textAlign="right">
-          <Button colorScheme="blue" onClick={onOpen}>
-            {t('builder.rules.add')}
-          </Button>
+        <Box mb="10">
+          <Box display="flex" flexDirection="row">
+            <Box flex="1">
+              <Text fontSize="xl" fontWeight="semibold" mb="5">
+                {t('builder.immunization.type')}
+              </Text>
+              <Text>{t(props.immunizationRule.type)}</Text>
+            </Box>
+          </Box>
         </Box>
-        <Table>
-          <Thead>
-            <Tr>
-              <Th>{t('vaccine')}</Th>
-              <Th>{t('builder.rules.dose')}</Th>
-              <Th>{t('type')}</Th>
-              <Th />
-            </Tr>
-          </Thead>
-          <Tbody>
-            {rules.map(rule => {
-              const decodedRule = decodeImmunizationRule(rule.rule)
-              const logic = `${decodedRule.dn} ${decodedRule.symbol} ${decodedRule.sd}`
-              return (
-                <Tr key={rule.id}>
-                  <Td>
-                    {rule.medicalProducts.map(mp => (
-                      <Text key={mp}>{vaccines.find(v => v.id === mp)?.name}</Text>
-                    ))}
-                  </Td>
-                  <Td>{logic}</Td>
-                  <Td>{immunizationTypeName(rule.type)}</Td>
-                  <Td>
-                    <Button colorScheme="red" onClick={() => onDelete(rule)}>
-                      <DeleteIcon width="4" height="4" />
-                    </Button>
-                  </Td>
-                </Tr>
-              )
-            })}
-          </Tbody>
-        </Table>
+        <Box mb="10">
+          <Box display="flex" flexDirection="row">
+            <Box flex="1">
+              <Text fontSize="xl" fontWeight="semibold" mb="5">
+                {t('vaccines')}
+              </Text>
+              {props.immunizationRule.medicalProducts
+                .map(mp => vaccines.find(vac => vac.id === mp)?.name ?? mp)
+                .map(mp => (
+                  <Text key={mp}>{mp}</Text>
+                ))}
+            </Box>
+          </Box>
+        </Box>
+        <Text fontSize="xl" fontWeight="semibold" mb="5">
+          {t('builder.edit.rule')}
+        </Text>
+        <BuilderStack data={data} onChange={setData} />
       </Box>
-      <ImmunizationWizardModal isOpen={isOpen} onClose={onClose} onCreate={onCreate} />
+      <ConfirmModal
+        title={t('builder.rule.delete')}
+        message={t('builder.rule.delete.message')}
+        isOpen={isOpenConfirm}
+        onClose={onDelete}
+      />
     </>
   )
 }
 
-export default EditImmunizationRules
+export default EditImmunizationRule

@@ -7,27 +7,16 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
-  InputRightAddon,
-  Select,
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  CertificateRule,
-  CustomRule,
-  immunizationTypeName,
-  IMMUNIZATION_TYPE_BOOSTER,
-  IMMUNIZATION_TYPE_FULL,
-  IMMUNIZATION_TYPE_FULL_RECOVERY,
-  IMMUNIZATION_TYPE_PARTIAL,
-  Language,
-} from '../../../utils/certlogic'
-import tests from '../../../utils/tests'
-import vaccines from '../../../utils/vaccines'
+import { JSONObject } from '../../../utils/builder/types'
+import { CertificateRule, CustomRule, Language } from '../../../utils/certlogic'
 import ConfirmModal from '../../modal/confirm'
 import LanguageModal from '../modal/language'
+import BuilderStack from '../stack'
 
 type Props = {
   customRule: CustomRule
@@ -40,11 +29,12 @@ const EditCertificateRule = (props: Props) => {
   const { t } = useTranslation('common')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { isOpen: isOpenConfirm, onOpen: onOpenConfirm, onClose: onCloseConfirm } = useDisclosure()
-  const [validFrom, setValidFrom] = useState<number | undefined>(props.certificateRule.validFrom)
-  const [validTo, setValidTo] = useState<number | undefined>(props.certificateRule.validTo)
-  const [immunizationStatus, setImmunizationStatus] = useState<string | undefined>(
-    props.certificateRule.immunizationStatus
-  )
+  const [data, setData] = useState<JSONObject | null>(props.certificateRule.rule)
+  // const [validFrom, setValidFrom] = useState<number | undefined>(props.certificateRule.validFrom)
+  // const [validTo, setValidTo] = useState<number | undefined>(props.certificateRule.validTo)
+  // const [immunizationStatus, setImmunizationStatus] = useState<string | undefined>(
+  //   props.certificateRule.immunizationStatus
+  // )
   const [translations, setTranslations] = useState<Language[]>(
     props.certificateRule.translations.length === 0
       ? [{ lang: 'en', desc: '' }]
@@ -85,9 +75,10 @@ const EditCertificateRule = (props: Props) => {
         {
           ...props.certificateRule,
           translations,
-          validFrom,
-          validTo,
-          immunizationStatus,
+          rule: data,
+          // validFrom,
+          // validTo,
+          // immunizationStatus,
         },
       ],
     })
@@ -120,91 +111,12 @@ const EditCertificateRule = (props: Props) => {
           </Button>
         </Box>
         <Box mb="10">
-          <Text fontSize="xl" fontWeight="semibold" mb="2">
-            {t('builder.precondition')}
-          </Text>
           <Box display="flex" flexDirection="row">
             <Box flex="1">
-              <Text fontWeight="semibold">{t('builder.certificate.type')}</Text>
+              <Text fontSize="xl" fontWeight="semibold" mb="5">
+                {t('builder.certificate.type')}
+              </Text>
               <Text>{props.certificateRule.type}</Text>
-            </Box>
-            {props.certificateRule.type === 'Vaccination' && (
-              <Box flex="1">
-                <Text fontWeight="semibold">{t('vaccines')}</Text>
-                {props.certificateRule.medicalProducts?.map(mp => (
-                  <Text key={mp}>{vaccines.find(v => v.id === mp)?.name}</Text>
-                ))}
-              </Box>
-            )}
-            {props.certificateRule.type === 'Test' && (
-              <Box flex="1">
-                <Text fontWeight="semibold">{t('tests')}</Text>
-                {props.certificateRule.medicalProducts?.map(mp => (
-                  <Text key={mp}>{tests.find(trans => trans.id === mp)?.name}</Text>
-                ))}
-              </Box>
-            )}
-          </Box>
-        </Box>
-        <Box mb="10">
-          <Text fontSize="xl" fontWeight="semibold" mb="2">
-            {t('builder.condition')}
-          </Text>
-          <Box display="flex" flexDirection="row" mb="5">
-            {props.certificateRule.type === 'Vaccination' && (
-              <Box flex="1">
-                <Text fontWeight="semibold">{t('type')}</Text>
-                <Select
-                  value={immunizationStatus}
-                  width={200}
-                  onChange={e => setImmunizationStatus(e.target.selectedOptions[0].value)}
-                >
-                  <option value={IMMUNIZATION_TYPE_PARTIAL}>
-                    {immunizationTypeName(IMMUNIZATION_TYPE_PARTIAL)}
-                  </option>
-                  <option value={IMMUNIZATION_TYPE_FULL}>
-                    {immunizationTypeName(IMMUNIZATION_TYPE_FULL)}
-                  </option>
-                  <option value={IMMUNIZATION_TYPE_FULL_RECOVERY}>
-                    {immunizationTypeName(IMMUNIZATION_TYPE_FULL_RECOVERY)}
-                  </option>
-                  <option value={IMMUNIZATION_TYPE_BOOSTER}>
-                    {immunizationTypeName(IMMUNIZATION_TYPE_BOOSTER)}
-                  </option>
-                </Select>
-              </Box>
-            )}
-          </Box>
-          <Box display="flex" flexDirection="row">
-            <Box flex="1">
-              <Text fontWeight="semibold">{t('builder.edit.validfrom')}</Text>
-              <InputGroup>
-                <Input
-                  value={validFrom}
-                  style={{ width: 200 }}
-                  onChange={e =>
-                    setValidFrom(e.target.value === '' ? undefined : parseInt(e.target.value, 10))
-                  }
-                />
-                <InputRightAddon
-                  children={props.certificateRule.type === 'Test' ? t('hours') : t('days')}
-                />
-              </InputGroup>
-            </Box>
-            <Box flex="1">
-              <Text fontWeight="semibold">{t('builder.edit.validto')}</Text>
-              <InputGroup>
-                <Input
-                  value={validTo}
-                  style={{ width: 200 }}
-                  onChange={e =>
-                    setValidTo(e.target.value === '' ? undefined : parseInt(e.target.value, 10))
-                  }
-                />
-                <InputRightAddon
-                  children={props.certificateRule.type === 'Test' ? 'hours' : 'days'}
-                />
-              </InputGroup>
             </Box>
           </Box>
         </Box>
@@ -237,6 +149,10 @@ const EditCertificateRule = (props: Props) => {
             </Box>
           ))}
         </Box>
+        <Text fontSize="xl" fontWeight="semibold" mb="5">
+          {t('builder.edit.rule')}
+        </Text>
+        <BuilderStack data={data} onChange={setData} />
       </Box>
       <LanguageModal isOpen={isOpen} onClose={onClose} onClick={onAddTranslation} />
       <ConfirmModal

@@ -5,6 +5,7 @@
 import { evaluate } from 'certlogic-js'
 import moment from 'moment'
 import builderStateRulesDE from './builder-state-rules-de.json'
+import { JSONObject } from './builder/types'
 import { encodeCertificateRule } from './certificate-rule'
 import { DCC } from './dcc'
 import countryBusinessRules from './eu-dcc-rules.json'
@@ -25,11 +26,8 @@ export type CustomRule = {
 export type CertificateRule = {
   id: string
   type: string
-  medicalProducts?: string[]
-  immunizationStatus?: string
-  validFrom?: number
-  validTo?: number
   translations: Language[]
+  rule: JSONObject | null
 }
 
 export const IMMUNIZATION_TYPE_PARTIAL = 'partial'
@@ -55,7 +53,7 @@ export function immunizationTypeName(type: string): string {
 export type ImmunizationRule = {
   id: string
   medicalProducts: string[]
-  rule: any
+  rule: JSONObject | null
   type: string
 }
 

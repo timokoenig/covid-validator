@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { CertificateRule, CustomRule } from '../../../utils/certlogic'
+import { CertificateRule, CustomRule, ImmunizationRule } from '../../../utils/certlogic'
 import Edit from './edit'
 import EditCertificateRule from './edit-certificate-rule'
 import EditImmunizationRules from './edit-immunization-rules'
@@ -17,12 +17,14 @@ const RightColumn = (props: Props) => {
   const [editModeCertificateRule, setEditModeCertificateRule] = useState<CertificateRule | null>(
     null
   )
-  const [editModeImmunizationRules, setEditModeImmunizationRules] = useState<boolean>(false)
+  const [editModeImmunizationRule, setEditModeImmunizationRule] = useState<ImmunizationRule | null>(
+    null
+  )
 
   useEffect(() => {
     setEditMode(false)
     setEditModeCertificateRule(null)
-    setEditModeImmunizationRules(false)
+    setEditModeImmunizationRule(null)
   }, [props.customRule])
 
   if (props.customRule === null) {
@@ -38,12 +40,13 @@ const RightColumn = (props: Props) => {
       />
     )
   }
-  if (editModeImmunizationRules) {
+  if (editModeImmunizationRule !== null) {
     return (
       <EditImmunizationRules
         customRule={props.customRule}
+        immunizationRule={editModeImmunizationRule}
         onChange={props.onChange}
-        onBack={() => setEditModeImmunizationRules(false)}
+        onBack={() => setEditModeImmunizationRule(null)}
       />
     )
   }
@@ -63,7 +66,7 @@ const RightColumn = (props: Props) => {
       onChange={props.onChange}
       onEdit={() => setEditMode(true)}
       onEditCertificateRule={setEditModeCertificateRule}
-      onEditImmunizationRules={() => setEditModeImmunizationRules(true)}
+      onEditImmunizationRule={setEditModeImmunizationRule}
     />
   )
 }

@@ -41,12 +41,14 @@ const LeftColumn = (props: Props) => {
         <Heading as="h1" size="lg" flex="1">
           <Link href="/" _hover={{ textDecoration: 'none' }}>
             CovidValidator
-          </Link>{' '}
-          <Text display="inline" fontSize="lg" color="red">
+          </Link>
+        </Heading>
+        <Text fontSize="xl">
+          {t('builder')}{' '}
+          <Text as="span" display="inline" fontSize="sm" fontWeight="bold" color="red">
             BETA
           </Text>
-        </Heading>
-        <Text fontSize="xl">{t('builder')}</Text>
+        </Text>
       </Center>
       <SimpleGrid mb="5" display="flex" spacing="5">
         <Button flex="1" onClick={props.onCreate} colorScheme="blue">

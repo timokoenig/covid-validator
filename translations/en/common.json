@@ -133,15 +133,16 @@
   "builder.edit.validfrom": "Valid From (optional)",
   "builder.edit.validto": "Valid To (optional)",
   "builder.edit.translations": "Translations",
+  "builder.edit.rule": "Rule",
   "builder.certificate.type": "Certificate Type",
+  "builder.immunization.type": "Immunization Type",
   "builder.rule.delete": "Are you sure?",
   "builder.rule.delete.message": "The certificate rule will be deleted irrevocably from your device. It will not be delete from other devices.",
   "builder.modal.language": "Select Language",
   "builder.modal.test": "Select Test",
   "builder.modal.certificate": "Select Certificate Type",
   "builder.modal.vaccine": "Select Vaccine",
-  "builder.modal.rule": "Select Rules",
-  "builder.modal.rule.validfor": "Valid for",
+  "builder.modal.type": "Select Type",
 
   "lang": {
     "en": "English",
