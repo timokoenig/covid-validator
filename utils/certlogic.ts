@@ -126,8 +126,8 @@ export function getCountryAndState(
   }
 }
 
-export function customRulesSelected(country: string): boolean {
-  return country.length > 2
+export function customRulesSelected(country: string, state: string): boolean {
+  return country.length > 2 || state !== ''
 }
 
 export function currentAcceptanceRules(): Rule[] {
@@ -178,7 +178,7 @@ export function validateDCCRules(
   const rules = acceptanceRules(country, state)
 
   // Custom or State Rules: certificate is valid if one rule is valid
-  if (customRulesSelected(country)) {
+  if (customRulesSelected(country, state)) {
     const results = rules.map(rule => {
       return validateDCCRule(rule, {
         payload: dcc.data.payload.hcert.dgc,

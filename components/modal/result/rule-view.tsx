@@ -16,7 +16,7 @@ const RuleView = () => {
     ruleText = `${ruleText} / ${currentPurpose}`
   }
   return (
-    <Text color="white" fontWeight="semibold">
+    <Text as="span" color="white" fontWeight="semibold">
       {ruleText}
     </Text>
   )
