@@ -11,21 +11,10 @@ const Information = () => {
     <Box mb="10">
       <InformationBlock
         title={t('information.purpose')}
-        message={t('information.purpose.message')}
+        message={parse(t('information.purpose.message')) as string}
       />
 
-      <InformationBlock
-        title={t('information.rules')}
-        message={
-          <Trans i18nKey="information.rules.message" t={t}>
-            x
-            <ExternalLink href="https://github.com/timokoenig/covid-validator/issues/4">
-              here
-            </ExternalLink>
-            y
-          </Trans>
-        }
-      />
+      <InformationBlock title={t('information.rules')} message={t('information.rules.message')} />
 
       <InformationBlock
         title={t('information.homescreen')}

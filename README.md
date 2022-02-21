@@ -30,7 +30,7 @@ Adding the CovidValidator to your Home Screen allows you fast access whenever yo
 
 ### What rules are being used?
 
-At the moment, the app uses the official [EU DCC Validation Rules](#eu-dcc-validation-rules) to validate the certificate. These rules are being provided by the member countries of the Digital Covid Certificate. It is a known problem that those rules might be out of date and do not reflect state or local regulations. This project is working on a custom rule builder that allows more precise rules for local regulations. You can follow the development [here](https://github.com/timokoenig/covid-validator/issues/4).
+The app uses the official [EU DCC Validation Rules](#eu-dcc-validation-rules) to validate the certificate. These rules are being provided by the member countries of the Digital Covid Certificate. It is a known problem that those rules might be out of date and do not reflect state or local regulations. This project adds additional rules, like state rules for Germany, to provide the verifier with more up-to-date rules.
 
 ## EU Digital Covid Certificate
 
