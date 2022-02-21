@@ -15,7 +15,7 @@ import vaccines from '../../../../utils/vaccines'
 
 type Props = {
   onClose: () => void
-  onClick: (selected: string[]) => void
+  onSelect: (vaccines: string[]) => void
 }
 
 const VaccineSelection = (props: Props) => {
@@ -61,7 +61,7 @@ const VaccineSelection = (props: Props) => {
       </ModalBody>
 
       <ModalFooter>
-        <Button colorScheme="blue" onClick={() => props.onClick(selectedVaccines)}>
+        <Button colorScheme="blue" onClick={() => props.onSelect(selectedVaccines)}>
           {t('continue')}
         </Button>
       </ModalFooter>

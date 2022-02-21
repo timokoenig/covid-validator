@@ -15,8 +15,7 @@ import moment from 'moment'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { app } from '../../state/app'
-import { Rules } from '../../utils/certlogic'
-import countries from '../../utils/countries'
+import { acceptanceRules, getCountryAndState } from '../../utils/certlogic'
 import rules from '../../utils/eu-dcc-rules.json'
 import Flag from '../flag'
 import CountryModal from './country'
@@ -30,16 +29,17 @@ type Props = {
 
 const OverviewModal = (props: Props) => {
   const { t } = useTranslation('common')
-  const { t: tCountry } = useTranslation('country')
   const { isOpen: isOpenCountry, onOpen: onOpenCountry, onClose: onCloseCountry } = useDisclosure()
   const { isOpen: isOpenPurpose, onOpen: onOpenPurpose, onClose: onClosePurpose } = useDisclosure()
   const { isOpen: isOpenRules, onOpen: onOpenRules, onClose: onCloseRules } = useDisclosure()
   const appState = app.use()
 
-  const allCountries = countries(tCountry)
-  const country = allCountries.find(item => item.code == appState.country) ?? allCountries[0]
-  const state = country.states.find(item => item.code == appState.state) ?? country.states[0]
-  const ruleCount = (rules as Rules).rules.filter(item => item.Country == country.code).length
+  const countryAndState = getCountryAndState(
+    useTranslation('country').t,
+    appState.country,
+    appState.state
+  )
+  const ruleCount = acceptanceRules(countryAndState.country.code, countryAndState.state.code).length
 
   return (
     <>
@@ -54,8 +54,8 @@ const OverviewModal = (props: Props) => {
                 <Flag country="de" size={25} />
               </Box>
               <Box flex="1">
-                <Text fontWeight="semibold">{country.name}</Text>
-                <Text>{state.name}</Text>
+                <Text fontWeight="semibold">{countryAndState.country.name}</Text>
+                <Text>{countryAndState.state.name}</Text>
               </Box>
               <Button variant="outline" onClick={onOpenCountry}>
                 {t('change')}
@@ -63,7 +63,7 @@ const OverviewModal = (props: Props) => {
             </Box>
             <hr />
 
-            {country.code === 'DE' && (
+            {countryAndState.country.code === 'DE' && (
               <>
                 <Box my="5" display="flex" flexDirection="row">
                   <Box flex="1" display="flex" alignItems="center">

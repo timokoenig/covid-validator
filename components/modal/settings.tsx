@@ -1,4 +1,3 @@
-import useColorMode from '@/utils/color-mode'
 import {
   Box,
   Button,
@@ -20,8 +19,8 @@ import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { app, resetCounter, toggleCounter } from '../../state/app'
-import { Rules } from '../../utils/certlogic'
-import countries from '../../utils/countries'
+import { acceptanceRules, getCountryAndState } from '../../utils/certlogic'
+import useColorMode from '../../utils/color-mode'
 import rules from '../../utils/eu-dcc-rules.json'
 import Flag from '../flag'
 import CountryModal from './country'
@@ -48,17 +47,8 @@ const SettingsModal = (props: Props) => {
   const { isOpen: isOpenRules, onOpen: onOpenRules, onClose: onCloseRules } = useDisclosure()
   const appState = app.use()
 
-  const allCountries = countries(tCountry)
-  const country = allCountries.find(item => item.code == appState.country) ?? allCountries[0]
-  const state = country.states.find(item => item.code == appState.state) ?? country.states[0]
-  let ruleCount = (rules as Rules).rules
-    .filter(rule => moment() >= moment(rule.ValidFrom) && moment() < moment(rule.ValidTo))
-    .filter(item => item.Country == country.code).length
-
-  // TODO temporary solution for state rules
-  if (appState.country.toUpperCase() === 'DE' && appState.state !== '') {
-    ruleCount = 6
-  }
+  const countryAndState = getCountryAndState(tCountry, appState.country, appState.state)
+  const ruleCount = acceptanceRules(countryAndState.country.code, countryAndState.state.code).length
 
   useEffect(() => {
     i18n.changeLanguage(lang).catch(console.log)
@@ -73,19 +63,21 @@ const SettingsModal = (props: Props) => {
           <ModalCloseButton onClick={props.onClose} />
           <ModalBody>
             <Box mb="5" display="flex" flexDirection="row">
-              <Box display="flex" alignItems="center" mr="5">
-                <Flag country={country.code.toLowerCase()} size={25} />
-              </Box>
+              {countryAndState.country.code.length == 2 && (
+                <Box display="flex" alignItems="center" mr="5">
+                  <Flag country={countryAndState.country.code.toLowerCase()} size={25} />
+                </Box>
+              )}
               <Box flex="1">
-                <Text fontWeight="semibold">{country.name}</Text>
-                <Text>{state.name}</Text>
+                <Text fontWeight="semibold">{countryAndState.country.name}</Text>
+                <Text>{countryAndState.state.name}</Text>
               </Box>
               <Button variant="outline" onClick={onOpenCountry}>
                 {t('change')}
               </Button>
             </Box>
 
-            {country.code === 'DE' && (
+            {countryAndState.country.code === 'DE' && (
               <Box my="5" display="flex" flexDirection="row">
                 <Box flex="1">
                   <Text>{t('modal.settings.purpose')}</Text>

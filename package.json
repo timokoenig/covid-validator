@@ -24,6 +24,7 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@fidm/x509": "^1.2.1",
+    "@types/lodash": "^4.14.178",
     "base45": "^2.0.1",
     "bignumber.js": "^9.0.2",
     "cbor": "^8.1.0",

@@ -2,6 +2,8 @@ import { ChevronLeftIcon } from '@chakra-ui/icons'
 import { Box, Button, FormControl, Input, Spacer, Text, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { v4 as uuidv4 } from 'uuid'
+import BuilderStateRuleDE from '../../../utils/builder-state-rules-de.json'
 import { CustomRule } from '../../../utils/certlogic'
 import ConfirmModal from '../../modal/confirm'
 
@@ -44,8 +46,16 @@ const Edit = (props: Props) => {
   const onDuplicate = () => {
     props.onChange({
       ...props.customRule,
-      id: '',
-      name: `${props.customRule.name} (copy)`,
+      id: uuidv4(),
+      name: `${props.customRule.name} (${t('copy')})`,
+    })
+  }
+
+  const copyExisting = () => {
+    props.onChange({
+      ...BuilderStateRuleDE,
+      id: uuidv4(),
+      name: `${BuilderStateRuleDE.name} (${t('copy')})`,
     })
   }
 
@@ -89,6 +99,17 @@ const Edit = (props: Props) => {
             />
           </FormControl>
         </Box>
+        {addMode && (
+          <Box my="10">
+            <Text mb="5">
+              (optional)
+              <br />
+              You can copy the existing custom rules for Hamburg, Germany by clicking the button
+              below
+            </Text>
+            <Button onClick={copyExisting}>Hamburg, Germany</Button>
+          </Box>
+        )}
       </Box>
       <ConfirmModal
         title={t('builder.delete.confirm')}

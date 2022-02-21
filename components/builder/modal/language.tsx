@@ -1,8 +1,5 @@
-import { ChevronRightIcon } from '@chakra-ui/icons'
 import {
-  Button,
   List,
-  ListItem,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -10,10 +7,10 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Spacer,
 } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import ListItem from '../../list-item'
 
 type Props = {
   isOpen: boolean
@@ -24,6 +21,7 @@ type Props = {
 const LanguageModal = (props: Props) => {
   const { t } = useTranslation('common')
 
+  // TODO add more languages
   const languages = [{ lang: 'de', desc: 'German' }]
 
   return (
@@ -35,18 +33,11 @@ const LanguageModal = (props: Props) => {
         <ModalBody>
           <List>
             {languages.map(lang => (
-              <ListItem key={lang.lang} display="flex">
-                <Button
-                  variant="ghost"
-                  flex="1"
-                  justifyContent="left"
-                  onClick={() => props.onClick(lang.lang)}
-                >
-                  {lang.desc}
-                  <Spacer />
-                  <ChevronRightIcon width="5" height="5" />
-                </Button>
-              </ListItem>
+              <ListItem
+                key={lang.lang}
+                title={lang.desc}
+                onClick={() => props.onClick(lang.lang)}
+              />
             ))}
           </List>
         </ModalBody>

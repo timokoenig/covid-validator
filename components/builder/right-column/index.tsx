@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { CertificateRule, CustomRule } from '../../../utils/certlogic'
+import { CustomRule, ImmunizationRule, Rule } from '../../../utils/certlogic'
+import EditCertificateRule from './detail/certificate-rule'
+import EditImmunizationRule from './detail/immunization-rule'
 import Edit from './edit'
-import EditCertificateRule from './edit-certificate-rule'
-import EditImmunizationRules from './edit-immunization-rules'
 import Empty from './empty'
 import Overview from './overview'
 
@@ -14,15 +14,15 @@ type Props = {
 
 const RightColumn = (props: Props) => {
   const [editMode, setEditMode] = useState<boolean>(false)
-  const [editModeCertificateRule, setEditModeCertificateRule] = useState<CertificateRule | null>(
+  const [editModeCertificateRule, setEditModeCertificateRule] = useState<Rule | null>(null)
+  const [editModeImmunizationRule, setEditModeImmunizationRule] = useState<ImmunizationRule | null>(
     null
   )
-  const [editModeImmunizationRules, setEditModeImmunizationRules] = useState<boolean>(false)
 
   useEffect(() => {
     setEditMode(false)
     setEditModeCertificateRule(null)
-    setEditModeImmunizationRules(false)
+    setEditModeImmunizationRule(null)
   }, [props.customRule])
 
   if (props.customRule === null) {
@@ -38,12 +38,13 @@ const RightColumn = (props: Props) => {
       />
     )
   }
-  if (editModeImmunizationRules) {
+  if (editModeImmunizationRule !== null) {
     return (
-      <EditImmunizationRules
+      <EditImmunizationRule
         customRule={props.customRule}
+        immunizationRule={editModeImmunizationRule}
         onChange={props.onChange}
-        onBack={() => setEditModeImmunizationRules(false)}
+        onBack={() => setEditModeImmunizationRule(null)}
       />
     )
   }
@@ -63,7 +64,7 @@ const RightColumn = (props: Props) => {
       onChange={props.onChange}
       onEdit={() => setEditMode(true)}
       onEditCertificateRule={setEditModeCertificateRule}
-      onEditImmunizationRules={() => setEditModeImmunizationRules(true)}
+      onEditImmunizationRule={setEditModeImmunizationRule}
     />
   )
 }

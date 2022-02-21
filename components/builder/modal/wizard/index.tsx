@@ -1,80 +1,42 @@
-/* eslint-disable react/no-unstable-nested-components */
-import { Box, Modal, ModalOverlay } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import { Modal, ModalOverlay } from '@chakra-ui/react'
+import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import { CertificateRule } from '../../../../utils/certlogic'
-import TestSelection from './test-selection'
+import { BClassCertificateType } from '../../../../utils/builder/classes'
+import { Rule } from '../../../../utils/certlogic'
 import TypeSelection from './type-selection'
-import VaccineSelection from './vaccine-selection'
 
 type Props = {
   isOpen: boolean
   onClose: () => void
-  onAdd: (data: CertificateRule) => void
+  onAdd: (data: Rule) => void
 }
 
-const WizardModal = (props: Props) => {
-  const [type, setType] = useState<string>('')
-
-  const onClose = () => {
-    setType('')
-    props.onClose()
-  }
-
-  const Body = (): JSX.Element => {
-    if (type === '') {
-      return (
-        <TypeSelection
-          onClose={onClose}
-          onClick={selection => {
-            if (selection === 'Recovery') {
-              props.onAdd({ id: uuidv4(), type: 'Recovery', translations: [] })
-              return
-            }
-            setType(selection)
-          }}
-        />
-      )
-    }
-    if (type === 'Vaccination') {
-      return (
-        <VaccineSelection
-          onClose={onClose}
-          onClick={vaccines => {
-            props.onAdd({
-              id: uuidv4(),
-              type,
-              medicalProducts: vaccines,
-              translations: [],
-            })
-          }}
-        />
-      )
-    }
-    if (type === 'Test') {
-      return (
-        <TestSelection
-          onClose={onClose}
-          onClick={tests => {
-            props.onAdd({
-              id: uuidv4(),
-              type,
-              medicalProducts: tests,
-              translations: [],
-            })
-          }}
-        />
-      )
-    }
-    return <Box />
-  }
-
-  return (
-    <Modal isOpen={props.isOpen} onClose={onClose} size="lg" scrollBehavior="inside">
-      <ModalOverlay />
-      <Body />
-    </Modal>
-  )
-}
+const WizardModal = (props: Props) => (
+  <Modal isOpen={props.isOpen} onClose={props.onClose} size="lg" scrollBehavior="inside">
+    <ModalOverlay />
+    <TypeSelection
+      onClose={props.onClose}
+      onClick={selection =>
+        props.onAdd({
+          // TODO make these values editable in the detail view
+          Identifier: uuidv4(),
+          Type: 'Acceptance',
+          Country: 'DE',
+          Version: '1.0.0',
+          SchemaVersion: '1.0.0',
+          Engine: 'CERTLOGIC',
+          EngineVersion: '0.7.5',
+          CertificateType: selection,
+          Description: [],
+          ValidFrom: '2022-01-01T00:00:00Z',
+          ValidTo: '2023-01-01T00:00:00Z',
+          AffectedFields: [],
+          // default for every new certificate rule to make it easier for the user
+          Logic: new BClassCertificateType(selection).decode(),
+        })
+      }
+    />
+  </Modal>
+)
 
 export default WizardModal

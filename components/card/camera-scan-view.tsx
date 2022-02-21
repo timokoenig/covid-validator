@@ -84,13 +84,12 @@ const CameraScanView = (props: Props) => {
               enableScan={!loading}
               facingMode={scannerFacingMode}
               onData={qrcode => {
+                setLoading(true)
                 if (!qrcode.startsWith('HC1:')) {
                   // User scanned a non-DCC QR code
-                  setLoading(true)
                   onOpenWrongQRCode()
                   return
                 }
-                setLoading(true)
                 setData(qrcode)
               }}
               onError={setError}

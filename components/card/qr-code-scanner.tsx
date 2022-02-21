@@ -25,7 +25,7 @@ const QRCodeScanner = (props: Props) => {
       const jpegData = Buffer.from(image.replace('data:image/jpeg;base64,', ''), 'base64')
       const rawImageData = jpeg.decode(jpegData)
       const code = jsQR(Uint8ClampedArray.from(rawImageData.data), SIZE, SIZE)
-      if (code === null) return
+      if (code === null || code.data.length == 0) return
       props.onData(code.data)
     }, DELAY)
 
@@ -33,7 +33,7 @@ const QRCodeScanner = (props: Props) => {
       clearInterval(interval)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [props])
 
   return (
     <Webcam

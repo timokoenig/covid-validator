@@ -2,7 +2,7 @@ import { Box, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-const Empty = () => {
+const EmptyComponent = () => {
   const { t } = useTranslation('common')
   return (
     <Box flex="1" px="10" py="5" display="flex" flexDirection="column" overflow="scroll">
@@ -13,4 +13,4 @@ const Empty = () => {
   )
 }
 
-export default Empty
+export default EmptyComponent
