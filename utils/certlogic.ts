@@ -136,7 +136,7 @@ export function currentAcceptanceRules(): Rule[] {
 }
 
 export function acceptanceRules(country: string, state: string): Rule[] {
-  // TODO temporary solution for German state rules
+  // Temporary solution for German state rules
   if (country.toUpperCase() === 'DE' && state !== '') {
     const customRule = builderStateRulesDE as CustomRule
     return exportRules(customRule, true)

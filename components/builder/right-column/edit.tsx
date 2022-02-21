@@ -51,7 +51,6 @@ const Edit = (props: Props) => {
     })
   }
 
-  // TODO fix default BuilderStateRuleDE to match type definition
   const copyExisting = () => {
     props.onChange({
       ...BuilderStateRuleDE,
