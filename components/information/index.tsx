@@ -1,4 +1,5 @@
 import { Box } from '@chakra-ui/react'
+import parse from 'html-react-parser'
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import ExternalLink from '../external-link'
@@ -24,6 +25,11 @@ const Information = () => {
             y
           </Trans>
         }
+      />
+
+      <InformationBlock
+        title={t('information.homescreen')}
+        message={parse(t('information.homescreen.message')) as string}
       />
 
       <InformationBlock

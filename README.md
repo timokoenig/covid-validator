@@ -19,6 +19,15 @@ Check EU Digitial Covid Certificates with ease and validate them against local o
 
 **CovidValidator** allows you to scan and validate EU Digital Covid Certificates based on country or local rules. It gives the person that checks the certificate only as little personal information as possible to protect the users' privacy. This web app is an alternative to other existing products because it does not rely on certain app stores or country restrictions.
 
+### Add CovidValidator to your Home Screen
+
+Adding the CovidValidator to your Home Screen allows you fast access whenever you need it.
+
+1. Open **CovidValidator** in the browser of your device (Smartphone, Tablet, Desktop)
+2. Open the browsers settings or share dialog (Safari)
+3. Scroll Down and tap **Add to Home Screen**
+4. Confirm Selection
+
 ### What rules are being used?
 
 At the moment, the app uses the official [EU DCC Validation Rules](#eu-dcc-validation-rules) to validate the certificate. These rules are being provided by the member countries of the Digital Covid Certificate. It is a known problem that those rules might be out of date and do not reflect state or local regulations. This project is working on a custom rule builder that allows more precise rules for local regulations. You can follow the development [here](https://github.com/timokoenig/covid-validator/issues/4).
