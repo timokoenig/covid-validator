@@ -27,14 +27,14 @@ const CountrySelection = (props: Props) => {
       <ModalCloseButton />
       <ModalBody position="relative">
         <Heading size="sm" mb="2">
-          {t('model.rules.custom')}
+          {t('modal.rules.custom')}
         </Heading>
         <CustomRuleList
           selectedItem={props.selection.country}
           onChange={selection => props.setSelection({ country: selection, state: '' })}
         />
         <Heading size="sm" mb="2">
-          {t('model.rules.system')}
+          {t('modal.rules.system')}
         </Heading>
         <CountryList
           selectedCountry={props.selection.country}
