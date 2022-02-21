@@ -19,7 +19,7 @@ type Props = {
 const EditImmunizationRule = (props: Props) => {
   const { t } = useTranslation('common')
   const { isOpen: isOpenConfirm, onOpen: onOpenConfirm, onClose: onCloseConfirm } = useDisclosure()
-  const [data, setData] = useState<JSONObject | null>(props.immunizationRule.rule)
+  const [data, setData] = useState<JSONObject | null>(props.immunizationRule.rule as JSONObject)
 
   const isEditMode =
     props.customRule.immunizationRules.find(r => r.id === props.immunizationRule.id) !== undefined

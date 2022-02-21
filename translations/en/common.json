@@ -10,6 +10,9 @@
   "show": "Show",
   "new": "New",
   "add": "Add",
+  "done": "Done",
+  "no": "No",
+  "yes": "Yes",
   "delete": "Delete",
   "duplicate": "Duplicate",
   "version": "Version",
@@ -85,6 +88,8 @@
   "modal.purpose": "Select purpose of use",
 
   "modal.rules": "Select Country and Rules",
+  "modal.rules.custom": "Custom Rules",
+  "modal.rules.system": "System Rules",
   "modal.rules.updated": "updated",
   "modal.rules.comingsoon": "Coming Soon",
   "modal.rules.confirmation": "Please confirm that these rules meet your requirements",
