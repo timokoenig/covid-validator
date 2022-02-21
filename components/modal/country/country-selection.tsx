@@ -1,5 +1,6 @@
 import {
   Button,
+  Heading,
   ModalBody,
   ModalCloseButton,
   ModalContent,
@@ -10,6 +11,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import BoxShadow from './box-shadow'
 import CountryList from './country-list'
+import CustomRuleList from './custom-rule-list'
 
 type Props = {
   selection: { country: string; state: string }
@@ -24,6 +26,16 @@ const CountrySelection = (props: Props) => {
       <ModalHeader>{t('modal.rules')}</ModalHeader>
       <ModalCloseButton />
       <ModalBody position="relative">
+        <Heading size="sm" mb="2">
+          Custom Rules
+        </Heading>
+        <CustomRuleList
+          selectedItem={props.selection.country}
+          onChange={selection => props.setSelection({ country: selection, state: '' })}
+        />
+        <Heading size="sm" mb="2">
+          System Rules
+        </Heading>
         <CountryList
           selectedCountry={props.selection.country}
           selectedState={props.selection.state}

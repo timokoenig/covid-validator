@@ -12,15 +12,10 @@ import {
   Text,
   UnorderedList,
 } from '@chakra-ui/react'
-import moment from 'moment'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { app } from '../../state/app'
-import builderStateRulesDE from '../../utils/builder-state-rules-de.json'
-import { encodeCertificateRule } from '../../utils/certificate-rule'
-import { Language, Rule, Rules } from '../../utils/certlogic'
-import countries from '../../utils/countries'
-import rules from '../../utils/eu-dcc-rules.json'
+import { acceptanceRules, getCountryAndState, Language, Rule } from '../../utils/certlogic'
 import BoxShadow from './country/box-shadow'
 
 type Props = {
@@ -31,24 +26,14 @@ type Props = {
 const RulesModal = (props: Props) => {
   const { t } = useTranslation('common')
   const appState = app.use()
-  const allCountries = countries(useTranslation('country').t)
-  const country = allCountries.find(item => item.code == appState.country) ?? allCountries[0]
-  const state = country.states.find(item => item.code == appState.state) ?? country.states[0]
+  const countryAndState = getCountryAndState(
+    useTranslation('country').t,
+    appState.country,
+    appState.state
+  )
 
   const preferredLanguage = localStorage.getItem('i18nextLng')?.substring(0, 2) ?? 'en'
-  let countryRules: Rule[] = (rules as Rules).rules
-    .filter(rule => moment() >= moment(rule.ValidFrom) && moment() < moment(rule.ValidTo))
-    .filter(rule => rule.Country == country.code)
-
-  // TODO temporary solution for state rules
-  if (appState.country.toUpperCase() === 'DE' && appState.state !== '') {
-    const customRule = builderStateRulesDE.customRules.find(
-      rule => rule.id === 'de45d285-c750-4537-bb09-79910079a559'
-    )!
-    countryRules = customRule.rules
-      .map(rule => encodeCertificateRule(customRule, rule))
-      .flatMap(r => (r ? [r] : []))
-  }
+  const countryRules = acceptanceRules(countryAndState.country.code, countryAndState.state.code)
 
   const mapLanguage = (rule: Rule): Language | null => {
     if (rule.Description.length == 0) return null
@@ -79,7 +64,9 @@ const RulesModal = (props: Props) => {
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          {country.name} / {state.name}
+          {countryAndState.state.code === ''
+            ? `${countryAndState.country.name}`
+            : `${countryAndState.country.name} / ${countryAndState.state.name}`}
         </ModalHeader>
         <ModalCloseButton onClick={props.onClose} />
 

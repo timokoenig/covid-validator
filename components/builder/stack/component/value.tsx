@@ -19,8 +19,8 @@ const BComponentValue = (props: BComponentProps<BTypeValue>) => {
           </Text>{' '}
           {typeof props.data.value === 'boolean'
             ? props.data.value
-              ? 'TRUE'
-              : 'FALSE'
+              ? 'true'
+              : 'false'
             : props.data.value}
         </Text>
       </BaseComponent>

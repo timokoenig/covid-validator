@@ -3,34 +3,7 @@ const defaultImmunizationRulesGermany = [
     id: 'c9df38ff-c16b-4817-a7aa-39ec7e47cf0d',
     medicalProducts: ['EU/1/20/1528', 'EU/1/20/1507', 'EU/1/21/1529', 'EU/1/21/1618'],
     rule: {
-      and: [
-        {
-          '===': [
-            {
-              var: 'payload.v.0.dn',
-            },
-            1,
-          ],
-        },
-        {
-          '===': [
-            {
-              var: 'payload.v.0.sd',
-            },
-            2,
-          ],
-        },
-        {
-          '===': [
-            {
-              var: 'payload.v.0.dn',
-            },
-            {
-              var: 'payload.v.0.sd',
-            },
-          ],
-        },
-      ],
+      and: [{ '===': [{ var: 'payload.v.0.dn' }, 1] }, { '===': [{ var: 'payload.v.0.sd' }, 2] }],
     },
     type: 'partial',
   },
@@ -44,34 +17,7 @@ const defaultImmunizationRulesGermany = [
       'EU/1/20/1525',
     ],
     rule: {
-      and: [
-        {
-          '===': [
-            {
-              var: 'payload.v.0.dn',
-            },
-            2,
-          ],
-        },
-        {
-          '===': [
-            {
-              var: 'payload.v.0.sd',
-            },
-            2,
-          ],
-        },
-        {
-          '===': [
-            {
-              var: 'payload.v.0.dn',
-            },
-            {
-              var: 'payload.v.0.sd',
-            },
-          ],
-        },
-      ],
+      and: [{ '===': [{ var: 'payload.v.0.dn' }, 2] }, { '===': [{ var: 'payload.v.0.sd' }, 2] }],
     },
     type: 'full',
   },
@@ -79,34 +25,7 @@ const defaultImmunizationRulesGermany = [
     id: '3b6770c1-8249-4051-98da-526207e3c566',
     medicalProducts: ['EU/1/20/1528', 'EU/1/20/1507', 'EU/1/21/1529', 'EU/1/21/1618'],
     rule: {
-      and: [
-        {
-          '===': [
-            {
-              var: 'payload.v.0.dn',
-            },
-            1,
-          ],
-        },
-        {
-          '===': [
-            {
-              var: 'payload.v.0.sd',
-            },
-            1,
-          ],
-        },
-        {
-          '===': [
-            {
-              var: 'payload.v.0.dn',
-            },
-            {
-              var: 'payload.v.0.sd',
-            },
-          ],
-        },
-      ],
+      and: [{ '===': [{ var: 'payload.v.0.dn' }, 1] }, { '===': [{ var: 'payload.v.0.sd' }, 1] }],
     },
     type: 'full-recovery',
   },
@@ -122,31 +41,9 @@ const defaultImmunizationRulesGermany = [
     rule: {
       and: [
         {
-          '===': [
-            {
-              var: 'payload.v.0.dn',
-            },
-            3,
-          ],
+          '===': [{ var: 'payload.v.0.dn' }, { var: 'payload.v.0.sd' }],
         },
-        {
-          '===': [
-            {
-              var: 'payload.v.0.sd',
-            },
-            3,
-          ],
-        },
-        {
-          '===': [
-            {
-              var: 'payload.v.0.dn',
-            },
-            {
-              var: 'payload.v.0.sd',
-            },
-          ],
-        },
+        { '>': [{ var: 'payload.v.0.sd' }, 2] },
       ],
     },
     type: 'booster',
@@ -161,14 +58,7 @@ const defaultImmunizationRulesGermany = [
       'EU/1/20/1525',
     ],
     rule: {
-      '>': [
-        {
-          var: 'payload.v.0.dn',
-        },
-        {
-          var: 'payload.v.0.sd',
-        },
-      ],
+      '>': [{ var: 'payload.v.0.dn' }, { var: 'payload.v.0.sd' }],
     },
     type: 'booster',
   },
@@ -176,34 +66,7 @@ const defaultImmunizationRulesGermany = [
     id: '34af00af-72c8-4b32-bc71-1bee8127776a',
     medicalProducts: ['EU/1/20/1525'],
     rule: {
-      and: [
-        {
-          '===': [
-            {
-              var: 'payload.v.0.dn',
-            },
-            1,
-          ],
-        },
-        {
-          '===': [
-            {
-              var: 'payload.v.0.sd',
-            },
-            1,
-          ],
-        },
-        {
-          '===': [
-            {
-              var: 'payload.v.0.dn',
-            },
-            {
-              var: 'payload.v.0.sd',
-            },
-          ],
-        },
-      ],
+      and: [{ '===': [{ var: 'payload.v.0.dn' }, 1] }, { '===': [{ var: 'payload.v.0.sd' }, 1] }],
     },
     type: 'partial',
   },

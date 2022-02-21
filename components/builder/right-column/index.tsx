@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { CertificateRule, CustomRule, ImmunizationRule } from '../../../utils/certlogic'
+import { CustomRule, ImmunizationRule, Rule } from '../../../utils/certlogic'
 import EditCertificateRule from './detail/certificate-rule'
 import EditImmunizationRule from './detail/immunization-rule'
 import Edit from './edit'
@@ -14,9 +14,7 @@ type Props = {
 
 const RightColumn = (props: Props) => {
   const [editMode, setEditMode] = useState<boolean>(false)
-  const [editModeCertificateRule, setEditModeCertificateRule] = useState<CertificateRule | null>(
-    null
-  )
+  const [editModeCertificateRule, setEditModeCertificateRule] = useState<Rule | null>(null)
   const [editModeImmunizationRule, setEditModeImmunizationRule] = useState<ImmunizationRule | null>(
     null
   )

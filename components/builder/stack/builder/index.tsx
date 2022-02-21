@@ -24,6 +24,7 @@ import {
   BTypeImmunizationStatus,
   BTypeValue,
   BTypeVar,
+  Value,
 } from '../../../../utils/builder/types'
 import { ImmunizationRule } from '../../../../utils/certlogic'
 import AndBody from './and'
@@ -194,7 +195,7 @@ const BuilderModal = (props: Props) => {
         <ValueBody
           data={props.data as BTypeValue}
           onClose={onClose}
-          onClick={(value: string) => {
+          onClick={(value: Value) => {
             props.onClick(new BClassValue(value))
             onClose()
           }}

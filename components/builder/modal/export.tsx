@@ -10,16 +10,16 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { CertificateRule, CustomRule, exportRule, exportRules } from '../../../utils/certlogic'
+import { CustomRule, exportRule, exportRules, Rule } from '../../../utils/certlogic'
 
 type Props = {
   customRule?: CustomRule
-  certificateRule?: CertificateRule
+  certificateRule?: Rule
   isOpen: boolean
   onClose: () => void
 }
 
-const LanguageModal = (props: Props) => {
+const ExportModal = (props: Props) => {
   const { t } = useTranslation('common')
 
   const exportedJSON = ((): string | null => {
@@ -51,4 +51,4 @@ const LanguageModal = (props: Props) => {
   )
 }
 
-export default LanguageModal
+export default ExportModal

@@ -13,7 +13,7 @@ import {
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { JSONObject } from '../../../../utils/builder/types'
-import { CertificateRule, CustomRule, Language } from '../../../../utils/certlogic'
+import { CustomRule, Language, Rule } from '../../../../utils/certlogic'
 import ConfirmModal from '../../../modal/confirm'
 import ExportModal from '../../modal/export'
 import LanguageModal from '../../modal/language'
@@ -21,7 +21,7 @@ import BuilderStack from '../../stack'
 
 type Props = {
   customRule: CustomRule
-  certificateRule: CertificateRule
+  certificateRule: Rule
   onChange: (customRule: CustomRule) => void
   onBack: () => void
 }
@@ -31,15 +31,16 @@ const EditCertificateRule = (props: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { isOpen: isOpenConfirm, onOpen: onOpenConfirm, onClose: onCloseConfirm } = useDisclosure()
   const { isOpen: isOpenExport, onOpen: onOpenExport, onClose: onCloseExport } = useDisclosure()
-  const [data, setData] = useState<JSONObject | null>(props.certificateRule.rule)
+  const [data, setData] = useState<JSONObject | null>(props.certificateRule.Logic as JSONObject)
   const [translations, setTranslations] = useState<Language[]>(
-    props.certificateRule.translations.length === 0
+    props.certificateRule.Description.length === 0
       ? [{ lang: 'en', desc: '' }]
-      : props.certificateRule.translations
+      : props.certificateRule.Description
   )
 
   const isEditMode =
-    props.customRule.rules.find(r => r.id === props.certificateRule.id) !== undefined
+    props.customRule.rules.find(r => r.Identifier === props.certificateRule.Identifier) !==
+    undefined
 
   const onAddTranslation = (lang: string) => {
     onClose()
@@ -68,11 +69,11 @@ const EditCertificateRule = (props: Props) => {
     props.onChange({
       ...props.customRule,
       rules: [
-        ...props.customRule.rules.filter(r => r.id !== props.certificateRule.id),
+        ...props.customRule.rules.filter(r => r.Identifier !== props.certificateRule.Identifier),
         {
           ...props.certificateRule,
-          translations,
-          rule: data,
+          Description: translations,
+          Logic: data,
         },
       ],
     })
@@ -83,7 +84,7 @@ const EditCertificateRule = (props: Props) => {
     if (!confirm) return
     props.onChange({
       ...props.customRule,
-      rules: props.customRule.rules.filter(r => r.id !== props.certificateRule.id),
+      rules: props.customRule.rules.filter(r => r.Identifier !== props.certificateRule.Identifier),
     })
   }
 
@@ -115,7 +116,7 @@ const EditCertificateRule = (props: Props) => {
               <Text fontSize="xl" fontWeight="semibold" mb="5">
                 {t('builder.certificate.type')}
               </Text>
-              <Text>{props.certificateRule.type}</Text>
+              <Text>{props.certificateRule.Type}</Text>
             </Box>
           </Box>
         </Box>

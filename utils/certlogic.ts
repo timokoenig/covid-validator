@@ -2,14 +2,17 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { app } from '@/state/app'
+import { builder } from '@/state/builder'
 import { evaluate } from 'certlogic-js'
 import moment from 'moment'
+import { TFunction } from 'react-i18next'
 import builderStateRulesDE from './builder-state-rules-de.json'
 import { encode } from './builder/classes'
-import { JSONObject } from './builder/types'
-import { encodeCertificateRule } from './certificate-rule'
+import countries from './countries'
 import { DCC } from './dcc'
 import countryBusinessRules from './eu-dcc-rules.json'
+import { Country, State } from './models'
 
 export type Rules = {
   updatedAt: string
@@ -21,56 +24,26 @@ export type CustomRule = {
   name: string
   description: string
   immunizationRules: ImmunizationRule[]
-  rules: CertificateRule[]
+  rules: Rule[]
 }
 
-export function exportRules(customRule: CustomRule): CertificateRule[] {
+export function exportRules(customRule: CustomRule): Rule[] {
   return customRule.rules.map(rule => {
     return exportRule(rule, customRule.immunizationRules)
   })
 }
 
-export function exportRule(
-  rule: CertificateRule,
-  immunizationRules: ImmunizationRule[]
-): CertificateRule {
+export function exportRule(rule: Rule, immunizationRules: ImmunizationRule[]): Rule {
   return {
     ...rule,
-    rule: encode(rule.rule).decode(immunizationRules) as JSONObject,
-  }
-}
-
-export type CertificateRule = {
-  id: string
-  type: string
-  translations: Language[]
-  rule: JSONObject | null
-}
-
-export const IMMUNIZATION_TYPE_PARTIAL = 'partial'
-export const IMMUNIZATION_TYPE_FULL = 'full'
-export const IMMUNIZATION_TYPE_FULL_RECOVERY = 'full-recovery'
-export const IMMUNIZATION_TYPE_BOOSTER = 'booster'
-
-export function immunizationTypeName(type: string): string {
-  switch (type) {
-    case IMMUNIZATION_TYPE_PARTIAL:
-      return 'Partial Immunization'
-    case IMMUNIZATION_TYPE_FULL:
-      return 'Full Immunization'
-    case IMMUNIZATION_TYPE_FULL_RECOVERY:
-      return 'Full Immunization after Recovery'
-    case IMMUNIZATION_TYPE_BOOSTER:
-      return 'Booster Immunization'
-    default:
-      return ''
+    Logic: encode(rule.Logic).decode(immunizationRules),
   }
 }
 
 export type ImmunizationRule = {
   id: string
   medicalProducts: string[]
-  rule: JSONObject | null
+  rule: any
   type: string
 }
 
@@ -116,6 +89,71 @@ export type Parameters = {
   external: ExternalParameters
 }
 
+export function getCountryAndState(
+  t: TFunction,
+  country: string,
+  state: string
+): { country: Country; state: State } {
+  if (country.length > 2) {
+    const customRule = builder.get().customRules.find(rule => rule.id === country)
+    return {
+      country: {
+        code: country,
+        name: customRule?.name ?? 'n/a',
+        states: [],
+      },
+      state: {
+        code: '',
+        name: '',
+        updated: new Date(),
+      },
+    }
+  }
+  const allCountries = countries(t)
+  const selectedCountry = allCountries.find(item => item.code == country) ?? allCountries[0]
+  const selectedState =
+    selectedCountry.states.find(item => item.code == state) ?? selectedCountry.states[0]
+  return {
+    country: selectedCountry,
+    state: selectedState,
+  }
+}
+
+export function customRulesSelected(country: string): boolean {
+  return country.length > 2
+}
+
+export function currentAcceptanceRules(): Rule[] {
+  const appState = app.get()
+  return acceptanceRules(appState.country, appState.state)
+}
+
+export function acceptanceRules(country: string, state: string): Rule[] {
+  // TODO temporary solution for German state rules
+  if (country.toUpperCase() === 'DE' && state !== '') {
+    const customRule = builderStateRulesDE as CustomRule
+    return customRule.rules.map(rule => exportRule(rule, customRule.immunizationRules))
+  }
+
+  // Local custom rules
+  if (country.length > 2 && state === '') {
+    const customRule = builder.get().customRules.find(rule => rule.id === country)
+    if (customRule === undefined) return []
+    return customRule.rules.map(rule => exportRule(rule, customRule.immunizationRules))
+  }
+
+  // EU business rules
+  const rules = countryBusinessRules as Rules
+  return (
+    rules.rules
+      .filter(rule => rule.Country == country.toUpperCase())
+      // Currently we only use Acceptance rules due to the fact that there are not Invalidation rules yet
+      .filter(rule => rule.Type == 'Acceptance')
+      // Only use rules that are active
+      .filter(rule => moment() >= moment(rule.ValidFrom) && moment() < moment(rule.ValidTo))
+  )
+}
+
 export function validateDCCRule(rule: Rule, parameters: Parameters): ValidationResult {
   const res = evaluate(rule.Logic, parameters)
   return {
@@ -130,13 +168,11 @@ export function validateDCCRules(
   state: string,
   validationClock: Date
 ): DCCRuleValidationResult {
-  // TODO this is a temporary workaround to handle custom rule validation
-  if (country.toUpperCase() == 'DE' && state !== '') {
-    // At this point all states are similar thats why we have only one set of rules for it
-    const customRule = builderStateRulesDE as CustomRule
-    const rules = customRule.rules.map(rule => encodeCertificateRule(customRule, rule))
+  const rules = acceptanceRules(country, state)
+
+  // Custom or State Rules: certificate is valid if one rule is valid
+  if (customRulesSelected(country)) {
     const results = rules.map(rule => {
-      if (rule === null) return { valid: false }
       return validateDCCRule(rule, {
         payload: dcc.data.payload.hcert.dgc,
         external: {
@@ -151,14 +187,9 @@ export function validateDCCRules(
       isValid: validRule !== undefined,
     }
   }
-  const rules = countryBusinessRules as Rules
-  const countryRules = rules.rules
-    .filter(rule => rule.Country == country.toUpperCase())
-    // Currently we only use Acceptance rules due to the fact that there are not Invalidation rules yet
-    .filter(rule => rule.Type == 'Acceptance')
-    // Only use rules that are active
-    .filter(rule => moment() >= moment(rule.ValidFrom) && moment() < moment(rule.ValidTo))
-  const results = countryRules.map(rule => {
+
+  // EU Rules: certificate is valid if one rule is invalid
+  const results = rules.map(rule => {
     return validateDCCRule(rule, {
       payload: dcc.data.payload.hcert.dgc,
       external: {

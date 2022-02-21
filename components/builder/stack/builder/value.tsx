@@ -1,3 +1,4 @@
+/* eslint-disable no-negated-condition */
 import {
   Button,
   Input,
@@ -8,18 +9,32 @@ import {
   ModalHeader,
   Spacer,
 } from '@chakra-ui/react'
+import { isNumber } from 'lodash'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { BTypeValue } from '../../../../utils/builder/types'
+import { BTypeValue, Value } from '../../../../utils/builder/types'
 
 const ValueBody = (props: {
   data?: BTypeValue
   onClose: () => void
-  onClick: (value: string) => void
+  onClick: (value: Value) => void
   onDelete: () => void
 }) => {
   const { t } = useTranslation('common')
-  const [value, setValue] = useState<string>(props.data ? (props.data.value as string) : '')
+  const [value, setValue] = useState<string>(props.data ? props.data.value.toString() : '')
+
+  const onDone = () => {
+    if (value.toLowerCase() === 'true' || value.toLowerCase() === 'false') {
+      // boolean
+      props.onClick(value.toLowerCase() === 'true')
+    } else if (isNumber(value)) {
+      // number
+      props.onClick(parseInt(value, 10))
+    } else {
+      // string
+      props.onClick(value)
+    }
+  }
 
   return (
     <ModalContent>
@@ -35,7 +50,7 @@ const ValueBody = (props: {
           </Button>
         )}
         <Spacer />
-        <Button onClick={() => props.onClick(value)}>{t('done')}</Button>
+        <Button onClick={onDone}>{t('done')}</Button>
       </ModalFooter>
     </ModalContent>
   )

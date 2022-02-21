@@ -2,7 +2,7 @@ import { Box, Button, Heading, List, SimpleGrid, Text, useDisclosure } from '@ch
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import ListItem from '../../../components/list-item'
-import { CertificateRule, CustomRule, ImmunizationRule } from '../../../utils/certlogic'
+import { CustomRule, ImmunizationRule, Rule } from '../../../utils/certlogic'
 import vaccines from '../../../utils/vaccines'
 import ExportModal from '../modal/export'
 import ImmunizationWizardModal from '../modal/immunization-wizard'
@@ -12,7 +12,7 @@ type Props = {
   customRule: CustomRule
   onChange: (customRule: CustomRule) => void
   onEdit: () => void
-  onEditCertificateRule: (rule: CertificateRule) => void
+  onEditCertificateRule: (rule: Rule) => void
   onEditImmunizationRule: (rule: ImmunizationRule) => void
 }
 
@@ -30,7 +30,7 @@ const Overview = (props: Props) => {
   } = useDisclosure()
   const { isOpen: isOpenExport, onOpen: onOpenExport, onClose: onCloseExport } = useDisclosure()
 
-  const onAddCertificateRule = (rule: CertificateRule) => {
+  const onAddCertificateRule = (rule: Rule) => {
     onCloseCertificate()
     props.onEditCertificateRule(rule)
   }
@@ -93,8 +93,8 @@ const Overview = (props: Props) => {
           <List>
             {props.customRule.rules.map(rule => (
               <ListItem
-                key={rule.id}
-                title={rule.translations.find(trans => trans.lang === 'en')?.desc ?? rule.id}
+                key={rule.Identifier}
+                title={rule.Description.find(desc => desc.lang === 'en')?.desc ?? rule.Identifier}
                 onClick={() => props.onEditCertificateRule(rule)}
               />
             ))}
