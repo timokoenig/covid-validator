@@ -21,7 +21,7 @@ Check EU Digitial Covid Certificates with ease and validate them against local o
 
 ### Add CovidValidator to your Home Screen
 
-Adding the CovidValidator to your Home Screen allows you fast access whenever you need it.
+Adding the **CovidValidator** to your Home Screen allows you fast access whenever you need it.
 
 1. Open **CovidValidator** in the browser of your device (Smartphone, Tablet, Desktop)
 2. Open the browsers settings or share dialog (Safari)
@@ -49,12 +49,12 @@ A [EU Digital Covid Certificate](https://ec.europa.eu/info/live-work-travel-eu/c
 
 The QR code on every certificate has a digital signature to protect it against falsification and it is being checked every time the QR code is scanned. Those signatures are being created by issuing entities, like hospitals, test centers, and health authorities. The public keys are shared through a European gateway with the member countries. The countries then provide additional software to allow the download of those keys. Read more about the update flow [here](https://github.com/Digitaler-Impfnachweis/certification-apis/blob/master/dsc-update/README.md).
 
-**CovidValidation** uses a Github Action to fetch the newest DSC list once a day from the following API.
+**CovidValidation** uses a Github Action to fetch the newest DSC list once a day from the following API. The reason to do this not in the app itself is to minimize the risk of failed requests and reduce the load on the API.
 
 - API: [de.dscg.ubirch.com](https://de.dscg.ubirch.com/trustList/DSC/)
 - Data Schema: [github.com/Digitaler-Impfnachweis/certification-apis](https://github.com/Digitaler-Impfnachweis/certification-apis/blob/master/dsc-update/README.md#data-schema)
 
-The verification takes place in `async function verifyDCC(dcc: DCC): Promise<boolean>` ([link](https://github.com/timokoenig/covid-validator/blob/bbf92a6df5ad56463d8e6fd47190ed4a1f023b3a/utils/dcc.ts#L219)). Every time a certificate is scanned, the app checks for the _kid_ in the CBOR Web Token and searches for the matching DSC. If no _kid_ is available, then all DSCs will be used to verify the certificate. The app uses [cose-js](https://github.com/erdtman/COSE-JS) to verify the signature of the DCC. If the check fails, the user will get an error message that the certificate is technically invalid.
+The verification takes place in `async function verifyDCC(dcc: DCC): Promise<boolean>` ([link](https://github.com/timokoenig/covid-validator/blob/bbf92a6df5ad56463d8e6fd47190ed4a1f023b3a/utils/dcc.ts#L219)). Every time a certificate is scanned, the app checks for the _kid_ in the CBOR Web Token and searches for the matching DSC. If no _kid_ is available, then all DSCs will be used to verify the certificate. The app uses [cose-js](https://github.com/erdtman/COSE-JS) to verify the signature of the DCC. If the check fails, the user will get an error message that the certificate is technically invalid. Any manipulation of the payload of the DCC will result in an invalid certificate due to the siganture check.
 
 **More Information**
 
@@ -72,7 +72,7 @@ You can find a repository with test certificates [here](https://github.com/eu-di
 
 The [EU DCC Validation Rules](https://ec.europa.eu/health/system/files/2021-06/eu-dcc_validation-rules_en_0.pdf) allow a verifier to check if a DCC holder fulfills all requirements to enter a country. You, as a verifier, can change the rules by selecting a different country in the app. Always make sure to select the rules that are required by law in your country, otherwise the verification results might be invalid.
 
-**CovidValidation** uses a Github Action to fetch the newest rules and value sets once a day from the EU Digital COVID Certificate Business Rule Service.
+**CovidValidation** uses a Github Action to fetch the newest rules and value sets once a day from the EU Digital COVID Certificate Business Rule Service. The reason to do this not in the app itself is to minimize the risk of failed requests and reduce the load on the API.
 
 - API: [distribution.dcc-rules.de](https://distribution.dcc-rules.de)
 - OpenAPI Specs: [eu-digital-green-certificates.github.io/dgca-businessrule-service](https://eu-digital-green-certificates.github.io/dgca-businessrule-service/)
@@ -82,11 +82,13 @@ For reference implementations, please refer to [github.com/ehn-dcc-development/d
 
 ## Custom Rule Builder
 
-The custom rule builder allows you to create your own rule set if the available rules do not meet your requirements. This feature is currently for experts only because it is quite complicated to interact with. Future updates will improve the usability.
+The custom rule builder allows you to create your own rule set if the available rules do not meet your requirements. This feature is currently in **BETA** and it might occur problems, so please use it with caution. Nevertheless this does not affect the **CovidValidator** with all country and state rules!
 
-NOTE **Documentation will follow shortly**
+**NOTE** Documentation will follow shortly
 
 ## Getting Started
+
+Add the following variables to your _.env_ file:
 
 ```sh
 NEXT_PUBLIC_CONTACT_NAME=xxx
@@ -98,6 +100,8 @@ NEXT_PUBLIC_CONTACT_WEBSITE=covidvalidator.app
 NEXT_PUBLIC_VERSION=0.0.1
 ```
 
+Then run the following two commands to start your local server:
+
 ```sh
 npm install
 npm run dev
@@ -105,7 +109,7 @@ npm run dev
 
 ## Developer Notes
 
-The QR code reader needs to run over localhost or SSL to work. For the local development, follow the script on https://github.com/vercel/next.js/discussions/10935#discussioncomment-1540436 and run `ipconfig getifaddr en0` to get your address. Now you can access your dev build via HTTPS on your network.
+The QR code reader needs to run over localhost or SSL to work. For the local development, follow [these steps](https://github.com/vercel/next.js/discussions/10935#discussioncomment-1540436) and run `ipconfig getifaddr en0` to get your IP address. Now you can access your dev build via HTTPS on your network.
 
 ## i18n
 
