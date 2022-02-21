@@ -362,6 +362,12 @@ export class BClassImmunizationStatus implements BTypeImmunizationStatus {
   }
 }
 
+/**
+ * Create JSON OR-operation with nested if-operation because certlogic-js does not support OR.
+ *
+ * @param rules - Array of JSONValues that should be included in the OR-operation
+ * @returns JSONValue
+ */
 function createOrOperation(rules: JSONValue[]): JSONValue {
   const arr = rules
   const con = arr.shift()
@@ -373,6 +379,12 @@ function createOrOperation(rules: JSONValue[]): JSONValue {
   } as JSONObject
 }
 
+/**
+ * Encodes the JSONValue to BType
+ *
+ * @param data - JSONValue
+ * @returns The BType class
+ */
 export function encode(data: JSONValue): BType {
   if (data === null) {
     return new BClassEmpty()

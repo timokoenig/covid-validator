@@ -21,6 +21,9 @@ const dscList = dscListJson as {
   }[]
 }
 
+/**
+ * Vaccination type
+ */
 type Vaccination = {
   // Disease or agent targeted
   tg: string
@@ -44,6 +47,9 @@ type Vaccination = {
   ci: string
 }
 
+/**
+ * Test type
+ */
 type Test = {
   // Disease or agent targeted
   tg: string
@@ -67,6 +73,9 @@ type Test = {
   ci: string
 }
 
+/**
+ * Recovery type
+ */
 type Recovery = {
   // Disease or agent targeted
   tg: string
@@ -84,6 +93,9 @@ type Recovery = {
   ci: string
 }
 
+/**
+ * Name type
+ */
 type Name = {
   gn?: string
   fn?: string
@@ -91,6 +103,9 @@ type Name = {
   fnt: string
 }
 
+/**
+ * DigitalGreenCertificate type
+ */
 export type DigitalGreenCertificate = {
   nam: Name
   dob?: string
@@ -100,10 +115,16 @@ export type DigitalGreenCertificate = {
   ver: string
 }
 
+/**
+ * HealthCertificateClaim type
+ */
 type HealthCertificateClaim = {
   dgc: DigitalGreenCertificate
 }
 
+/**
+ * CBORWebToken type
+ */
 export type CBORWebToken = {
   iss: string
   iat?: string
@@ -111,36 +132,59 @@ export type CBORWebToken = {
   hcert: HealthCertificateClaim
 }
 
+/**
+ * DCCHeader type
+ */
 export type DCCHeader = {
   kid: string | null
 }
 
+/**
+ * DCCData type
+ */
 export type DCCData = {
   header: DCCHeader
   payload: CBORWebToken
   signature: string
 }
 
+/**
+ * DCC type
+ */
 export type DCC = {
   raw: string
   decompressedRaw: Uint8Array
   data: DCCData
 }
 
+/**
+ * CertificateResult type
+ */
 export type CertificateResult = {
   dcc: DCC
   verification: boolean
   ruleValidation?: DCCRuleValidationResult
 }
 
+/**
+ * ScanResult type
+ */
 export type ScanResult = {
   certificates: CertificateResult[]
   isMultiScan: boolean
 }
 
+/**
+ * DCCParseError
+ */
 class DCCParseError extends Error {}
 
-// parse, verify and validate rules
+/**
+ * Parse, verify, and validate DCC against selected rules
+ *
+ * @param data - Scanned QR code data
+ * @returns ScanResult
+ */
 export async function checkCertificate(data: string): Promise<ScanResult> {
   // parse dcc
   const dcc = await parseDCC(data)
@@ -176,6 +220,15 @@ export async function checkCertificate(data: string): Promise<ScanResult> {
   }
 }
 
+/**
+ * Check if multiscan is required for given DCC.
+ * In case of a + Purpose, like 2G+ in Germany, the user has to scan a test certificate if only a full immunization is given.
+ *
+ * @param dcc - Users DCC
+ * @param country - Country code
+ * @param state - State code
+ * @returns True, if multiscan is required
+ */
 function isMultiScan(dcc: DCC, country: string, purpose: string): boolean {
   // At the moment the multiscan is only available in Germany. Need to check if this is a thing in other countries as well
   if (country !== 'DE') return false
@@ -191,6 +244,12 @@ function isMultiScan(dcc: DCC, country: string, purpose: string): boolean {
   return !isBooster
 }
 
+/**
+ * Parse DCC from QR code data
+ *
+ * @param data - QR code data
+ * @returns DCC
+ */
 export async function parseDCC(data: string): Promise<DCC> {
   if (!data.startsWith('HC1:')) throw DCCParseError
   const certData = data.replace('HC1:', '')
@@ -212,6 +271,12 @@ export async function parseDCC(data: string): Promise<DCC> {
   }
 }
 
+/**
+ * Parse CBOR payload into CBORWebToken
+ *
+ * @param payload - Decoded CBOR payload
+ * @returns CBORWebToken
+ */
 function parsePayload(payload: any[] | ExtendedResults[]): CBORWebToken {
   return {
     iss: payload[0].get(1) as string,
@@ -223,6 +288,12 @@ function parsePayload(payload: any[] | ExtendedResults[]): CBORWebToken {
   }
 }
 
+/**
+ * Verify DCC with digital signing certificates (DSCs)
+ *
+ * @param dcc - Users DCC
+ * @returns True, if DCC is signed with a valid key
+ */
 export async function verifyDCC(dcc: DCC): Promise<boolean> {
   const keyByKid = dscList.certificates.find(cert => cert.kid == dcc.data.header.kid)
   const certList = keyByKid ? [keyByKid] : dscList.certificates
@@ -254,6 +325,13 @@ export async function verifyDCC(dcc: DCC): Promise<boolean> {
   return false
 }
 
+/**
+ * Parse kid from CBOR header
+ *
+ * @param protectedHeader - any
+ * @param unprotectedHeader - any
+ * @returns kid string
+ */
 function parseKid(protectedHeader: any, unprotectedHeader: any): string | null {
   let kid = protectedHeader[0].get(4)
   if (!kid) {
@@ -263,6 +341,13 @@ function parseKid(protectedHeader: any, unprotectedHeader: any): string | null {
   return btoa(kid.reduce((str: any, v: any) => `${str}${String.fromCharCode(v)}`, ''))
 }
 
+/**
+ * Chunk string with given size
+ *
+ * @param str - string that should be chunked
+ * @param size - number of characters in chunk
+ * @returns Array of chunks
+ */
 function chunkSubstr(str: string, size: number): string[] {
   const numChunks = Math.ceil(str.length / size)
   const chunks = new Array(numChunks)

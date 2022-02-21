@@ -1,3 +1,4 @@
+// TODO replace with value set
 const vaccines = [
   { id: 'EU/1/20/1528', name: 'BioNTech' },
   { id: 'EU/1/20/1507', name: 'Moderna' },

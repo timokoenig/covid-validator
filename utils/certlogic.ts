@@ -14,11 +14,17 @@ import { DCC } from './dcc'
 import countryBusinessRules from './eu-dcc-rules.json'
 import { Country, State } from './models'
 
+/**
+ * Rules type
+ */
 export type Rules = {
   updatedAt: string
   rules: Rule[]
 }
 
+/**
+ * CustomRule type
+ */
 export type CustomRule = {
   id: string
   name: string
@@ -27,26 +33,9 @@ export type CustomRule = {
   rules: Rule[]
 }
 
-export function exportRules(
-  customRule: CustomRule,
-  excludeCustomProperties: boolean = false
-): Rule[] {
-  return customRule.rules.map(rule => {
-    return exportRule(rule, customRule.immunizationRules, excludeCustomProperties)
-  })
-}
-
-export function exportRule(
-  rule: Rule,
-  immunizationRules: ImmunizationRule[],
-  excludeCustomProperties: boolean = false
-): Rule {
-  return {
-    ...rule,
-    Logic: encode(rule.Logic).decode(immunizationRules, excludeCustomProperties),
-  }
-}
-
+/**
+ * ImmunizationRule type
+ */
 export type ImmunizationRule = {
   id: string
   medicalProducts: string[]
@@ -54,11 +43,17 @@ export type ImmunizationRule = {
   type: string
 }
 
+/**
+ * Language type
+ */
 export type Language = {
   lang: string
   desc: string
 }
 
+/**
+ * Rule type
+ */
 export type Rule = {
   Identifier: string
   Hash?: string | null
@@ -76,26 +71,46 @@ export type Rule = {
   Logic: any
 }
 
+/**
+ * DCCRuleValidationResult type
+ */
 export type DCCRuleValidationResult = {
   results: ValidationResult[]
   isValid: boolean
 }
 
+/**
+ * ValidationResult type
+ */
 export type ValidationResult = {
   rule: Rule
   valid: boolean
 }
 
+/**
+ * ExternalParameters type
+ */
 export type ExternalParameters = {
   valueSets: any
   validationClock: string
 }
 
+/**
+ * Parameters type
+ */
 export type Parameters = {
   payload: any
   external: ExternalParameters
 }
 
+/**
+ * Get Code and Name for given country and state
+ *
+ * @param t - TFunction to translate country names
+ * @param country - Country code
+ * @param state - State code
+ * @returns Country and State
+ */
 export function getCountryAndState(
   t: TFunction,
   country: string,
@@ -126,15 +141,35 @@ export function getCountryAndState(
   }
 }
 
+/**
+ * Check if country and state combination is a custom rule.
+ * Custom user rules are any countries with length > 2
+ * Custom German state rules are any state that is not empty
+ *
+ * @param country - Country code
+ * @param state - State code
+ * @returns boolean
+ */
 export function customRulesSelected(country: string, state: string): boolean {
   return country.length > 2 || state !== ''
 }
 
+/**
+ * Return acceptance rules based on users country and state selection
+ *
+ * @returns Array of rules
+ */
 export function currentAcceptanceRules(): Rule[] {
   const appState = app.get()
   return acceptanceRules(appState.country, appState.state)
 }
-
+/**
+ * Return acceptance rules based on country and state
+ *
+ * @param country - Country code
+ * @param state - State code
+ * @returns Array of rules
+ */
 export function acceptanceRules(country: string, state: string): Rule[] {
   // Temporary solution for German state rules
   if (country.toUpperCase() === 'DE' && state !== '') {
@@ -161,6 +196,13 @@ export function acceptanceRules(country: string, state: string): Rule[] {
   )
 }
 
+/**
+ * Validate DCC with Rule
+ *
+ * @param rule - Acceptance Rule
+ * @param parameters - DCC payload and external parameters
+ * @returns Validation result
+ */
 export function validateDCCRule(rule: Rule, parameters: Parameters): ValidationResult {
   const res = evaluate(rule.Logic, parameters)
   return {
@@ -169,6 +211,15 @@ export function validateDCCRule(rule: Rule, parameters: Parameters): ValidationR
   }
 }
 
+/**
+ * Validate DCC with all rules for country and state
+ *
+ * @param dcc - Users DCC
+ * @param country - Country code
+ * @param state - State code
+ * @param validationClock - Date when the rule should be checked
+ * @returns Validation result
+ */
 export function validateDCCRules(
   dcc: DCC,
   country: string,
@@ -209,5 +260,40 @@ export function validateDCCRules(
   return {
     results,
     isValid,
+  }
+}
+
+/**
+ * Export rules from CustomRule that can be used with the certlogic
+ *
+ * @param customRule - CustomRule
+ * @param excludeCustomProperties - True, if you use these rules with certlogic
+ * @returns Array of rules
+ */
+export function exportRules(
+  customRule: CustomRule,
+  excludeCustomProperties: boolean = false
+): Rule[] {
+  return customRule.rules.map(rule => {
+    return exportRule(rule, customRule.immunizationRules, excludeCustomProperties)
+  })
+}
+
+/**
+ * Dynamically combine immunization rules with certificate rule and export so it can be used with certlogic
+ *
+ * @param rule - Rule
+ * @param immunizationRules - Array of ImmunizationRules
+ * @param excludeCustomProperties - True, if you use these rules with certlogic
+ * @returns The combined Rule
+ */
+export function exportRule(
+  rule: Rule,
+  immunizationRules: ImmunizationRule[],
+  excludeCustomProperties: boolean = false
+): Rule {
+  return {
+    ...rule,
+    Logic: encode(rule.Logic).decode(immunizationRules, excludeCustomProperties),
   }
 }
