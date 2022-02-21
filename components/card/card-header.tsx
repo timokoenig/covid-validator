@@ -14,6 +14,8 @@ const CustButton = (props: ButtonProps) => (
     py="3"
     h="auto"
     borderRadius="0"
+    borderBottom="1px"
+    borderBottomColor="blue.300"
     _hover={{ bgColor: 'blue.400' }}
     _active={{ bgColor: 'blue.300' }}
   >
