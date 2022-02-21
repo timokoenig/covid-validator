@@ -27,16 +27,23 @@ export type CustomRule = {
   rules: Rule[]
 }
 
-export function exportRules(customRule: CustomRule): Rule[] {
+export function exportRules(
+  customRule: CustomRule,
+  excludeCustomProperties: boolean = false
+): Rule[] {
   return customRule.rules.map(rule => {
-    return exportRule(rule, customRule.immunizationRules)
+    return exportRule(rule, customRule.immunizationRules, excludeCustomProperties)
   })
 }
 
-export function exportRule(rule: Rule, immunizationRules: ImmunizationRule[]): Rule {
+export function exportRule(
+  rule: Rule,
+  immunizationRules: ImmunizationRule[],
+  excludeCustomProperties: boolean = false
+): Rule {
   return {
     ...rule,
-    Logic: encode(rule.Logic).decode(immunizationRules),
+    Logic: encode(rule.Logic).decode(immunizationRules, excludeCustomProperties),
   }
 }
 
@@ -132,14 +139,14 @@ export function acceptanceRules(country: string, state: string): Rule[] {
   // TODO temporary solution for German state rules
   if (country.toUpperCase() === 'DE' && state !== '') {
     const customRule = builderStateRulesDE as CustomRule
-    return customRule.rules.map(rule => exportRule(rule, customRule.immunizationRules))
+    return exportRules(customRule, true)
   }
 
   // Local custom rules
   if (country.length > 2 && state === '') {
     const customRule = builder.get().customRules.find(rule => rule.id === country)
     if (customRule === undefined) return []
-    return customRule.rules.map(rule => exportRule(rule, customRule.immunizationRules))
+    return exportRules(customRule, true)
   }
 
   // EU business rules

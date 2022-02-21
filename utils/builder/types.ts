@@ -11,7 +11,7 @@ export interface JSONArray extends Array<JSONValue> {}
 
 export interface BType {
   encode(data: JSONValue): BType
-  decode(immunizationRules?: JSONArray): JSONValue
+  decode(immunizationRules?: JSONArray, excludeCustomProperties?: boolean): JSONValue
 }
 
 export interface BTypeEmpty extends BType {}

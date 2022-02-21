@@ -33,7 +33,7 @@ export class BClassEmpty implements BType {
     return new BClassEmpty()
   }
 
-  decode(_?: JSONArray): JSONValue {
+  decode(): JSONValue {
     return {}
   }
 }
@@ -59,12 +59,12 @@ export class BClassIf implements BTypeIf {
     return new BClassIf(encode(arr[0]), encode(arr[1]), encode(arr[2]))
   }
 
-  decode(immunizationRules?: JSONArray): JSONValue {
+  decode(immunizationRules?: JSONArray, excludeCustomProperties?: boolean): JSONValue {
     return {
       if: [
-        this.condition.decode(immunizationRules),
-        this.conditionTrue.decode(immunizationRules),
-        this.conditionFalse.decode(immunizationRules),
+        this.condition.decode(immunizationRules, excludeCustomProperties),
+        this.conditionTrue.decode(immunizationRules, excludeCustomProperties),
+        this.conditionFalse.decode(immunizationRules, excludeCustomProperties),
       ],
     }
   }
@@ -81,7 +81,7 @@ export class BClassValue implements BTypeVar {
     return new BClassValue(data as string)
   }
 
-  decode(_?: JSONArray): JSONValue {
+  decode(): JSONValue {
     return this.value
   }
 }
@@ -98,7 +98,7 @@ export class BClassVar implements BTypeValue {
     return new BClassVar(obj.var as string)
   }
 
-  decode(_?: JSONArray): JSONValue {
+  decode(): JSONValue {
     return {
       var: this.value,
     }
@@ -126,9 +126,13 @@ export class BClassDate implements BTypeDate {
     return new BClassDate(encode(arr[0]) as BTypeValue, arr[1] as number, arr[2] as string)
   }
 
-  decode(immunizationRules?: JSONArray): JSONValue {
+  decode(immunizationRules?: JSONArray, excludeCustomProperties?: boolean): JSONValue {
     return {
-      plusTime: [this.value.decode(immunizationRules), this.number, this.duration],
+      plusTime: [
+        this.value.decode(immunizationRules, excludeCustomProperties),
+        this.number,
+        this.duration,
+      ],
     }
   }
 }
@@ -155,11 +159,11 @@ export class BClassCompare implements BTypeCompare {
     return new BClassCompare(encode(arr[0]), encode(arr[1]), keys[0])
   }
 
-  decode(immunizationRules?: JSONArray): JSONValue {
+  decode(immunizationRules?: JSONArray, excludeCustomProperties?: boolean): JSONValue {
     return {
       [this.operator]: [
-        this.variableA.decode(immunizationRules),
-        this.variableB.decode(immunizationRules),
+        this.variableA.decode(immunizationRules, excludeCustomProperties),
+        this.variableB.decode(immunizationRules, excludeCustomProperties),
       ],
     }
   }
@@ -187,11 +191,11 @@ export class BClassCompareDate implements BTypeCompareDate {
     return new BClassCompareDate(encode(arr[0]), encode(arr[1]), keys[0])
   }
 
-  decode(immunizationRules?: JSONArray): JSONValue {
+  decode(immunizationRules?: JSONArray, excludeCustomProperties?: boolean): JSONValue {
     return {
       [this.operator]: [
-        this.variableA.decode(immunizationRules),
-        this.variableB.decode(immunizationRules),
+        this.variableA.decode(immunizationRules, excludeCustomProperties),
+        this.variableB.decode(immunizationRules, excludeCustomProperties),
       ],
     }
   }
@@ -212,9 +216,9 @@ export class BClassCompareIn implements BTypeCompareIn {
     return new BClassCompareIn(encode(arr[0]), arr[1] as string[])
   }
 
-  decode(immunizationRules?: JSONArray): JSONValue {
+  decode(immunizationRules?: JSONArray, excludeCustomProperties?: boolean): JSONValue {
     return {
-      in: [this.variable.decode(immunizationRules), this.values],
+      in: [this.variable.decode(immunizationRules, excludeCustomProperties), this.values],
     }
   }
 }
@@ -232,9 +236,9 @@ export class BClassAnd implements BTypeAnd {
     return new BClassAnd(arr.map(a => encode(a)))
   }
 
-  decode(immunizationRules?: JSONArray): JSONValue {
+  decode(immunizationRules?: JSONArray, excludeCustomProperties?: boolean): JSONValue {
     return {
-      and: this.conditions.map(c => c.decode(immunizationRules)),
+      and: this.conditions.map(c => c.decode(immunizationRules, excludeCustomProperties)),
     }
   }
 }
@@ -267,7 +271,7 @@ export class BClassCertificateType implements BTypeCertificateType {
     return new BClassCertificateType(type, encode(arr[1] as JSONObject))
   }
 
-  decode(immunizationRules?: JSONArray): JSONValue {
+  decode(immunizationRules?: JSONArray, excludeCustomProperties?: boolean): JSONValue {
     let typeVar = 'payload.v.0'
     if (this.type === CERTIFICATE_TYPE_TEST) {
       typeVar = 'payload.t.0'
@@ -276,10 +280,17 @@ export class BClassCertificateType implements BTypeCertificateType {
       typeVar = 'payload.r.0'
     }
 
-    return {
-      type: 'certificate-type',
-      if: [{ var: typeVar }, this.conditionTrue.decode(immunizationRules), false],
+    const res: JSONObject = {
+      if: [
+        { var: typeVar },
+        this.conditionTrue.decode(immunizationRules, excludeCustomProperties),
+        false,
+      ],
     }
+    if (excludeCustomProperties !== true) {
+      res.type = 'certificate-type'
+    }
+    return res
   }
 }
 
@@ -309,7 +320,7 @@ export class BClassImmunizationStatus implements BTypeImmunizationStatus {
     return new BClassImmunizationStatus(status, vaccines, encode(arr[1] as JSONObject))
   }
 
-  decode(immunizationRules?: JSONArray): JSONValue {
+  decode(immunizationRules?: JSONArray, excludeCustomProperties?: boolean): JSONValue {
     // filter all active immunization rules and add them to the immunization-status component
     const tmpRules =
       immunizationRules
@@ -324,9 +335,7 @@ export class BClassImmunizationStatus implements BTypeImmunizationStatus {
     ].map(rule => rule.rule)
     const activeRulesComp = activeRules.length > 1 ? createOrOperation(activeRules) : activeRules[0]
 
-    return {
-      type: 'immunization-status',
-      status: this.status,
+    const res: JSONObject = {
       if: [
         {
           and: [
@@ -341,10 +350,15 @@ export class BClassImmunizationStatus implements BTypeImmunizationStatus {
             activeRulesComp,
           ],
         },
-        this.conditionTrue.decode(immunizationRules),
+        this.conditionTrue.decode(immunizationRules, excludeCustomProperties),
         false,
       ],
     }
+    if (excludeCustomProperties !== true) {
+      res.type = 'immunization-status'
+      res.status = this.status
+    }
+    return res
   }
 }
 
