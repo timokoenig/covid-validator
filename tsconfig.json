@@ -3,12 +3,21 @@
     "target": "esnext",
     "module": "esnext",
     "jsx": "preserve",
-    "lib": ["dom", "es2019"],
+    "lib": [
+      "dom",
+      "es2019"
+    ],
     "baseUrl": ".",
     "paths": {
-      "~/components/*": ["components/*"],
-      "~/utils/*": ["utils/*"],
-      "@/*": ["*"]
+      "~/components/*": [
+        "components/*"
+      ],
+      "~/utils/*": [
+        "utils/*"
+      ],
+      "@/*": [
+        "*"
+      ]
     },
     "moduleResolution": "node",
     "strict": true,
@@ -24,13 +33,22 @@
     "removeComments": false,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "incremental": true
   },
   "ts-node": {
     "moduleTypes": {
       "jest.config.ts": "cjs"
     }
   },
-  "exclude": ["node_modules"],
-  "include": ["env.d.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/index.tsx"]
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "env.d.ts",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/index.tsx"
+  ]
 }
