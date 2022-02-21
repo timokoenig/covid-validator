@@ -66,7 +66,7 @@
   "information.rules": "What rules are being used?",
   "information.rules.message": "The app uses the official EU entry rules to validate the certificate. These rules are being provided by the member countries of the Digital Covid Certificate. It is a known problem that those rules might be out of date and do not reflect state or local regulations. This project adds additional rules, like state rules for Germany, to provide the verifier with more up-to-date rules.",
   "information.homescreen": "Add CovidValidator to your Home Screen",
-  "information.homescreen.message": "Adding the <b>CovidValidator</b> to your Home Screen (Smartphone, Tablet, Desktop) allows you fast access whenever you need it.<br /><br />1) Open <b>CovidValidator</b> in the browser of your device<br />2) Open the browsers settings or share dialog (Safari)<br />3) Scroll down and tap <b>Add to Home Screen</b><br />4) Confirm selection",
+  "information.homescreen.message": "Adding the <b>CovidValidator</b> to your Home Screen (Smartphone, Tablet, Desktop) allows you fast access whenever you need it.<br /><br />1) Open <b>CovidValidator</b> in the browser on your device<br />2) Open the browsers settings or share dialog (Safari)<br />3) Scroll down and tap <b>Add to Home Screen</b><br />4) Confirm selection",
   "information.issue": "What to do if something is not working?",
   "information.issue.message": "First check if you have selected the correct country and rules. Then try to connect your device to the internet to download the latest data. If your problem still occurs, go to <1>Github</1> and create an issue.",
   "information.certificate": "What is the EU Digital Covid Certificate?",
