@@ -2,11 +2,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { app } from '@/state/app'
-import { builder } from '@/state/builder'
 import { evaluate } from 'certlogic-js'
 import moment from 'moment'
 import { TFunction } from 'react-i18next'
+import { app } from '../state/app'
+import { builder } from '../state/builder'
 import builderStateRulesDE from './builder-state-rules-de.json'
 import { encode } from './builder/classes'
 import countries from './countries'

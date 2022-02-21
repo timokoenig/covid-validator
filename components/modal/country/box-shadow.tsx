@@ -1,6 +1,6 @@
-import React from 'react'
 import { Box } from '@chakra-ui/react'
-import useColorMode from '@/utils/color-mode'
+import React from 'react'
+import useColorMode from '../../../utils/color-mode'
 
 const BoxShadow = () => {
   const { isDarkMode } = useColorMode()

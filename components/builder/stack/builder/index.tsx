@@ -224,7 +224,7 @@ const BuilderModal = (props: Props) => {
           data={props.data as BTypeDate}
           onClose={onClose}
           onClick={(value: string, number: number, duration: string) => {
-            props.onClick(new BClassDate(new BClassValue(value), number, duration))
+            props.onClick(new BClassDate(new BClassVar(value), number, duration))
             onClose()
           }}
           onDelete={() => {

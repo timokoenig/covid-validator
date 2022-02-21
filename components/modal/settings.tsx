@@ -1,4 +1,3 @@
-import useColorMode from '@/utils/color-mode'
 import {
   Box,
   Button,
@@ -21,6 +20,7 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { app, resetCounter, toggleCounter } from '../../state/app'
 import { acceptanceRules, getCountryAndState } from '../../utils/certlogic'
+import useColorMode from '../../utils/color-mode'
 import rules from '../../utils/eu-dcc-rules.json'
 import Flag from '../flag'
 import CountryModal from './country'

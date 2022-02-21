@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React from 'react'
+import '@/node_modules/flag-icons/css/flag-icons.min.css'
 import { ChakraProvider, CSSReset } from '@chakra-ui/react'
-import { I18nextProvider } from 'react-i18next'
 import i18next from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { AppProps } from 'next/app'
-
-import '@/node_modules/flag-icons/css/flag-icons.min.css'
+import React from 'react'
+import { I18nextProvider } from 'react-i18next'
 import '../styles/globals.css'
 
 i18next

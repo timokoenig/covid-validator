@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import moment from 'moment'
 import builderStateRulesDE from '../utils/builder-state-rules-de.json'
-import { CustomRule, exportRule, Rule, validateDCCRule } from '../utils/certlogic'
+import { CustomRule, exportRules, Rule, validateDCCRule } from '../utils/certlogic'
 import { DigitalGreenCertificate } from '../utils/dcc'
 
 /// DCCs
@@ -97,9 +97,7 @@ function validate(
 const date = moment('2022-02-15T20:00:00Z').toDate()
 
 const customRule = builderStateRulesDE as CustomRule
-const localRulesHamburg = customRule.rules.map(rule =>
-  exportRule(rule, customRule.immunizationRules)
-)
+const localRulesHamburg = exportRules(customRule, true)
 
 /// Tests
 /////////////////// BioNTech ///////////////////
