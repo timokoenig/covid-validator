@@ -32,10 +32,7 @@ const Header = (props: Props) => {
           <Heading as="h1" size="2xl" flex="1" mr="3">
             <Link href="/" _hover={{ textDecoration: 'none' }}>
               CovidValidator
-            </Link>{' '}
-            <Text display="inline" fontSize="lg" color="red">
-              BETA
-            </Text>
+            </Link>
           </Heading>
           {(props.showMenu ?? true) && (
             <Menu>

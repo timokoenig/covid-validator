@@ -96,8 +96,8 @@ const EditImmunizationRule = (props: Props) => {
         <BuilderStack data={data} onChange={setData} />
       </Box>
       <ConfirmModal
-        title={t('builder.rule.delete')}
-        message={t('builder.rule.delete.message')}
+        title={t('builder.delete.confirm')}
+        message={t('builder.delete.confirm.message')}
         isOpen={isOpenConfirm}
         onClose={onDelete}
       />

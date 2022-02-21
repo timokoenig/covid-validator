@@ -1,5 +1,5 @@
+import { Box } from '@chakra-ui/react'
 import React from 'react'
-import { Box, Text } from '@chakra-ui/react'
 import { Trans, useTranslation } from 'react-i18next'
 import ExternalLink from '../external-link'
 import InformationBlock from './information-block'
@@ -11,25 +11,6 @@ const Information = () => {
       <InformationBlock
         title={t('information.purpose')}
         message={t('information.purpose.message')}
-      />
-
-      <InformationBlock
-        title={
-          <Trans i18nKey="information.beta" t={t}>
-            x
-            <Text display="inline" color="red">
-              BETA
-            </Text>
-            y
-          </Trans>
-        }
-        message={
-          <Trans i18nKey="information.beta.message" t={t}>
-            x
-            <ExternalLink href="https://github.com/timokoenig/covid-validator">Github</ExternalLink>
-            y
-          </Trans>
-        }
       />
 
       <InformationBlock
