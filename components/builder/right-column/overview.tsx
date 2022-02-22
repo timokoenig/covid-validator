@@ -95,6 +95,7 @@ const Overview = (props: Props) => {
               <ListItem
                 key={rule.Identifier}
                 title={rule.Description.find(desc => desc.lang === 'en')?.desc ?? rule.Identifier}
+                subtitle={t(rule.CertificateType.toLowerCase())}
                 onClick={() => props.onEditCertificateRule(rule)}
               />
             ))}

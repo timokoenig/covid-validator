@@ -1,54 +1,8 @@
 {
   "id": "c937bd4e-c82d-4319-bdef-371d868ff852",
-  "name": "Hamburg NEW",
+  "name": "Hamburg",
   "description": "",
   "rules": [
-    {
-      "Identifier": "256f2ba9-a87f-4e92-8d63-09f51fbd04e5",
-      "Type": "Acceptance",
-      "Country": "DE",
-      "Version": "1.0.0",
-      "SchemaVersion": "1.0.0",
-      "Engine": "CERTLOGIC",
-      "EngineVersion": "0.7.5",
-      "CertificateType": "Recovery",
-      "Description": [
-        {
-          "lang": "en",
-          "desc": "The positive NAA test result (e.g., PCR) must be older than 28 days and not older than 180 days."
-        },
-        {
-          "lang": "de",
-          "desc": "Der positive NAA-Test (z.B. PCR) muss mindestens 28 Tage und maximal 180 Tage zurückliegen."
-        }
-      ],
-      "ValidFrom": "2022-01-01T00:00:00Z",
-      "ValidTo": "2023-01-01T00:00:00Z",
-      "AffectedFields": [],
-      "Logic": {
-        "if": [
-          { "var": "payload.r.0" },
-          {
-            "and": [
-              {
-                "not-before": [
-                  { "plusTime": [{ "var": "external.validationClock" }, 0, "day"] },
-                  { "plusTime": [{ "var": "payload.r.0.fr" }, 28, "day"] }
-                ]
-              },
-              {
-                "not-after": [
-                  { "plusTime": [{ "var": "external.validationClock" }, 0, "day"] },
-                  { "plusTime": [{ "var": "payload.r.0.fr" }, 180, "day"] }
-                ]
-              }
-            ]
-          },
-          false
-        ],
-        "type": "certificate-type"
-      }
-    },
     {
       "Identifier": "88f976da-1a70-4047-aa3d-c081a787581d",
       "Type": "Acceptance",
@@ -60,10 +14,7 @@
       "CertificateType": "Vaccination",
       "Description": [
         { "lang": "en", "desc": "Full vaccination must be at least 14 days ago." },
-        {
-          "lang": "de",
-          "desc": "Die vollständige Impfung muss mindestens 14 Tage zurückliegen."
-        }
+        { "lang": "de", "desc": "Die vollständige Impfung muss mindestens 14 Tage zurückliegen." }
       ],
       "ValidFrom": "2022-01-01T00:00:00Z",
       "ValidTo": "2023-01-01T00:00:00Z",
@@ -182,14 +133,7 @@
           { "var": "payload.t.0" },
           {
             "and": [
-              {
-                "===": [
-                  {
-                    "var": "payload.t.0.tr"
-                  },
-                  "260415000"
-                ]
-              },
+              { "===": [{ "var": "payload.t.0.tr" }, "260415000"] },
               { "===": [{ "var": "payload.t.0.tt" }, "LP217198-3"] },
               {
                 "not-after": [
@@ -231,14 +175,7 @@
           { "var": "payload.t.0" },
           {
             "and": [
-              {
-                "===": [
-                  {
-                    "var": "payload.t.0.tr"
-                  },
-                  "260415000"
-                ]
-              },
+              { "===": [{ "var": "payload.t.0.tr" }, "260415000"] },
               { "===": [{ "var": "payload.t.0.tt" }, "LP6464-4"] },
               {
                 "not-after": [
@@ -290,6 +227,98 @@
             ],
             "type": "immunization-status",
             "status": "full-recovery"
+          },
+          false
+        ],
+        "type": "certificate-type"
+      }
+    },
+    {
+      "Identifier": "256f2ba9-a87f-4e92-8d63-09f51fbd04e5",
+      "Type": "Acceptance",
+      "Country": "DE",
+      "Version": "1.0.0",
+      "SchemaVersion": "1.0.0",
+      "Engine": "CERTLOGIC",
+      "EngineVersion": "0.7.5",
+      "CertificateType": "Recovery",
+      "Description": [
+        {
+          "lang": "en",
+          "desc": "The positive NAA test result (e.g., PCR) must be older than 28 days and not older than 180 days."
+        },
+        {
+          "lang": "de",
+          "desc": "Der positive NAA-Test (z.B. PCR) muss mindestens 28 Tage und maximal 180 Tage zurückliegen."
+        }
+      ],
+      "ValidFrom": "2022-01-01T00:00:00Z",
+      "ValidTo": "2023-01-01T00:00:00Z",
+      "AffectedFields": [],
+      "Logic": {
+        "if": [
+          { "var": "payload.r.0" },
+          {
+            "and": [
+              {
+                "not-before": [
+                  { "plusTime": [{ "var": "external.validationClock" }, 0, "day"] },
+                  { "plusTime": [{ "var": "payload.r.0.fr" }, 28, "day"] }
+                ]
+              },
+              {
+                "not-after": [
+                  { "plusTime": [{ "var": "external.validationClock" }, 0, "day"] },
+                  { "plusTime": [{ "var": "payload.r.0.fr" }, 180, "day"] }
+                ]
+              }
+            ]
+          },
+          false
+        ],
+        "type": "certificate-type"
+      }
+    },
+    {
+      "Identifier": "069bd12b-711b-41fe-9a23-0ed33f70b5fa",
+      "Type": "Acceptance",
+      "Country": "DE",
+      "Version": "1.0.0",
+      "SchemaVersion": "1.0.0",
+      "Engine": "CERTLOGIC",
+      "EngineVersion": "0.7.5",
+      "CertificateType": "Test",
+      "Description": [
+        {
+          "lang": "en",
+          "desc": "The positive NAA test result (e.g., PCR) must be older than 28 days and not older than 180 days."
+        },
+        {
+          "lang": "de",
+          "desc": "Der positive NAA-Test (z.B. PCR) muss mindestens 28 Tage und maximal 180 Tage zurückliegen."
+        }
+      ],
+      "ValidFrom": "2022-01-01T00:00:00Z",
+      "ValidTo": "2023-01-01T00:00:00Z",
+      "AffectedFields": [],
+      "Logic": {
+        "if": [
+          { "var": "payload.t.0" },
+          {
+            "and": [
+              {
+                "not-before": [
+                  { "plusTime": [{ "var": "external.validationClock" }, 0, "day"] },
+                  { "plusTime": [{ "var": "payload.t.0.sc" }, 28, "day"] }
+                ]
+              },
+              {
+                "not-after": [
+                  { "plusTime": [{ "var": "external.validationClock" }, 0, "day"] },
+                  { "plusTime": [{ "var": "payload.t.0.sc" }, 180, "day"] }
+                ]
+              }
+            ]
           },
           false
         ],
