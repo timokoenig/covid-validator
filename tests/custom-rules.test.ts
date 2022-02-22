@@ -271,12 +271,26 @@ test('PCR after 80 hours; INVALID', () => {
 
   expect(validate(dcc, localRulesHamburg, moment('2022-02-18T18:00:00Z').toDate())).toBeFalsy()
 })
-test('Positive PCR; INVALID', () => {
+test('Positive PCR less than 28 days; INVALID', () => {
   const dcc = { ...testDCC }
   dcc.t![0].tt = 'LP6464-4'
   dcc.t![0].tr = TEST_POSITIVE
 
   expect(validate(dcc, localRulesHamburg, date)).toBeFalsy()
+})
+test('Positive PCR between 28 and 180 days; Recoverd; VALID', () => {
+  const dcc = { ...testDCC }
+  dcc.t![0].tt = 'LP6464-4'
+  dcc.t![0].tr = TEST_POSITIVE
+
+  expect(validate(dcc, localRulesHamburg, moment('2022-03-17').toDate())).toBeTruthy()
+})
+test('Positive PCR after 180 days; INVALID', () => {
+  const dcc = { ...testDCC }
+  dcc.t![0].tt = 'LP6464-4'
+  dcc.t![0].tr = TEST_POSITIVE
+
+  expect(validate(dcc, localRulesHamburg, moment('2022-08-15').toDate())).toBeFalsy()
 })
 test('Unknown Test after 10 hours; INVALID', () => {
   const dcc = { ...testDCC }
