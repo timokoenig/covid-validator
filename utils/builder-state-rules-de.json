@@ -182,6 +182,14 @@
           { "var": "payload.t.0" },
           {
             "and": [
+              {
+                "===": [
+                  {
+                    "var": "payload.t.0.tr"
+                  },
+                  "260415000"
+                ]
+              },
               { "===": [{ "var": "payload.t.0.tt" }, "LP217198-3"] },
               {
                 "not-after": [
@@ -223,6 +231,14 @@
           { "var": "payload.t.0" },
           {
             "and": [
+              {
+                "===": [
+                  {
+                    "var": "payload.t.0.tr"
+                  },
+                  "260415000"
+                ]
+              },
               { "===": [{ "var": "payload.t.0.tt" }, "LP6464-4"] },
               {
                 "not-after": [

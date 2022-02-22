@@ -75,6 +75,9 @@ const testDCC: DigitalGreenCertificate = {
   ver: '1.3.0',
 }
 
+const TEST_NEGATIVE = '260415000'
+const TEST_POSITIVE = '260373001'
+
 /// Helper functions
 function validate(
   dgc: DigitalGreenCertificate,
@@ -237,26 +240,48 @@ test('Recovery after 190 days; INVALID', () => {
 
 /////////////////// Test ///////////////////
 test('Antigen after 10 hours; VALID', () => {
-  expect(validate(testDCC, localRulesHamburg, date)).toBeTruthy()
+  const dcc = { ...testDCC }
+  dcc.t![0].tr = TEST_NEGATIVE
+
+  expect(validate(dcc, localRulesHamburg, date)).toBeTruthy()
 })
 test('Antigen after 30 hours; INVALID', () => {
-  expect(validate(testDCC, localRulesHamburg, moment('2022-02-16T16:00:00Z').toDate())).toBeFalsy()
+  const dcc = { ...testDCC }
+  dcc.t![0].tr = TEST_NEGATIVE
+
+  expect(validate(dcc, localRulesHamburg, moment('2022-02-16T16:00:00Z').toDate())).toBeFalsy()
+})
+test('Positive Antigen; INVALID', () => {
+  const dcc = { ...testDCC }
+  dcc.t![0].tr = TEST_POSITIVE
+
+  expect(validate(dcc, localRulesHamburg, date)).toBeFalsy()
 })
 test('PCR after 10 hours; VALID', () => {
   const dcc = { ...testDCC }
   dcc.t![0].tt = 'LP6464-4'
+  dcc.t![0].tr = TEST_NEGATIVE
 
   expect(validate(dcc, localRulesHamburg, date)).toBeTruthy()
 })
 test('PCR after 80 hours; INVALID', () => {
   const dcc = { ...testDCC }
   dcc.t![0].tt = 'LP6464-4'
+  dcc.t![0].tr = TEST_NEGATIVE
 
   expect(validate(dcc, localRulesHamburg, moment('2022-02-18T18:00:00Z').toDate())).toBeFalsy()
+})
+test('Positive PCR; INVALID', () => {
+  const dcc = { ...testDCC }
+  dcc.t![0].tt = 'LP6464-4'
+  dcc.t![0].tr = TEST_POSITIVE
+
+  expect(validate(dcc, localRulesHamburg, date)).toBeFalsy()
 })
 test('Unknown Test after 10 hours; INVALID', () => {
   const dcc = { ...testDCC }
   dcc.t![0].tt = 'taste-test'
+  dcc.t![0].tr = TEST_NEGATIVE
 
   expect(validate(dcc, localRulesHamburg, date)).toBeFalsy()
 })
