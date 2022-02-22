@@ -1,5 +1,5 @@
 /* eslint-disable import/order */
-import { Box, Heading, Stack, Text, useDisclosure } from '@chakra-ui/react'
+import { Box, Heading, Stack, Text, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { BComponent, BComponentProps } from '.'
@@ -22,7 +22,7 @@ const BComponentImmunizationStatus = (props: BComponentProps<BTypeImmunizationSt
         </Text>
         <Stack>
           <Box
-            backgroundColor="gray.800"
+            backgroundColor={useColorModeValue('gray.200', 'gray.800')}
             py="1"
             pl="1"
             borderTopLeftRadius="10"

@@ -1,5 +1,5 @@
 /* eslint-disable import/order */
-import { Box, Heading, Stack, useDisclosure } from '@chakra-ui/react'
+import { Box, Heading, Stack, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { BComponent, BComponentProps } from '.'
@@ -18,7 +18,7 @@ const BComponentIf = (props: BComponentProps<BTypeIf>) => {
         </Heading>
         <Stack>
           <Box
-            backgroundColor="gray.800"
+            backgroundColor={useColorModeValue('gray.200', 'gray.800')}
             py="1"
             pl="1"
             borderTopLeftRadius="10"
@@ -38,7 +38,7 @@ const BComponentIf = (props: BComponentProps<BTypeIf>) => {
             {t('builder.then')}
           </Heading>
           <Box
-            backgroundColor="gray.800"
+            backgroundColor={useColorModeValue('gray.200', 'gray.800')}
             py="1"
             pl="1"
             borderTopLeftRadius="10"
@@ -58,7 +58,7 @@ const BComponentIf = (props: BComponentProps<BTypeIf>) => {
             {t('builder.else')}
           </Heading>
           <Box
-            backgroundColor="gray.800"
+            backgroundColor={useColorModeValue('gray.200', 'gray.800')}
             py="1"
             pl="1"
             borderTopLeftRadius="10"

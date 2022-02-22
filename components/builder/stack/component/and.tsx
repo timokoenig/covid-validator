@@ -1,5 +1,5 @@
 /* eslint-disable import/order */
-import { Box, Text, useDisclosure, VStack } from '@chakra-ui/react'
+import { Box, Text, useColorModeValue, useDisclosure, VStack } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { BComponent, BComponentProps } from '.'
@@ -12,6 +12,7 @@ import BComponentEmpty from './empty'
 const BComponentAnd = (props: BComponentProps<BTypeAnd>) => {
   const { t } = useTranslation('common')
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const bgColor = useColorModeValue('gray.200', 'gray.800')
   return (
     <>
       <BaseComponent styles={props.styles} depth={props.depth} onClick={onOpen}>
@@ -24,7 +25,7 @@ const BComponentAnd = (props: BComponentProps<BTypeAnd>) => {
           {props.data.conditions.map((c, index) => (
             <Box
               key={index}
-              backgroundColor="gray.800"
+              backgroundColor={bgColor}
               py="1"
               pl="1"
               borderTopLeftRadius="10"

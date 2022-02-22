@@ -1,5 +1,5 @@
 /* eslint-disable import/order */
-import { Box, HStack, Text, useDisclosure } from '@chakra-ui/react'
+import { Box, HStack, Text, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { BComponent, BComponentProps } from '.'
@@ -15,10 +15,10 @@ const BComponentCompareIn = (props: BComponentProps<BTypeCompareIn>) => {
       <BaseComponent styles={{ padding: 0 }} depth={props.depth} onClick={onOpen}>
         <HStack>
           <Box
-            backgroundColor="gray.800"
+            backgroundColor={useColorModeValue('gray.200', 'gray.800')}
             borderRadius="10"
             borderRight="3px solid"
-            borderRightColor="gray.800"
+            borderRightColor={useColorModeValue('gray.200', 'gray.800')}
           >
             <BComponent
               data={props.data.variable}

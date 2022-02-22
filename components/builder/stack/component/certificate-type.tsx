@@ -1,5 +1,5 @@
 /* eslint-disable import/order */
-import { Box, Heading, Stack, useDisclosure } from '@chakra-ui/react'
+import { Box, Heading, Stack, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 import { BComponent, BComponentProps } from '.'
 import { BTypeCertificateType } from '../../../../utils/builder/types'
@@ -16,7 +16,7 @@ const BComponentCertificateType = (props: BComponentProps<BTypeCertificateType>)
         </Heading>
         <Stack>
           <Box
-            backgroundColor="gray.800"
+            backgroundColor={useColorModeValue('gray.200', 'gray.800')}
             py="1"
             pl="1"
             borderTopLeftRadius="10"
