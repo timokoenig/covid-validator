@@ -151,6 +151,13 @@ test('BioNTech; Booster Immunization; VALID', () => {
 
   expect(validate(dcc, localRulesHamburg, date)).toBeTruthy()
 })
+test('BioNTech; Booster 2 Immunization; VALID', () => {
+  const dcc = { ...vaccinationDCC }
+  dcc.v![0].dn = 4
+  dcc.v![0].sd = 4
+
+  expect(validate(dcc, localRulesHamburg, date)).toBeTruthy()
+})
 test('BioNTech; Booster Immunization shortly after vaccination; VALID', () => {
   const dcc = { ...vaccinationDCC }
   dcc.v![0].dn = 3
