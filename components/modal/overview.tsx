@@ -14,9 +14,10 @@ import {
 import moment from 'moment'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import rules from '../../data/eu-dcc-rules.json'
 import { app } from '../../state/app'
-import { acceptanceRules, getCountryAndState } from '../../utils/certlogic'
-import rules from '../../utils/eu-dcc-rules.json'
+import { CertLogic } from '../../utils/certlogic'
+import { getCountryAndState } from '../../utils/helper'
 import Flag from '../flag'
 import CountryModal from './country'
 import PurposeModal from './purpose'
@@ -29,6 +30,7 @@ type Props = {
 
 const OverviewModal = (props: Props) => {
   const { t } = useTranslation('common')
+  const certLogic = new CertLogic()
   const { isOpen: isOpenCountry, onOpen: onOpenCountry, onClose: onCloseCountry } = useDisclosure()
   const { isOpen: isOpenPurpose, onOpen: onOpenPurpose, onClose: onClosePurpose } = useDisclosure()
   const { isOpen: isOpenRules, onOpen: onOpenRules, onClose: onCloseRules } = useDisclosure()
@@ -39,7 +41,10 @@ const OverviewModal = (props: Props) => {
     appState.country,
     appState.state
   )
-  const ruleCount = acceptanceRules(countryAndState.country.code, countryAndState.state.code).length
+  const ruleCount = certLogic.acceptanceRules(
+    countryAndState.country.code,
+    countryAndState.state.code
+  ).length
 
   return (
     <>

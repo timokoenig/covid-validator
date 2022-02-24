@@ -31,6 +31,8 @@
   "copy": "Kopie",
   "export": "Export",
   "export.none": "Nichts zu exportieren",
+  "or": "oder",
+  "required": "benötigt",
 
   "imprint": "Impressum",
   "imprint.information": "Informationen nach Sektion 5 TMG",
@@ -76,9 +78,13 @@
   "scan.message": "Halten Sie den QR-Code vor Ihre Kamera",
   "scan.error": "Kamera Fehler",
   "scan.error.message": "Haben Sie den Zugriff auf die Kamera erlaubt?",
-  "scan.multiscan": "Scannen Sie das Testzertifikat für",
+  "scan.multiscan": "Scannen Sie das zweite Zertifkat für",
   "scan.note.permission": "Stellen Sie immer sicher, dass Sie berechtigt sind, das Zertifikat der anderen Person zu scannen!",
   "scan.note.rules": "Überprüfen Sie die ausgewählten Regeln und stellen Sie sicher, dass Sie Ihren lokalen Vorschriften entsprechen. Andernfalls kann es zu ungültigen Prüfergebnissen kommen.",
+
+  "certificate.vaccination": "Impfzertifikat",
+  "certificate.recovery": "Genesenenzertifikat",
+  "certificate.test": "Testzertifikat",
 
   "camera.close": "Kamera schließen",
 
@@ -101,7 +107,6 @@
 
   "modal.result.valid": "GÜLTIG",
   "modal.result.notvalid": "UNGÜLTIG",
-  "modal.result.testrequired": "TEST ZERTIFIKAT BENÖTIGT",
   "modal.result.technicallyinvalid": "TECHNISCH UNGÜLTIG",
   "modal.result.name": "Name",
   "modal.result.birthdate": "Geburtsdatum",

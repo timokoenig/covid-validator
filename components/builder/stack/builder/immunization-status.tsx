@@ -12,8 +12,8 @@ import {
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import vaccines from '../../../../data/vaccines.json'
 import { IMMUNIZATION_STATUS_ALL } from '../../../../utils/builder/types'
-import vaccines from '../../../../utils/vaccines'
 import ListItem from '../../../list-item'
 
 const ImmunizationStatusBody = (props: {

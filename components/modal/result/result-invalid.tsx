@@ -1,22 +1,19 @@
-import React from 'react'
 import {
+  Button,
+  Center,
+  Heading,
+  ModalBody,
   ModalContent,
   ModalFooter,
-  ModalBody,
-  Button,
   Text,
-  Center,
-  Box,
-  Heading,
 } from '@chakra-ui/react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { ScanResult } from '../../../utils/dcc'
 import RuleView from './rule-view'
 
 type Props = {
   isOpen: boolean
-  onClose: (multiscan: boolean) => void
-  result: ScanResult
+  onClose: () => void
 }
 
 const ResultInvalid = (props: Props) => {
@@ -37,14 +34,6 @@ const ResultInvalid = (props: Props) => {
       </ModalBody>
 
       <ModalFooter>
-        <Text color="white">
-          <Text as="span" fontWeight="semibold">
-            {props.result.certificates[props.result.certificates.length - 1].ruleValidation?.results
-              .length ?? 0}{' '}
-          </Text>
-          {t('modal.result.rulecount')}
-        </Text>
-        <Box flex="1" />
         <Button
           size="lg"
           variant="outline"
@@ -52,7 +41,7 @@ const ResultInvalid = (props: Props) => {
           backgroundColor="red.400"
           _hover={{ bg: 'red.300' }}
           _active={{ bg: 'red.400' }}
-          onClick={() => props.onClose(props.result.isMultiScan)}
+          onClick={props.onClose}
         >
           {t('close')}
         </Button>

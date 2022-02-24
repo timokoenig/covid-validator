@@ -10,7 +10,8 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { CustomRule, exportRule, exportRules, Rule } from '../../../utils/certlogic'
+import { CustomRule, Rule } from '../../../utils/certlogic'
+import { exportRule, exportRules } from '../../../utils/helper'
 
 type Props = {
   customRule?: CustomRule

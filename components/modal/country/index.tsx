@@ -1,6 +1,6 @@
 import { Modal, ModalOverlay } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { app, setCountry, setState } from '../../../state/app'
+import { app, setCountry, setPurpose, setState } from '../../../state/app'
 import CountryConfirmation from './country-confirmation'
 import CountrySelection from './country-selection'
 
@@ -25,6 +25,9 @@ const CountryModal = (props: Props) => {
   const onSave = () => {
     setCountry(selection.country)
     setState(selection.state)
+    if (selection.state === '') {
+      setPurpose('3G')
+    }
     setConfirm(false)
     props.onClose()
   }
