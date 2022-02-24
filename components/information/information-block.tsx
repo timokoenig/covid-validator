@@ -5,6 +5,7 @@ import {
   AccordionPanel,
   Heading,
   Text,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import React from 'react'
 
@@ -14,8 +15,13 @@ type Props = {
 }
 
 const InformationBlock = (props: Props) => (
-  <AccordionItem mb="5" borderTop="0">
-    <AccordionButton px="5" py="3" backgroundColor="gray.100" rounded="10">
+  <AccordionItem mb="5" border="0">
+    <AccordionButton
+      px="5"
+      py="3"
+      backgroundColor={useColorModeValue('gray.100', 'gray.700')}
+      rounded="10"
+    >
       <Heading as="h4" size="sm" fontWeight="semibold" textAlign="left" flex="1">
         {props.title}
       </Heading>
