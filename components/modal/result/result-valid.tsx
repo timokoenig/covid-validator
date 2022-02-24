@@ -83,8 +83,7 @@ const ResultValid = (props: Props) => {
         {showAdditionalInfos && (
           <>
             <Text textAlign="center" color="white" fontSize="lg" my="5">
-              * The names on both certificates do not match. Please verify manually if that is
-              correct.
+              * {t('modal.result.valid.mismatch')}
             </Text>
             <Data dgc={props.result.certificates[1].data.payload.hcert.dgc} />
           </>

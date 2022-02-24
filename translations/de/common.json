@@ -106,6 +106,7 @@
   "modal.settings.rules": "Regeln aktiv",
 
   "modal.result.valid": "GÜLTIG",
+  "modal.result.valid.mismatch": "Der Name auf beiden Zertifikaten stimmt nicht überein. Bitte überprüfen Sie manuell, ob dies korrekt ist.",
   "modal.result.notvalid": "UNGÜLTIG",
   "modal.result.technicallyinvalid": "TECHNISCH UNGÜLTIG",
   "modal.result.name": "Name",
