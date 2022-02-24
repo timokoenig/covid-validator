@@ -3,7 +3,7 @@ import { Box, Button, FormControl, Input, Spacer, Text, useDisclosure } from '@c
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { v4 as uuidv4 } from 'uuid'
-import BuilderStateRuleDE from '../../../utils/builder-state-rules-de.json'
+import BuilderStateRuleDE from '../../../data/builder-state-rules-de.json'
 import { CustomRule } from '../../../utils/certlogic'
 import ConfirmModal from '../../modal/confirm'
 

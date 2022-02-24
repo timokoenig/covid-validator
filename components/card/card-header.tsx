@@ -2,7 +2,7 @@ import { Box, Button, ButtonProps, Text, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { app } from '../../state/app'
-import { getCountryAndState } from '../../utils/certlogic'
+import { getCountryAndState } from '../../utils/helper'
 import Flag from '../flag'
 import RulesModal from '../modal/rules'
 

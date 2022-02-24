@@ -31,6 +31,8 @@
   "copy": "Copy",
   "export": "Export",
   "export.none": "Nothing to export",
+  "or": "or",
+  "required": "required",
 
   "imprint": "Imprint",
   "imprint.information": "Information in accordance with Section 5 TMG",
@@ -76,9 +78,13 @@
   "scan.message": "Hold the QR Code in front of your camera",
   "scan.error": "Camera Error",
   "scan.error.message": "Did you accept the camera permission?",
-  "scan.multiscan": "Scan test certificate for",
+  "scan.multiscan": "Scan second certificate for",
   "scan.note.permission": "Always make sure you have the permission to scan the other persons certificate!",
   "scan.note.rules": "Check the selected rules and confirm with your local regulations. Otherwise it might come to invalid certificate validations.",
+
+  "certificate.vaccination": "Vaccination Certificate",
+  "certificate.recovery": "Recovery Certificate",
+  "certificate.test": "Test Certificate",
 
   "camera.close": "Close Camera",
 
@@ -101,7 +107,6 @@
 
   "modal.result.valid": "VALID",
   "modal.result.notvalid": "NOT VALID",
-  "modal.result.testrequired": "TEST CERTIFICATE REQUIRED",
   "modal.result.technicallyinvalid": "TECHNICALLY INVALID",
   "modal.result.name": "Name",
   "modal.result.birthdate": "Birthdate",

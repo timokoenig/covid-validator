@@ -15,7 +15,8 @@ import {
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { app } from '../../state/app'
-import { acceptanceRules, getCountryAndState, Language, Rule } from '../../utils/certlogic'
+import { CertLogic, Language, Rule } from '../../utils/certlogic'
+import { getCountryAndState } from '../../utils/helper'
 import BoxShadow from './country/box-shadow'
 
 type Props = {
@@ -25,6 +26,7 @@ type Props = {
 
 const RulesModal = (props: Props) => {
   const { t } = useTranslation('common')
+  const certLogic = new CertLogic()
   const appState = app.use()
   const countryAndState = getCountryAndState(
     useTranslation('country').t,
@@ -33,7 +35,10 @@ const RulesModal = (props: Props) => {
   )
 
   const preferredLanguage = localStorage.getItem('i18nextLng')?.substring(0, 2) ?? 'en'
-  const countryRules = acceptanceRules(countryAndState.country.code, countryAndState.state.code)
+  const countryRules = certLogic.acceptanceRules(
+    countryAndState.country.code,
+    countryAndState.state.code
+  )
 
   const mapLanguage = (rule: Rule): Language | null => {
     if (rule.Description.length == 0) return null

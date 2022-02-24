@@ -9,26 +9,23 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import RuleView from './rule-view'
 
 type Props = {
   isOpen: boolean
   onClose: () => void
 }
 
-const ResultTechnicallyInvalid = (props: Props) => {
+const ResultWrongQrCode = (props: Props) => {
   const { t } = useTranslation('common')
   return (
     <ModalContent overflow="hidden" bg="gray.400">
       <ModalBody mb="5">
-        <Center px="10" pt="10" textAlign="center">
-          <Heading color="white">{t('modal.result.technicallyinvalid')}</Heading>
+        <Center px="10" pt="10" mb="5" textAlign="center">
+          <Heading color="white">{t('modal.result.wrongqrcode')}</Heading>
         </Center>
-        <Center px="10">
-          <Text color="white" fontWeight="semibold">
-            <RuleView />
-          </Text>
-        </Center>
+        <Text color="white" fontWeight="semibold" textAlign="center" px="10">
+          {t('modal.result.wrongqrcode.message')}
+        </Text>
       </ModalBody>
 
       <ModalFooter>
@@ -48,4 +45,4 @@ const ResultTechnicallyInvalid = (props: Props) => {
   )
 }
 
-export default ResultTechnicallyInvalid
+export default ResultWrongQrCode

@@ -1,6 +1,6 @@
 import moment from 'moment'
 import { TFunction } from 'react-i18next'
-import countryBusinessRules from './eu-dcc-rules.json'
+import countryBusinessRules from '../data/eu-dcc-rules.json'
 import { Rules } from './certlogic'
 import { Country } from './models'
 

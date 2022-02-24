@@ -3,8 +3,8 @@ import { Box, Heading, Stack, Text, useColorModeValue, useDisclosure } from '@ch
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { BComponent, BComponentProps } from '.'
+import vaccines from '../../../../data/vaccines.json'
 import { BTypeImmunizationStatus } from '../../../../utils/builder/types'
-import vaccines from '../../../../utils/vaccines'
 import BuilderModal from '../builder'
 import BaseComponent from './base'
 

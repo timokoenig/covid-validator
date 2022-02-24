@@ -15,7 +15,7 @@
     "format": "prettier --write \"./**/*.{ts,tsx}\"",
     "lint": "eslint \"**/*.{ts,tsx}\" \"*.config.js\"",
     "now-build": "cross-env BUILD_TARGET=serverless next build",
-    "test": "jest",
+    "test": "jest --silent",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

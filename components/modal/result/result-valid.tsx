@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import {
   Box,
   Button,
@@ -12,7 +13,9 @@ import moment from 'moment'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { increaseCounter } from '../../../state/app'
-import { ScanResult } from '../../../utils/dcc'
+import { DigitalGreenCertificate } from '../../../utils/dcc'
+import { dislpayName } from '../../../utils/helper'
+import { ScanResult } from '../../card/camera-scan-view'
 import RuleView from './rule-view'
 
 type Props = {
@@ -23,14 +26,46 @@ type Props = {
 
 const ResultValid = (props: Props) => {
   const { t } = useTranslation('common')
-  const dgc = props.result.certificates[0].dcc.data.payload.hcert.dgc
-  const name = `${dgc.nam.gn} ${dgc.nam.fn}` // TODO show gnt and fnt as a fallback
-  const birthdate = dgc.dob ? moment(dgc.dob).format('MM.DD.YYYY') : 'XX.XX.XXXX'
+
+  // Show additional information if we have scanned two certificates from different people
+  const showAdditionalInfos = ((): boolean => {
+    if (props.result.certificates.length == 1) return false
+    const name1 = dislpayName(props.result.certificates[0].data.payload.hcert.dgc.nam)
+    const name2 = dislpayName(props.result.certificates[1].data.payload.hcert.dgc.nam)
+    return name1 !== name2
+  })()
 
   useEffect(() => {
     // increase counter for valid certificate
     increaseCounter()
   }, [])
+
+  const Data = (dataProps: { dgc: DigitalGreenCertificate }): JSX.Element => {
+    const name = dislpayName(dataProps.dgc.nam)
+    const birthdate = dataProps.dgc.dob
+      ? moment(dataProps.dgc.dob).format('MM.DD.YYYY')
+      : 'XX.XX.XXXX'
+    return (
+      <Center display="flex" flexDirection="row">
+        <Box px="5">
+          <Text fontWeight="semibold" fontSize="xl" color="white">
+            {t('modal.result.name')}
+          </Text>
+          <Text fontWeight="semibold" fontSize="xl" color="white">
+            {t('modal.result.birthdate')}
+          </Text>
+        </Box>
+        <Box px="5">
+          <Text fontSize="xl" color="white">
+            {name}
+          </Text>
+          <Text fontSize="xl" color="white">
+            {birthdate}
+          </Text>
+        </Box>
+      </Center>
+    )
+  }
 
   return (
     <ModalContent overflow="hidden" bg="green.400">
@@ -38,40 +73,25 @@ const ResultValid = (props: Props) => {
         <Center px="10" pt="10">
           <Heading color="white" textAlign="center">
             {t('modal.result.valid')}
+            {showAdditionalInfos && ' *'}
           </Heading>
         </Center>
         <Center px="10" pb="10">
           <RuleView />
         </Center>
-        <Center display="flex" flexDirection="row">
-          <Box px="5">
-            <Text fontWeight="semibold" fontSize="xl" color="white">
-              {t('modal.result.name')}
+        <Data dgc={props.result.certificates[0].data.payload.hcert.dgc} />
+        {showAdditionalInfos && (
+          <>
+            <Text textAlign="center" color="white" fontSize="lg" my="5">
+              * The names on both certificates do not match. Please verify manually if that is
+              correct.
             </Text>
-            <Text fontWeight="semibold" fontSize="xl" color="white">
-              {t('modal.result.birthdate')}
-            </Text>
-          </Box>
-          <Box px="5">
-            <Text fontSize="xl" color="white">
-              {name}
-            </Text>
-            <Text fontSize="xl" color="white">
-              {birthdate}
-            </Text>
-          </Box>
-        </Center>
+            <Data dgc={props.result.certificates[1].data.payload.hcert.dgc} />
+          </>
+        )}
       </ModalBody>
 
       <ModalFooter>
-        <Text color="white">
-          <Text as="span" fontWeight="semibold">
-            {props.result.certificates[props.result.certificates.length - 1].ruleValidation?.results
-              .length ?? 0}{' '}
-          </Text>
-          {t('modal.result.rulecount')}
-        </Text>
-        <Box flex="1" />
         <Button
           size="lg"
           variant="outline"

@@ -18,10 +18,11 @@ import {
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import rules from '../../data/eu-dcc-rules.json'
 import { app, resetCounter, toggleCounter } from '../../state/app'
-import { acceptanceRules, getCountryAndState } from '../../utils/certlogic'
+import { CertLogic } from '../../utils/certlogic'
 import useColorMode from '../../utils/color-mode'
-import rules from '../../utils/eu-dcc-rules.json'
+import { getCountryAndState } from '../../utils/helper'
 import Flag from '../flag'
 import CountryModal from './country'
 import PurposeModal from './purpose'
@@ -36,6 +37,7 @@ type Props = {
 }
 
 const SettingsModal = (props: Props) => {
+  const certLogic = new CertLogic()
   const [lang, setLang] = useState<string>(
     localStorage.getItem('i18nextLng')?.substring(0, 2) ?? 'en'
   )
@@ -48,7 +50,10 @@ const SettingsModal = (props: Props) => {
   const appState = app.use()
 
   const countryAndState = getCountryAndState(tCountry, appState.country, appState.state)
-  const ruleCount = acceptanceRules(countryAndState.country.code, countryAndState.state.code).length
+  const ruleCount = certLogic.acceptanceRules(
+    countryAndState.country.code,
+    countryAndState.state.code
+  ).length
 
   useEffect(() => {
     i18n.changeLanguage(lang).catch(console.log)
@@ -77,7 +82,7 @@ const SettingsModal = (props: Props) => {
               </Button>
             </Box>
 
-            {countryAndState.country.code === 'DE' && (
+            {countryAndState.state.code !== '' && (
               <Box my="5" display="flex" flexDirection="row">
                 <Box flex="1">
                   <Text>{t('modal.settings.purpose')}</Text>

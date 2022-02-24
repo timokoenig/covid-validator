@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import vaccines from '../../../../utils/vaccines'
+import vaccines from '../../../../data/vaccines.json'
 
 type Props = {
   onClose: () => void

@@ -6,9 +6,9 @@ import { v4 as uuidv4 } from 'uuid'
 import LeftColumn from '../components/builder/left-column'
 import RightColumn from '../components/builder/right-column'
 import PageMeta from '../components/page-meta'
+import defaultImmunizationRulesGermany from '../data/default-immunization-rules-germany.json'
 import { builder, setRules } from '../state/builder'
 import { CustomRule } from '../utils/certlogic'
-import defaultImmunizationRulesGermany from '../utils/default-immunization-rules-germany'
 
 const BuilderPage = () => {
   const { t } = useTranslation('common')

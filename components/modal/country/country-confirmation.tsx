@@ -13,7 +13,8 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { acceptanceRules, getCountryAndState, Language, Rule } from '../../../utils/certlogic'
+import { CertLogic, Language, Rule } from '../../../utils/certlogic'
+import { getCountryAndState } from '../../../utils/helper'
 import BoxShadow from './box-shadow'
 
 type Props = {
@@ -24,6 +25,7 @@ type Props = {
 
 const RuleConfirmation = (props: Props) => {
   const { t } = useTranslation('common')
+  const certLogic = new CertLogic()
   const countryAndState = getCountryAndState(
     useTranslation('country').t,
     props.selection.country,
@@ -31,7 +33,10 @@ const RuleConfirmation = (props: Props) => {
   )
 
   const preferredLanguage = localStorage.getItem('i18nextLng')?.substring(0, 2) ?? 'en'
-  const countryRules = acceptanceRules(countryAndState.country.code, countryAndState.state.code)
+  const countryRules = certLogic.acceptanceRules(
+    countryAndState.country.code,
+    countryAndState.state.code
+  )
 
   const mapLanguage = (rule: Rule): Language | null => {
     if (rule.Description.length == 0) return null

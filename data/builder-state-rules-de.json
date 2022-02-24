@@ -245,11 +245,11 @@
       "Description": [
         {
           "lang": "en",
-          "desc": "The positive NAA test result (e.g., PCR) must be older than 28 days and not older than 180 days."
+          "desc": "The positive NAA test result (e.g., PCR) must be older than 28 days and not older than 90 days."
         },
         {
           "lang": "de",
-          "desc": "Der positive NAA-Test (z.B. PCR) muss mindestens 28 Tage und maximal 180 Tage zurückliegen."
+          "desc": "Der positive NAA-Test (z.B. PCR) muss mindestens 28 Tage und maximal 90 Tage zurückliegen."
         }
       ],
       "ValidFrom": "2022-01-01T00:00:00Z",
@@ -269,7 +269,7 @@
               {
                 "not-after": [
                   { "plusTime": [{ "var": "external.validationClock" }, 0, "day"] },
-                  { "plusTime": [{ "var": "payload.r.0.fr" }, 180, "day"] }
+                  { "plusTime": [{ "var": "payload.r.0.fr" }, 90, "day"] }
                 ]
               }
             ]
@@ -291,11 +291,11 @@
       "Description": [
         {
           "lang": "en",
-          "desc": "The positive NAA test result (e.g., PCR) must be older than 28 days and not older than 180 days."
+          "desc": "The positive NAA test result (e.g., PCR) must be older than 28 days and not older than 90 days."
         },
         {
           "lang": "de",
-          "desc": "Der positive NAA-Test (z.B. PCR) muss mindestens 28 Tage und maximal 180 Tage zurückliegen."
+          "desc": "Der positive NAA-Test (z.B. PCR) muss mindestens 28 Tage und maximal 90 Tage zurückliegen."
         }
       ],
       "ValidFrom": "2022-01-01T00:00:00Z",
@@ -315,7 +315,7 @@
               {
                 "not-after": [
                   { "plusTime": [{ "var": "external.validationClock" }, 0, "day"] },
-                  { "plusTime": [{ "var": "payload.t.0.sc" }, 180, "day"] }
+                  { "plusTime": [{ "var": "payload.t.0.sc" }, 90, "day"] }
                 ]
               }
             ]

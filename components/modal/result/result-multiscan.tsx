@@ -1,20 +1,20 @@
-import React from 'react'
 import {
-  ModalContent,
-  ModalFooter,
-  ModalBody,
   Button,
-  Text,
   Center,
   Heading,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  Text,
 } from '@chakra-ui/react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { ScanResult } from '../../../utils/dcc'
+import { ScanResult } from '../../card/camera-scan-view'
 import RuleView from './rule-view'
 
 type Props = {
   isOpen: boolean
-  onClose: (multiscan: boolean) => void
+  onClose: () => void
   result: ScanResult
 }
 
@@ -25,7 +25,9 @@ const ResultMultiscan = (props: Props) => {
       <ModalBody mb="5">
         <Center px="10" pt="10">
           <Heading color="white" textAlign="center">
-            {t('modal.result.testrequired')}
+            {`${props.result.multiscan
+              .map(s => t(`certificate.${s.toLowerCase()}`))
+              .join(` ${t('or')} `)} ${t('required')}`}
           </Heading>
         </Center>
         <Center px="10">
@@ -43,7 +45,7 @@ const ResultMultiscan = (props: Props) => {
           backgroundColor="orange.400"
           _hover={{ bg: 'orange.300' }}
           _active={{ bg: 'orange.400' }}
-          onClick={() => props.onClose(true)}
+          onClick={props.onClose}
         >
           {t('modal.result.scannext')}
         </Button>
