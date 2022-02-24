@@ -106,6 +106,7 @@
   "modal.settings.rules": "rules active",
 
   "modal.result.valid": "VALID",
+  "modal.result.valid.mismatch": "The name on both certificates do not match. Please verify manually if that is correct.",
   "modal.result.notvalid": "NOT VALID",
   "modal.result.technicallyinvalid": "TECHNICALLY INVALID",
   "modal.result.name": "Name",
