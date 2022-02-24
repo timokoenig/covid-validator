@@ -19,7 +19,7 @@ import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import rules from '../../data/eu-dcc-rules.json'
-import { app, resetCounter, toggleCounter } from '../../state/app'
+import { app, resetCounter, toggleCounter, toggleExcludeBooster } from '../../state/app'
 import { CertLogic } from '../../utils/certlogic'
 import useColorMode from '../../utils/color-mode'
 import { getCountryAndState } from '../../utils/helper'
@@ -92,6 +92,17 @@ const SettingsModal = (props: Props) => {
                   {t('change')}
                 </Button>
               </Box>
+            )}
+
+            {appState.purpose.includes('+') && (
+              <FormControl display="flex" alignItems="center" mb="5">
+                <FormLabel flex="1">{t('modal.settings.purpose.excludebooster')}</FormLabel>
+                <Switch
+                  size="lg"
+                  onChange={toggleExcludeBooster}
+                  isChecked={appState.excludeBooster}
+                />
+              </FormControl>
             )}
 
             <Box my="5" display="flex" flexDirection="row">

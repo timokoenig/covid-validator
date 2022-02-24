@@ -6,10 +6,11 @@ export type AppState = {
   purpose: string
   counter: number
   showCounter: boolean
+  excludeBooster: boolean
 }
 
 export const app = entity<AppState>(
-  { country: 'DE', state: '', purpose: '3G', counter: 0, showCounter: false },
+  { country: 'DE', state: '', purpose: '3G', counter: 0, showCounter: false, excludeBooster: true },
   [persistence('app')]
 )
 
@@ -43,4 +44,12 @@ export const decreaseCounter = () => {
 export const increaseCounter = () => {
   const state = app.get()
   app.set({ ...state, counter: state.counter + 1 })
+}
+
+export const toggleExcludeBooster = () => {
+  const state = app.get()
+  app.set({
+    ...state,
+    excludeBooster: !state.excludeBooster,
+  })
 }
