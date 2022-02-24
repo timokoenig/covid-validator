@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react'
+import { Accordion } from '@chakra-ui/react'
 import parse from 'html-react-parser'
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
@@ -8,7 +8,7 @@ import InformationBlock from './information-block'
 const Information = () => {
   const { t } = useTranslation('common')
   return (
-    <Box mb="10">
+    <Accordion defaultIndex={0} allowToggle mb="10">
       <InformationBlock
         title={t('information.purpose')}
         message={parse(t('information.purpose.message')) as string}
@@ -44,7 +44,7 @@ const Information = () => {
           </Trans>
         }
       />
-    </Box>
+    </Accordion>
   )
 }
 

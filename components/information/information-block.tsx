@@ -1,5 +1,12 @@
+import {
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Heading,
+  Text,
+} from '@chakra-ui/react'
 import React from 'react'
-import { Heading, Box, Text } from '@chakra-ui/react'
 
 type Props = {
   title: string | JSX.Element
@@ -7,12 +14,17 @@ type Props = {
 }
 
 const InformationBlock = (props: Props) => (
-  <Box mb="5">
-    <Heading as="h4" size="md" mb="2">
-      {props.title}
-    </Heading>
-    <Text>{props.message}</Text>
-  </Box>
+  <AccordionItem mb="5" borderTop="0">
+    <AccordionButton px="5" py="3" backgroundColor="gray.100" rounded="10">
+      <Heading as="h4" size="sm" fontWeight="semibold" textAlign="left" flex="1">
+        {props.title}
+      </Heading>
+      <AccordionIcon />
+    </AccordionButton>
+    <AccordionPanel>
+      <Text>{props.message}</Text>
+    </AccordionPanel>
+  </AccordionItem>
 )
 
 export default InformationBlock
