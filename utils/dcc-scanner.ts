@@ -55,6 +55,13 @@ export interface IDCCScannerConfig {
   purpose: () => string
 
   /**
+   * Exclude people with booster from providing an additional test certificate
+   *
+   * @return string
+   */
+  excludeBooster: () => boolean
+
+  /**
    * Validation clock
    *
    * @return Date
@@ -85,6 +92,9 @@ export class DCCScannerConfig implements IDCCScannerConfig {
   }
   purpose(): string {
     return app.get().purpose
+  }
+  excludeBooster(): boolean {
+    return app.get().excludeBooster
   }
   validationClock(): Date {
     return new Date()
@@ -282,7 +292,7 @@ export class DCCScanner implements IDCCScanner {
           this.config.country(),
           this.config.state()
         )
-        if (immunizationStatus !== IMMUNIZATION_STATUS_BOOSTER) {
+        if (immunizationStatus !== IMMUNIZATION_STATUS_BOOSTER || !this.config.excludeBooster()) {
           return [CERTIFICATE_TYPE_TEST]
         }
       }
@@ -309,7 +319,7 @@ export class DCCScanner implements IDCCScanner {
           this.config.country(),
           this.config.state()
         )
-        if (immunizationStatus !== IMMUNIZATION_STATUS_BOOSTER) {
+        if (immunizationStatus !== IMMUNIZATION_STATUS_BOOSTER || !this.config.excludeBooster()) {
           return [CERTIFICATE_TYPE_TEST]
         }
       }

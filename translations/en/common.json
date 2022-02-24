@@ -103,6 +103,7 @@
   "modal.settings.language": "Preferred Language",
   "modal.settings.counter": "Scan Counter",
   "modal.settings.purpose": "Purpose of Use",
+  "modal.settings.purpose.excludebooster": "Exclude people with a booster from providing a test certificate",
   "modal.settings.rules": "rules active",
 
   "modal.result.valid": "VALID",

@@ -25,12 +25,14 @@ class DebugConfig implements IDCCScannerConfig {
   dCountry: string
   dState: string
   dPurpose: string
+  dExcludeBooster: boolean
 
   constructor(data: {
     dscList?: DSC[] | null
     country?: string
     state?: string
     purpose?: string
+    excludeBooster?: boolean
   }) {
     this.dDscList =
       data.dscList === null
@@ -44,6 +46,7 @@ class DebugConfig implements IDCCScannerConfig {
     this.dCountry = data.country ?? 'DE'
     this.dState = data.state ?? 'HH'
     this.dPurpose = data.purpose ?? '3G'
+    this.dExcludeBooster = data.excludeBooster ?? true
   }
 
   dscList(): DSC[] | null {
@@ -57,6 +60,9 @@ class DebugConfig implements IDCCScannerConfig {
   }
   purpose(): string {
     return this.dPurpose
+  }
+  excludeBooster(): boolean {
+    return this.dExcludeBooster
   }
   validationClock(): Date {
     return new Date()
@@ -253,10 +259,20 @@ test('Multiscan VAC BOOSTER 2G+', async () => {
   const certLogic = new CertLogicMock({
     validateImmunizationRulesResult: IMMUNIZATION_STATUS_BOOSTER,
   })
-  const sut = new DCCScanner(new DebugConfig({ purpose: '2G+' }), certLogic)
+  const sut = new DCCScanner(new DebugConfig({ purpose: '2G+', excludeBooster: true }), certLogic)
   sut.certificates = [vaccinationDCC()]
 
   expect(sut.isMultiScanNecessary()).toMatchObject([])
+})
+
+test('Multiscan VAC BOOSTER 2G+; exclude booster', async () => {
+  const certLogic = new CertLogicMock({
+    validateImmunizationRulesResult: IMMUNIZATION_STATUS_BOOSTER,
+  })
+  const sut = new DCCScanner(new DebugConfig({ purpose: '2G+', excludeBooster: false }), certLogic)
+  sut.certificates = [vaccinationDCC()]
+
+  expect(sut.isMultiScanNecessary()).toMatchObject([CERTIFICATE_TYPE_TEST])
 })
 
 test('Multiscan REC 2G+', async () => {
@@ -334,10 +350,20 @@ test('Multiscan VAC BOOSTER 1G+', async () => {
   const certLogic = new CertLogicMock({
     validateImmunizationRulesResult: IMMUNIZATION_STATUS_BOOSTER,
   })
-  const sut = new DCCScanner(new DebugConfig({ purpose: '1G+' }), certLogic)
+  const sut = new DCCScanner(new DebugConfig({ purpose: '1G+', excludeBooster: true }), certLogic)
   sut.certificates = [vaccinationDCC()]
 
   expect(sut.isMultiScanNecessary()).toMatchObject([])
+})
+
+test('Multiscan VAC BOOSTER 1G+; exclude booster', async () => {
+  const certLogic = new CertLogicMock({
+    validateImmunizationRulesResult: IMMUNIZATION_STATUS_BOOSTER,
+  })
+  const sut = new DCCScanner(new DebugConfig({ purpose: '1G+', excludeBooster: false }), certLogic)
+  sut.certificates = [vaccinationDCC()]
+
+  expect(sut.isMultiScanNecessary()).toMatchObject([CERTIFICATE_TYPE_TEST])
 })
 
 test('Multiscan REC 1G+', async () => {
