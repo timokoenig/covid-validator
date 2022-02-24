@@ -6,6 +6,7 @@
 import { Certificate, PublicKey } from '@fidm/x509'
 import cose from 'cose-js'
 import moment from 'moment'
+import dscListDemoJson from '../data/dsc-demo.json'
 import dscListJson from '../data/dsc.json'
 import { app } from '../state/app'
 import {
@@ -63,6 +64,13 @@ export interface IDCCScannerConfig {
 
 export class DCCScannerConfig implements IDCCScannerConfig {
   dscList(): DSC[] | null {
+    if (process.env.NEXT_PUBLIC_DEBUG_DSC == 'true') {
+      return (
+        dscListDemoJson as {
+          certificates: DSC[]
+        }
+      ).certificates
+    }
     return (
       dscListJson as {
         certificates: DSC[]

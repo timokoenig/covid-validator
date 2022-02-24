@@ -64,9 +64,13 @@ The verification takes place in `async function verifyDCC(dcc: DCC): Promise<boo
 
 ### Test Data
 
-You can find a repository with test certificates [here](https://github.com/eu-digital-green-certificates/dcc-quality-assurance).
+You can find a repository with demo certificates [here](https://github.com/eu-digital-green-certificates/dcc-quality-assurance).
 
-**IMPORTANT**: At the moment **CovidValidator** only supports production certificates. The debug build will soon handle test certificates as well.
+The app will validate only production certificates by default. If you want to use these demo certificates set the following ENV var:
+
+```bash
+NEXT_PUBLIC_DEBUG_DSC=true
+```
 
 ## EU DCC Validation Rules
 
