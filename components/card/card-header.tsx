@@ -1,7 +1,7 @@
 import { Box, Button, ButtonProps, Text, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { app } from '../../state/app'
+import { app, disableScanner, enableScanner } from '../../state/app'
 import { getCountryAndState } from '../../utils/helper'
 import Flag from '../flag'
 import RulesModal from '../modal/rules'
@@ -32,7 +32,13 @@ const CardHeader = () => {
   return (
     <>
       <Box display="flex" flexDirection="row" backgroundColor="blue.300">
-        <CustButton flex="1" onClick={onOpenRules}>
+        <CustButton
+          flex="1"
+          onClick={() => {
+            disableScanner()
+            onOpenRules()
+          }}
+        >
           <Box display="flex" alignItems="center">
             <Flag country={countryAndState.country.code.toLowerCase()} size={25} />
           </Box>
@@ -51,7 +57,13 @@ const CardHeader = () => {
           </Box>
         </CustButton>
       </Box>
-      <RulesModal isOpen={isOpenRules} onClose={onCloseRules} />
+      <RulesModal
+        isOpen={isOpenRules}
+        onClose={() => {
+          enableScanner()
+          onCloseRules()
+        }}
+      />
     </>
   )
 }

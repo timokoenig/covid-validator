@@ -1,6 +1,7 @@
 import { Box } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
+import { enableScanner } from '../../state/app'
 import CameraScanView from './camera-scan-view'
 import CameraStartView from './camera-start-view'
 
@@ -18,7 +19,12 @@ const Card = () => {
       {scanMode ? (
         <CameraScanView onCloseCamera={() => setScanMode(false)} />
       ) : (
-        <CameraStartView onClickStart={() => setScanMode(true)} />
+        <CameraStartView
+          onClickStart={() => {
+            enableScanner()
+            setScanMode(true)
+          }}
+        />
       )}
     </Box>
   )

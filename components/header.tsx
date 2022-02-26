@@ -1,3 +1,4 @@
+import { disableScanner, enableScanner } from '@/state/app'
 import { SettingsIcon } from '@chakra-ui/icons'
 import {
   Box,
@@ -41,14 +42,24 @@ const Header = (props: Props) => {
                 aria-label="Options"
                 icon={<SettingsIcon />}
                 variant="outline"
-                onClick={onOpen}
+                onClick={() => {
+                  disableScanner()
+                  onOpen()
+                }}
               />
             </Menu>
           )}
         </Box>
         <Text fontWeight="semibold">{t('subtitle')}</Text>
       </Box>
-      <SettingsModal isOpen={isOpen} onClose={onClose} version={props.version ?? 'n/a'} />
+      <SettingsModal
+        isOpen={isOpen}
+        onClose={() => {
+          enableScanner()
+          onClose()
+        }}
+        version={props.version ?? 'n/a'}
+      />
     </>
   )
 }

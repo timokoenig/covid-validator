@@ -2,6 +2,7 @@ import { AspectRatio, Box, Button, Center, Heading, Text, useDisclosure } from '
 import dynamic from 'next/dynamic'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { app, disableScanner, enableScanner } from '../../state/app'
 import { DCC } from '../../utils/dcc'
 import { DCCScanner } from '../../utils/dcc-scanner'
 import { dislpayName } from '../../utils/helper'
@@ -32,9 +33,9 @@ const CameraScanView = (props: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [error, setError] = useState<string | null>(null)
   const [scannerFacingMode, setScannerFacingMode] = useState<string>('environment')
-  const [loading, setLoading] = useState<boolean>(false)
   const [data, setData] = useState<string>('')
   const [scanResult, setScanResult] = useState<ScanResult | null>(null)
+  const appState = app.use()
 
   const onModalClose = () => {
     if (dccScanner.isMultiScanNecessary().length === 0) {
@@ -42,7 +43,7 @@ const CameraScanView = (props: Props) => {
       dccScanner.clear()
     }
     setData('')
-    setLoading(false)
+    enableScanner()
     onClose()
   }
 
@@ -85,10 +86,10 @@ const CameraScanView = (props: Props) => {
               </Box>
             )}
             <QRCodeScanner
-              enableScan={!loading}
+              enableScan={appState.enableScanner}
               facingMode={scannerFacingMode}
               onData={qrcode => {
-                setLoading(true)
+                disableScanner()
                 if (!qrcode.startsWith('HC1:')) {
                   // User scanned a non-DCC QR code
                   setScanResult({
@@ -103,7 +104,7 @@ const CameraScanView = (props: Props) => {
               }}
               onError={setError}
             />
-            {loading && <LoadingIndicator />}
+            {!appState.enableScanner && <LoadingIndicator />}
           </>
         </AspectRatio>
         {(scanResult?.multiscan.length ?? 0) > 0 && (

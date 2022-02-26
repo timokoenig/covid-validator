@@ -7,10 +7,19 @@ export type AppState = {
   counter: number
   showCounter: boolean
   excludeBooster: boolean
+  enableScanner: boolean
 }
 
 export const app = entity<AppState>(
-  { country: 'DE', state: '', purpose: '3G', counter: 0, showCounter: false, excludeBooster: true },
+  {
+    country: 'DE',
+    state: '',
+    purpose: '3G',
+    counter: 0,
+    showCounter: false,
+    excludeBooster: true,
+    enableScanner: true,
+  },
   [persistence('app')]
 )
 
@@ -51,5 +60,21 @@ export const toggleExcludeBooster = () => {
   app.set({
     ...state,
     excludeBooster: !state.excludeBooster,
+  })
+}
+
+export const enableScanner = () => {
+  const state = app.get()
+  app.set({
+    ...state,
+    enableScanner: true,
+  })
+}
+
+export const disableScanner = () => {
+  const state = app.get()
+  app.set({
+    ...state,
+    enableScanner: false,
   })
 }

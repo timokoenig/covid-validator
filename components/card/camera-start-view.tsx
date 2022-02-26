@@ -1,5 +1,5 @@
+import { Box, Button, Center, Text } from '@chakra-ui/react'
 import React from 'react'
-import { Button, Box, Text, Center } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
 
 type Props = {
