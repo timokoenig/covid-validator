@@ -43,7 +43,7 @@ const ResultValid = (props: Props) => {
   const Data = (dataProps: { dgc: DigitalGreenCertificate }): JSX.Element => {
     const name = dislpayName(dataProps.dgc.nam)
     const birthdate = dataProps.dgc.dob
-      ? moment(dataProps.dgc.dob).format('MM.DD.YYYY')
+      ? moment(dataProps.dgc.dob).format('DD.MM.YYYY')
       : 'XX.XX.XXXX'
     return (
       <Center display="flex" flexDirection="row">
