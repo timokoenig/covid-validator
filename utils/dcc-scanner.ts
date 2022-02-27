@@ -193,7 +193,9 @@ export class DCCScanner implements IDCCScanner {
 
   async check(dcc: DCC): Promise<void> {
     // verify dcc
-    const isExpired = dcc.data.payload.exp ? moment() > moment.unix(dcc.data.payload.exp) : false
+    const isExpired = dcc.data.payload.exp
+      ? moment() > moment.unix(parseInt(dcc.data.payload.exp, 10))
+      : false
     if (isExpired) {
       // certificate is expired
       throw new DCCExpiredError()
