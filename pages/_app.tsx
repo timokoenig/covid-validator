@@ -18,6 +18,10 @@ i18next
         common: require('../translations/en/common.json'),
         country: require('../translations/en/country.json'),
       },
+      es: {
+        common: require('../translations/es/common.json'),
+        country: require('../translations/es/country.json'),
+      },
       de: {
         common: require('../translations/de/common.json'),
         country: require('../translations/de/country.json'),
