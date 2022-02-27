@@ -1,16 +1,22 @@
 import React, { useEffect } from 'react'
 import { Container, useDisclosure } from '@chakra-ui/react'
-import { useTranslation } from 'react-i18next'
+import dynamic from 'next/dynamic'
 import Header from '../components/header'
-import Card from '../components/card'
 import Information from '../components/information'
 import Footer from '../components/footer'
-import OnboardingModal from '~/components/onboarding-modal'
-import PageMeta from '~/components/page-meta'
+import OnboardingModal from '../components/modal/onboarding'
+import PageMeta from '../components/page-meta'
+
+const Card = dynamic(() => import('../components/card'), {
+  ssr: false,
+})
+
+const Counter = dynamic(() => import('../components/counter'), {
+  ssr: false,
+})
 
 const IndexPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { i18n } = useTranslation()
 
   useEffect(() => {
     // check if we need to show the onboarding
@@ -18,9 +24,6 @@ const IndexPage = () => {
     if (onboarding !== 'true') {
       onOpen()
     }
-    // change users preferred language
-    const language = localStorage.getItem('lang')
-    i18n.changeLanguage(language ?? 'en').catch(console.log)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -30,6 +33,7 @@ const IndexPage = () => {
       <Container marginTop={10}>
         <Header version={process.env.NEXT_PUBLIC_VERSION as string} />
         <Card />
+        <Counter />
         <Information />
         <Footer />
       </Container>

@@ -1,19 +1,20 @@
-import React from 'react'
+import { disableScanner, enableScanner } from '@/state/app'
+import { SettingsIcon } from '@chakra-ui/icons'
 import {
-  Heading,
   Box,
-  Text,
-  Menu,
-  MenuButton,
+  Heading,
   IconButton,
   Link,
+  Menu,
+  MenuButton,
+  Text,
   useDisclosure,
 } from '@chakra-ui/react'
-import { HamburgerIcon } from '@chakra-ui/icons'
-import { useTranslation } from 'react-i18next'
 import dynamic from 'next/dynamic'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
-const SettingsModal = dynamic(() => import('./settings-modal'), {
+const SettingsModal = dynamic(() => import('./modal/settings'), {
   ssr: false,
 })
 
@@ -28,30 +29,37 @@ const Header = (props: Props) => {
   return (
     <>
       <Box mb="5">
-        <Box display="flex">
-          <Heading as="h1" size="2xl" flex="1">
+        <Box display="flex" flexWrap="wrap">
+          <Heading as="h1" size="2xl" flex="1" mr="3">
             <Link href="/" _hover={{ textDecoration: 'none' }}>
-              Covid Validator
-            </Link>{' '}
-            <Text display="inline" fontSize="lg" color="red">
-              BETA
-            </Text>
+              CovidValidator
+            </Link>
           </Heading>
           {(props.showMenu ?? true) && (
             <Menu>
               <MenuButton
                 as={IconButton}
                 aria-label="Options"
-                icon={<HamburgerIcon />}
+                icon={<SettingsIcon />}
                 variant="outline"
-                onClick={onOpen}
+                onClick={() => {
+                  disableScanner()
+                  onOpen()
+                }}
               />
             </Menu>
           )}
         </Box>
         <Text fontWeight="semibold">{t('subtitle')}</Text>
       </Box>
-      <SettingsModal isOpen={isOpen} onClose={onClose} version={props.version ?? 'n/a'} />
+      <SettingsModal
+        isOpen={isOpen}
+        onClose={() => {
+          enableScanner()
+          onClose()
+        }}
+        version={props.version ?? 'n/a'}
+      />
     </>
   )
 }

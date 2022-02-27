@@ -1,5 +1,5 @@
-import React from 'react'
 import Head from 'next/head'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 type Props = {
@@ -10,7 +10,7 @@ const PageMeta = (props: Props) => {
   const { t } = useTranslation('common')
   return (
     <Head>
-      <title>Covid Validator</title>
+      <title>CovidValidator</title>
       <meta name="description" content={t('meta.description')} />
       {props.allowIndex === false && <meta name="robots" content="noindex" />}
       <meta name="theme-color" content="#ffffff" />

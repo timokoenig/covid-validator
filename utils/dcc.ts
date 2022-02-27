@@ -4,22 +4,14 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import base45 from 'base45'
-import zlib from 'pako'
 import cbor from 'cbor'
-import { Certificate, PublicKey } from '@fidm/x509'
-import cose from 'cose-js'
 import { ExtendedResults } from 'cbor/types/lib/decoder'
-import { DCCRuleValidationResult, validateDCCRules } from './certlogic'
-import dscListJson from './dsc.json'
+import zlib from 'pako'
 
-const dscList = dscListJson as {
-  certificates: {
-    kid: string
-    rawData: string
-  }[]
-}
-
-type Vaccination = {
+/**
+ * Vaccination type
+ */
+export type Vaccination = {
   // Disease or agent targeted
   tg: string
   // Vaccine or prophylaxis
@@ -42,7 +34,10 @@ type Vaccination = {
   ci: string
 }
 
-type Test = {
+/**
+ * Test type
+ */
+export type Test = {
   // Disease or agent targeted
   tg: string
   // Type of Test
@@ -65,7 +60,10 @@ type Test = {
   ci: string
 }
 
-type Recovery = {
+/**
+ * Recovery type
+ */
+export type Recovery = {
   // Disease or agent targeted
   tg: string
   // Date of First Positive Test Result
@@ -82,14 +80,20 @@ type Recovery = {
   ci: string
 }
 
-type Name = {
+/**
+ * Name type
+ */
+export type Name = {
   gn?: string
   fn?: string
   gnt?: string
   fnt: string
 }
 
-type DigitalGreenCertificate = {
+/**
+ * DigitalGreenCertificate type
+ */
+export type DigitalGreenCertificate = {
   nam: Name
   dob?: string
   v?: Vaccination[]
@@ -98,10 +102,16 @@ type DigitalGreenCertificate = {
   ver: string
 }
 
+/**
+ * HealthCertificateClaim type
+ */
 type HealthCertificateClaim = {
   dgc: DigitalGreenCertificate
 }
 
+/**
+ * CBORWebToken type
+ */
 export type CBORWebToken = {
   iss: string
   iat?: string
@@ -109,158 +119,90 @@ export type CBORWebToken = {
   hcert: HealthCertificateClaim
 }
 
+/**
+ * DCCHeader type
+ */
 export type DCCHeader = {
   kid: string | null
 }
 
+/**
+ * DCCData type
+ */
 export type DCCData = {
   header: DCCHeader
   payload: CBORWebToken
   signature: string
 }
 
-export type DCC = {
+/**
+ * DCCParseError
+ */
+export class DCCParseError extends Error {
+  name: string = 'DCCParseError'
+}
+
+/**
+ * Parse DCC from QR code data
+ *
+ * @param data - QR code data
+ */
+export class DCC {
   raw: string
   decompressedRaw: Uint8Array
   data: DCCData
-}
 
-export type CertificateResult = {
-  dcc: DCC
-  verification: boolean
-  ruleValidation?: DCCRuleValidationResult
-}
-
-export type ScanResult = {
-  certificates: CertificateResult[]
-  isMultiScan: boolean
-}
-
-class DCCParseError extends Error {}
-
-// parse, verify and validate rules
-export async function checkCertificate(data: string): Promise<ScanResult> {
-  // parse dcc
-  const dcc = await parseDCC(data)
-  // verify dcc
-  const verified = await verifyDCC(dcc)
-  if (!verified) {
-    // verification failed
-    return {
-      certificates: [
-        {
-          dcc,
-          verification: false,
-        },
-      ],
-      isMultiScan: false,
+  constructor(data: string) {
+    if (!data.startsWith('HC1:')) throw DCCParseError
+    const certData = data.replace('HC1:', '')
+    const decodedData = base45.decode(certData)
+    const decompressedData = zlib.inflate(decodedData)
+    const coseResult = cbor.decodeAllSync(decompressedData)
+    if (coseResult.length == 0) throw DCCParseError
+    const [protected_header, unprotected_header, payload, signature] = coseResult[0].value
+    this.raw = data
+    this.decompressedRaw = decompressedData
+    this.data = {
+      header: {
+        kid: this.parseKid(cbor.decodeAllSync(protected_header), unprotected_header),
+      },
+      payload: this.parsePayload(cbor.decodeAllSync(payload)),
+      signature,
     }
   }
-  // check dcc is multiscan is required
-  // validate dcc against selected rules
-  const ruleResult = validateDCCRules(dcc, localStorage.getItem('country') ?? 'DE', new Date())
-  return {
-    certificates: [
-      {
-        dcc,
-        verification: true,
-        ruleValidation: ruleResult,
+
+  /**
+   * Parse CBOR payload into CBORWebToken
+   *
+   * @param payload - Decoded CBOR payload
+   * @returns CBORWebToken
+   */
+  private parsePayload(payload: any[] | ExtendedResults[]): CBORWebToken {
+    return {
+      iss: payload[0].get(1) as string,
+      iat: (payload[0].get(6) as number).toFixed(0),
+      exp: (payload[0].get(4) as number).toFixed(0),
+      hcert: {
+        dgc: payload[0].get(-260).get(1),
       },
-    ],
-    isMultiScan: ruleResult.isValid ? isMultiScan(dcc) : false,
-  }
-}
-
-function isMultiScan(dcc: DCC): boolean {
-  const purpose = localStorage.getItem('purpose') ?? ''
-  if (!purpose.includes('+')) return false
-  // current purpose required additional test, except for valid booster certificates
-  const vac = dcc.data.payload.hcert.dgc.v
-  if (vac == undefined || vac.length == 0) {
-    // TODO throw error
-    return false
-  }
-  const isBooster = vac[0].dn >= 3 || vac[0].dn > vac[0].sd
-  return !isBooster
-}
-
-export async function parseDCC(data: string): Promise<DCC> {
-  if (!data.startsWith('HC1:')) throw DCCParseError
-  const certData = data.replace('HC1:', '')
-  const decodedData = base45.decode(certData)
-  const decompressedData = zlib.inflate(decodedData)
-  const coseResult = cbor.decodeAllSync(decompressedData)
-  if (coseResult.length == 0) throw DCCParseError
-  const [protected_header, unprotected_header, payload, signature] = coseResult[0].value
-  return {
-    raw: data,
-    decompressedRaw: decompressedData,
-    data: {
-      header: {
-        kid: parseKid(cbor.decodeAllSync(protected_header), unprotected_header),
-      },
-      payload: parsePayload(cbor.decodeAllSync(payload)),
-      signature,
-    },
-  }
-}
-
-function parsePayload(payload: any[] | ExtendedResults[]): CBORWebToken {
-  return {
-    iss: payload[0].get(1) as string,
-    iat: (payload[0].get(6) as number).toFixed(0),
-    exp: (payload[0].get(4) as number).toFixed(0),
-    hcert: {
-      dgc: payload[0].get(-260).get(1),
-    },
-  }
-}
-
-export async function verifyDCC(dcc: DCC): Promise<boolean> {
-  const keyByKid = dscList.certificates.find(cert => cert.kid == dcc.data.header.kid)
-  const certList = keyByKid ? [keyByKid] : dscList.certificates
-  for (const cert of certList) {
-    const chunkedData = chunkSubstr(cert.rawData, 64).join('\n')
-    const certBuff = Buffer.from(
-      `-----BEGIN CERTIFICATE-----\n${chunkedData}\n-----END CERTIFICATE-----`
-    )
-    const chunkedPubkey = chunkSubstr(
-      Certificate.fromPEM(certBuff).publicKeyRaw.toString('base64'),
-      64
-    ).join('\n')
-    const pubkeyBuff = Buffer.from(
-      `-----BEGIN PUBLIC KEY-----\n${chunkedPubkey}\n-----END PUBLIC KEY-----`
-    )
-    const publicKey = PublicKey.fromPEM(pubkeyBuff).keyRaw
-    const keyX = publicKey.slice(1, 1 + 32)
-    const keyY = publicKey.slice(33, 33 + 32)
-    try {
-      // eslint-disable-next-line no-await-in-loop
-      await cose.sign.verify(dcc.decompressedRaw, {
-        key: { x: keyX, y: keyY },
-      })
-      return true
-      // eslint-disable-next-line no-empty
-    } catch {}
+    }
   }
 
-  return false
-}
-
-function parseKid(protectedHeader: any, unprotectedHeader: any): string | null {
-  let kid = protectedHeader[0].get(4)
-  if (!kid) {
-    kid = unprotectedHeader.get(4)
+  /**
+   * Parse kid from CBOR header
+   *
+   * @param protectedHeader - any
+   * @param unprotectedHeader - any
+   * @returns kid string
+   */
+  private parseKid(protectedHeader: any, unprotectedHeader: any): string | null {
+    let kid = protectedHeader[0].get(4)
+    if (!kid) {
+      kid = unprotectedHeader.get(4)
+    }
+    if (!kid) return null
+    return Buffer.from(
+      (kid.reduce((str: any, v: any) => `${str}${String.fromCharCode(v)}`, ''), 'binary')
+    ).toString()
   }
-  if (!kid) return null
-  return btoa(kid.reduce((str: any, v: any) => `${str}${String.fromCharCode(v)}`, ''))
-}
-
-function chunkSubstr(str: string, size: number): string[] {
-  const numChunks = Math.ceil(str.length / size)
-  const chunks = new Array(numChunks)
-  for (let i = 0, o = 0; i < numChunks; ++i, o += size) {
-    chunks[i] = str.substr(o, size)
-  }
-  return chunks
 }

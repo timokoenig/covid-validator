@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Container, Heading, Text, List, ListItem, Link } from '@chakra-ui/react'
 import Header from '../components/header'
 import Footer from '../components/footer'
-import PageMeta from '~/components/page-meta'
+import PageMeta from '../components/page-meta'
 
 type Props = {
   contactName: string
@@ -1320,7 +1320,7 @@ const PrivacyPage = () => {
   const [lang, setLang] = useState<string>('')
 
   useEffect(() => {
-    const preferredLanguage = localStorage.getItem('lang') ?? 'en'
+    const preferredLanguage = localStorage.getItem('i18nextLng')?.substring(0, 2) ?? 'en'
     setLang(preferredLanguage)
   }, [])
 

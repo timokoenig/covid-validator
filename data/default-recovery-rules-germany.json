@@ -1,0 +1,52 @@
+[
+  {
+    "id": "recovery",
+    "rule": {
+      "if": [
+        { "var": "payload.r.0" },
+        {
+          "and": [
+            {
+              "not-before": [
+                { "plusTime": [{ "var": "external.validationClock" }, 0, "day"] },
+                { "plusTime": [{ "var": "payload.r.0.fr" }, 28, "day"] }
+              ]
+            },
+            {
+              "not-after": [
+                { "plusTime": [{ "var": "external.validationClock" }, 0, "day"] },
+                { "plusTime": [{ "var": "payload.r.0.fr" }, 90, "day"] }
+              ]
+            }
+          ]
+        },
+        false
+      ]
+    }
+  },
+  {
+    "id": "test-recovery",
+    "rule": {
+      "if": [
+        { "var": "payload.t.0" },
+        {
+          "and": [
+            {
+              "not-before": [
+                { "plusTime": [{ "var": "external.validationClock" }, 0, "day"] },
+                { "plusTime": [{ "var": "payload.t.0.sc" }, 28, "day"] }
+              ]
+            },
+            {
+              "not-after": [
+                { "plusTime": [{ "var": "external.validationClock" }, 0, "day"] },
+                { "plusTime": [{ "var": "payload.t.0.sc" }, 90, "day"] }
+              ]
+            }
+          ]
+        },
+        false
+      ]
+    }
+  }
+]
