@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-implicit-any-catch */
 import dscDemoListJson from '../data/dsc-demo.json'
@@ -424,6 +425,35 @@ test('Multiscan TES RECOVERY 1G', async () => {
   sut.certificates = [testDCC()]
 
   expect(sut.isMultiScanNecessary()).toMatchObject([])
+})
+
+/////////////////// Fraudulent Certificate ///////////////////
+
+test('Invalidate Fraudulent Vaccination Certificate', async () => {
+  const certLogic = new CertLogicMock({})
+  const sut = new DCCScanner(new DebugConfig({}), certLogic)
+  const dcc = vaccinationDCC()
+  dcc.data.payload.hcert.dgc.v![0].ci = 'URN:UVCI:01:FR:T5DWTJYS4ZR8#4'
+
+  await expect(() => sut.check(dcc)).rejects.toThrowError(DCCVerifyError)
+})
+
+test('Invalidate Fraudulent Test Certificate', async () => {
+  const certLogic = new CertLogicMock({})
+  const sut = new DCCScanner(new DebugConfig({}), certLogic)
+  const dcc = testDCC()
+  dcc.data.payload.hcert.dgc.t![0].ci = 'URN:UVCI:01:FR:T5DWTJYS4ZR8#4'
+
+  await expect(() => sut.check(dcc)).rejects.toThrowError(DCCVerifyError)
+})
+
+test('Invalidate Fraudulent Recovery Certificate', async () => {
+  const certLogic = new CertLogicMock({})
+  const sut = new DCCScanner(new DebugConfig({}), certLogic)
+  const dcc = recoveryDCC()
+  dcc.data.payload.hcert.dgc.r![0].ci = 'URN:UVCI:01:FR:T5DWTJYS4ZR8#4'
+
+  await expect(() => sut.check(dcc)).rejects.toThrowError(DCCVerifyError)
 })
 
 export {}
