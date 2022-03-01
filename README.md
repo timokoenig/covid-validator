@@ -129,6 +129,11 @@ The app uses [i18next](https://www.i18next.com/) for internationalization. We wa
 
 Note: If you do not add a translation in any given language, the app will default to English.
 
+### Available Languages
+
+- English (100%)
+- German (100%)
+
 ## More Information
 
 - [A collection of Country and State rules](./docs/README.md).
