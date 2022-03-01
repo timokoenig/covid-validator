@@ -133,6 +133,7 @@ Note: If you do not add a translation in any given language, the app will defaul
 
 - English (100%)
 - German (100%)
+- Lithuanian (85%, further checks required)
 
 ## More Information
 
