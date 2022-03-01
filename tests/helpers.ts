@@ -72,6 +72,7 @@ export function testDCC(): DCC {
         tg: '840539006',
         tr: '260415000',
         tt: 'LP217198-3',
+        ma: '2290',
       },
     ],
     dob: '1970-01-01',
