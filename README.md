@@ -84,6 +84,8 @@ The [EU DCC Validation Rules](https://ec.europa.eu/health/system/files/2021-06/e
 
 For reference implementations, please refer to [github.com/ehn-dcc-development/dgc-business-rules](https://github.com/ehn-dcc-development/dgc-business-rules).
 
+The DGCA Business Rule Service is provided by T-Systems Internation GmbH under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+
 ## Custom Rule Builder
 
 The custom rule builder allows you to create your own rule set if the available rules do not meet your requirements. This feature is currently in **BETA** and it might occur problems, so please use it with caution. Nevertheless this does not affect the **CovidValidator** with all country and state rules!
