@@ -14,6 +14,7 @@ Check EU Digitial Covid Certificates with ease and validate them against local o
 - 🌍 Validate against country or local rules
 - 🎟 Scan Counter to keep track of admission criteria at local venues
 - 📴 Works offline on smartphones, tablets, and desktop computers
+- 🗣 Available Languages: 🇺🇸 🇩🇪 🇵🇱 🇱🇹
 
 ### What is the purpose of CovidValidator?
 
