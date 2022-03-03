@@ -26,6 +26,10 @@ i18next
         common: require('../translations/pl/common.json'),
         country: require('../translations/pl/country.json'),
       },
+      lt: {
+        common: require('../translations/lt/common.json'),
+        country: require('../translations/lt/country.json'),
+      },
     },
   })
   .catch(console.log)

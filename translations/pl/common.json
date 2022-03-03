@@ -167,11 +167,5 @@
   "builder.immunizationstatus": "Status uodpornienia",
   "builder.select.component": "Wybierz komponent",
   "builder.select.custom": "Własna strona",
-  "builder.select.default": "Domyślnie",
-
-  "lang": {
-    "en": "Język angielski",
-    "de": "Niemiecki",
-    "pl": "Polska"
-  }
+  "builder.select.default": "Domyślnie"
 }

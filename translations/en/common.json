@@ -170,7 +170,9 @@
   "builder.select.default": "Default",
 
   "lang": {
+    "de": "Deutsch",
     "en": "English",
-    "de": "German"
+    "lt": "Lietuvių",
+    "pl": "Polski"
   }
 }

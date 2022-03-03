@@ -167,11 +167,5 @@
   "builder.immunizationstatus": "Imunizacijos būklė",
   "builder.select.component": "Pasirinkite komponentą",
   "builder.select.custom": "Pasirinktinis",
-  "builder.select.default": "Numatytoji",
-
-  "lang": {
-    "en": "Anglų kalba",
-    "de": "Vokiečių kalba",
-    "lt": "Lietuvių kalba"
-  }
+  "builder.select.default": "Numatytoji"
 }
