@@ -20,6 +20,7 @@ const InformationBlock = (props: Props) => (
       px="5"
       py="3"
       backgroundColor={useColorModeValue('gray.100', 'gray.700')}
+      _hover={{ backgroundColor: useColorModeValue('gray.200', 'gray.600') }}
       rounded="10"
     >
       <Heading as="h4" size="sm" fontWeight="semibold" textAlign="left" flex="1">

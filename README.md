@@ -14,6 +14,7 @@ Check EU Digitial Covid Certificates with ease and validate them against local o
 - 🌍 Validate against country or local rules
 - 🎟 Scan Counter to keep track of admission criteria at local venues
 - 📴 Works offline on smartphones, tablets, and desktop computers
+- 🗣 Available Languages: 🇺🇸 🇩🇪 🇵🇱 🇱🇹
 
 ### What is the purpose of CovidValidator?
 
@@ -84,6 +85,8 @@ The [EU DCC Validation Rules](https://ec.europa.eu/health/system/files/2021-06/e
 
 For reference implementations, please refer to [github.com/ehn-dcc-development/dgc-business-rules](https://github.com/ehn-dcc-development/dgc-business-rules).
 
+The DGCA Business Rule Service is provided by T-Systems Internation GmbH under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+
 ## Custom Rule Builder
 
 The custom rule builder allows you to create your own rule set if the available rules do not meet your requirements. This feature is currently in **BETA** and it might occur problems, so please use it with caution. Nevertheless this does not affect the **CovidValidator** with all country and state rules!
@@ -128,6 +131,13 @@ The app uses [i18next](https://www.i18next.com/) for internationalization. We wa
 4. Save and commit your changes
 
 Note: If you do not add a translation in any given language, the app will default to English.
+
+### Available Languages
+
+- English (100%)
+- German (100%)
+- Polish (95%)
+- Lithuanian (85%, further checks required)
 
 ## More Information
 
