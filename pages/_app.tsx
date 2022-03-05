@@ -22,17 +22,21 @@ i18next
         common: require('../translations/de/common.json'),
         country: require('../translations/de/country.json'),
       },
-      ro: {
-        common: require('../translations/ro/common.json'),
-        country: require('../translations/ro/country.json'),
+      fr: {
+        common: require('../translations/fr/common.json'),
+        country: require('../translations/fr/country.json'),
+      },
+      lt: {
+        common: require('../translations/lt/common.json'),
+        country: require('../translations/lt/country.json'),
       },
       pl: {
         common: require('../translations/pl/common.json'),
         country: require('../translations/pl/country.json'),
       },
-      lt: {
-        common: require('../translations/lt/common.json'),
-        country: require('../translations/lt/country.json'),
+      ro: {
+        common: require('../translations/ro/common.json'),
+        country: require('../translations/ro/country.json'),
       },
     },
   })
