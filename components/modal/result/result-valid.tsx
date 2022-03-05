@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unstable-nested-components */
 import {
   Box,
@@ -10,13 +11,15 @@ import {
   Text,
 } from '@chakra-ui/react'
 import moment from 'moment'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { increaseCounter } from '../../../state/app'
 import { DigitalGreenCertificate } from '../../../utils/dcc'
 import { dislpayName } from '../../../utils/helper'
 import { ScanResult } from '../../card/camera-scan-view'
 import RuleView from './rule-view'
+
+const CLOSE_MODAL_TIMEOUT_SECONDS = 30
 
 type Props = {
   isOpen: boolean
@@ -26,6 +29,7 @@ type Props = {
 
 const ResultValid = (props: Props) => {
   const { t } = useTranslation('common')
+  const [timer, setTimer] = useState<number>(CLOSE_MODAL_TIMEOUT_SECONDS)
 
   // Show additional information if we have scanned two certificates from different people
   const showAdditionalInfos = ((): boolean => {
@@ -39,6 +43,17 @@ const ResultValid = (props: Props) => {
     // increase counter for valid certificate
     increaseCounter()
   }, [])
+
+  useEffect(() => {
+    // Set timeout interval to close modal after X seconds
+    const interval = setInterval(() => {
+      const newTimer = timer - 1
+      setTimer(timer - 1)
+      if (newTimer > 0) return
+      props.onClose(false)
+    }, 1000)
+    return () => clearInterval(interval)
+  }, [timer])
 
   const Data = (dataProps: { dgc: DigitalGreenCertificate }): JSX.Element => {
     const name = dislpayName(dataProps.dgc.nam)
@@ -100,7 +115,7 @@ const ResultValid = (props: Props) => {
           _active={{ bg: 'green.400' }}
           onClick={() => props.onClose(false)}
         >
-          {t('close')}
+          {t('close')} ({timer.toString()})
         </Button>
       </ModalFooter>
     </ModalContent>

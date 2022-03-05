@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
@@ -11,6 +13,31 @@ import { app } from '../state/app'
 import { builder } from '../state/builder'
 import { DCC } from './dcc'
 import { exportRules, getCertificateType } from './helper'
+
+const valueSets: any = {
+  'country-2-codes': Object.keys(require('../data/value-sets/country-2-codes.json').valueSetValues),
+  'covid-19-lab-result': Object.keys(
+    require('../data/value-sets/covid-19-lab-result.json').valueSetValues
+  ),
+  'covid-19-lab-test-manufacturer-and-name': Object.keys(
+    require('../data/value-sets/covid-19-lab-test-manufacturer-and-name.json').valueSetValues
+  ),
+  'covid-19-lab-test-type': Object.keys(
+    require('../data/value-sets/covid-19-lab-test-type.json').valueSetValues
+  ),
+  'disease-agent-targeted': Object.keys(
+    require('../data/value-sets/disease-agent-targeted.json').valueSetValues
+  ),
+  'sct-vaccines-covid-19': Object.keys(
+    require('../data/value-sets/sct-vaccines-covid-19.json').valueSetValues
+  ),
+  'vaccines-covid-19-auth-holders': Object.keys(
+    require('../data/value-sets/vaccines-covid-19-auth-holders.json').valueSetValues
+  ),
+  'vaccines-covid-19-names': Object.keys(
+    require('../data/value-sets/vaccines-covid-19-names.json').valueSetValues
+  ),
+}
 
 /**
  * Rules type
@@ -99,6 +126,9 @@ export type ValidationResult = {
 export type ExternalParameters = {
   valueSets: any
   validationClock: string
+  exp: string | undefined
+  iat: string | undefined
+  issuerCountryCode: string
 }
 
 /**
@@ -236,8 +266,11 @@ export class CertLogic implements ICertLogic {
         return this.validateDCCRule(rule, {
           payload: dcc.data.payload.hcert.dgc,
           external: {
-            valueSets: [],
+            valueSets,
             validationClock: validationClock.toISOString(),
+            exp: dcc.data.payload.exp,
+            iat: dcc.data.payload.iat,
+            issuerCountryCode: dcc.data.payload.iss,
           },
         })
       })
@@ -253,8 +286,11 @@ export class CertLogic implements ICertLogic {
       return this.validateDCCRule(rule, {
         payload: dcc.data.payload.hcert.dgc,
         external: {
-          valueSets: [],
+          valueSets,
           validationClock: validationClock.toISOString(),
+          exp: dcc.data.payload.exp,
+          iat: dcc.data.payload.iat,
+          issuerCountryCode: dcc.data.payload.iss,
         },
       })
     })
@@ -289,8 +325,11 @@ export class CertLogic implements ICertLogic {
         {
           payload: dcc.data.payload.hcert.dgc,
           external: {
-            valueSets: [],
+            valueSets,
             validationClock: new Date().toISOString(),
+            exp: dcc.data.payload.exp,
+            iat: dcc.data.payload.iat,
+            issuerCountryCode: dcc.data.payload.iss,
           },
         }
       )
@@ -323,8 +362,11 @@ export class CertLogic implements ICertLogic {
         {
           payload: dcc.data.payload.hcert.dgc,
           external: {
-            valueSets: [],
+            valueSets,
             validationClock: new Date().toISOString(),
+            exp: dcc.data.payload.exp,
+            iat: dcc.data.payload.iat,
+            issuerCountryCode: dcc.data.payload.iss,
           },
         }
       )

@@ -167,11 +167,5 @@
   "builder.immunizationstatus": "Starea de imunizare",
   "builder.select.component": "Selectați componenta",
   "builder.select.custom": "Personalizat",
-  "builder.select.default": "Implicit",
-
-  "lang": {
-    "en": "Engleză",
-    "de": "Germană",
-    "ro": "Românesc"
-  }
+  "builder.select.default": "Implicit"
 }

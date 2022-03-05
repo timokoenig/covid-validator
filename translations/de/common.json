@@ -167,11 +167,5 @@
   "builder.immunizationstatus": "Immunisierungsstatus",
   "builder.select.component": "Komponente ausewählen",
   "builder.select.custom": "Benutzerdefiniert",
-  "builder.select.default": "Standard",
-
-  "lang": {
-    "en": "Englisch",
-    "de": "Deutsch",
-    "ro": "Rumänisch"
-  }
+  "builder.select.default": "Standard"
 }
