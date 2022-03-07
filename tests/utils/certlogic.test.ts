@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import moment from 'moment'
-import { CertLogic } from '../utils/certlogic'
-import { DCC } from '../utils/dcc'
+import { CertLogic } from '../../utils/certlogic'
+import { DCC } from '../../utils/dcc'
 import { recoveryDCC, testDCC, vaccinationDCC } from './helpers'
 
 const TEST_NEGATIVE = '260415000'
