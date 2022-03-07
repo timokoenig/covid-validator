@@ -1,4 +1,4 @@
-import { DCC, DigitalGreenCertificate } from '../utils/dcc'
+import { DCC, DigitalGreenCertificate } from '../../utils/dcc'
 
 export function createDCC(data: DigitalGreenCertificate): DCC {
   const dcc = new DCC(

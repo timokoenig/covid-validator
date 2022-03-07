@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-implicit-any-catch */
-import { DCC } from '../utils/dcc'
+import { DCC } from '../../utils/dcc'
 
 /// Tests
 test('Valid DCC', () => {

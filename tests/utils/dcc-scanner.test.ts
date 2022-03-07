@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-implicit-any-catch */
-import dscDemoListJson from '../data/dsc-demo.json'
+import dscDemoListJson from '../../data/dsc-demo.json'
 import {
   CERTIFICATE_TYPE_RECOVERY,
   CERTIFICATE_TYPE_TEST,
   CERTIFICATE_TYPE_VACCINATION,
   IMMUNIZATION_STATUS_BOOSTER,
-} from '../utils/builder/types'
+} from '../../utils/builder/types'
 import {
   DCCExpiredError,
   DCCNoValidationError,
@@ -17,7 +17,7 @@ import {
   DCCVerifyError,
   DSC,
   IDCCScannerConfig,
-} from '../utils/dcc-scanner'
+} from '../../utils/dcc-scanner'
 import { CertLogicMock } from './certlogic.mock'
 import { recoveryDCC, testDCC, vaccinationDCC } from './helpers'
 
