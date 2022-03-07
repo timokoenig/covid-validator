@@ -118,6 +118,14 @@ npm run dev
 
 The QR code reader needs to run over localhost or SSL to work. For the local development, follow [these steps](https://github.com/vercel/next.js/discussions/10935#discussioncomment-1540436) and run `ipconfig getifaddr en0` to get your IP address. Now you can access your dev build via HTTPS on your network.
 
+## Snapshot Tests
+
+We use [Jest Snapshot Testing](https://jestjs.io/docs/snapshot-testing) for our components.
+
+To add a new snapshot test, follow [the instructions](https://jestjs.io/docs/snapshot-testing) or use [this example](./tests/components/external-link.test.tsx) and then run `npm run test` to automatically create the snapshot file.
+
+To update an existing snapshot, adjust the test case and run `npm run snapshot-update`.
+
 ## i18n
 
 The app uses [i18next](https://www.i18next.com/) for internationalization. We want to offer this app to as many people as possible therefore native translations are important. We welcome anyone to help us translate this app. To do so, follow these steps:

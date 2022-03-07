@@ -16,7 +16,8 @@
     "lint": "eslint \"**/*.{ts,tsx}\" \"*.config.js\"",
     "now-build": "cross-env BUILD_TARGET=serverless next build",
     "test": "jest --silent",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "snapshot-update": "jest --updateSnapshot --silent"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.1.1",
