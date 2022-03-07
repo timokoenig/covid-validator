@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<span
+  className="fi fi-de fis"
+  style={
+    Object {
+      "borderRadius": 12.5,
+      "height": 25,
+      "width": 25,
+    }
+  }
+/>
+`;
