@@ -45,6 +45,7 @@
   "offline": "Hors connexion",
   "offline.message": "Vérifier votre connexion internet",
 
+  "general": "Général",
   "vaccination": "Vaccination",
   "recovery": "Rétablissement",
   "test": "Test",

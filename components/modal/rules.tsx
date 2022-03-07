@@ -51,6 +51,10 @@ const RulesModal = (props: Props) => {
 
   const items: { title: string; items: (Language | null)[] }[] = [
     {
+      title: t('general'),
+      items: countryRules.filter(rule => rule.CertificateType == 'General').map(mapLanguage),
+    },
+    {
       title: t('vaccination'),
       items: countryRules.filter(rule => rule.CertificateType == 'Vaccination').map(mapLanguage),
     },
