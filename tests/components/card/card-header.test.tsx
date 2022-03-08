@@ -10,7 +10,7 @@ describe('CardHeader', () => {
   })
 
   it('renders correctly', () => {
-    app.set({ ...app.get(), country: 'foo', state: 'bar' })
+    app.set({ ...app.get(), country: 'DE', state: '' })
 
     const tree = renderer.create(<CardHeader />).toJSON()
     expect(tree).toMatchSnapshot()
