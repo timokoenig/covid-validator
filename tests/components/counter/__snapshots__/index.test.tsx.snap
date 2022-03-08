@@ -1,0 +1,217 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Counter renders correctly 1`] = `
+Array [
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".css-qc2p2d{border-radius:lg;overflow:hidden;background:blue.400;box-shadow:xl;margin-bottom:10px;padding:5px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;vertical-align:center;}",
+      }
+    }
+    data-emotion="css qc2p2d"
+  />,
+  <div
+    className="css-qc2p2d"
+  >
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": ".css-57pqds{-webkit-flex:1;-ms-flex:1;flex:1;vertical-align:center;}",
+        }
+      }
+      data-emotion="css 57pqds"
+    />
+    <div
+      className="css-57pqds"
+    >
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-mmcpkq{font-weight:semibold;text-transform:uppercase;color:white;}",
+          }
+        }
+        data-emotion="css mmcpkq"
+      />
+      <p
+        className="chakra-text css-mmcpkq"
+      >
+        counter
+      </p>
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-1j71ma5{font-size:2xl;color:white;}",
+          }
+        }
+        data-emotion="css 1j71ma5"
+      />
+      <p
+        className="chakra-text css-1j71ma5"
+      >
+        0
+      </p>
+    </div>
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": ".css-eg4v4b{margin-top:1px;}",
+        }
+      }
+      data-emotion="css eg4v4b"
+    />
+    <div
+      className="css-eg4v4b"
+    >
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-c32o75{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;white-space:nowrap;vertical-align:middle;outline:2px solid transparent;outline-offset:2px;width:auto;color:white;background-color:blue.400;}.css-c32o75:hover,.css-c32o75[data-hover]{background:blue.300;}.css-c32o75:active,.css-c32o75[data-active]{background:blue.400;}",
+          }
+        }
+        data-emotion="css c32o75"
+      />
+      <button
+        className="chakra-button css-c32o75"
+        onClick={[Function]}
+        type="button"
+      >
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-19svxgr{width:5;height:5px;display:inline-block;line-height:1em;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;color:currentColor;vertical-align:middle;}",
+            }
+          }
+          data-emotion="css 19svxgr"
+        />
+        <svg
+          className="chakra-icon css-19svxgr"
+          focusable={false}
+          viewBox="0 0 24 24"
+        >
+          <g
+            fill="currentColor"
+          >
+            <rect
+              height="4"
+              width="20"
+              x="2"
+              y="10"
+            />
+          </g>
+        </svg>
+      </button>
+    </div>
+  </div>,
+]
+`;
+
+exports[`Counter renders correctly with set counter 1`] = `
+Array [
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".css-qc2p2d{border-radius:lg;overflow:hidden;background:blue.400;box-shadow:xl;margin-bottom:10px;padding:5px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;vertical-align:center;}",
+      }
+    }
+    data-emotion="css qc2p2d"
+  />,
+  <div
+    className="css-qc2p2d"
+  >
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": ".css-57pqds{-webkit-flex:1;-ms-flex:1;flex:1;vertical-align:center;}",
+        }
+      }
+      data-emotion="css 57pqds"
+    />
+    <div
+      className="css-57pqds"
+    >
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-mmcpkq{font-weight:semibold;text-transform:uppercase;color:white;}",
+          }
+        }
+        data-emotion="css mmcpkq"
+      />
+      <p
+        className="chakra-text css-mmcpkq"
+      >
+        counter
+      </p>
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-1j71ma5{font-size:2xl;color:white;}",
+          }
+        }
+        data-emotion="css 1j71ma5"
+      />
+      <p
+        className="chakra-text css-1j71ma5"
+      >
+        1
+      </p>
+    </div>
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": ".css-eg4v4b{margin-top:1px;}",
+        }
+      }
+      data-emotion="css eg4v4b"
+    />
+    <div
+      className="css-eg4v4b"
+    >
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-c32o75{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;white-space:nowrap;vertical-align:middle;outline:2px solid transparent;outline-offset:2px;width:auto;color:white;background-color:blue.400;}.css-c32o75:hover,.css-c32o75[data-hover]{background:blue.300;}.css-c32o75:active,.css-c32o75[data-active]{background:blue.400;}",
+          }
+        }
+        data-emotion="css c32o75"
+      />
+      <button
+        className="chakra-button css-c32o75"
+        onClick={[Function]}
+        type="button"
+      >
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-19svxgr{width:5;height:5px;display:inline-block;line-height:1em;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;color:currentColor;vertical-align:middle;}",
+            }
+          }
+          data-emotion="css 19svxgr"
+        />
+        <svg
+          className="chakra-icon css-19svxgr"
+          focusable={false}
+          viewBox="0 0 24 24"
+        >
+          <g
+            fill="currentColor"
+          >
+            <rect
+              height="4"
+              width="20"
+              x="2"
+              y="10"
+            />
+          </g>
+        </svg>
+      </button>
+    </div>
+  </div>,
+]
+`;
+
+exports[`Counter renders correctly without counter 1`] = `
+<div
+  className="css-0"
+/>
+`;
