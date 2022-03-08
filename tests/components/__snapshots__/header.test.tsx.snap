@@ -1,0 +1,283 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Array [
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".css-r7q7qr{margin-bottom:5px;}",
+      }
+    }
+    data-emotion="css r7q7qr"
+  />,
+  <div
+    className="css-r7q7qr"
+  >
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": ".css-2imjyh{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;}",
+        }
+      }
+      data-emotion="css 2imjyh"
+    />
+    <div
+      className="css-2imjyh"
+    >
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-alkm1m{-webkit-flex:1;-ms-flex:1;flex:1;margin-right:3px;}",
+          }
+        }
+        data-emotion="css alkm1m"
+      />
+      <h1
+        className="chakra-heading css-alkm1m"
+      >
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-163zzif:hover,.css-163zzif[data-hover]{-webkit-text-decoration:none;text-decoration:none;}",
+            }
+          }
+          data-emotion="css 163zzif"
+        />
+        <a
+          className="chakra-link css-163zzif"
+          href="/"
+        >
+          CovidValidator
+        </a>
+      </h1>
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-198bfjk{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;white-space:nowrap;vertical-align:middle;outline:2px solid transparent;outline-offset:2px;width:auto;padding:0px;}",
+          }
+        }
+        data-emotion="css 198bfjk"
+      />
+      <button
+        aria-controls="menu-list-6225437457-3"
+        aria-expanded={false}
+        aria-haspopup="menu"
+        aria-label="Options"
+        className="chakra-button chakra-menu__menu-button css-198bfjk"
+        id="menu-button-6225437457-3"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        type="button"
+      >
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-onkibi{width:1em;height:1em;display:inline-block;line-height:1em;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;color:currentColor;vertical-align:middle;}",
+            }
+          }
+          data-emotion="css onkibi"
+        />
+        <svg
+          aria-hidden={true}
+          className="chakra-icon css-onkibi"
+          focusable={false}
+          viewBox="0 0 14 14"
+        >
+          <path
+            d="M14,7.77 L14,6.17 L12.06,5.53 L11.61,4.44 L12.49,2.6 L11.36,1.47 L9.55,2.38 L8.46,1.93 L7.77,0.01 L6.17,0.01 L5.54,1.95 L4.43,2.4 L2.59,1.52 L1.46,2.65 L2.37,4.46 L1.92,5.55 L0,6.23 L0,7.82 L1.94,8.46 L2.39,9.55 L1.51,11.39 L2.64,12.52 L4.45,11.61 L5.54,12.06 L6.23,13.98 L7.82,13.98 L8.45,12.04 L9.56,11.59 L11.4,12.47 L12.53,11.34 L11.61,9.53 L12.08,8.44 L14,7.75 L14,7.77 Z M7,10 C5.34,10 4,8.66 4,7 C4,5.34 5.34,4 7,4 C8.66,4 10,5.34 10,7 C10,8.66 8.66,10 7,10 Z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+    </div>
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": ".css-10ircq3{font-weight:semibold;}",
+        }
+      }
+      data-emotion="css 10ircq3"
+    />
+    <p
+      className="chakra-text css-10ircq3"
+    >
+      subtitle
+    </p>
+  </div>,
+]
+`;
+
+exports[`renders correctly without menu 1`] = `
+Array [
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".css-r7q7qr{margin-bottom:5px;}",
+      }
+    }
+    data-emotion="css r7q7qr"
+  />,
+  <div
+    className="css-r7q7qr"
+  >
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": ".css-2imjyh{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;}",
+        }
+      }
+      data-emotion="css 2imjyh"
+    />
+    <div
+      className="css-2imjyh"
+    >
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-alkm1m{-webkit-flex:1;-ms-flex:1;flex:1;margin-right:3px;}",
+          }
+        }
+        data-emotion="css alkm1m"
+      />
+      <h1
+        className="chakra-heading css-alkm1m"
+      >
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-163zzif:hover,.css-163zzif[data-hover]{-webkit-text-decoration:none;text-decoration:none;}",
+            }
+          }
+          data-emotion="css 163zzif"
+        />
+        <a
+          className="chakra-link css-163zzif"
+          href="/"
+        >
+          CovidValidator
+        </a>
+      </h1>
+    </div>
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": ".css-10ircq3{font-weight:semibold;}",
+        }
+      }
+      data-emotion="css 10ircq3"
+    />
+    <p
+      className="chakra-text css-10ircq3"
+    >
+      subtitle
+    </p>
+  </div>,
+]
+`;
+
+exports[`renders correctly without version 1`] = `
+Array [
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".css-r7q7qr{margin-bottom:5px;}",
+      }
+    }
+    data-emotion="css r7q7qr"
+  />,
+  <div
+    className="css-r7q7qr"
+  >
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": ".css-2imjyh{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;}",
+        }
+      }
+      data-emotion="css 2imjyh"
+    />
+    <div
+      className="css-2imjyh"
+    >
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-alkm1m{-webkit-flex:1;-ms-flex:1;flex:1;margin-right:3px;}",
+          }
+        }
+        data-emotion="css alkm1m"
+      />
+      <h1
+        className="chakra-heading css-alkm1m"
+      >
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-163zzif:hover,.css-163zzif[data-hover]{-webkit-text-decoration:none;text-decoration:none;}",
+            }
+          }
+          data-emotion="css 163zzif"
+        />
+        <a
+          className="chakra-link css-163zzif"
+          href="/"
+        >
+          CovidValidator
+        </a>
+      </h1>
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-198bfjk{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;white-space:nowrap;vertical-align:middle;outline:2px solid transparent;outline-offset:2px;width:auto;padding:0px;}",
+          }
+        }
+        data-emotion="css 198bfjk"
+      />
+      <button
+        aria-controls="menu-list-6225437457-6"
+        aria-expanded={false}
+        aria-haspopup="menu"
+        aria-label="Options"
+        className="chakra-button chakra-menu__menu-button css-198bfjk"
+        id="menu-button-6225437457-6"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        type="button"
+      >
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-onkibi{width:1em;height:1em;display:inline-block;line-height:1em;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;color:currentColor;vertical-align:middle;}",
+            }
+          }
+          data-emotion="css onkibi"
+        />
+        <svg
+          aria-hidden={true}
+          className="chakra-icon css-onkibi"
+          focusable={false}
+          viewBox="0 0 14 14"
+        >
+          <path
+            d="M14,7.77 L14,6.17 L12.06,5.53 L11.61,4.44 L12.49,2.6 L11.36,1.47 L9.55,2.38 L8.46,1.93 L7.77,0.01 L6.17,0.01 L5.54,1.95 L4.43,2.4 L2.59,1.52 L1.46,2.65 L2.37,4.46 L1.92,5.55 L0,6.23 L0,7.82 L1.94,8.46 L2.39,9.55 L1.51,11.39 L2.64,12.52 L4.45,11.61 L5.54,12.06 L6.23,13.98 L7.82,13.98 L8.45,12.04 L9.56,11.59 L11.4,12.47 L12.53,11.34 L11.61,9.53 L12.08,8.44 L14,7.75 L14,7.77 Z M7,10 C5.34,10 4,8.66 4,7 C4,5.34 5.34,4 7,4 C8.66,4 10,5.34 10,7 C10,8.66 8.66,10 7,10 Z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+    </div>
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": ".css-10ircq3{font-weight:semibold;}",
+        }
+      }
+      data-emotion="css 10ircq3"
+    />
+    <p
+      className="chakra-text css-10ircq3"
+    >
+      subtitle
+    </p>
+  </div>,
+]
+`;
