@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Array [
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".css-6nai8q{padding-bottom:5px;-webkit-padding-start:5px;padding-inline-start:5px;-webkit-padding-end:5px;padding-inline-end:5px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;}",
+      }
+    }
+    data-emotion="css 6nai8q"
+  />,
+  <div
+    className="css-6nai8q"
+  >
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": ".css-1rr4qq7{-webkit-flex:1;-ms-flex:1;flex:1;}",
+        }
+      }
+      data-emotion="css 1rr4qq7"
+    />
+    <div
+      className="css-1rr4qq7"
+    >
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-c32o75{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;white-space:nowrap;vertical-align:middle;outline:2px solid transparent;outline-offset:2px;width:auto;color:white;background-color:blue.400;}.css-c32o75:hover,.css-c32o75[data-hover]{background:blue.300;}.css-c32o75:active,.css-c32o75[data-active]{background:blue.400;}",
+          }
+        }
+        data-emotion="css c32o75"
+      />
+      <button
+        className="chakra-button css-c32o75"
+        onClick={[Function]}
+        type="button"
+      >
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-1dbqamk{width:6;height:6px;display:inline-block;line-height:1em;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;color:currentColor;vertical-align:middle;}",
+            }
+          }
+          data-emotion="css 1dbqamk"
+        />
+        <svg
+          className="chakra-icon css-1dbqamk"
+          focusable={false}
+          viewBox="0 0 24 24"
+        >
+          <g
+            fill="currentColor"
+          >
+            <path
+              d="M10.319,4.936a7.239,7.239,0,0,1,7.1,2.252,1.25,1.25,0,1,0,1.872-1.657A9.737,9.737,0,0,0,9.743,2.5,10.269,10.269,0,0,0,2.378,9.61a.249.249,0,0,1-.271.178l-1.033-.13A.491.491,0,0,0,.6,9.877a.5.5,0,0,0-.019.526l2.476,4.342a.5.5,0,0,0,.373.248.43.43,0,0,0,.062,0,.5.5,0,0,0,.359-.152l3.477-3.593a.5.5,0,0,0-.3-.844L5.15,10.172a.25.25,0,0,1-.2-.333A7.7,7.7,0,0,1,10.319,4.936Z"
+            />
+            <path
+              d="M23.406,14.1a.5.5,0,0,0,.015-.526l-2.5-4.329A.5.5,0,0,0,20.546,9a.489.489,0,0,0-.421.151l-3.456,3.614a.5.5,0,0,0,.3.842l1.848.221a.249.249,0,0,1,.183.117.253.253,0,0,1,.023.216,7.688,7.688,0,0,1-5.369,4.9,7.243,7.243,0,0,1-7.1-2.253,1.25,1.25,0,1,0-1.872,1.656,9.74,9.74,0,0,0,9.549,3.03,10.261,10.261,0,0,0,7.369-7.12.251.251,0,0,1,.27-.179l1.058.127a.422.422,0,0,0,.06,0A.5.5,0,0,0,23.406,14.1Z"
+            />
+          </g>
+        </svg>
+      </button>
+    </div>
+    <div
+      className="css-1rr4qq7"
+    >
+      <button
+        className="chakra-button css-c32o75"
+        onClick={[Function]}
+        type="button"
+      >
+        camera.close
+      </button>
+    </div>
+    <div
+      className="css-1rr4qq7"
+    />
+  </div>,
+]
+`;
