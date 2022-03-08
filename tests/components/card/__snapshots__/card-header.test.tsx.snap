@@ -38,7 +38,7 @@ Array [
         className="css-70qvj9"
       >
         <span
-          className="fi fi-foo fis"
+          className="fi fi-de fis"
           style={
             Object {
               "borderRadius": 12.5,
@@ -70,7 +70,7 @@ Array [
         <p
           className="chakra-text css-1rd7vmm"
         >
-          n/a
+          DE
         </p>
         <style
           dangerouslySetInnerHTML={
@@ -83,7 +83,7 @@ Array [
         <p
           className="chakra-text css-qsvu6k"
         >
-          
+          nationwide
         </p>
       </div>
       <div
@@ -100,7 +100,7 @@ Array [
         <p
           className="chakra-text css-1sb26sn"
         >
-          
+          3G
         </p>
       </div>
     </button>
