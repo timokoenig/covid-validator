@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CardHeader renders correctly 1`] = `
+Array [
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".css-16glbkg{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;background-color:blue.300;}",
+      }
+    }
+    data-emotion="css 16glbkg"
+  />,
+  <div
+    className="css-16glbkg"
+  >
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": ".css-1a55jeh{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;white-space:nowrap;vertical-align:middle;outline:2px solid transparent;outline-offset:2px;width:auto;-webkit-flex:1;-ms-flex:1;flex:1;background-color:inherit;padding-left:5px;padding-top:3px;padding-bottom:3px;height:auto;border-radius:0px;border-bottom:1px;border-bottom-color:blue.300;}.css-1a55jeh:hover,.css-1a55jeh[data-hover]{background-color:blue.400;}.css-1a55jeh:active,.css-1a55jeh[data-active]{background-color:blue.300;}",
+        }
+      }
+      data-emotion="css 1a55jeh"
+    />
+    <button
+      className="chakra-button css-1a55jeh"
+      onClick={[Function]}
+      type="button"
+    >
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-70qvj9{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;}",
+          }
+        }
+        data-emotion="css 70qvj9"
+      />
+      <div
+        className="css-70qvj9"
+      >
+        <span
+          className="fi fi-foo fis"
+          style={
+            Object {
+              "borderRadius": 12.5,
+              "height": 25,
+              "width": 25,
+            }
+          }
+        />
+      </div>
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-ubxiqz{text-align:center;-webkit-flex:1;-ms-flex:1;flex:1;-webkit-margin-start:6px;margin-inline-start:6px;-webkit-margin-end:6px;margin-inline-end:6px;color:white;}",
+          }
+        }
+        data-emotion="css ubxiqz"
+      />
+      <div
+        className="css-ubxiqz"
+      >
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-1rd7vmm{font-size:lg;word-break:break-word;white-space:normal;font-weight:bold;}",
+            }
+          }
+          data-emotion="css 1rd7vmm"
+        />
+        <p
+          className="chakra-text css-1rd7vmm"
+        >
+          n/a
+        </p>
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-qsvu6k{font-size:md;word-break:break-word;white-space:normal;font-weight:400;}",
+            }
+          }
+          data-emotion="css qsvu6k"
+        />
+        <p
+          className="chakra-text css-qsvu6k"
+        >
+          
+        </p>
+      </div>
+      <div
+        className="css-70qvj9"
+      >
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-1sb26sn{font-size:lg;justify-self:flex-end;font-weight:bold;color:white;}",
+            }
+          }
+          data-emotion="css 1sb26sn"
+        />
+        <p
+          className="chakra-text css-1sb26sn"
+        >
+          
+        </p>
+      </div>
+    </button>
+  </div>,
+]
+`;
