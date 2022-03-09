@@ -1,3 +1,4 @@
+import { ChakraProvider } from '@chakra-ui/react'
 import React from 'react'
 import renderer from 'react-test-renderer'
 import { resetAll } from 'simpler-state'
@@ -12,7 +13,13 @@ describe('CardHeader', () => {
   it('renders correctly', () => {
     app.set({ ...app.get(), country: 'DE', state: '' })
 
-    const tree = renderer.create(<CardHeader />).toJSON()
+    const tree = renderer
+      .create(
+        <ChakraProvider>
+          <CardHeader />
+        </ChakraProvider>
+      )
+      .toJSON()
     expect(tree).toMatchSnapshot()
   })
 })
