@@ -62,10 +62,6 @@ const SettingsModal = (props: Props) => {
       .catch(console.log)
   }
 
-  // useEffect(() => {
-  //   i18n.changeLanguage(lang).catch(console.log)
-  // }, [lang, i18n])
-
   return (
     <>
       <Modal isOpen={props.isOpen} onClose={props.onClose} size="lg" scrollBehavior="inside">
