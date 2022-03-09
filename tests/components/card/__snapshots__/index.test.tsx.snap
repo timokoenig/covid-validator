@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Array [
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".css-1h98hrg{border-radius:lg;overflow:hidden;background:blue.400;box-shadow:xl;margin-bottom:10px;}",
+      }
+    }
+    data-emotion="css 1h98hrg"
+  />,
+  <div
+    className="css-1h98hrg"
+  >
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": ".css-1vae7t2{padding:6px;}",
+        }
+      }
+      data-emotion="css 1vae7t2"
+    />
+    <div
+      className="css-1vae7t2"
+    >
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-3c83ig{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;padding-top:10px;padding-bottom:10px;}",
+          }
+        }
+        data-emotion="css 3c83ig"
+      />
+      <div
+        className="css-3c83ig"
+      >
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-c32o75{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;white-space:nowrap;vertical-align:middle;outline:2px solid transparent;outline-offset:2px;width:auto;color:white;background-color:blue.400;}.css-c32o75:hover,.css-c32o75[data-hover]{background:blue.300;}.css-c32o75:active,.css-c32o75[data-active]{background:blue.400;}",
+            }
+          }
+          data-emotion="css c32o75"
+        />
+        <button
+          className="chakra-button css-c32o75"
+          onClick={[Function]}
+          type="button"
+        >
+          scan.button
+        </button>
+      </div>
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-1p4s8v2{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;padding-bottom:10px;}",
+          }
+        }
+        data-emotion="css 1p4s8v2"
+      />
+      <div
+        className="css-1p4s8v2"
+      >
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-1rb6b6y{font-weight:semibold;color:white;text-align:center;}",
+            }
+          }
+          data-emotion="css 1rb6b6y"
+        />
+        <p
+          className="chakra-text css-1rb6b6y"
+        >
+          scan.note.permission
+        </p>
+      </div>
+      <div
+        className="css-1p4s8v2"
+      >
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-w57xvv{color:white;text-align:center;}",
+            }
+          }
+          data-emotion="css w57xvv"
+        />
+        <p
+          className="chakra-text css-w57xvv"
+        >
+          scan.note.rules
+        </p>
+      </div>
+    </div>
+  </div>,
+]
+`;
