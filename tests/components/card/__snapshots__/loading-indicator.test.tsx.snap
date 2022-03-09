@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Array [
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".css-46b4xn{background:rgba(255, 255, 255, 0.5);}",
+      }
+    }
+    data-emotion="css 46b4xn"
+  />,
+  <div
+    className="css-46b4xn"
+  >
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": ".css-u4uvb9{display:inline-block;border-color:currentColor;border-style:solid;border-radius:99999px;border-width:4px;border-bottom-color:gray.200;border-left-color:gray.200;-webkit-animation:animation-b7n1on 0.65s linear infinite;animation:animation-b7n1on 0.65s linear infinite;color:blue.500;}@-webkit-keyframes animation-b7n1on{0%{-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-ms-transform:rotate(0deg);transform:rotate(0deg);}100%{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);transform:rotate(360deg);}}@keyframes animation-b7n1on{0%{-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-ms-transform:rotate(0deg);transform:rotate(0deg);}100%{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);transform:rotate(360deg);}}",
+        }
+      }
+      data-emotion="css u4uvb9 animation-b7n1on"
+    />
+    <div
+      className="chakra-spinner css-u4uvb9"
+    >
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-f8n5zr{border:0px;clip:rect(0px, 0px, 0px, 0px);height:1px;width:1px;margin:-1px;padding:0px;overflow:hidden;white-space:nowrap;position:absolute;}",
+          }
+        }
+        data-emotion="css f8n5zr"
+      />
+      <span
+        className="css-f8n5zr"
+      >
+        Loading...
+      </span>
+    </div>
+  </div>,
+]
+`;
