@@ -1,0 +1,364 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Array [
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".css-1r2f04i{margin-bottom:10px;}",
+      }
+    }
+    data-emotion="css 1r2f04i"
+  />,
+  <div
+    className="chakra-accordion css-1r2f04i"
+  >
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": ".css-1j4c8jn{overflow-anchor:none;margin-bottom:5px;border:0;}",
+        }
+      }
+      data-emotion="css 1j4c8jn"
+    />
+    <div
+      className="chakra-accordion__item css-1j4c8jn"
+    >
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-mpof3v{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;outline:2px solid transparent;outline-offset:2px;-webkit-padding-start:5px;padding-inline-start:5px;-webkit-padding-end:5px;padding-inline-end:5px;padding-top:3px;padding-bottom:3px;background-color:gray.100;border-radius:10px;}.css-mpof3v:hover,.css-mpof3v[data-hover]{background-color:gray.200;}",
+          }
+        }
+        data-emotion="css mpof3v"
+      />
+      <button
+        aria-controls="accordion-panel-2364318192-1"
+        aria-expanded={false}
+        className="chakra-accordion__button css-mpof3v"
+        disabled={false}
+        id="accordion-button-2364318192-1"
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        type="button"
+      >
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-11advgh{font-weight:semibold;text-align:left;-webkit-flex:1;-ms-flex:1;flex:1;}",
+            }
+          }
+          data-emotion="css 11advgh"
+        />
+        <h4
+          className="chakra-heading css-11advgh"
+        >
+          information.purpose
+        </h4>
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-8o5ky2{width:1em;height:1em;display:inline-block;line-height:1em;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;color:currentColor;opacity:1;-webkit-transition:-webkit-transform 0.2s;transition:transform 0.2s;transform-origin:center;vertical-align:middle;}",
+            }
+          }
+          data-emotion="css 8o5ky2"
+        />
+        <svg
+          aria-hidden={true}
+          className="chakra-icon chakra-accordion__icon css-8o5ky2"
+          focusable={false}
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+      <div
+        className="chakra-collapse"
+        style={
+          Object {
+            "display": "none",
+            "height": "0px",
+            "opacity": 0,
+            "overflow": "hidden",
+          }
+        }
+      >
+        <div
+          aria-labelledby="accordion-button-2364318192-1"
+          className="chakra-accordion__panel css-0"
+          id="accordion-panel-2364318192-1"
+          role="region"
+        >
+          <p
+            className="chakra-text css-0"
+          >
+            information.purpose.message
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      className="chakra-accordion__item css-1j4c8jn"
+    >
+      <button
+        aria-controls="accordion-panel-2364318192-2"
+        aria-expanded={false}
+        className="chakra-accordion__button css-mpof3v"
+        disabled={false}
+        id="accordion-button-2364318192-2"
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        type="button"
+      >
+        <h4
+          className="chakra-heading css-11advgh"
+        >
+          information.rules
+        </h4>
+        <svg
+          aria-hidden={true}
+          className="chakra-icon chakra-accordion__icon css-8o5ky2"
+          focusable={false}
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+      <div
+        className="chakra-collapse"
+        style={
+          Object {
+            "display": "none",
+            "height": "0px",
+            "opacity": 0,
+            "overflow": "hidden",
+          }
+        }
+      >
+        <div
+          aria-labelledby="accordion-button-2364318192-2"
+          className="chakra-accordion__panel css-0"
+          id="accordion-panel-2364318192-2"
+          role="region"
+        >
+          <p
+            className="chakra-text css-0"
+          >
+            information.rules.message
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      className="chakra-accordion__item css-1j4c8jn"
+    >
+      <button
+        aria-controls="accordion-panel-2364318192-3"
+        aria-expanded={false}
+        className="chakra-accordion__button css-mpof3v"
+        disabled={false}
+        id="accordion-button-2364318192-3"
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        type="button"
+      >
+        <h4
+          className="chakra-heading css-11advgh"
+        >
+          information.homescreen
+        </h4>
+        <svg
+          aria-hidden={true}
+          className="chakra-icon chakra-accordion__icon css-8o5ky2"
+          focusable={false}
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+      <div
+        className="chakra-collapse"
+        style={
+          Object {
+            "display": "none",
+            "height": "0px",
+            "opacity": 0,
+            "overflow": "hidden",
+          }
+        }
+      >
+        <div
+          aria-labelledby="accordion-button-2364318192-3"
+          className="chakra-accordion__panel css-0"
+          id="accordion-panel-2364318192-3"
+          role="region"
+        >
+          <p
+            className="chakra-text css-0"
+          >
+            information.homescreen.message
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      className="chakra-accordion__item css-1j4c8jn"
+    >
+      <button
+        aria-controls="accordion-panel-2364318192-4"
+        aria-expanded={false}
+        className="chakra-accordion__button css-mpof3v"
+        disabled={false}
+        id="accordion-button-2364318192-4"
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        type="button"
+      >
+        <h4
+          className="chakra-heading css-11advgh"
+        >
+          information.issue
+        </h4>
+        <svg
+          aria-hidden={true}
+          className="chakra-icon chakra-accordion__icon css-8o5ky2"
+          focusable={false}
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+      <div
+        className="chakra-collapse"
+        style={
+          Object {
+            "display": "none",
+            "height": "0px",
+            "opacity": 0,
+            "overflow": "hidden",
+          }
+        }
+      >
+        <div
+          aria-labelledby="accordion-button-2364318192-4"
+          className="chakra-accordion__panel css-0"
+          id="accordion-panel-2364318192-4"
+          role="region"
+        >
+          <p
+            className="chakra-text css-0"
+          >
+            x
+            <style
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": ".css-1x3w0s1{-webkit-margin-start:1px;margin-inline-start:1px;-webkit-margin-end:1px;margin-inline-end:1px;}",
+                }
+              }
+              data-emotion="css 1x3w0s1"
+            />
+            <a
+              className="chakra-link css-1x3w0s1"
+              href="https://github.com/timokoenig/covid-validator"
+              style={
+                Object {
+                  "textDecoration": "underline",
+                }
+              }
+              target="_blank"
+            >
+              Github
+            </a>
+            y
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      className="chakra-accordion__item css-1j4c8jn"
+    >
+      <button
+        aria-controls="accordion-panel-2364318192-5"
+        aria-expanded={false}
+        className="chakra-accordion__button css-mpof3v"
+        disabled={false}
+        id="accordion-button-2364318192-5"
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        type="button"
+      >
+        <h4
+          className="chakra-heading css-11advgh"
+        >
+          information.certificate
+        </h4>
+        <svg
+          aria-hidden={true}
+          className="chakra-icon chakra-accordion__icon css-8o5ky2"
+          focusable={false}
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+      <div
+        className="chakra-collapse"
+        style={
+          Object {
+            "display": "none",
+            "height": "0px",
+            "opacity": 0,
+            "overflow": "hidden",
+          }
+        }
+      >
+        <div
+          aria-labelledby="accordion-button-2364318192-5"
+          className="chakra-accordion__panel css-0"
+          id="accordion-panel-2364318192-5"
+          role="region"
+        >
+          <p
+            className="chakra-text css-0"
+          >
+            x
+            <a
+              className="chakra-link css-1x3w0s1"
+              href="https://ec.europa.eu/info/live-work-travel-eu/coronavirus-response/safe-covid-19-vaccines-europeans/eu-digital-covid-certificate_en"
+              style={
+                Object {
+                  "textDecoration": "underline",
+                }
+              }
+              target="_blank"
+            >
+              the offical website of the EU
+            </a>
+            y
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;
