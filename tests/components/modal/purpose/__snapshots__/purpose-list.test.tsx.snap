@@ -27,403 +27,129 @@ Array [
     data-emotion="css-global 1baqkrf"
   />,
   <div
-    data-testId="modal"
+    className="chakra-radio-group css-0"
+    role="radiogroup"
   >
-    <div
-      data-testId="overlay"
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": ".css-n21gh5{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;}.css-n21gh5>*:not(style)~*:not(style){margin-top:0.5rem;-webkit-margin-end:0px;margin-inline-end:0px;margin-bottom:0px;-webkit-margin-start:0px;margin-inline-start:0px;}",
+        }
+      }
+      data-emotion="css n21gh5"
     />
     <div
-      data-testId="content"
+      className="chakra-stack css-n21gh5"
     >
-      <div
-        data-testId="header"
-      >
-        modal.purpose
-      </div>
-      <div
-        data-testId="close"
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-1pw4d56{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;vertical-align:top;cursor:pointer;}",
+          }
+        }
+        data-emotion="css 1pw4d56"
       />
-      <div
-        data-testId="body"
+      <label
+        className="chakra-radio css-1pw4d56"
+        data-checked=""
       >
-        <div
-          className="chakra-radio-group css-0"
-          role="radiogroup"
+        <input
+          checked={true}
+          className="chakra-radio__input"
+          id="radio-2"
+          name="radio-1"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          style={
+            Object {
+              "border": "0px",
+              "clip": "rect(0px, 0px, 0px, 0px)",
+              "height": "1px",
+              "margin": "-1px",
+              "overflow": "hidden",
+              "padding": "0px",
+              "position": "absolute",
+              "whiteSpace": "nowrap",
+              "width": "1px",
+            }
+          }
+          type="radio"
+          value="foo"
+        />
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-1rggdzb{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;width:var(--chakra-sizes-4);transition-property:box-shadow;transition-duration:var(--chakra-transition-duration-normal);border:2px solid;border-radius:var(--chakra-radii-full);border-color:inherit;color:var(--chakra-colors-white);height:var(--chakra-sizes-4);}.css-1rggdzb[aria-checked=true],.css-1rggdzb[data-checked]{background:var(--chakra-colors-blue-500);border-color:var(--chakra-colors-blue-500);color:var(--chakra-colors-white);}.css-1rggdzb[aria-checked=true]:hover,.css-1rggdzb[data-checked]:hover,.css-1rggdzb[aria-checked=true][data-hover],.css-1rggdzb[data-checked][data-hover]{background:var(--chakra-colors-blue-600);border-color:var(--chakra-colors-blue-600);}.css-1rggdzb[aria-checked=true][disabled],.css-1rggdzb[data-checked][disabled],.css-1rggdzb[aria-checked=true][aria-disabled=true],.css-1rggdzb[data-checked][aria-disabled=true],.css-1rggdzb[aria-checked=true][data-disabled],.css-1rggdzb[data-checked][data-disabled]{border-color:var(--chakra-colors-gray-200);background:var(--chakra-colors-gray-200);color:var(--chakra-colors-gray-500);}.css-1rggdzb[aria-checked=true]::before,.css-1rggdzb[data-checked]::before{content:\\"\\";display:inline-block;position:relative;width:50%;height:50%;border-radius:50%;background:currentColor;}.css-1rggdzb:indeterminate,.css-1rggdzb[aria-checked=mixed],.css-1rggdzb[data-indeterminate]{background:var(--chakra-colors-blue-500);border-color:var(--chakra-colors-blue-500);color:var(--chakra-colors-white);}.css-1rggdzb[disabled],.css-1rggdzb[aria-disabled=true],.css-1rggdzb[data-disabled]{background:var(--chakra-colors-gray-100);border-color:var(--chakra-colors-gray-100);}.css-1rggdzb:focus,.css-1rggdzb[data-focus]{box-shadow:var(--chakra-shadows-outline);}.css-1rggdzb[aria-invalid=true],.css-1rggdzb[data-invalid]{border-color:var(--chakra-colors-red-500);}",
+            }
+          }
+          data-emotion="css 1rggdzb"
+        />
+        <span
+          aria-hidden={true}
+          className="chakra-radio__control css-1rggdzb"
+          data-checked=""
+          onMouseDown={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+        />
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-1i66d7g{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-margin-start:0.5rem;margin-inline-start:0.5rem;font-size:var(--chakra-fontSizes-md);}.css-1i66d7g[disabled],.css-1i66d7g[aria-disabled=true],.css-1i66d7g[data-disabled]{opacity:0.4;}",
+            }
+          }
+          data-emotion="css 1i66d7g"
+        />
+        <span
+          className="chakra-radio__label css-1i66d7g"
+          data-checked=""
+          onMouseDown={[Function]}
+          onTouchStart={[Function]}
         >
           <style
             dangerouslySetInnerHTML={
               Object {
-                "__html": ".css-n21gh5{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;}.css-n21gh5>*:not(style)~*:not(style){margin-top:0.5rem;-webkit-margin-end:0px;margin-inline-end:0px;margin-bottom:0px;-webkit-margin-start:0px;margin-inline-start:0px;}",
+                "__html": ".css-1xloz6w{padding-top:var(--chakra-space-3);padding-bottom:var(--chakra-space-3);display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;}",
               }
             }
-            data-emotion="css n21gh5"
+            data-emotion="css 1xloz6w"
           />
           <div
-            className="chakra-stack css-n21gh5"
+            className="css-1xloz6w"
           >
             <style
               dangerouslySetInnerHTML={
                 Object {
-                  "__html": ".css-1pw4d56{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;vertical-align:top;cursor:pointer;}",
+                  "__html": ".css-722v25{font-weight:var(--chakra-fontWeights-bold);}",
                 }
               }
-              data-emotion="css 1pw4d56"
+              data-emotion="css 722v25"
             />
-            <label
-              className="chakra-radio css-1pw4d56"
-              data-checked=""
+            <p
+              className="chakra-text css-722v25"
             >
-              <input
-                checked={true}
-                className="chakra-radio__input"
-                id="radio-2"
-                name="radio-1"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                onKeyDown={[Function]}
-                onKeyUp={[Function]}
-                style={
-                  Object {
-                    "border": "0px",
-                    "clip": "rect(0px, 0px, 0px, 0px)",
-                    "height": "1px",
-                    "margin": "-1px",
-                    "overflow": "hidden",
-                    "padding": "0px",
-                    "position": "absolute",
-                    "whiteSpace": "nowrap",
-                    "width": "1px",
-                  }
+              foo
+            </p>
+            <style
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": ".css-l6gl81{font-size:var(--chakra-fontSizes-xs);margin-left:var(--chakra-space-2);}",
                 }
-                type="radio"
-                value="3G"
-              />
-              <style
-                dangerouslySetInnerHTML={
-                  Object {
-                    "__html": ".css-1rggdzb{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;width:var(--chakra-sizes-4);transition-property:box-shadow;transition-duration:var(--chakra-transition-duration-normal);border:2px solid;border-radius:var(--chakra-radii-full);border-color:inherit;color:var(--chakra-colors-white);height:var(--chakra-sizes-4);}.css-1rggdzb[aria-checked=true],.css-1rggdzb[data-checked]{background:var(--chakra-colors-blue-500);border-color:var(--chakra-colors-blue-500);color:var(--chakra-colors-white);}.css-1rggdzb[aria-checked=true]:hover,.css-1rggdzb[data-checked]:hover,.css-1rggdzb[aria-checked=true][data-hover],.css-1rggdzb[data-checked][data-hover]{background:var(--chakra-colors-blue-600);border-color:var(--chakra-colors-blue-600);}.css-1rggdzb[aria-checked=true][disabled],.css-1rggdzb[data-checked][disabled],.css-1rggdzb[aria-checked=true][aria-disabled=true],.css-1rggdzb[data-checked][aria-disabled=true],.css-1rggdzb[aria-checked=true][data-disabled],.css-1rggdzb[data-checked][data-disabled]{border-color:var(--chakra-colors-gray-200);background:var(--chakra-colors-gray-200);color:var(--chakra-colors-gray-500);}.css-1rggdzb[aria-checked=true]::before,.css-1rggdzb[data-checked]::before{content:\\"\\";display:inline-block;position:relative;width:50%;height:50%;border-radius:50%;background:currentColor;}.css-1rggdzb:indeterminate,.css-1rggdzb[aria-checked=mixed],.css-1rggdzb[data-indeterminate]{background:var(--chakra-colors-blue-500);border-color:var(--chakra-colors-blue-500);color:var(--chakra-colors-white);}.css-1rggdzb[disabled],.css-1rggdzb[aria-disabled=true],.css-1rggdzb[data-disabled]{background:var(--chakra-colors-gray-100);border-color:var(--chakra-colors-gray-100);}.css-1rggdzb:focus,.css-1rggdzb[data-focus]{box-shadow:var(--chakra-shadows-outline);}.css-1rggdzb[aria-invalid=true],.css-1rggdzb[data-invalid]{border-color:var(--chakra-colors-red-500);}",
-                  }
-                }
-                data-emotion="css 1rggdzb"
-              />
-              <span
-                aria-hidden={true}
-                className="chakra-radio__control css-1rggdzb"
-                data-checked=""
-                onMouseDown={[Function]}
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-                onMouseUp={[Function]}
-              />
-              <style
-                dangerouslySetInnerHTML={
-                  Object {
-                    "__html": ".css-1i66d7g{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-margin-start:0.5rem;margin-inline-start:0.5rem;font-size:var(--chakra-fontSizes-md);}.css-1i66d7g[disabled],.css-1i66d7g[aria-disabled=true],.css-1i66d7g[data-disabled]{opacity:0.4;}",
-                  }
-                }
-                data-emotion="css 1i66d7g"
-              />
-              <span
-                className="chakra-radio__label css-1i66d7g"
-                data-checked=""
-                onMouseDown={[Function]}
-                onTouchStart={[Function]}
-              >
-                <style
-                  dangerouslySetInnerHTML={
-                    Object {
-                      "__html": ".css-1xloz6w{padding-top:var(--chakra-space-3);padding-bottom:var(--chakra-space-3);display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;}",
-                    }
-                  }
-                  data-emotion="css 1xloz6w"
-                />
-                <div
-                  className="css-1xloz6w"
-                >
-                  <style
-                    dangerouslySetInnerHTML={
-                      Object {
-                        "__html": ".css-722v25{font-weight:var(--chakra-fontWeights-bold);}",
-                      }
-                    }
-                    data-emotion="css 722v25"
-                  />
-                  <p
-                    className="chakra-text css-722v25"
-                  >
-                    3G
-                  </p>
-                  <style
-                    dangerouslySetInnerHTML={
-                      Object {
-                        "__html": ".css-l6gl81{font-size:var(--chakra-fontSizes-xs);margin-left:var(--chakra-space-2);}",
-                      }
-                    }
-                    data-emotion="css l6gl81"
-                  />
-                  <p
-                    className="chakra-text css-l6gl81"
-                  >
-                    3G
-                  </p>
-                </div>
-              </span>
-            </label>
-            <label
-              className="chakra-radio css-1pw4d56"
+              }
+              data-emotion="css l6gl81"
+            />
+            <p
+              className="chakra-text css-l6gl81"
             >
-              <input
-                checked={false}
-                className="chakra-radio__input"
-                id="radio-3"
-                name="radio-1"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                onKeyDown={[Function]}
-                onKeyUp={[Function]}
-                style={
-                  Object {
-                    "border": "0px",
-                    "clip": "rect(0px, 0px, 0px, 0px)",
-                    "height": "1px",
-                    "margin": "-1px",
-                    "overflow": "hidden",
-                    "padding": "0px",
-                    "position": "absolute",
-                    "whiteSpace": "nowrap",
-                    "width": "1px",
-                  }
-                }
-                type="radio"
-                value="2G+"
-              />
-              <span
-                aria-hidden={true}
-                className="chakra-radio__control css-1rggdzb"
-                onMouseDown={[Function]}
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-                onMouseUp={[Function]}
-              />
-              <span
-                className="chakra-radio__label css-1i66d7g"
-                onMouseDown={[Function]}
-                onTouchStart={[Function]}
-              >
-                <div
-                  className="css-1xloz6w"
-                >
-                  <p
-                    className="chakra-text css-722v25"
-                  >
-                    2G+
-                  </p>
-                  <p
-                    className="chakra-text css-l6gl81"
-                  >
-                    2G+
-                  </p>
-                </div>
-              </span>
-            </label>
-            <label
-              className="chakra-radio css-1pw4d56"
-            >
-              <input
-                checked={false}
-                className="chakra-radio__input"
-                id="radio-4"
-                name="radio-1"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                onKeyDown={[Function]}
-                onKeyUp={[Function]}
-                style={
-                  Object {
-                    "border": "0px",
-                    "clip": "rect(0px, 0px, 0px, 0px)",
-                    "height": "1px",
-                    "margin": "-1px",
-                    "overflow": "hidden",
-                    "padding": "0px",
-                    "position": "absolute",
-                    "whiteSpace": "nowrap",
-                    "width": "1px",
-                  }
-                }
-                type="radio"
-                value="2G"
-              />
-              <span
-                aria-hidden={true}
-                className="chakra-radio__control css-1rggdzb"
-                onMouseDown={[Function]}
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-                onMouseUp={[Function]}
-              />
-              <span
-                className="chakra-radio__label css-1i66d7g"
-                onMouseDown={[Function]}
-                onTouchStart={[Function]}
-              >
-                <div
-                  className="css-1xloz6w"
-                >
-                  <p
-                    className="chakra-text css-722v25"
-                  >
-                    2G
-                  </p>
-                  <p
-                    className="chakra-text css-l6gl81"
-                  >
-                    2G
-                  </p>
-                </div>
-              </span>
-            </label>
-            <label
-              className="chakra-radio css-1pw4d56"
-            >
-              <input
-                checked={false}
-                className="chakra-radio__input"
-                id="radio-5"
-                name="radio-1"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                onKeyDown={[Function]}
-                onKeyUp={[Function]}
-                style={
-                  Object {
-                    "border": "0px",
-                    "clip": "rect(0px, 0px, 0px, 0px)",
-                    "height": "1px",
-                    "margin": "-1px",
-                    "overflow": "hidden",
-                    "padding": "0px",
-                    "position": "absolute",
-                    "whiteSpace": "nowrap",
-                    "width": "1px",
-                  }
-                }
-                type="radio"
-                value="1G+"
-              />
-              <span
-                aria-hidden={true}
-                className="chakra-radio__control css-1rggdzb"
-                onMouseDown={[Function]}
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-                onMouseUp={[Function]}
-              />
-              <span
-                className="chakra-radio__label css-1i66d7g"
-                onMouseDown={[Function]}
-                onTouchStart={[Function]}
-              >
-                <div
-                  className="css-1xloz6w"
-                >
-                  <p
-                    className="chakra-text css-722v25"
-                  >
-                    1G+
-                  </p>
-                  <p
-                    className="chakra-text css-l6gl81"
-                  >
-                    1G+
-                  </p>
-                </div>
-              </span>
-            </label>
-            <label
-              className="chakra-radio css-1pw4d56"
-            >
-              <input
-                checked={false}
-                className="chakra-radio__input"
-                id="radio-6"
-                name="radio-1"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                onKeyDown={[Function]}
-                onKeyUp={[Function]}
-                style={
-                  Object {
-                    "border": "0px",
-                    "clip": "rect(0px, 0px, 0px, 0px)",
-                    "height": "1px",
-                    "margin": "-1px",
-                    "overflow": "hidden",
-                    "padding": "0px",
-                    "position": "absolute",
-                    "whiteSpace": "nowrap",
-                    "width": "1px",
-                  }
-                }
-                type="radio"
-                value="1G"
-              />
-              <span
-                aria-hidden={true}
-                className="chakra-radio__control css-1rggdzb"
-                onMouseDown={[Function]}
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-                onMouseUp={[Function]}
-              />
-              <span
-                className="chakra-radio__label css-1i66d7g"
-                onMouseDown={[Function]}
-                onTouchStart={[Function]}
-              >
-                <div
-                  className="css-1xloz6w"
-                >
-                  <p
-                    className="chakra-text css-722v25"
-                  >
-                    1G
-                  </p>
-                  <p
-                    className="chakra-text css-l6gl81"
-                  >
-                    1G
-                  </p>
-                </div>
-              </span>
-            </label>
+              bar
+            </p>
           </div>
-        </div>
-      </div>
-      <div
-        data-testId="footer"
-      >
-        <style
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": ".css-f7a7u3{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;white-space:nowrap;vertical-align:middle;outline:2px solid transparent;outline-offset:2px;width:auto;line-height:1.2;border-radius:var(--chakra-radii-md);font-weight:var(--chakra-fontWeights-semibold);transition-property:var(--chakra-transition-property-common);transition-duration:var(--chakra-transition-duration-normal);height:var(--chakra-sizes-12);min-width:var(--chakra-sizes-12);font-size:var(--chakra-fontSizes-lg);-webkit-padding-start:var(--chakra-space-6);padding-inline-start:var(--chakra-space-6);-webkit-padding-end:var(--chakra-space-6);padding-inline-end:var(--chakra-space-6);color:var(--chakra-colors-white);background-color:var(--chakra-colors-blue-400);margin-right:var(--chakra-space-3);}.css-f7a7u3:focus,.css-f7a7u3[data-focus]{box-shadow:var(--chakra-shadows-outline);}.css-f7a7u3[disabled],.css-f7a7u3[aria-disabled=true],.css-f7a7u3[data-disabled]{opacity:0.4;cursor:not-allowed;box-shadow:var(--chakra-shadows-none);}.css-f7a7u3:hover,.css-f7a7u3[data-hover]{background:var(--chakra-colors-blue-300);}.css-f7a7u3:active,.css-f7a7u3[data-active]{background:var(--chakra-colors-blue-400);}",
-            }
-          }
-          data-emotion="css f7a7u3"
-        />
-        <button
-          className="chakra-button css-f7a7u3"
-          onClick={[Function]}
-          type="button"
-        >
-          save
-        </button>
-      </div>
+        </span>
+      </label>
     </div>
   </div>,
   <span />,
