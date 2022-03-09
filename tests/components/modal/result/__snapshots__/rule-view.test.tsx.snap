@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RuleView renders correctly 1`] = `
+Array [
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".css-mfq1v{color:white;font-weight:semibold;}",
+      }
+    }
+    data-emotion="css mfq1v"
+  />,
+  <span
+    className="chakra-text css-mfq1v"
+  >
+    DE / Hamburg / 3G
+  </span>,
+]
+`;

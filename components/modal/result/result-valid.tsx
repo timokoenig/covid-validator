@@ -25,6 +25,8 @@ type Props = {
   isOpen: boolean
   onClose: (multiscan: boolean) => void
   result: ScanResult
+  enableCounter?: boolean
+  enableTimer?: boolean
 }
 
 const ResultValid = (props: Props) => {
@@ -40,11 +42,13 @@ const ResultValid = (props: Props) => {
   })()
 
   useEffect(() => {
+    if (props.enableCounter === false) return
     // increase counter for valid certificate
     increaseCounter()
   }, [])
 
   useEffect(() => {
+    if (props.enableTimer === false) return
     // Set timeout interval to close modal after X seconds
     const interval = setInterval(() => {
       const newTimer = timer - 1
