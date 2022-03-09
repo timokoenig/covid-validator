@@ -1,46 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import '@/node_modules/flag-icons/css/flag-icons.min.css'
 import { ChakraProvider, CSSReset } from '@chakra-ui/react'
-import i18next from 'i18next'
-import LanguageDetector from 'i18next-browser-languagedetector'
 import { AppProps } from 'next/app'
 import React from 'react'
 import { I18nextProvider } from 'react-i18next'
 import '../styles/globals.css'
-
-i18next
-  .use(LanguageDetector)
-  .init({
-    interpolation: { escapeValue: false },
-    fallbackLng: 'en',
-    resources: {
-      en: {
-        common: require('../translations/en/common.json'),
-        country: require('../translations/en/country.json'),
-      },
-      de: {
-        common: require('../translations/de/common.json'),
-        country: require('../translations/de/country.json'),
-      },
-      fr: {
-        common: require('../translations/fr/common.json'),
-        country: require('../translations/fr/country.json'),
-      },
-      lt: {
-        common: require('../translations/lt/common.json'),
-        country: require('../translations/lt/country.json'),
-      },
-      pl: {
-        common: require('../translations/pl/common.json'),
-        country: require('../translations/pl/country.json'),
-      },
-      ro: {
-        common: require('../translations/ro/common.json'),
-        country: require('../translations/ro/country.json'),
-      },
-    },
-  })
-  .catch(console.log)
+import i18next from '../utils/i18next'
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
