@@ -151,7 +151,8 @@ Note: If you do not add a translation in any given language, the app will defaul
 
 ## More Information
 
-- [A collection of Country and State rules](./docs/README.md).
+- [A collection of Country and State rules](./docs/README.md)
+- [Desktop App for CovidValidator](https://github.com/timokoenig/covid-validator-app) (EXPERIMENTAL)
 
 ---
 
