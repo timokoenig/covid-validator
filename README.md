@@ -14,7 +14,7 @@ Check EU Digitial Covid Certificates with ease and validate them against local o
 - 🌍 Validate against country or local rules
 - 🎟 Scan Counter to keep track of admission criteria at local venues
 - 📴 Works offline on smartphones, tablets, and desktop computers
-- 🗣 Available Languages: 🇺🇸 🇩🇪 🇫🇷 🇵🇱 🇱🇹 🇷🇴
+- 🗣 Available Languages: 🇺🇸 🇩🇪 🇫🇷 🇵🇱 🇱🇹 🇷🇴 🇪🇸
 
 ### What is the purpose of CovidValidator?
 
@@ -148,6 +148,7 @@ Note: If you do not add a translation in any given language, the app will defaul
 - Lithuanian (85%, further checks required)
 - Polish (95%)
 - Romanian (95%)
+- Spanish (100%)
 
 ## More Information
 
