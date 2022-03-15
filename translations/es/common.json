@@ -103,7 +103,7 @@
   "modal.settings.language": "Idioma preferido",
   "modal.settings.counter": "Contador de escaneo",
   "modal.settings.purpose": "Propósito de uso",
-  "modal.settings.purpose.excludebooster": "Excluir a las personas con un reforzador de proporcionar un certificado de prueba",
+  "modal.settings.purpose.excludebooster": "Excluir a las personas con una vacuna de refuerzo de proporcionar una prueba certificada",
   "modal.settings.rules": "reglas activas",
 
   "modal.result.valid": "VALIDO",
