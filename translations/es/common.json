@@ -167,11 +167,5 @@
   "builder.immunizationstatus": "Estado de vacunación",
   "builder.select.component": "Seleccionar componente",
   "builder.select.custom": "Personalizado",
-  "builder.select.default": "Por defecto",
-
-  "lang": {
-    "en": "Inglés",
-    "de": "Alemán",
-    "es": "Español"
-  }
+  "builder.select.default": "Por defecto"
 }
