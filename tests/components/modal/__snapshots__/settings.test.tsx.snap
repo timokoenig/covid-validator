@@ -168,7 +168,7 @@ Array [
               (
               updated
                
-              05.03.2022
+              15.03.2022
               )
             </p>
           </div>
@@ -275,6 +275,11 @@ Array [
                 value="ro"
               >
                 Românesc
+              </option>
+              <option
+                value="es"
+              >
+                Español
               </option>
             </select>
             <style
@@ -820,7 +825,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -957,7 +962,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -1094,7 +1099,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -1231,7 +1236,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -1368,7 +1373,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -2433,7 +2438,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -2570,7 +2575,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -2707,7 +2712,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -2844,7 +2849,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -2981,7 +2986,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -3118,7 +3123,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -3255,7 +3260,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -3392,7 +3397,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -3529,7 +3534,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -3666,7 +3671,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -3803,7 +3808,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -3940,7 +3945,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -4077,7 +4082,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -4214,7 +4219,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -4351,7 +4356,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -4488,7 +4493,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
@@ -4625,7 +4630,7 @@ Array [
                           <p
                             className="chakra-text css-l6gl81"
                           >
-                            (updated 05.03.2022)
+                            (updated 15.03.2022)
                           </p>
                         </div>
                       </span>
