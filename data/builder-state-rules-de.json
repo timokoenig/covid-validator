@@ -140,6 +140,16 @@
                   { "plusTime": [{ "var": "external.validationClock" }, 0, "hour"] },
                   { "plusTime": [{ "var": "payload.t.0.sc" }, 24, "hour"] }
                 ]
+              },
+              {
+                "in": [
+                  {
+                    "var": "payload.t.0.ma"
+                  },
+                  {
+                    "var": "external.valueSets.covid-19-lab-test-manufacturer-and-name"
+                  }
+                ]
               }
             ]
           },

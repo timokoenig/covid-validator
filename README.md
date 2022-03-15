@@ -14,6 +14,7 @@ Check EU Digitial Covid Certificates with ease and validate them against local o
 - 🌍 Validate against country or local rules
 - 🎟 Scan Counter to keep track of admission criteria at local venues
 - 📴 Works offline on smartphones, tablets, and desktop computers
+- 🗣 Available Languages: 🇺🇸 🇩🇪 🇫🇷 🇵🇱 🇱🇹 🇷🇴
 
 ### What is the purpose of CovidValidator?
 
@@ -84,6 +85,8 @@ The [EU DCC Validation Rules](https://ec.europa.eu/health/system/files/2021-06/e
 
 For reference implementations, please refer to [github.com/ehn-dcc-development/dgc-business-rules](https://github.com/ehn-dcc-development/dgc-business-rules).
 
+The DGCA Business Rule Service is provided by T-Systems Internation GmbH under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+
 ## Custom Rule Builder
 
 The custom rule builder allows you to create your own rule set if the available rules do not meet your requirements. This feature is currently in **BETA** and it might occur problems, so please use it with caution. Nevertheless this does not affect the **CovidValidator** with all country and state rules!
@@ -115,6 +118,14 @@ npm run dev
 
 The QR code reader needs to run over localhost or SSL to work. For the local development, follow [these steps](https://github.com/vercel/next.js/discussions/10935#discussioncomment-1540436) and run `ipconfig getifaddr en0` to get your IP address. Now you can access your dev build via HTTPS on your network.
 
+## Snapshot Tests
+
+We use [Jest Snapshot Testing](https://jestjs.io/docs/snapshot-testing) for our components.
+
+To add a new snapshot test, follow [the instructions](https://jestjs.io/docs/snapshot-testing) or use [this example](./tests/components/external-link.test.tsx) and then run `npm run test` to automatically create the snapshot file.
+
+To update an existing snapshot, adjust the test case and run `npm run snapshot-update`.
+
 ## i18n
 
 The app uses [i18next](https://www.i18next.com/) for internationalization. We want to offer this app to as many people as possible therefore native translations are important. We welcome anyone to help us translate this app. To do so, follow these steps:
@@ -129,9 +140,19 @@ The app uses [i18next](https://www.i18next.com/) for internationalization. We wa
 
 Note: If you do not add a translation in any given language, the app will default to English.
 
+### Available Languages
+
+- English (100%)
+- German (100%)
+- French (100%)
+- Lithuanian (85%, further checks required)
+- Polish (95%)
+- Romanian (95%)
+
 ## More Information
 
-- [A collection of Country and State rules](./docs/README.md).
+- [A collection of Country and State rules](./docs/README.md)
+- [Desktop App for CovidValidator](https://github.com/timokoenig/covid-validator-app) (EXPERIMENTAL)
 
 ---
 

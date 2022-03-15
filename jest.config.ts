@@ -9,6 +9,7 @@ const config: Config.InitialOptions = {
   transformIgnorePatterns: [
     'node_modules/(?!aggregate-error|clean-stack|escape-string-regexp|indent-string|p-map)',
   ],
+  setupFilesAfterEnv: ['<rootDir>/tests/setup-tests.js'],
 }
 
 export default config

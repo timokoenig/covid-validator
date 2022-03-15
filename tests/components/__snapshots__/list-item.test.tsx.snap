@@ -1,0 +1,210 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Array [
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".css-155za0w{list-style-type:none;}",
+      }
+    }
+    data-emotion="css 155za0w"
+  />,
+  <ul
+    className="css-155za0w"
+    role="list"
+  >
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": ".css-k008qs{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;}",
+        }
+      }
+      data-emotion="css k008qs"
+    />
+    <li
+      className="css-k008qs"
+    >
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-1kmn8s5{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;white-space:nowrap;vertical-align:middle;outline:2px solid transparent;outline-offset:2px;width:auto;-webkit-flex:1;-ms-flex:1;flex:1;padding-top:7px;padding-bottom:7px;}",
+          }
+        }
+        data-emotion="css 1kmn8s5"
+      />
+      <button
+        className="chakra-button css-1kmn8s5"
+        onClick={[Function]}
+        type="button"
+      >
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-13brihr{text-align:left;}",
+            }
+          }
+          data-emotion="css 13brihr"
+        />
+        <div
+          className="css-13brihr"
+        >
+          <style
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": ".css-10ircq3{font-weight:semibold;}",
+              }
+            }
+            data-emotion="css 10ircq3"
+          />
+          <p
+            className="chakra-text css-10ircq3"
+          >
+            foo
+          </p>
+          <style
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": ".css-1l7mgse{font-weight:normal;}",
+              }
+            }
+            data-emotion="css 1l7mgse"
+          />
+          <p
+            className="chakra-text css-1l7mgse"
+          >
+            bar
+          </p>
+        </div>
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-17xejub{-webkit-flex:1;-ms-flex:1;flex:1;justify-self:stretch;-webkit-align-self:stretch;-ms-flex-item-align:stretch;align-self:stretch;}",
+            }
+          }
+          data-emotion="css 17xejub"
+        />
+        <div
+          className="css-17xejub"
+        />
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-19svxgr{width:5;height:5px;display:inline-block;line-height:1em;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;color:currentColor;vertical-align:middle;}",
+            }
+          }
+          data-emotion="css 19svxgr"
+        />
+        <svg
+          className="chakra-icon css-19svxgr"
+          focusable={false}
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+    </li>
+  </ul>,
+]
+`;
+
+exports[`renders correctly without subtitle 1`] = `
+Array [
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".css-155za0w{list-style-type:none;}",
+      }
+    }
+    data-emotion="css 155za0w"
+  />,
+  <ul
+    className="css-155za0w"
+    role="list"
+  >
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": ".css-k008qs{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;}",
+        }
+      }
+      data-emotion="css k008qs"
+    />
+    <li
+      className="css-k008qs"
+    >
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-1kmn8s5{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;white-space:nowrap;vertical-align:middle;outline:2px solid transparent;outline-offset:2px;width:auto;-webkit-flex:1;-ms-flex:1;flex:1;padding-top:7px;padding-bottom:7px;}",
+          }
+        }
+        data-emotion="css 1kmn8s5"
+      />
+      <button
+        className="chakra-button css-1kmn8s5"
+        onClick={[Function]}
+        type="button"
+      >
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-13brihr{text-align:left;}",
+            }
+          }
+          data-emotion="css 13brihr"
+        />
+        <div
+          className="css-13brihr"
+        >
+          <style
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": ".css-10ircq3{font-weight:semibold;}",
+              }
+            }
+            data-emotion="css 10ircq3"
+          />
+          <p
+            className="chakra-text css-10ircq3"
+          >
+            foo
+          </p>
+        </div>
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-17xejub{-webkit-flex:1;-ms-flex:1;flex:1;justify-self:stretch;-webkit-align-self:stretch;-ms-flex-item-align:stretch;align-self:stretch;}",
+            }
+          }
+          data-emotion="css 17xejub"
+        />
+        <div
+          className="css-17xejub"
+        />
+        <style
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": ".css-19svxgr{width:5;height:5px;display:inline-block;line-height:1em;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;color:currentColor;vertical-align:middle;}",
+            }
+          }
+          data-emotion="css 19svxgr"
+        />
+        <svg
+          className="chakra-icon css-19svxgr"
+          focusable={false}
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+    </li>
+  </ul>,
+]
+`;

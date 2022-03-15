@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Array [
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".css-1x3w0s1{-webkit-margin-start:1px;margin-inline-start:1px;-webkit-margin-end:1px;margin-inline-end:1px;}",
+      }
+    }
+    data-emotion="css 1x3w0s1"
+  />,
+  <a
+    className="chakra-link css-1x3w0s1"
+    href="https://covidvalidator.app"
+    style={
+      Object {
+        "textDecoration": "underline",
+      }
+    }
+    target="_blank"
+  >
+    Link
+  </a>,
+]
+`;
+
+exports[`renders correctly with component 1`] = `
+Array [
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".css-1x3w0s1{-webkit-margin-start:1px;margin-inline-start:1px;-webkit-margin-end:1px;margin-inline-end:1px;}",
+      }
+    }
+    data-emotion="css 1x3w0s1"
+  />,
+  <a
+    className="chakra-link css-1x3w0s1"
+    href="https://covidvalidator.app"
+    style={
+      Object {
+        "textDecoration": "underline",
+      }
+    }
+    target="_blank"
+  >
+    <p
+      className="chakra-text css-0"
+    >
+      Link
+    </p>
+  </a>,
+]
+`;

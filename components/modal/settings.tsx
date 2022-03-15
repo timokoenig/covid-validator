@@ -16,7 +16,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import moment from 'moment'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import rules from '../../data/eu-dcc-rules.json'
 import { app, resetCounter, toggleCounter, toggleExcludeBooster } from '../../state/app'
@@ -28,7 +28,7 @@ import CountryModal from './country'
 import PurposeModal from './purpose'
 import RulesModal from './rules'
 
-const availableLanguages = ['en', 'de', 'es']
+const availableLanguages = ['en', 'de', 'fr', 'lt', 'pl', 'ro']
 
 type Props = {
   isOpen: boolean
@@ -55,9 +55,12 @@ const SettingsModal = (props: Props) => {
     countryAndState.state.code
   ).length
 
-  useEffect(() => {
-    i18n.changeLanguage(lang).catch(console.log)
-  }, [lang, i18n])
+  const onChangeLang = (newLang: string) => {
+    i18n
+      .changeLanguage(newLang)
+      .then(() => setLang(newLang))
+      .catch(console.log)
+  }
 
   return (
     <>
@@ -123,7 +126,7 @@ const SettingsModal = (props: Props) => {
 
             <FormControl display="flex" alignItems="center" my="5">
               <FormLabel flex="1">{t('modal.settings.language')}</FormLabel>
-              <Select value={lang} onChange={e => setLang(e.target.value)} width="100">
+              <Select value={lang} onChange={e => onChangeLang(e.target.value)} width="100">
                 {availableLanguages.map(key => (
                   <option key={key} value={key}>
                     {t(`lang.${key}`)}
