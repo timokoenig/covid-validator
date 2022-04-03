@@ -281,6 +281,11 @@ Array [
               >
                 Español
               </option>
+              <option
+                value="it"
+              >
+                lang.it
+              </option>
             </select>
             <style
               dangerouslySetInnerHTML={
