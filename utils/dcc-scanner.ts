@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
@@ -18,6 +19,14 @@ import {
 import { CertLogic, ICertLogic } from './certlogic'
 import { DCC } from './dcc'
 import { chunkSubstr, getCertificateType } from './helper'
+
+// Invalidate fraudulent certificates like mikey mouse, etc
+const fraudulentCertificateUVCIs = [
+  'URN:UVCI:V1:MK:S98KWT17050MEGUGPLGDV2H0CV',
+  'URN:UVCI:01:FR:W7V2BE46QSBJ#L',
+  'URN:UVCI:01:PL:1/AF2AA5873FAF45DFA826B8A01237BDC4',
+  'URN:UVCI:01:FR:T5DWTJYS4ZR8#4',
+]
 
 export type DSC = {
   kid: string
@@ -192,6 +201,12 @@ export class DCCScanner implements IDCCScanner {
   }
 
   async check(dcc: DCC): Promise<void> {
+    // check fraudulent certificates
+    if (this.checkFraudulentCertificates(dcc)) {
+      // check failed - Mickey Mouse needs to stay outside
+      throw new DCCVerifyError()
+    }
+
     // verify dcc
     const isExpired = dcc.data.payload.exp
       ? moment() > moment.unix(parseInt(dcc.data.payload.exp, 10))
@@ -397,6 +412,20 @@ export class DCCScanner implements IDCCScanner {
       } catch {}
     }
 
+    return false
+  }
+
+  private checkFraudulentCertificates(dcc: DCC): boolean {
+    const dgc = dcc.data.payload.hcert.dgc
+    if ((dgc.v?.length ?? 0) > 0 ? fraudulentCertificateUVCIs.includes(dgc.v![0].ci) : false) {
+      return true
+    }
+    if ((dgc.r?.length ?? 0) > 0 ? fraudulentCertificateUVCIs.includes(dgc.r![0].ci) : false) {
+      return true
+    }
+    if ((dgc.t?.length ?? 0) > 0 ? fraudulentCertificateUVCIs.includes(dgc.t![0].ci) : false) {
+      return true
+    }
     return false
   }
 }

@@ -17,7 +17,7 @@
   "duplicate": "Duplicate",
   "version": "Version",
   "sponsor": "Sponsor",
-  "privacy": "Data Pivacy",
+  "privacy": "Data Privacy",
   "github": "Github",
   "builder": "Rule Builder",
   "date": "Date",
@@ -45,6 +45,7 @@
   "offline": "Offline",
   "offline.message": "Please check your internet connection",
 
+  "general": "General",
   "vaccination": "Vaccination",
   "recovery": "Recovery",
   "test": "Test",
@@ -170,7 +171,12 @@
   "builder.select.default": "Default",
 
   "lang": {
+    "de": "Deutsch",
     "en": "English",
-    "de": "German"
+    "fr": "Français",
+    "lt": "Lietuvių",
+    "pl": "Polski",
+    "ro": "Românesc",
+    "es": "Español"
   }
 }

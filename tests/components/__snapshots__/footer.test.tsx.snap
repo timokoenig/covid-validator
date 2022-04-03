@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Array [
+  <hr />,
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".css-1ghd4k2{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;margin-top:5px;}",
+      }
+    }
+    data-emotion="css 1ghd4k2"
+  />,
+  <div
+    className="css-1ghd4k2"
+  >
+    <p
+      className="chakra-text css-0"
+    >
+      x
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": ".css-tokvmb{color:red;}",
+          }
+        }
+        data-emotion="css tokvmb"
+      />
+      <span
+        className="chakra-text css-tokvmb"
+      >
+        ♥
+      </span>
+      y
+    </p>
+  </div>,
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".css-cyl1zv{margin-bottom:20px;text-align:center;}",
+      }
+    }
+    data-emotion="css cyl1zv"
+  />,
+  <div
+    className="css-cyl1zv"
+  >
+    <style
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": ".css-1hivrq9{-webkit-padding-start:2px;padding-inline-start:2px;-webkit-padding-end:2px;padding-inline-end:2px;display:inline-block;}",
+        }
+      }
+      data-emotion="css 1hivrq9"
+    />
+    <a
+      className="chakra-link css-1hivrq9"
+      href="/builder"
+    >
+      builder
+    </a>
+    |
+    <a
+      className="chakra-link css-1hivrq9"
+      href="https://github.com/timokoenig/covid-validator"
+      target="_blank"
+    >
+      github
+    </a>
+    |
+    <a
+      className="chakra-link css-1hivrq9"
+      href="https://ko-fi.com/timokoenig"
+      target="_blank"
+    >
+      sponsor
+    </a>
+    |
+    <a
+      className="chakra-link css-1hivrq9"
+      href="/privacy"
+    >
+      privacy
+    </a>
+    |
+    <a
+      className="chakra-link css-1hivrq9"
+      href="/imprint"
+    >
+      imprint
+    </a>
+  </div>,
+]
+`;

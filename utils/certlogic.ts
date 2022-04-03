@@ -15,19 +15,28 @@ import { DCC } from './dcc'
 import { exportRules, getCertificateType } from './helper'
 
 const valueSets: any = {
-  'country-2-codes': require('../data/value-sets/country-2-codes.json').valueSetValues,
-  'covid-19-lab-result': require('../data/value-sets/covid-19-lab-result.json').valueSetValues,
-  'covid-19-lab-test-manufacturer-and-name':
-    require('../data/value-sets/covid-19-lab-test-manufacturer-and-name.json').valueSetValues,
-  'covid-19-lab-test-type': require('../data/value-sets/covid-19-lab-test-type.json')
-    .valueSetValues,
-  'disease-agent-targeted': require('../data/value-sets/disease-agent-targeted.json')
-    .valueSetValues,
-  'sct-vaccines-covid-19': require('../data/value-sets/sct-vaccines-covid-19.json').valueSetValues,
-  'vaccines-covid-19-auth-holders':
-    require('../data/value-sets/vaccines-covid-19-auth-holders.json').valueSetValues,
-  'vaccines-covid-19-names': require('../data/value-sets/vaccines-covid-19-names.json')
-    .valueSetValues,
+  'country-2-codes': Object.keys(require('../data/value-sets/country-2-codes.json').valueSetValues),
+  'covid-19-lab-result': Object.keys(
+    require('../data/value-sets/covid-19-lab-result.json').valueSetValues
+  ),
+  'covid-19-lab-test-manufacturer-and-name': Object.keys(
+    require('../data/value-sets/covid-19-lab-test-manufacturer-and-name.json').valueSetValues
+  ),
+  'covid-19-lab-test-type': Object.keys(
+    require('../data/value-sets/covid-19-lab-test-type.json').valueSetValues
+  ),
+  'disease-agent-targeted': Object.keys(
+    require('../data/value-sets/disease-agent-targeted.json').valueSetValues
+  ),
+  'sct-vaccines-covid-19': Object.keys(
+    require('../data/value-sets/sct-vaccines-covid-19.json').valueSetValues
+  ),
+  'vaccines-covid-19-auth-holders': Object.keys(
+    require('../data/value-sets/vaccines-covid-19-auth-holders.json').valueSetValues
+  ),
+  'vaccines-covid-19-names': Object.keys(
+    require('../data/value-sets/vaccines-covid-19-names.json').valueSetValues
+  ),
 }
 
 /**

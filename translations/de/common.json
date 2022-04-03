@@ -45,6 +45,7 @@
   "offline": "Offline",
   "offline.message": "Bitte überprüfen Sie Ihre Internetverbindung",
 
+  "general": "Allgemein",
   "vaccination": "Impfung",
   "recovery": "Genesung",
   "test": "Test",
@@ -167,10 +168,5 @@
   "builder.immunizationstatus": "Immunisierungsstatus",
   "builder.select.component": "Komponente ausewählen",
   "builder.select.custom": "Benutzerdefiniert",
-  "builder.select.default": "Standard",
-
-  "lang": {
-    "en": "Englisch",
-    "de": "Deutsch"
-  }
+  "builder.select.default": "Standard"
 }
