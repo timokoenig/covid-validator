@@ -167,11 +167,5 @@
   "builder.immunizationstatus": "Immunisatiestatus",
   "builder.select.component": "Selecteer component",
   "builder.select.custom": "Aangepaste",
-  "builder.select.default": "Standaard",
-
-  "lang": {
-    "en": "Engels",
-    "de": "Duits",
-    "nl": "Dutch"
-  }
+  "builder.select.default": "Standaard"
 }
