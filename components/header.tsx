@@ -1,4 +1,3 @@
-import { disableScanner, enableScanner } from '@/state/app'
 import { SettingsIcon } from '@chakra-ui/icons'
 import {
   Box,
@@ -13,6 +12,7 @@ import {
 import dynamic from 'next/dynamic'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { disableScanner, enableScanner } from '../state/app'
 
 const SettingsModal = dynamic(() => import('./modal/settings'), {
   ssr: false,

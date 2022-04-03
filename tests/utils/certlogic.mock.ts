@@ -1,4 +1,4 @@
-import { DCCRuleValidationResult, ICertLogic, ICertLogicConfig, Rule } from '../utils/certlogic'
+import { DCCRuleValidationResult, ICertLogic, ICertLogicConfig, Rule } from '../../utils/certlogic'
 
 class DebugConfig implements ICertLogicConfig {
   country(): string {
