@@ -284,7 +284,12 @@ Array [
               <option
                 value="it"
               >
-                lang.it
+                Italiano
+              </option>
+              <option
+                value="nl"
+              >
+                Nederlands
               </option>
             </select>
             <style

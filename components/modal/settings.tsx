@@ -28,7 +28,7 @@ import CountryModal from './country'
 import PurposeModal from './purpose'
 import RulesModal from './rules'
 
-const availableLanguages = ['en', 'de', 'fr', 'lt', 'pl', 'ro', 'es', 'it']
+const availableLanguages = ['en', 'de', 'fr', 'lt', 'pl', 'ro', 'es', 'it', 'nl']
 
 type Props = {
   isOpen: boolean
