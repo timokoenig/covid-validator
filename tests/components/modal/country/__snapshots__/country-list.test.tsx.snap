@@ -257,7 +257,7 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -391,7 +391,7 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -525,7 +525,7 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -554,7 +554,7 @@ Array [
             className="css-1t7d7e7"
           >
             <span
-              className="fi fi-cz fis"
+              className="fi fi-cy fis"
               style={
                 Object {
                   "borderRadius": 10,
@@ -566,7 +566,7 @@ Array [
             <p
               className="chakra-text css-5lyju4"
             >
-              CZ
+              CY
             </p>
           </div>
           <svg
@@ -659,7 +659,7 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -688,7 +688,7 @@ Array [
             className="css-1t7d7e7"
           >
             <span
-              className="fi fi-de fis"
+              className="fi fi-cz fis"
               style={
                 Object {
                   "borderRadius": 10,
@@ -700,7 +700,7 @@ Array [
             <p
               className="chakra-text css-5lyju4"
             >
-              DE
+              CZ
             </p>
           </div>
           <svg
@@ -793,7 +793,141 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
+                    </p>
+                  </div>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="chakra-accordion__item css-17mg6aq"
+    >
+      <h2>
+        <button
+          aria-controls="accordion-panel-16"
+          aria-expanded={false}
+          className="chakra-accordion__button css-1ygl3x"
+          disabled={false}
+          id="accordion-button-16"
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          type="button"
+        >
+          <div
+            className="css-1t7d7e7"
+          >
+            <span
+              className="fi fi-de fis"
+              style={
+                Object {
+                  "borderRadius": 10,
+                  "height": 20,
+                  "width": 20,
+                }
+              }
+            />
+            <p
+              className="chakra-text css-5lyju4"
+            >
+              DE
+            </p>
+          </div>
+          <svg
+            aria-hidden={true}
+            className="chakra-icon chakra-accordion__icon css-186l2rg"
+            focusable={false}
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+      </h2>
+      <div
+        className="chakra-collapse"
+        style={
+          Object {
+            "display": "none",
+            "height": "0px",
+            "opacity": 0,
+            "overflow": "hidden",
+          }
+        }
+      >
+        <div
+          aria-labelledby="accordion-button-16"
+          className="chakra-accordion__panel css-1hb5ode"
+          id="accordion-panel-16"
+          role="region"
+        >
+          <div
+            className="chakra-radio-group css-0"
+            role="radiogroup"
+          >
+            <div
+              className="chakra-stack css-n21gh5"
+            >
+              <label
+                className="chakra-radio css-1pw4d56"
+              >
+                <input
+                  checked={false}
+                  className="chakra-radio__input"
+                  id="radio-18"
+                  name="radio-17"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyUp={[Function]}
+                  style={
+                    Object {
+                      "border": "0px",
+                      "clip": "rect(0px, 0px, 0px, 0px)",
+                      "height": "1px",
+                      "margin": "-1px",
+                      "overflow": "hidden",
+                      "padding": "0px",
+                      "position": "absolute",
+                      "whiteSpace": "nowrap",
+                      "width": "1px",
+                    }
+                  }
+                  type="radio"
+                  value=""
+                />
+                <span
+                  aria-hidden={true}
+                  className="chakra-radio__control css-1rggdzb"
+                  onMouseDown={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseUp={[Function]}
+                />
+                <span
+                  className="chakra-radio__label css-1i66d7g"
+                  onMouseDown={[Function]}
+                  onTouchStart={[Function]}
+                >
+                  <div
+                    className="css-u4p24i"
+                  >
+                    <p
+                      className="chakra-text css-722v25"
+                    >
+                      nationwide
+                    </p>
+                    <p
+                      className="chakra-text css-l6gl81"
+                    >
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -804,8 +938,8 @@ Array [
                 <input
                   checked={false}
                   className="chakra-radio__input"
-                  id="radio-16"
-                  name="radio-14"
+                  id="radio-19"
+                  name="radio-17"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -862,8 +996,8 @@ Array [
                 <input
                   checked={false}
                   className="chakra-radio__input"
-                  id="radio-17"
-                  name="radio-14"
+                  id="radio-20"
+                  name="radio-17"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -920,8 +1054,8 @@ Array [
                 <input
                   checked={false}
                   className="chakra-radio__input"
-                  id="radio-18"
-                  name="radio-14"
+                  id="radio-21"
+                  name="radio-17"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -978,8 +1112,8 @@ Array [
                 <input
                   checked={false}
                   className="chakra-radio__input"
-                  id="radio-19"
-                  name="radio-14"
+                  id="radio-22"
+                  name="radio-17"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -1036,8 +1170,8 @@ Array [
                 <input
                   checked={false}
                   className="chakra-radio__input"
-                  id="radio-20"
-                  name="radio-14"
+                  id="radio-23"
+                  name="radio-17"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -1094,8 +1228,8 @@ Array [
                 <input
                   checked={false}
                   className="chakra-radio__input"
-                  id="radio-21"
-                  name="radio-14"
+                  id="radio-24"
+                  name="radio-17"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -1152,8 +1286,8 @@ Array [
                 <input
                   checked={false}
                   className="chakra-radio__input"
-                  id="radio-22"
-                  name="radio-14"
+                  id="radio-25"
+                  name="radio-17"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -1210,8 +1344,8 @@ Array [
                 <input
                   checked={false}
                   className="chakra-radio__input"
-                  id="radio-23"
-                  name="radio-14"
+                  id="radio-26"
+                  name="radio-17"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -1268,8 +1402,8 @@ Array [
                 <input
                   checked={false}
                   className="chakra-radio__input"
-                  id="radio-24"
-                  name="radio-14"
+                  id="radio-27"
+                  name="radio-17"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -1326,8 +1460,8 @@ Array [
                 <input
                   checked={false}
                   className="chakra-radio__input"
-                  id="radio-25"
-                  name="radio-14"
+                  id="radio-28"
+                  name="radio-17"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -1384,8 +1518,8 @@ Array [
                 <input
                   checked={false}
                   className="chakra-radio__input"
-                  id="radio-26"
-                  name="radio-14"
+                  id="radio-29"
+                  name="radio-17"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -1442,8 +1576,8 @@ Array [
                 <input
                   checked={false}
                   className="chakra-radio__input"
-                  id="radio-27"
-                  name="radio-14"
+                  id="radio-30"
+                  name="radio-17"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -1500,8 +1634,8 @@ Array [
                 <input
                   checked={false}
                   className="chakra-radio__input"
-                  id="radio-28"
-                  name="radio-14"
+                  id="radio-31"
+                  name="radio-17"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -1558,8 +1692,8 @@ Array [
                 <input
                   checked={false}
                   className="chakra-radio__input"
-                  id="radio-29"
-                  name="radio-14"
+                  id="radio-32"
+                  name="radio-17"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -1616,8 +1750,8 @@ Array [
                 <input
                   checked={false}
                   className="chakra-radio__input"
-                  id="radio-30"
-                  name="radio-14"
+                  id="radio-33"
+                  name="radio-17"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -1674,8 +1808,8 @@ Array [
                 <input
                   checked={false}
                   className="chakra-radio__input"
-                  id="radio-31"
-                  name="radio-14"
+                  id="radio-34"
+                  name="radio-17"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -1736,11 +1870,11 @@ Array [
     >
       <h2>
         <button
-          aria-controls="accordion-panel-32"
+          aria-controls="accordion-panel-35"
           aria-expanded={false}
           className="chakra-accordion__button css-1ygl3x"
           disabled={false}
-          id="accordion-button-32"
+          id="accordion-button-35"
           onClick={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
@@ -1763,140 +1897,6 @@ Array [
               className="chakra-text css-5lyju4"
             >
               EE
-            </p>
-          </div>
-          <svg
-            aria-hidden={true}
-            className="chakra-icon chakra-accordion__icon css-186l2rg"
-            focusable={false}
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
-              fill="currentColor"
-            />
-          </svg>
-        </button>
-      </h2>
-      <div
-        className="chakra-collapse"
-        style={
-          Object {
-            "display": "none",
-            "height": "0px",
-            "opacity": 0,
-            "overflow": "hidden",
-          }
-        }
-      >
-        <div
-          aria-labelledby="accordion-button-32"
-          className="chakra-accordion__panel css-1hb5ode"
-          id="accordion-panel-32"
-          role="region"
-        >
-          <div
-            className="chakra-radio-group css-0"
-            role="radiogroup"
-          >
-            <div
-              className="chakra-stack css-n21gh5"
-            >
-              <label
-                className="chakra-radio css-1pw4d56"
-              >
-                <input
-                  checked={false}
-                  className="chakra-radio__input"
-                  id="radio-34"
-                  name="radio-33"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  onKeyUp={[Function]}
-                  style={
-                    Object {
-                      "border": "0px",
-                      "clip": "rect(0px, 0px, 0px, 0px)",
-                      "height": "1px",
-                      "margin": "-1px",
-                      "overflow": "hidden",
-                      "padding": "0px",
-                      "position": "absolute",
-                      "whiteSpace": "nowrap",
-                      "width": "1px",
-                    }
-                  }
-                  type="radio"
-                  value=""
-                />
-                <span
-                  aria-hidden={true}
-                  className="chakra-radio__control css-1rggdzb"
-                  onMouseDown={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                  onMouseUp={[Function]}
-                />
-                <span
-                  className="chakra-radio__label css-1i66d7g"
-                  onMouseDown={[Function]}
-                  onTouchStart={[Function]}
-                >
-                  <div
-                    className="css-u4p24i"
-                  >
-                    <p
-                      className="chakra-text css-722v25"
-                    >
-                      nationwide
-                    </p>
-                    <p
-                      className="chakra-text css-l6gl81"
-                    >
-                      (modal.rules.updated 29.03.2022)
-                    </p>
-                  </div>
-                </span>
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="chakra-accordion__item css-17mg6aq"
-    >
-      <h2>
-        <button
-          aria-controls="accordion-panel-35"
-          aria-expanded={false}
-          className="chakra-accordion__button css-1ygl3x"
-          disabled={false}
-          id="accordion-button-35"
-          onClick={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          type="button"
-        >
-          <div
-            className="css-1t7d7e7"
-          >
-            <span
-              className="fi fi-es fis"
-              style={
-                Object {
-                  "borderRadius": 10,
-                  "height": 20,
-                  "width": 20,
-                }
-              }
-            />
-            <p
-              className="chakra-text css-5lyju4"
-            >
-              ES
             </p>
           </div>
           <svg
@@ -1989,7 +1989,7 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -2018,7 +2018,7 @@ Array [
             className="css-1t7d7e7"
           >
             <span
-              className="fi fi-fr fis"
+              className="fi fi-es fis"
               style={
                 Object {
                   "borderRadius": 10,
@@ -2030,7 +2030,7 @@ Array [
             <p
               className="chakra-text css-5lyju4"
             >
-              FR
+              ES
             </p>
           </div>
           <svg
@@ -2123,7 +2123,7 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -2152,7 +2152,7 @@ Array [
             className="css-1t7d7e7"
           >
             <span
-              className="fi fi-ie fis"
+              className="fi fi-fi fis"
               style={
                 Object {
                   "borderRadius": 10,
@@ -2164,7 +2164,7 @@ Array [
             <p
               className="chakra-text css-5lyju4"
             >
-              IE
+              FI
             </p>
           </div>
           <svg
@@ -2257,7 +2257,7 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -2286,7 +2286,7 @@ Array [
             className="css-1t7d7e7"
           >
             <span
-              className="fi fi-lt fis"
+              className="fi fi-fr fis"
               style={
                 Object {
                   "borderRadius": 10,
@@ -2298,7 +2298,7 @@ Array [
             <p
               className="chakra-text css-5lyju4"
             >
-              LT
+              FR
             </p>
           </div>
           <svg
@@ -2391,7 +2391,7 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -2420,7 +2420,7 @@ Array [
             className="css-1t7d7e7"
           >
             <span
-              className="fi fi-lu fis"
+              className="fi fi-hr fis"
               style={
                 Object {
                   "borderRadius": 10,
@@ -2432,7 +2432,7 @@ Array [
             <p
               className="chakra-text css-5lyju4"
             >
-              LU
+              HR
             </p>
           </div>
           <svg
@@ -2525,7 +2525,7 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -2554,7 +2554,7 @@ Array [
             className="css-1t7d7e7"
           >
             <span
-              className="fi fi-lv fis"
+              className="fi fi-ie fis"
               style={
                 Object {
                   "borderRadius": 10,
@@ -2566,7 +2566,7 @@ Array [
             <p
               className="chakra-text css-5lyju4"
             >
-              LV
+              IE
             </p>
           </div>
           <svg
@@ -2659,7 +2659,7 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -2688,7 +2688,7 @@ Array [
             className="css-1t7d7e7"
           >
             <span
-              className="fi fi-me fis"
+              className="fi fi-lt fis"
               style={
                 Object {
                   "borderRadius": 10,
@@ -2700,7 +2700,7 @@ Array [
             <p
               className="chakra-text css-5lyju4"
             >
-              ME
+              LT
             </p>
           </div>
           <svg
@@ -2793,7 +2793,7 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -2822,7 +2822,7 @@ Array [
             className="css-1t7d7e7"
           >
             <span
-              className="fi fi-mt fis"
+              className="fi fi-lu fis"
               style={
                 Object {
                   "borderRadius": 10,
@@ -2834,7 +2834,7 @@ Array [
             <p
               className="chakra-text css-5lyju4"
             >
-              MT
+              LU
             </p>
           </div>
           <svg
@@ -2927,7 +2927,7 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -2956,7 +2956,7 @@ Array [
             className="css-1t7d7e7"
           >
             <span
-              className="fi fi-nl fis"
+              className="fi fi-lv fis"
               style={
                 Object {
                   "borderRadius": 10,
@@ -2968,7 +2968,7 @@ Array [
             <p
               className="chakra-text css-5lyju4"
             >
-              NL
+              LV
             </p>
           </div>
           <svg
@@ -3061,7 +3061,7 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -3090,7 +3090,7 @@ Array [
             className="css-1t7d7e7"
           >
             <span
-              className="fi fi-pl fis"
+              className="fi fi-me fis"
               style={
                 Object {
                   "borderRadius": 10,
@@ -3102,7 +3102,7 @@ Array [
             <p
               className="chakra-text css-5lyju4"
             >
-              PL
+              ME
             </p>
           </div>
           <svg
@@ -3195,7 +3195,7 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -3224,7 +3224,7 @@ Array [
             className="css-1t7d7e7"
           >
             <span
-              className="fi fi-ro fis"
+              className="fi fi-mt fis"
               style={
                 Object {
                   "borderRadius": 10,
@@ -3236,7 +3236,7 @@ Array [
             <p
               className="chakra-text css-5lyju4"
             >
-              RO
+              MT
             </p>
           </div>
           <svg
@@ -3329,7 +3329,7 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -3358,7 +3358,7 @@ Array [
             className="css-1t7d7e7"
           >
             <span
-              className="fi fi-rs fis"
+              className="fi fi-nl fis"
               style={
                 Object {
                   "borderRadius": 10,
@@ -3370,7 +3370,7 @@ Array [
             <p
               className="chakra-text css-5lyju4"
             >
-              RS
+              NL
             </p>
           </div>
           <svg
@@ -3463,7 +3463,7 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -3492,7 +3492,7 @@ Array [
             className="css-1t7d7e7"
           >
             <span
-              className="fi fi-si fis"
+              className="fi fi-pl fis"
               style={
                 Object {
                   "borderRadius": 10,
@@ -3504,7 +3504,7 @@ Array [
             <p
               className="chakra-text css-5lyju4"
             >
-              SI
+              PL
             </p>
           </div>
           <svg
@@ -3597,7 +3597,7 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -3626,7 +3626,7 @@ Array [
             className="css-1t7d7e7"
           >
             <span
-              className="fi fi-sk fis"
+              className="fi fi-ro fis"
               style={
                 Object {
                   "borderRadius": 10,
@@ -3638,7 +3638,7 @@ Array [
             <p
               className="chakra-text css-5lyju4"
             >
-              SK
+              RO
             </p>
           </div>
           <svg
@@ -3731,7 +3731,7 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -3760,7 +3760,7 @@ Array [
             className="css-1t7d7e7"
           >
             <span
-              className="fi fi-tg fis"
+              className="fi fi-rs fis"
               style={
                 Object {
                   "borderRadius": 10,
@@ -3772,7 +3772,7 @@ Array [
             <p
               className="chakra-text css-5lyju4"
             >
-              TG
+              RS
             </p>
           </div>
           <svg
@@ -3865,7 +3865,7 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
@@ -3894,7 +3894,7 @@ Array [
             className="css-1t7d7e7"
           >
             <span
-              className="fi fi-ua fis"
+              className="fi fi-si fis"
               style={
                 Object {
                   "borderRadius": 10,
@@ -3906,7 +3906,7 @@ Array [
             <p
               className="chakra-text css-5lyju4"
             >
-              UA
+              SI
             </p>
           </div>
           <svg
@@ -3999,7 +3999,409 @@ Array [
                     <p
                       className="chakra-text css-l6gl81"
                     >
-                      (modal.rules.updated 29.03.2022)
+                      (modal.rules.updated 04.04.2022)
+                    </p>
+                  </div>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="chakra-accordion__item css-17mg6aq"
+    >
+      <h2>
+        <button
+          aria-controls="accordion-panel-83"
+          aria-expanded={false}
+          className="chakra-accordion__button css-1ygl3x"
+          disabled={false}
+          id="accordion-button-83"
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          type="button"
+        >
+          <div
+            className="css-1t7d7e7"
+          >
+            <span
+              className="fi fi-sk fis"
+              style={
+                Object {
+                  "borderRadius": 10,
+                  "height": 20,
+                  "width": 20,
+                }
+              }
+            />
+            <p
+              className="chakra-text css-5lyju4"
+            >
+              SK
+            </p>
+          </div>
+          <svg
+            aria-hidden={true}
+            className="chakra-icon chakra-accordion__icon css-186l2rg"
+            focusable={false}
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+      </h2>
+      <div
+        className="chakra-collapse"
+        style={
+          Object {
+            "display": "none",
+            "height": "0px",
+            "opacity": 0,
+            "overflow": "hidden",
+          }
+        }
+      >
+        <div
+          aria-labelledby="accordion-button-83"
+          className="chakra-accordion__panel css-1hb5ode"
+          id="accordion-panel-83"
+          role="region"
+        >
+          <div
+            className="chakra-radio-group css-0"
+            role="radiogroup"
+          >
+            <div
+              className="chakra-stack css-n21gh5"
+            >
+              <label
+                className="chakra-radio css-1pw4d56"
+              >
+                <input
+                  checked={false}
+                  className="chakra-radio__input"
+                  id="radio-85"
+                  name="radio-84"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyUp={[Function]}
+                  style={
+                    Object {
+                      "border": "0px",
+                      "clip": "rect(0px, 0px, 0px, 0px)",
+                      "height": "1px",
+                      "margin": "-1px",
+                      "overflow": "hidden",
+                      "padding": "0px",
+                      "position": "absolute",
+                      "whiteSpace": "nowrap",
+                      "width": "1px",
+                    }
+                  }
+                  type="radio"
+                  value=""
+                />
+                <span
+                  aria-hidden={true}
+                  className="chakra-radio__control css-1rggdzb"
+                  onMouseDown={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseUp={[Function]}
+                />
+                <span
+                  className="chakra-radio__label css-1i66d7g"
+                  onMouseDown={[Function]}
+                  onTouchStart={[Function]}
+                >
+                  <div
+                    className="css-u4p24i"
+                  >
+                    <p
+                      className="chakra-text css-722v25"
+                    >
+                      nationwide
+                    </p>
+                    <p
+                      className="chakra-text css-l6gl81"
+                    >
+                      (modal.rules.updated 04.04.2022)
+                    </p>
+                  </div>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="chakra-accordion__item css-17mg6aq"
+    >
+      <h2>
+        <button
+          aria-controls="accordion-panel-86"
+          aria-expanded={false}
+          className="chakra-accordion__button css-1ygl3x"
+          disabled={false}
+          id="accordion-button-86"
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          type="button"
+        >
+          <div
+            className="css-1t7d7e7"
+          >
+            <span
+              className="fi fi-tg fis"
+              style={
+                Object {
+                  "borderRadius": 10,
+                  "height": 20,
+                  "width": 20,
+                }
+              }
+            />
+            <p
+              className="chakra-text css-5lyju4"
+            >
+              TG
+            </p>
+          </div>
+          <svg
+            aria-hidden={true}
+            className="chakra-icon chakra-accordion__icon css-186l2rg"
+            focusable={false}
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+      </h2>
+      <div
+        className="chakra-collapse"
+        style={
+          Object {
+            "display": "none",
+            "height": "0px",
+            "opacity": 0,
+            "overflow": "hidden",
+          }
+        }
+      >
+        <div
+          aria-labelledby="accordion-button-86"
+          className="chakra-accordion__panel css-1hb5ode"
+          id="accordion-panel-86"
+          role="region"
+        >
+          <div
+            className="chakra-radio-group css-0"
+            role="radiogroup"
+          >
+            <div
+              className="chakra-stack css-n21gh5"
+            >
+              <label
+                className="chakra-radio css-1pw4d56"
+              >
+                <input
+                  checked={false}
+                  className="chakra-radio__input"
+                  id="radio-88"
+                  name="radio-87"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyUp={[Function]}
+                  style={
+                    Object {
+                      "border": "0px",
+                      "clip": "rect(0px, 0px, 0px, 0px)",
+                      "height": "1px",
+                      "margin": "-1px",
+                      "overflow": "hidden",
+                      "padding": "0px",
+                      "position": "absolute",
+                      "whiteSpace": "nowrap",
+                      "width": "1px",
+                    }
+                  }
+                  type="radio"
+                  value=""
+                />
+                <span
+                  aria-hidden={true}
+                  className="chakra-radio__control css-1rggdzb"
+                  onMouseDown={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseUp={[Function]}
+                />
+                <span
+                  className="chakra-radio__label css-1i66d7g"
+                  onMouseDown={[Function]}
+                  onTouchStart={[Function]}
+                >
+                  <div
+                    className="css-u4p24i"
+                  >
+                    <p
+                      className="chakra-text css-722v25"
+                    >
+                      nationwide
+                    </p>
+                    <p
+                      className="chakra-text css-l6gl81"
+                    >
+                      (modal.rules.updated 04.04.2022)
+                    </p>
+                  </div>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="chakra-accordion__item css-17mg6aq"
+    >
+      <h2>
+        <button
+          aria-controls="accordion-panel-89"
+          aria-expanded={false}
+          className="chakra-accordion__button css-1ygl3x"
+          disabled={false}
+          id="accordion-button-89"
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          type="button"
+        >
+          <div
+            className="css-1t7d7e7"
+          >
+            <span
+              className="fi fi-ua fis"
+              style={
+                Object {
+                  "borderRadius": 10,
+                  "height": 20,
+                  "width": 20,
+                }
+              }
+            />
+            <p
+              className="chakra-text css-5lyju4"
+            >
+              UA
+            </p>
+          </div>
+          <svg
+            aria-hidden={true}
+            className="chakra-icon chakra-accordion__icon css-186l2rg"
+            focusable={false}
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+      </h2>
+      <div
+        className="chakra-collapse"
+        style={
+          Object {
+            "display": "none",
+            "height": "0px",
+            "opacity": 0,
+            "overflow": "hidden",
+          }
+        }
+      >
+        <div
+          aria-labelledby="accordion-button-89"
+          className="chakra-accordion__panel css-1hb5ode"
+          id="accordion-panel-89"
+          role="region"
+        >
+          <div
+            className="chakra-radio-group css-0"
+            role="radiogroup"
+          >
+            <div
+              className="chakra-stack css-n21gh5"
+            >
+              <label
+                className="chakra-radio css-1pw4d56"
+              >
+                <input
+                  checked={false}
+                  className="chakra-radio__input"
+                  id="radio-91"
+                  name="radio-90"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyUp={[Function]}
+                  style={
+                    Object {
+                      "border": "0px",
+                      "clip": "rect(0px, 0px, 0px, 0px)",
+                      "height": "1px",
+                      "margin": "-1px",
+                      "overflow": "hidden",
+                      "padding": "0px",
+                      "position": "absolute",
+                      "whiteSpace": "nowrap",
+                      "width": "1px",
+                    }
+                  }
+                  type="radio"
+                  value=""
+                />
+                <span
+                  aria-hidden={true}
+                  className="chakra-radio__control css-1rggdzb"
+                  onMouseDown={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseUp={[Function]}
+                />
+                <span
+                  className="chakra-radio__label css-1i66d7g"
+                  onMouseDown={[Function]}
+                  onTouchStart={[Function]}
+                >
+                  <div
+                    className="css-u4p24i"
+                  >
+                    <p
+                      className="chakra-text css-722v25"
+                    >
+                      nationwide
+                    </p>
+                    <p
+                      className="chakra-text css-l6gl81"
+                    >
+                      (modal.rules.updated 04.04.2022)
                     </p>
                   </div>
                 </span>
